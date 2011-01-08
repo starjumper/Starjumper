@@ -58,3 +58,4 @@ CODING CONVENTIONS
 - Comments
 	- License and commented-out code: /* ... */
 	- All other comments:             // ...
+	- No capital letters at the beginning

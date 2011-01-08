@@ -1,6 +1,9 @@
 SET(SOURCE
     main.cpp
     GameManager.cpp
+    RenderingInstance.cpp
+    Menu.cpp
+    Game.cpp
 )
 
 FIND_PACKAGE( OpenGL )
