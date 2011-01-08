@@ -1,0 +1,45 @@
+CODE CONVENTIONS
+================
+
+- Tabs: 4 Whitespaces
+
+- Classes and methods:
+	- Camel-case
+	- Classes start with capital letter (files are named _exactly_ like the class)
+	- Methods don't, neither do variables
+	- private member variables start with _ (underscore)
+	- No egyptian-style brackets
+	- #pragma once instead of include guards in header files (#ifndef ... #define ... #endif)
+	
+	Example:
+	--------
+
+	*** FooBar.h ***
+
+	#pragma once
+
+	class FooBar
+	{
+	private:
+		int _member1;
+		int _member2;
+	protected:
+		int fooBarMethod();
+	public:
+		FooBar(int member1, int member2);
+		char suckMyDick();
+	}
+	
+	
+	*** FooBar.cpp ***
+	
+	FooBar::FooBar(int member1, int member2) :
+		_member1(member1),
+		_member2(member2)
+	{
+		// More code here
+	}
+	
+- Comments
+	- License and commented-out code: /* ... */
+	- All other comments:             // ...
