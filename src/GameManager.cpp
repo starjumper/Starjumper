@@ -8,7 +8,7 @@ GameManager::GameManager()
     // configure viewer to use the primary screen only
     _viewer.setUpViewOnSingleScreen(0);
     
-    // TODO: add event handler to the viewer
+    // TODO: add keyboard/mouse event handler to the viewer
     
     selectRenderingInstance("menu");
 }
