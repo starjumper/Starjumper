@@ -6,4 +6,4 @@ private:
 public:
     GameManager();
     void run();
-}
+};

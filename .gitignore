@@ -1,0 +1,10 @@
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+bin/StarJumper
+
+src/CMakeFiles/
+src/cmake_install.cmake
+src/Makefile

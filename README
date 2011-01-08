@@ -1,5 +1,20 @@
-CODE CONVENTIONS
-================
+##############
+# STARJUMPER #
+##############
+
+REQUIREMENTS
+============
+
+- OpenSceneGraph
+- bullet Physics Library
+
+INSTALL
+=======
+cmake .
+make
+
+CODING CONVENTIONS
+==================
 
 - Tabs: 4 Whitespaces
 
