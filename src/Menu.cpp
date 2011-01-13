@@ -12,10 +12,9 @@ osgWidget::Label* createLabel(const std::string& l, unsigned int size=13) {
 	
 	    label->setFont("fonts/times.ttf");
     	label->setFontSize(size);
-	    label->setFontColor(1.0f, 1.0f, 1.0f, 1.0f);
+	    label->setFontColor(0.8f, 0.85f, 0.9f, 0.8f);
 	    label->setLabel(l);
 		label->setPadding(3.0f);
-		label->setColor(0.0f, 0.0f, 1.0f, 0.5f);
 		label->setAlignHorizontal(osgWidget::Widget::HA_LEFT);
 	
 	    return label;
@@ -28,7 +27,7 @@ void Menu::configureViewer(osgViewer::Viewer *viewer)
        	viewer->getCamera()->getViewport()->width(),
        	viewer->getCamera()->getViewport()->height(),
         MASK_2D,
-        // osgWidget::WindowManager::WM_USE_RENDERBINS |
+        osgWidget::WindowManager::WM_USE_RENDERBINS |
         osgWidget::WindowManager::WM_PICK_DEBUG
     );
     
@@ -40,16 +39,16 @@ void Menu::configureViewer(osgViewer::Viewer *viewer)
     osgWidget::Label* label3 = createLabel("Highscore", 60);
     osgWidget::Label* label4 = createLabel("Quit", 60);
 
-    vbox->addWidget(label1);
-    vbox->addWidget(label2);
-    vbox->addWidget(label3);
     vbox->addWidget(label4);
+    vbox->addWidget(label3);
+    vbox->addWidget(label2);
+    vbox->addWidget(label1);
+
     vbox->attachMoveCallback();
     vbox->attachScaleCallback();
-
     vbox->resize();
 
-    vbox->setVisibilityMode(osgWidget::Window::VM_ENTIRE);
+//    vbox->setVisibilityMode(osgWidget::Window::VM_ENTIRE);
 //    vbox->setVisibleArea(50, 50, 500, 200);
     vbox->setAnchorVertical(osgWidget::Window::VA_CENTER);
     vbox->setAnchorHorizontal(osgWidget::Window::HA_CENTER);
@@ -61,10 +60,11 @@ void Menu::configureViewer(osgViewer::Viewer *viewer)
 
     osg::Camera* camera = wm->createParentOrthoCamera();
 
+  	vbox->getBackground()->setColor(1.0f, 1.0f, 1.0f, 0.0f);
+    vbox->resizePercent(100.0f);
+
     getRootNode()->addChild(camera);
     wm->resizeAllWindows();
-
-//    osgWidget::createExample(*viewer, wm);
 }
 
 void Menu::handleUserInput(Key key, KeyState keyState)
