@@ -45,6 +45,20 @@ void Menu::configureViewer(osgViewer::Viewer *viewer)
     vbox->resizePercent(100.0f);
 
     getRootNode()->addChild(camera);
+
+    viewer->addEventHandler(new osgWidget::MouseHandler(wm));
+    viewer->addEventHandler(new osgWidget::KeyboardHandler(wm));
+    viewer->addEventHandler(new osgWidget::ResizeHandler(wm, camera));
+    viewer->addEventHandler(new osgWidget::CameraSwitchHandler(wm, camera));
+    viewer->addEventHandler(new osgViewer::StatsHandler());
+    viewer->addEventHandler(new osgViewer::WindowSizeHandler());
+    viewer->addEventHandler(new osgGA::StateSetManipulator(
+        viewer->getCamera()->getOrCreateStateSet()
+    ));
+
+
+
+
     wm->resizeAllWindows();
 }
 

@@ -23,14 +23,14 @@ struct MenuButton: public osgWidget::Label
 	MenuButton(const char* label): osgWidget::Label("", "") 
 	{
 		// styling
-		setFont("fonts/times.ttf");
+		setFont("fonts/Vera.ttf");
     	setFontSize(60);
 	    setFontColor(0.8f, 0.85f, 0.9f, 0.8f);
 	    setLabel(label);
 		setPadding(3.0f);
 		setAlignHorizontal(osgWidget::Widget::HA_LEFT);
 	    
-		// event handling
+		// activate event handling for mouse clicks and moves
 		setEventMask(osgWidget::EVENT_MOUSE_PUSH | osgWidget::EVENT_MASK_MOUSE_MOVE);
 	}
 
@@ -41,13 +41,17 @@ struct MenuButton: public osgWidget::Label
 
 	bool mouseEnter(double, double, osgWidget::WindowManager*) 
 	{
-		setColor(0.6f, 0.6f, 0.6f, 1.0f);
+		setFontSize(65);
+	    setFontColor(0.8f, 0.85f, 0.9f, 1.0f);
+
         return true;
     }
 
     bool mouseLeave(double, double, osgWidget::WindowManager*) 
 	{
-        setColor(0.3f, 0.3f, 0.3f, 1.0f);
+		setFontSize(60);
+		setFontColor(0.8f, 0.85f, 0.9f, 0.8f);
+				
         return true;
     }
 };
