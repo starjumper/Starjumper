@@ -23,7 +23,7 @@ struct MenuButton: public osgWidget::Label
 	MenuButton(const char* label): osgWidget::Label("", "") 
 	{
 		// styling
-		setFont("fonts/Vera.ttf");
+		setFont("fonts/times.ttf");
     	setFontSize(60);
 	    setFontColor(0.8f, 0.85f, 0.9f, 0.8f);
 	    setLabel(label);
@@ -41,7 +41,7 @@ struct MenuButton: public osgWidget::Label
 
 	bool mouseEnter(double, double, osgWidget::WindowManager*) 
 	{
-		setFontSize(65);
+		// hover style
 	    setFontColor(0.8f, 0.85f, 0.9f, 1.0f);
 
         return true;
@@ -49,7 +49,7 @@ struct MenuButton: public osgWidget::Label
 
     bool mouseLeave(double, double, osgWidget::WindowManager*) 
 	{
-		setFontSize(60);
+		// reset style
 		setFontColor(0.8f, 0.85f, 0.9f, 0.8f);
 				
         return true;

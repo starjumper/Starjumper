@@ -13,8 +13,8 @@ void Menu::configureViewer(osgViewer::Viewer *viewer)
        	viewer->getCamera()->getViewport()->width(),
        	viewer->getCamera()->getViewport()->height(),
         MASK_2D,
-        osgWidget::WindowManager::WM_USE_RENDERBINS |
-        osgWidget::WindowManager::WM_PICK_DEBUG
+        osgWidget::WindowManager::WM_USE_RENDERBINS
+//        osgWidget::WindowManager::WM_PICK_DEBUG
     );
     
     osgWidget::Box*   vbox   = new osgWidget::Box("vbox", osgWidget::Box::VERTICAL);
@@ -47,14 +47,14 @@ void Menu::configureViewer(osgViewer::Viewer *viewer)
     getRootNode()->addChild(camera);
 
     viewer->addEventHandler(new osgWidget::MouseHandler(wm));
-    viewer->addEventHandler(new osgWidget::KeyboardHandler(wm));
+/*    viewer->addEventHandler(new osgWidget::KeyboardHandler(wm));
     viewer->addEventHandler(new osgWidget::ResizeHandler(wm, camera));
     viewer->addEventHandler(new osgWidget::CameraSwitchHandler(wm, camera));
     viewer->addEventHandler(new osgViewer::StatsHandler());
     viewer->addEventHandler(new osgViewer::WindowSizeHandler());
     viewer->addEventHandler(new osgGA::StateSetManipulator(
         viewer->getCamera()->getOrCreateStateSet()
-    ));
+    ));*/
 
 
 
