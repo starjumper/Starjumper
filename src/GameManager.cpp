@@ -8,7 +8,9 @@ GameManager::GameManager()
     // configure viewer to use the primary screen only
     _viewer.setUpViewOnSingleScreen(0);
     
-    // TODO: add keyboard/mouse event handler to the viewer
+    // setup InputManager to track user inputs via keyboard
+    _inputManager = new InputManager(this);
+    _viewer.addEventHandler(_inputManager);
     
     selectRenderingInstance("menu");
 }
@@ -28,4 +30,18 @@ void GameManager::selectRenderingInstance(std::string name)
 void GameManager::run()
 {
     _viewer.run();
+}
+
+void GameManager::handleUserInput(Key key, KeyState keyState)
+{
+    if(key == Escape && keyState == pressed)
+    {
+        // toggle in-game menu
+    }
+    else
+    {
+        // if key does require a global action, let the active RenderingInstance handle it
+        _activeRenderingInstance->handleUserInput(key, keyState);
+    }
+    
 }

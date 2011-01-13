@@ -3,6 +3,8 @@
 #include <osg/Group>
 #include <osgViewer/Viewer>
 
+#include "types.h"
+
 class RenderingInstance
 {
 private:
@@ -13,4 +15,7 @@ public:
     
     // configure global viewer according to the RenderingInstance's needs
     virtual void configureViewer(osgViewer::Viewer *viewer) = 0;
+    
+    // react upon user input
+    virtual void handleUserInput(Key key, KeyState keyState) = 0;
 };
