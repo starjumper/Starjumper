@@ -12,9 +12,9 @@
 #include <osgbBullet/Utils.h>
 #include <osgbBullet/CollisionShapes.h>
 
-#include "rapidxml.hpp"
-#include "rapidxml_iterators.hpp"
-#include "rapidxml_utils.hpp"
+#include "RapidXML/rapidxml.hpp"
+#include "RapidXML/rapidxml_iterators.hpp"
+#include "RapidXML/rapidxml_utils.hpp"
 
 #define DEFAULT_COLOR	osg::Vec4(0.8, 0.5, 0.7, 1.0)
 

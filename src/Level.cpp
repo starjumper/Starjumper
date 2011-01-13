@@ -21,12 +21,18 @@ void Level::loadMapFromFile(const std::string mapfile)
     // parse XML document
     for(rapidxml::node_iterator<char> it(xml_doc.first_node()); ; ++it)
     {
-        if(strcmp(it->name(), "cuboid") == 0)
+        if(it->name() == "cuboid")
+        {
             addCuboid(*it);
-        else if(strcmp(it->name(), "tunnel") == 0)
+        }
+        else if(it->name() == "tunnel")
+        {
             addTunnel(*it);
-        else
+        }
+		else
+        {
             throw std::runtime_error("Error: Unrecognized element in level file!");
+        }
     }
 }
 
