@@ -8,6 +8,10 @@
 #include <osg/ShapeDrawable>
 #include <osg/PositionAttitudeTransform>
 
+#include <btBulletDynamicsCommon.h>
+#include <osgbBullet/Utils.h>
+#include <osgbBullet/CollisionShapes.h>
+
 #include "rapidxml.hpp"
 #include "rapidxml_iterators.hpp"
 #include "rapidxml_utils.hpp"
@@ -19,13 +23,17 @@ class Level
 private:
     osg::PositionAttitudeTransform *_level;
     
-public:
-    Level(std::string mapfile);
-    void loadMapFromFile(std::string mapfile);
-
-    osg::Vec3 getFromVector(rapidxml::xml_node<> &node);
-    osg::Vec3 getToVector(rapidxml::xml_node<> &node);
+    btDynamicsWorld *_world;
+    btCompoundShape *_collisionShapes;
     
-    void addCuboid(rapidxml::xml_node<> &cuboidNode);
-    void addTunnel(rapidxml::xml_node<> &tunnelNode);
+public:
+    Level(btDynamicsWorld *world, const std::string mapfile);
+    
+    void loadMapFromFile(const std::string mapfile);
+
+    osg::Vec3 getFromVector(const rapidxml::xml_node<> &node) const;
+    osg::Vec3 getToVector(const rapidxml::xml_node<> &node) const;
+    
+    void addCuboid(const rapidxml::xml_node<> &cuboidNode);
+    void addTunnel(const rapidxml::xml_node<> &tunnelNode);
 };

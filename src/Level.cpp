@@ -1,13 +1,17 @@
 #include "Level.h"
 
-Level::Level(std::string mapfile)
+Level::Level(btDynamicsWorld *world, const std::string mapfile) :
+    _world(world)
 {
     _level = new osg::PositionAttitudeTransform();
     
     loadMapFromFile(mapfile);
+    
+    // setup physics components
+    _collisionShapes = new btCompoundShape();
 }
 
-void Level::loadMapFromFile(std::string mapfile)
+void Level::loadMapFromFile(const std::string mapfile)
 {
     // load XML document
     rapidxml::file<> mf(mapfile.c_str());
@@ -26,7 +30,7 @@ void Level::loadMapFromFile(std::string mapfile)
     }
 }
 
-osg::Vec3 Level::getFromVector(rapidxml::xml_node<> &node)
+osg::Vec3 Level::getFromVector(const rapidxml::xml_node<> &node) const
 {
     rapidxml::xml_node<> *position = node.first_node("position");
     
@@ -49,7 +53,7 @@ osg::Vec3 Level::getFromVector(rapidxml::xml_node<> &node)
     return osg::Vec3(x, y, z);
 }
 
-osg::Vec3 Level::getToVector(rapidxml::xml_node<> &node)
+osg::Vec3 Level::getToVector(const rapidxml::xml_node<> &node) const
 {
     rapidxml::xml_node<> *size = node.first_node("size");
     
@@ -72,7 +76,7 @@ osg::Vec3 Level::getToVector(rapidxml::xml_node<> &node)
     return getFromVector(node) + osg::Vec3(x, y, z);
 }
 
-void Level::addCuboid(rapidxml::xml_node<> &cuboidNode)
+void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
 {
     osg::Vec3 from = getFromVector(cuboidNode);
     osg::Vec3 to = getToVector(cuboidNode);
@@ -95,9 +99,18 @@ void Level::addCuboid(rapidxml::xml_node<> &cuboidNode)
 	geode->addDrawable(cuboid);	
 	
     _level->addChild(geode);
+    
+    // create Bullet bounding box
+    btBoxShape *bsCuboid = new btBoxShape(osgbBullet::asBtVector3(osg::Vec3(width, depth, height) / 2.0f));
+    
+    btTransform shapeTransform;
+    shapeTransform.setIdentity();
+    shapeTransform.setOrigin(osgbBullet::asBtVector3(center));
+    
+    _collisionShapes->addChildShape(shapeTransform, bsCuboid);
 }
 
-void Level::addTunnel(rapidxml::xml_node<> &tunnelNode)
+void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
 {
     // yet to be done
 }
