@@ -10,32 +10,30 @@
 #include <osgWidget/Box>
 #include <osgWidget/Label>
 #include <osgWidget/ViewerEventHandlers>
-#include <osg/ShapeDrawable>
-#include <osg/Geode>
-
 
 #include "RenderingInstance.h"
 #include "types.h"
 
+// masks for the window manager
 const unsigned int MASK_2D = 0xF0000000;
 const unsigned int MASK_3D = 0x0F000000;
 
-struct ColorLabel: public osgWidget::Label {
-	ColorLabel(const char* label): osgWidget::Label("", "") 
+struct MenuButton: public osgWidget::Label 
+{
+	MenuButton(const char* label): osgWidget::Label("", "") 
 	{
+		// styling
 		setFont("fonts/times.ttf");
-		setFontSize(14);
-		setFontColor(0.0f, 0.0f, 0.0f, 1.0f);
-//		setColor(0.5f, 0.5f, 0.5f, 1.0f);
-//		addHeight(18.0f);
-//		setCanFill(true);
-		setLabel(label);
-		setPadding(10.0f);
-		addSize(21.0f, 22.0f);
-		setColor(1.0f, 0.5f, 0.0f, 0.0f);
-//		setEventMask(osgWidget::EVENT_MOUSE_PUSH | osgWidget::EVENT_MASK_MOUSE_MOVE);
+    	setFontSize(60);
+	    setFontColor(0.8f, 0.85f, 0.9f, 0.8f);
+	    setLabel(label);
+		setPadding(3.0f);
+		setAlignHorizontal(osgWidget::Widget::HA_LEFT);
+	    
+		// event handling
+		setEventMask(osgWidget::EVENT_MOUSE_PUSH | osgWidget::EVENT_MASK_MOUSE_MOVE);
 	}
-/*
+
 	bool mousePush(double, double, osgWidget::WindowManager*) 
 	{
 		return true;
@@ -51,9 +49,9 @@ struct ColorLabel: public osgWidget::Label {
 	{
         setColor(0.3f, 0.3f, 0.3f, 1.0f);
         return true;
-    }*/
+    }
 };
-
+/*
 class ColorLabelMenu: public ColorLabel {
     osg::ref_ptr<osgWidget::Window> _window;
 
@@ -105,7 +103,7 @@ public:
 
         return true;
     }
-};
+};*/
 
 class Menu : public RenderingInstance
 {
