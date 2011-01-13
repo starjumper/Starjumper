@@ -9,6 +9,7 @@ class RenderingInstance
 {
 private:
     osg::ref_ptr<osg::Group> _rootNode;
+
 public:
     RenderingInstance();
     osg::Group *getRootNode();

@@ -8,6 +8,9 @@ GameManager::GameManager()
     // configure viewer to use the primary screen only
     _viewer.setUpViewOnSingleScreen(0);
     
+	// set background color
+	_viewer.getCamera()->setClearColor(osg::Vec4( 0., 0., 0., 1. )); 
+
     // setup InputManager to track user inputs via keyboard
     _inputManager = new InputManager(this);
     _viewer.addEventHandler(_inputManager);
