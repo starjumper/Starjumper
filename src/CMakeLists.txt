@@ -5,6 +5,7 @@ SET(SOURCE
     RenderingInstance.cpp
     Menu.cpp
     Game.cpp
+    Level.cpp
 )
 
 FIND_PACKAGE( OpenGL )
