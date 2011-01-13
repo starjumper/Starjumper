@@ -1,7 +1,7 @@
 #include "Menu.h"
 
-Menu::Menu() :
-    RenderingInstance()
+Menu::Menu(osgViewer::Viewer *viewer) :
+    RenderingInstance(viewer)
 {
     
 }

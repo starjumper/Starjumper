@@ -1,6 +1,8 @@
 #include "MenuButton.h"
 
-MenuButton::MenuButton(const char* label, void (*callback)()): osgWidget::Label("", ""), _callback(callback)
+MenuButton::MenuButton(const char* label, void (*callback)()) : 
+	osgWidget::Label("", ""), 
+	_callback(callback)
 {	
 	// styling
 	setFont("fonts/times.ttf");

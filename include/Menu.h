@@ -22,7 +22,7 @@ class Menu : public RenderingInstance
 private:
     
 public:
-	Menu();
+	Menu(osgViewer::Viewer *viewer);
 	
 	virtual void configureViewer(osgViewer::Viewer *viewer);
     virtual void handleUserInput(Key key, KeyState keyState);

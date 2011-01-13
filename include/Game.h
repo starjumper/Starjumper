@@ -8,7 +8,8 @@ class Game : public RenderingInstance
 private:
     
 public:
-    Game();
+    Game(osgViewer::Viewer *viewer);
+
     virtual void configureViewer(osgViewer::Viewer *viewer);
     virtual void handleUserInput(Key key, KeyState keyState);
 };

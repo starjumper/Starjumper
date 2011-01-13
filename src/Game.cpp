@@ -1,6 +1,7 @@
 #include "Game.h"
 
-Game::Game()
+Game::Game(osgViewer::Viewer *viewer) :
+	RenderingInstance(viewer)
 {
     
 }

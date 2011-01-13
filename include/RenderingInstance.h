@@ -9,9 +9,10 @@ class RenderingInstance
 {
 private:
     osg::ref_ptr<osg::Group> _rootNode;
+	osgViewer::Viewer *_viewer;
 
 public:
-    RenderingInstance();
+    RenderingInstance(osgViewer::Viewer *viewer);
     osg::Group *getRootNode();
     
     // configure global viewer according to the RenderingInstance's needs

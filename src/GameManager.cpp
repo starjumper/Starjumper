@@ -2,8 +2,8 @@
 
 GameManager::GameManager()
 {
-    addRenderingInstance("menu", new Menu());
-    addRenderingInstance("game", new Game());
+    addRenderingInstance("menu", new Menu(&_viewer));
+    addRenderingInstance("game", new Game(&_viewer));
     
     // configure viewer to use the primary screen only
     _viewer.setUpViewOnSingleScreen(0);

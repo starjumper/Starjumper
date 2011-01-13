@@ -1,6 +1,6 @@
 #include "RenderingInstance.h"
 
-RenderingInstance::RenderingInstance()
+RenderingInstance::RenderingInstance(osgViewer::Viewer *viewer): _viewer(viewer)
 {
     _rootNode = new osg::Group();
 }
