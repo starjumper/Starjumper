@@ -4,14 +4,10 @@
 
 #include <tr1/functional>
 
-#include <osgGA/StateSetManipulator>
-#include <osgDB/ReadFile>
 #include <osgViewer/Viewer>
 #include <osgViewer/ViewerEventHandlers>
-#include <osgWidget/Util>
 #include <osgWidget/WindowManager>
 #include <osgWidget/Box>
-
 
 #include "types.h"
 #include "RenderingInstance.h"

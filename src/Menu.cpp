@@ -15,30 +15,29 @@ Menu::Menu(osgViewer::Viewer *viewer) :
 	// position the menu in the window
 	_buttonList->setAnchorVertical(osgWidget::Window::VA_CENTER);
     _buttonList->setAnchorHorizontal(osgWidget::Window::HA_CENTER);
-}
 
-void Menu::configureViewer(osgViewer::Viewer *viewer)
-{
+  	_buttonList->getBackground()->setColor(1.0f, 1.0f, 1.0f, 0.0f);
+
     _buttonList->attachMoveCallback();
     _buttonList->attachScaleCallback();
     _buttonList->resize();
 
     _windowManager->addChild(_buttonList);
-
-    osg::Camera* camera = _windowManager->createParentOrthoCamera();
-
-  	_buttonList->getBackground()->setColor(1.0f, 1.0f, 1.0f, 0.0f);
-    _buttonList->resizePercent(100.0f);
-
-    getRootNode()->addChild(camera);
-
-    viewer->addEventHandler(new osgWidget::MouseHandler(_windowManager));
-
     _windowManager->resizeAllWindows();
+
+	// create a camera which is orthogonal to the window for having a 2D view
+    osg::Camera *camera = _windowManager->createParentOrthoCamera();
+    getRootNode()->addChild(camera);
+}
+
+void Menu::configureViewer(osgViewer::Viewer *viewer)
+{
+    viewer->addEventHandler(new osgWidget::MouseHandler(_windowManager));
 }
 
 void Menu::addButton(const char* label, std::tr1::function<void ()> callback)
 {
 	MenuButton *button = new MenuButton(label, callback);
+	
 	_buttonList->addWidget(button);
 }

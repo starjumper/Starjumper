@@ -32,10 +32,10 @@ void GameManager::buildMenus()
 	{
 		Menu *menu = new Menu(&_viewer);
 
-		menu->addButton("Start game", std::tr1::bind(&GameManager::quit, this));
-		menu->addButton("Settings", std::tr1::bind(&GameManager::quit, this));
-		menu->addButton("Highscore", std::tr1::bind(&GameManager::quit, this));
 		menu->addButton("Quit", std::tr1::bind(&GameManager::quit, this));
+		menu->addButton("Highscore", std::tr1::bind(&GameManager::quit, this));
+		menu->addButton("Settings", std::tr1::bind(&GameManager::quit, this));
+		menu->addButton("Start game", std::tr1::bind(&GameManager::quit, this));
 
     	addRenderingInstance("main_menu", menu);
 	}
