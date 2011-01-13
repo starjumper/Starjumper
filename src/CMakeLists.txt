@@ -1,7 +1,6 @@
 SET(SOURCE
     main.cpp
     GameManager.cpp
-    InputManager.cpp
     RenderingInstance.cpp
 	MenuButton.cpp
     Menu.cpp

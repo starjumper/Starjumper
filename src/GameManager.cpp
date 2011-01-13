@@ -10,10 +10,6 @@ GameManager::GameManager()
     
 	// set background color
 	_viewer.getCamera()->setClearColor(osg::Vec4( 0., 0., 0., 1. )); 
-
-    // setup InputManager to track user inputs via keyboard
-    _inputManager = new InputManager(this);
-    _viewer.addEventHandler(_inputManager);
     
     selectRenderingInstance("menu");
 }
