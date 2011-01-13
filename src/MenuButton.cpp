@@ -1,6 +1,6 @@
 #include "MenuButton.h"
 
-MenuButton::MenuButton(const char* label, void (*callback)()) : 
+MenuButton::MenuButton(const char* label, std::tr1::function<void ()> callback) : 
 	osgWidget::Label("", ""), 
 	_callback(callback)
 {	
@@ -19,7 +19,7 @@ MenuButton::MenuButton(const char* label, void (*callback)()) :
 bool MenuButton::mousePush(double, double, osgWidget::WindowManager*) 
 {
 	_callback();
-	
+		
 	return true;
 }
 

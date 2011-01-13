@@ -1,17 +1,17 @@
 #include "GameManager.h"
 
 GameManager::GameManager()
-{
-    addRenderingInstance("menu", new Menu(&_viewer));
-    addRenderingInstance("game", new Game(&_viewer));
-    
+{    
     // configure viewer to use the primary screen only
     _viewer.setUpViewOnSingleScreen(0);
     
 	// set background color
 	_viewer.getCamera()->setClearColor(osg::Vec4( 0., 0., 0., 1. )); 
-    
-    selectRenderingInstance("menu");
+
+	buildMenus();
+    addRenderingInstance("game", new Game(&_viewer));
+
+    selectRenderingInstance("main_menu");
 }
 
 void GameManager::addRenderingInstance(std::string name, RenderingInstance *instance)
@@ -26,21 +26,27 @@ void GameManager::selectRenderingInstance(std::string name)
     _viewer.setSceneData(_activeRenderingInstance->getRootNode());
 }
 
+void GameManager::buildMenus()
+{
+	// main menu
+	{
+		Menu *menu = new Menu(&_viewer);
+
+		menu->addButton("Start game", std::tr1::bind(&GameManager::quit, this));
+		menu->addButton("Settings", std::tr1::bind(&GameManager::quit, this));
+		menu->addButton("Highscore", std::tr1::bind(&GameManager::quit, this));
+		menu->addButton("Quit", std::tr1::bind(&GameManager::quit, this));
+
+    	addRenderingInstance("main_menu", menu);
+	}
+}
+
 void GameManager::run()
 {
     _viewer.run();
 }
 
-void GameManager::handleUserInput(Key key, KeyState keyState)
+void GameManager::quit()
 {
-    if(key == Escape && keyState == pressed)
-    {
-        // toggle in-game menu
-    }
-    else
-    {
-        // if key does require a global action, let the active RenderingInstance handle it
-        _activeRenderingInstance->handleUserInput(key, keyState);
-    }
-    
+	exit(0);
 }

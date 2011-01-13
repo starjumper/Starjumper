@@ -3,53 +3,42 @@
 Menu::Menu(osgViewer::Viewer *viewer) :
     RenderingInstance(viewer)
 {
-    
-}
-
-void Menu::configureViewer(osgViewer::Viewer *viewer)
-{
-    osgWidget::WindowManager* wm = new osgWidget::WindowManager(
+    _windowManager = new osgWidget::WindowManager(
         viewer,
        	viewer->getCamera()->getViewport()->width(),
        	viewer->getCamera()->getViewport()->height(),
         MASK_2D
-    );
-    
-    osgWidget::Box*   vbox   = new osgWidget::Box("vbox", osgWidget::Box::VERTICAL);
+    );  
 
-    // Setup the labels for the vertical box.
-    MenuButton *startButton = new MenuButton("Start game", NULL);
-    MenuButton *settingsButton = new MenuButton("Settings", NULL);
-    MenuButton *highscoreButton = new MenuButton("Highscore", NULL);
-    MenuButton *quitButton = new MenuButton("Quit", NULL);
+	_buttonList = new osgWidget::Box("menu", osgWidget::Box::VERTICAL);
+	
+	// position the menu in the window
+	_buttonList->setAnchorVertical(osgWidget::Window::VA_CENTER);
+    _buttonList->setAnchorHorizontal(osgWidget::Window::HA_CENTER);
+}
 
-    vbox->addWidget(quitButton);
-    vbox->addWidget(highscoreButton);
-    vbox->addWidget(settingsButton);
-    vbox->addWidget(startButton);
+void Menu::configureViewer(osgViewer::Viewer *viewer)
+{
+    _buttonList->attachMoveCallback();
+    _buttonList->attachScaleCallback();
+    _buttonList->resize();
 
-    vbox->attachMoveCallback();
-    vbox->attachScaleCallback();
-    vbox->resize();
+    _windowManager->addChild(_buttonList);
 
-    vbox->setAnchorVertical(osgWidget::Window::VA_CENTER);
-    vbox->setAnchorHorizontal(osgWidget::Window::HA_CENTER);
+    osg::Camera* camera = _windowManager->createParentOrthoCamera();
 
-    wm->addChild(vbox);
-
-    osg::Camera* camera = wm->createParentOrthoCamera();
-
-  	vbox->getBackground()->setColor(1.0f, 1.0f, 1.0f, 0.0f);
-    vbox->resizePercent(100.0f);
+  	_buttonList->getBackground()->setColor(1.0f, 1.0f, 1.0f, 0.0f);
+    _buttonList->resizePercent(100.0f);
 
     getRootNode()->addChild(camera);
 
-    viewer->addEventHandler(new osgWidget::MouseHandler(wm));
+    viewer->addEventHandler(new osgWidget::MouseHandler(_windowManager));
 
-    wm->resizeAllWindows();
+    _windowManager->resizeAllWindows();
 }
 
-void Menu::handleUserInput(Key key, KeyState keyState)
+void Menu::addButton(const char* label, std::tr1::function<void ()> callback)
 {
-    
+	MenuButton *button = new MenuButton(label, callback);
+	_buttonList->addWidget(button);
 }

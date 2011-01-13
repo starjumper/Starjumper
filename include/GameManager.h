@@ -3,14 +3,14 @@
 #include <map>
 #include <string>
 
+#include <tr1/functional>
+
 #include <osgViewer/Viewer>
 
 #include "types.h"
 #include "RenderingInstance.h"
 #include "Menu.h"
 #include "Game.h"
-
-class InputManager;
 
 class GameManager
 {
@@ -22,8 +22,11 @@ private:
     void addRenderingInstance(std::string name, RenderingInstance *instance);
     void selectRenderingInstance(std::string name);
     
+	void buildMenus();
+
 public:
     GameManager();
+
     void run();
-    void handleUserInput(Key key, KeyState keyState);
+	void quit();
 };
