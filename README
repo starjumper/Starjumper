@@ -59,3 +59,20 @@ CODING CONVENTIONS
 	- License and commented-out code: /* ... */
 	- All other comments:             // ...
 	- No capital letters at the beginning
+	
+- Don't use if constructs without brackets
+
+	Good:
+
+		if(your_mother == your_grandma)
+		{
+			std::cout << "haha" << std::cout;
+		}
+		
+	Bad:
+	
+		if(your_mother == your_grandma)
+			std::cout << "haha" << std::cout;
+			
+- Don't use namespaces!
+- use const if it possible!

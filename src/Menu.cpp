@@ -12,18 +12,16 @@ void Menu::configureViewer(osgViewer::Viewer *viewer)
         viewer,
        	viewer->getCamera()->getViewport()->width(),
        	viewer->getCamera()->getViewport()->height(),
-        MASK_2D,
-        osgWidget::WindowManager::WM_USE_RENDERBINS
-//        osgWidget::WindowManager::WM_PICK_DEBUG
+        MASK_2D
     );
     
     osgWidget::Box*   vbox   = new osgWidget::Box("vbox", osgWidget::Box::VERTICAL);
 
     // Setup the labels for the vertical box.
-    MenuButton *startButton = new MenuButton("Start game");
-    MenuButton *settingsButton = new MenuButton("Settings");
-    MenuButton *highscoreButton = new MenuButton("Highscore");
-    MenuButton *quitButton = new MenuButton("Quit");
+    MenuButton *startButton = new MenuButton("Start game", NULL);
+    MenuButton *settingsButton = new MenuButton("Settings", NULL);
+    MenuButton *highscoreButton = new MenuButton("Highscore", NULL);
+    MenuButton *quitButton = new MenuButton("Quit", NULL);
 
     vbox->addWidget(quitButton);
     vbox->addWidget(highscoreButton);
@@ -47,17 +45,6 @@ void Menu::configureViewer(osgViewer::Viewer *viewer)
     getRootNode()->addChild(camera);
 
     viewer->addEventHandler(new osgWidget::MouseHandler(wm));
-/*    viewer->addEventHandler(new osgWidget::KeyboardHandler(wm));
-    viewer->addEventHandler(new osgWidget::ResizeHandler(wm, camera));
-    viewer->addEventHandler(new osgWidget::CameraSwitchHandler(wm, camera));
-    viewer->addEventHandler(new osgViewer::StatsHandler());
-    viewer->addEventHandler(new osgViewer::WindowSizeHandler());
-    viewer->addEventHandler(new osgGA::StateSetManipulator(
-        viewer->getCamera()->getOrCreateStateSet()
-    ));*/
-
-
-
 
     wm->resizeAllWindows();
 }
