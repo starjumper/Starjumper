@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include <tr1/functional>
+#include <functional>
 
 #include <osgViewer/Viewer>
 #include <osgViewer/ViewerEventHandlers>

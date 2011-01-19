@@ -3,7 +3,7 @@
 #include <map>
 #include <string>
 
-#include <tr1/functional>
+#include <functional>
 
 #include <osgViewer/Viewer>
 
