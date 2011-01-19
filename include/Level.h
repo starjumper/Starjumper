@@ -34,7 +34,4 @@ public:
     osg::Vec3 getToVector(const rapidxml::xml_node<> &node) const;
     void addCuboid(const rapidxml::xml_node<> &cuboidNode);
     void addTunnel(const rapidxml::xml_node<> &tunnelNode);
-    
-public:
-    Level(btDynamicsWorld *world, const std::string mapfile);
 };

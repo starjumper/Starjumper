@@ -6,6 +6,7 @@ SET(SOURCE
     Menu.cpp
     Game.cpp
     Level.cpp
+    Player.cpp
 )
 
 FIND_PACKAGE( OpenGL )

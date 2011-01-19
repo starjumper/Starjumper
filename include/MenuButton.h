@@ -1,6 +1,6 @@
 #pragma once
 
-#include <functional>
+#include <tr1/functional>
 
 #include <osgWidget/Label>
 #include <osgWidget/ViewerEventHandlers>
