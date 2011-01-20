@@ -1,7 +1,5 @@
 #include "Level.h"
 
-#include <iostream>
-
 //Level::Level(btDynamicsWorld *world, const std::string mapfile) :
 //    _world(world)
 Level::Level(const std::string mapfile)
@@ -33,11 +31,11 @@ void Level::loadMapFromFile(const std::string mapfile)
     // parse XML document
     for(rapidxml::node_iterator<char> it(xml_doc.first_node()); it.dereference() != NULL; ++it)
     {
-        if(strcasecmp((*it).name(), "cuboid") == 0)
+        if(strcmp((*it).name(), "cuboid") == 0)
         {
             addCuboid(*it);
         }
-        else if(strcasecmp((*it).name(), "tunnel") == 0)
+        else if(strcmp((*it).name(), "tunnel") == 0)
         {
             addTunnel(*it);
         }

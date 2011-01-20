@@ -53,6 +53,8 @@ bool LazyCameraManipulator::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAc
      
         _oldNodeXPosition = nodeCenter[0];
      }
+
+	return true;
 }
 
 osg::Matrixd LazyCameraManipulator::getInverseMatrix() const

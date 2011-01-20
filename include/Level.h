@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <string>
 #include <stdexcept>
 
@@ -16,7 +17,7 @@
 #include "RapidXML/rapidxml_iterators.hpp"
 #include "RapidXML/rapidxml_utils.hpp"
 
-#define DEFAULT_COLOR	osg::Vec4(0.8, 0.5, 0.7, 1.0)
+#define DEFAULT_COLOR	osg::Vec4f(0.8f, 0.5f, 0.7f, 1.0f)
 
 class Level
 {
