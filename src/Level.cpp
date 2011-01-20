@@ -1,9 +1,14 @@
 #include "Level.h"
 
-Level::Level(btDynamicsWorld *world, const std::string mapfile) :
-    _world(world)
+#include <iostream>
+
+//Level::Level(btDynamicsWorld *world, const std::string mapfile) :
+//    _world(world)
+Level::Level(const std::string mapfile)
 {
     _level = new osg::PositionAttitudeTransform();
+    
+    std::cout << "Loading map from file " << mapfile << std::endl;
     
     loadMapFromFile(mapfile);
     
@@ -14,23 +19,31 @@ Level::Level(btDynamicsWorld *world, const std::string mapfile) :
 void Level::loadMapFromFile(const std::string mapfile)
 {
     // load XML document
+    std::cout << "preparing load..." << std::endl;
+    
     rapidxml::file<> mf(mapfile.c_str());
     rapidxml::xml_document<> xml_doc;
+    
+    std::cout << "next step: parsing..." << std::endl;
+    
     xml_doc.parse<0>(mf.data());
     
+    std::cout << "finished parsing." << std::endl;
+    
     // parse XML document
-    for(rapidxml::node_iterator<char> it(xml_doc.first_node()); ; ++it)
+    for(rapidxml::node_iterator<char> it(xml_doc.first_node()); it.dereference() != NULL; ++it)
     {
-        if(it->name() == "cuboid")
+        if(strcasecmp((*it).name(), "cuboid") == 0)
         {
             addCuboid(*it);
         }
-        else if(it->name() == "tunnel")
+        else if(strcasecmp((*it).name(), "tunnel") == 0)
         {
             addTunnel(*it);
         }
 		else
         {
+            std::cout << "Elementname: '" << (*it).name() << "'" << std::endl;
             throw std::runtime_error("Error: Unrecognized element in level file!");
         }
     }
@@ -107,16 +120,21 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
     _level->addChild(geode);
     
     // create Bullet bounding box
-    btBoxShape *bsCuboid = new btBoxShape(osgbBullet::asBtVector3(osg::Vec3(width, depth, height) / 2.0f));
+    /*btBoxShape *bsCuboid = new btBoxShape(osgbBullet::asBtVector3(osg::Vec3(width, depth, height) / 2.0f));
     
     btTransform shapeTransform;
     shapeTransform.setIdentity();
     shapeTransform.setOrigin(osgbBullet::asBtVector3(center));
     
-    _collisionShapes->addChildShape(shapeTransform, bsCuboid);
+    _collisionShapes->addChildShape(shapeTransform, bsCuboid);*/
 }
 
 void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
 {
     // yet to be done
+}
+
+osg::PositionAttitudeTransform *Level::getNode()
+{
+    return _level;
 }

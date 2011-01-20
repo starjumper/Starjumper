@@ -35,7 +35,7 @@ void GameManager::buildMenus()
 		menu->addButton("Quit", std::tr1::bind(&GameManager::quit, this));
 		menu->addButton("Highscore", std::tr1::bind(&GameManager::quit, this));
 		menu->addButton("Settings", std::tr1::bind(&GameManager::quit, this));
-		menu->addButton("Start game", std::tr1::bind(&GameManager::quit, this));
+		menu->addButton("Start game", std::tr1::bind(&GameManager::startGame, this));
 
     	addRenderingInstance("main_menu", menu);
 	}
@@ -49,4 +49,9 @@ void GameManager::run()
 void GameManager::quit()
 {
 	exit(0);
+}
+
+void GameManager::startGame()
+{
+    selectRenderingInstance("game");
 }
