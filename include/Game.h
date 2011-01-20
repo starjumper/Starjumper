@@ -3,6 +3,7 @@
 #include <osg/Group>
 
 #include "RenderingInstance.h"
+#include "LazyCameraManipulator.h"
 #include "Level.h"
 #include "Player.h"
 
@@ -12,6 +13,7 @@ private:
     
     Level *_level;
     Player *_player;
+    LazyCameraManipulator *_cameraManipulator;
     
 public:
     Game(osgViewer::Viewer *viewer);
