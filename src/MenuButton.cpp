@@ -6,10 +6,10 @@ MenuButton::MenuButton(const char* label, std::tr1::function<void ()> callback) 
 {	
 	// styling
 	setFont("fonts/times.ttf");
-	setFontSize(60);
-    setFontColor(0.8f, 0.85f, 0.9f, 0.8f);
+	setFontSize(MENU_BUTTON_FONT_SIZE);
+    setFontColor(MENU_BUTTON_FONT_COLOR);
     setLabel(label);
-	setPadding(3.0f);
+	setPadding(MENU_BUTTON_PADDING);
 	setAlignHorizontal(osgWidget::Widget::HA_LEFT);
     
 	// activate event handling for mouse clicks and moves
@@ -26,7 +26,7 @@ bool MenuButton::mousePush(double, double, osgWidget::WindowManager*)
 bool MenuButton::mouseEnter(double, double, osgWidget::WindowManager*) 
 {
 	// hover style
-    setFontColor(0.8f, 0.85f, 0.9f, 1.0f);
+    setFontColor(MENU_BUTTON_FONT_COLOR_HOVER);
 
     return true;
 }
@@ -34,7 +34,7 @@ bool MenuButton::mouseEnter(double, double, osgWidget::WindowManager*)
 bool MenuButton::mouseLeave(double, double, osgWidget::WindowManager*) 
 {
 	// reset style
-	setFontColor(0.8f, 0.85f, 0.9f, 0.8f);
+	setFontColor(MENU_BUTTON_FONT_COLOR);
 			
     return true;
 }
