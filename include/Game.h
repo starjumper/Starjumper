@@ -1,11 +1,15 @@
 #pragma once
 
+#include <osg/Group>
+
 #include "RenderingInstance.h"
-#include "types.h"
+#include "Level.h"
 
 class Game : public RenderingInstance
 {
 private:
+    
+    Level *_level;
     
 public:
     Game(osgViewer::Viewer *viewer);

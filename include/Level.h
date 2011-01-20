@@ -27,11 +27,13 @@ private:
     btCompoundShape *_collisionShapes;
   
 public:
-    Level(btDynamicsWorld *world, const std::string mapfile);
+    Level(/*btDynamicsWorld *world, */const std::string mapfile);
     
     void loadMapFromFile(const std::string mapfile);
     osg::Vec3 getFromVector(const rapidxml::xml_node<> &node) const;
     osg::Vec3 getToVector(const rapidxml::xml_node<> &node) const;
     void addCuboid(const rapidxml::xml_node<> &cuboidNode);
     void addTunnel(const rapidxml::xml_node<> &tunnelNode);
+    
+    osg::PositionAttitudeTransform *getNode();
 };

@@ -29,4 +29,5 @@ public:
 
     void run();
 	void quit();
+    void startGame();
 };

@@ -86,6 +86,11 @@ namespace rapidxml
         {
             return m_node != rhs.m_node;
         }
+        
+        xml_node<Ch> *dereference()
+        {
+            return m_node;
+        }
 
     private:
 
