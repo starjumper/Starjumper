@@ -3,7 +3,11 @@
 #include <map>
 #include <string>
 
-#include <functional>
+#if defined (__WIN32__)
+    #include <functional>
+#else
+    #include <tr1/functional>
+#endif
 
 #include <osgViewer/Viewer>
 

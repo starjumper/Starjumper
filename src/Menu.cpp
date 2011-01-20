@@ -16,7 +16,7 @@ Menu::Menu(osgViewer::Viewer *viewer) :
 	_buttonList->setAnchorVertical(osgWidget::Window::VA_CENTER);
     _buttonList->setAnchorHorizontal(osgWidget::Window::HA_CENTER);
 
-  	_buttonList->getBackground()->setColor(1.0f, 1.0f, 1.0f, 0.0f);
+  	_buttonList->getBackground()->setColor(MENU_BACKGROUND_COLOR);
 
     _buttonList->attachMoveCallback();
     _buttonList->attachScaleCallback();

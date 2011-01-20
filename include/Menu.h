@@ -2,7 +2,11 @@
 
 #include <iostream>
 
-#include <functional>
+#if defined (__WIN32__)
+    #include <functional>
+#else
+    #include <tr1/functional>
+#endif
 
 #include <osgViewer/Viewer>
 #include <osgViewer/ViewerEventHandlers>
@@ -12,6 +16,8 @@
 #include "types.h"
 #include "RenderingInstance.h"
 #include "MenuButton.h"
+
+#define MENU_BACKGROUND_COLOR   1.0f, 1.0f, 1.0f, 0.0f
 
 // masks for the window manager
 const unsigned int MASK_2D = 0xF0000000;
