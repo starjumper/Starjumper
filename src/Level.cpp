@@ -22,11 +22,11 @@ void Level::loadMapFromFile(const std::string mapfile)
     // parse XML document
     for(rapidxml::node_iterator<char> it(xml_doc.first_node()); it.dereference() != NULL; ++it)
     {
-        if(strcasecmp((*it).name(), "cuboid") == 0)
+        if(strcmp((*it).name(), "cuboid") == 0)
         {
             addCuboid(*it);
         }
-        else if(strcasecmp((*it).name(), "tunnel") == 0)
+        else if(strcmp((*it).name(), "tunnel") == 0)
         {
             addTunnel(*it);
         }
@@ -119,7 +119,20 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
 
 void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
 {
-    // yet to be done
+	osg::Node *tunnelModel = osgDB::readNodeFile(TUNNEL_MODEL_FILE);
+	osg::PositionAttitudeTransform* tunnelTransform = new osg::PositionAttitudeTransform();
+
+	tunnelTransform->addChild(tunnelModel);
+	tunnelTransform->setPosition(getFromVector(tunnelNode));
+	tunnelTransform->setScale(osg::Vec3f(1.0f, atof(tunnelNode.first_node("size")->first_attribute("y")->value()) / 8.0f, 1.0f));
+	
+	_level->addChild(tunnelTransform);
+    /*
+	btConvexTriangleMeshShape* mesh = osgbBullet::btConvexTriMeshCollisionShapeFromOSG(tunnelPat);
+
+	btTransform shapeTransform;
+	shapeTransform.setIdentity();
+	cs->addChildShape(shapeTransform, mesh);*/
 }
 
 osg::PositionAttitudeTransform *Level::getNode()
