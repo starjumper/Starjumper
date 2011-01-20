@@ -8,7 +8,9 @@
 class LazyCameraManipulator : public osgGA::NodeTrackerManipulator
 {
     private:
-    
+        float _oldNodeXPosition;
+        float _newCameraXPosition;
+        
     public:
         LazyCameraManipulator(); 
         
@@ -16,9 +18,5 @@ class LazyCameraManipulator : public osgGA::NodeTrackerManipulator
         bool handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us);
 
     protected:
-
         ~LazyCameraManipulator();
-        
-        float                   _oldNodeXPosition;
-        float                   _newCameraXPosition;
 };

@@ -6,8 +6,6 @@ Level::Level(const std::string mapfile)
 {
     _level = new osg::PositionAttitudeTransform();
     
-    std::cout << "Loading map from file " << mapfile << std::endl;
-    
     loadMapFromFile(mapfile);
     
     // setup physics components
@@ -17,16 +15,9 @@ Level::Level(const std::string mapfile)
 void Level::loadMapFromFile(const std::string mapfile)
 {
     // load XML document
-    std::cout << "preparing load..." << std::endl;
-    
     rapidxml::file<> mf(mapfile.c_str());
     rapidxml::xml_document<> xml_doc;
-    
-    std::cout << "next step: parsing..." << std::endl;
-    
     xml_doc.parse<0>(mf.data());
-    
-    std::cout << "finished parsing." << std::endl;
     
     // parse XML document
     for(rapidxml::node_iterator<char> it(xml_doc.first_node()); it.dereference() != NULL; ++it)
@@ -41,7 +32,6 @@ void Level::loadMapFromFile(const std::string mapfile)
         }
 		else
         {
-            std::cout << "Elementname: '" << (*it).name() << "'" << std::endl;
             throw std::runtime_error("Error: Unrecognized element in level file!");
         }
     }

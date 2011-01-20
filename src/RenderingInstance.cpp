@@ -9,3 +9,8 @@ osg::Group *RenderingInstance::getRootNode()
 {
     return _rootNode;
 }
+
+osgViewer::Viewer *RenderingInstance::getViewer()
+{
+    return _viewer;
+}

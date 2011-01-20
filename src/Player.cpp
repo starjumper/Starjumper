@@ -1,5 +1,12 @@
 #include "Player.h"
 
+Player::Player()
+{
+    _player = new osg::PositionAttitudeTransform;
+    
+    initializePlayerModel();
+}
+
 Player::Player(btDynamicsWorld *world) :
     _world(world)
 {
@@ -39,7 +46,7 @@ void Player::initializePlayerPhysics()
 	_playerGhostObject->setWorldTransform(playerTransform);
 }
 
-osg::PositionAttitudeTransform *Player::getPlayer()
+osg::PositionAttitudeTransform *Player::getNode()
 {
     return _player;
 }
