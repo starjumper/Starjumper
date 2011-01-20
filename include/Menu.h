@@ -2,10 +2,10 @@
 
 #include <iostream>
 
-#if defined (__WIN32__)
+#if defined (_WIN32)
     #include <functional>
 #else
-    #include <tr1/functional>
+	#include <tr1/functional>
 #endif
 
 #include <osgViewer/Viewer>
