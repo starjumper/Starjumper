@@ -22,7 +22,6 @@ void GameManager::addRenderingInstance(std::string name, RenderingInstance *inst
 void GameManager::selectRenderingInstance(std::string name)
 {
     _activeRenderingInstance = _renderingInstances[name];
-    _activeRenderingInstance->configureViewer(&_viewer);
     _viewer.setSceneData(_activeRenderingInstance->getRootNode());
 }
 

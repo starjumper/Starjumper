@@ -28,11 +28,8 @@ Menu::Menu(osgViewer::Viewer *viewer) :
 	// create a camera which is orthogonal to the window for having a 2D view
     osg::Camera *camera = _windowManager->createParentOrthoCamera();
     getRootNode()->addChild(camera);
-}
-
-void Menu::configureViewer(osgViewer::Viewer *viewer)
-{
-    viewer->addEventHandler(new osgWidget::MouseHandler(_windowManager));
+    
+    getViewer()->addEventHandler(new osgWidget::MouseHandler(_windowManager));
 }
 
 void Menu::addButton(const char* label, std::tr1::function<void ()> callback)

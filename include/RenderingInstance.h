@@ -17,7 +17,4 @@ protected:
 public:
     RenderingInstance(osgViewer::Viewer *viewer);
     osg::Group *getRootNode();
-    
-    // configure global viewer according to the RenderingInstance's needs
-    virtual void configureViewer(osgViewer::Viewer *viewer) = 0;
 };

@@ -31,10 +31,5 @@ private:
 
 public:
 	Menu(osgViewer::Viewer *viewer);
-
-	// inherited methods
-	virtual void configureViewer(osgViewer::Viewer *viewer);
-
-	// own methods
 	void addButton(const char* label, std::tr1::function<void ()> callback);
 };
