@@ -36,9 +36,8 @@
 		<position x="6.0" y="100" z="0" />
 		<size x="2.0" y="50" z="5.0" />
 	</cuboid>
-	<tunnel>
+	<tunnel length="50">
 		<position x="0" y="60" z="0" />
-		<size y="50" />
 	</tunnel>
 	<cuboid>
 		<position x="-2.0" y="260" z="0" />

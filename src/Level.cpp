@@ -37,56 +37,36 @@ void Level::loadMapFromFile(const std::string mapfile)
     }
 }
 
-osg::Vec3 Level::getFromVector(const rapidxml::xml_node<> &node) const
+osg::Vec3 Level::getVectorFromXMLNode(const std::string &name, const rapidxml::xml_node<> &node) const
 {
-    rapidxml::xml_node<> *position = node.first_node("position");
+    rapidxml::xml_node<> *vectorNode = node.first_node(name.c_str());
     
-    if(!position)
+    if(!vectorNode)
+    {
         throw std::runtime_error("Error: Level element missing position node!");
-    
+    }
+        
     float x, y, z;
     
     try
     {
-        x = atof(position->first_attribute("x")->value());
-        y = atof(position->first_attribute("y")->value());
-        z = atof(position->first_attribute("z")->value());
+        x = atof(vectorNode->first_attribute("x")->value());
+        y = atof(vectorNode->first_attribute("y")->value());
+        z = atof(vectorNode->first_attribute("z")->value());
     }
     catch(...)
     {
-        throw std::runtime_error("Error: position node missing either x, y or z attribute!");
+        throw std::runtime_error("Error: " + name + " node missing either x, y or z attribute!");
     }
     
-    return osg::Vec3(x, y, z);
-}
-
-osg::Vec3 Level::getToVector(const rapidxml::xml_node<> &node) const
-{
-    rapidxml::xml_node<> *size = node.first_node("size");
-    
-    if(!size)
-        throw std::runtime_error("Error: Level element missing size node!");
-    
-    float x, y, z;
-    
-    try
-    {
-        x = atof(size->first_attribute("x")->value());
-        y = atof(size->first_attribute("y")->value());
-        z = atof(size->first_attribute("z")->value());
-    }
-    catch(...)
-    {
-        throw std::runtime_error("Error: size node missing either x, y or z attribute!");
-    }
-    
-    return getFromVector(node) + osg::Vec3(x, y, z);
-}
+    std::cout << "x:" << x << " y:" << y << " z:" << z << std::endl;
+    return osg::Vec3(x, y, z);   
+};
 
 void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
 {
-    osg::Vec3 from = getFromVector(cuboidNode);
-    osg::Vec3 to = getToVector(cuboidNode);
+    osg::Vec3 from = getVectorFromXMLNode("position", cuboidNode);
+    osg::Vec3 to = getVectorFromXMLNode("size", cuboidNode);
     
     osg::ShapeDrawable *cuboid;
     
@@ -118,15 +98,15 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
 }
 
 void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
-{
+{/*
 	osg::Node *tunnelModel = osgDB::readNodeFile(TUNNEL_MODEL_FILE);
-	osg::PositionAttitudeTransform* tunnelTransform = new osg::PositionAttitudeTransform();
+	osg::PositionAttitudeTransform *tunnelTransform = new osg::PositionAttitudeTransform();
 
 	tunnelTransform->addChild(tunnelModel);
-	tunnelTransform->setPosition(getFromVector(tunnelNode));
-	tunnelTransform->setScale(osg::Vec3f(1.0f, atof(tunnelNode.first_node("size")->first_attribute("y")->value()) / 8.0f, 1.0f));
+	tunnelTransform->setPosition(getVectorFromXMLNode("position", tunnelNode));
+	tunnelTransform->setScale(osg::Vec3f(1.0f, 100.0f, 1.0f));
 	
-	_level->addChild(tunnelTransform);
+	_level->addChild(tunnelTransform);*/
     /*
 	btConvexTriangleMeshShape* mesh = osgbBullet::btConvexTriMeshCollisionShapeFromOSG(tunnelPat);
 
