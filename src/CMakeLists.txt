@@ -8,6 +8,7 @@ SET(SOURCE
     Level.cpp
     Player.cpp
     LazyCameraManipulator.cpp
+    PlayerController.cpp
 )
 
 FIND_PACKAGE( OpenGL )

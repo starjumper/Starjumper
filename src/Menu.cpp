@@ -38,3 +38,13 @@ void Menu::addButton(const char* label, std::tr1::function<void ()> callback)
 	
 	_buttonList->addWidget(button);
 }
+
+void Menu::prepare(osgViewer::Viewer *viewer)
+{
+    
+}
+
+void Menu::cleanup(osgViewer::Viewer *viewer)
+{
+    
+}

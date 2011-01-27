@@ -119,3 +119,8 @@ osg::PositionAttitudeTransform *Level::getNode()
 {
     return _level;
 }
+
+btCompoundShape *Level::getCollisionShape()
+{
+    return _collisionShapes;
+}

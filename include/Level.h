@@ -39,4 +39,5 @@ public:
     void loadMapFromFile(const std::string mapfile);
     
     osg::PositionAttitudeTransform *getNode();
+    btCompoundShape *getCollisionShape();
 };
