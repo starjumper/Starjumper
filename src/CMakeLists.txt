@@ -9,6 +9,7 @@ SET(SOURCE
     Player.cpp
     LazyCameraManipulator.cpp
     PlayerController.cpp
+	HeadUpDisplay.cpp
 )
 
 FIND_PACKAGE( OpenGL )

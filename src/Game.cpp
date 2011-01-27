@@ -7,7 +7,8 @@ Game::Game(osgViewer::Viewer *viewer) :
     _player = new Player();
     
     _controller = new PlayerController(_player);
-    
+    _headUpDisplay = new HeadUpDisplay(_player);
+	
     initializeScene();
     initializePhysics();
     
@@ -26,9 +27,10 @@ void Game::initializeScene()
     _cameraManipulator->setTrackNode(_player->getNode());
     _cameraManipulator->setHomePosition(CAMERA_HOME_EYE, CAMERA_HOME_CENTER, CAMERA_HOME_UP);
     
-    // add level and player to scene
+    // add level and player to scene and setup heads up display
     getRootNode()->addChild(_level->getNode());
     getRootNode()->addChild(_player->getNode());
+    getRootNode()->addChild(_headUpDisplay->getCamera());
     
     // set _cameraManipulator as manipulator for the scene
     getViewer()->setCameraManipulator(_cameraManipulator);

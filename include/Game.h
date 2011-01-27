@@ -9,6 +9,7 @@
 #include "Level.h"
 #include "Player.h"
 #include "PlayerController.h"
+#include "HeadUpDisplay.h"
 
 #define WORLD_MIN          -1000, -1000, -1000
 #define WORLD_MAX          1000, 1000, 1000
@@ -24,6 +25,7 @@ private:
     Player *_player;
     PlayerController *_controller;
     LazyCameraManipulator *_cameraManipulator;
+    HeadUpDisplay *_headUpDisplay;
     
     btDynamicsWorld *_world;
     btDefaultCollisionConfiguration *_collisionConfiguration;
