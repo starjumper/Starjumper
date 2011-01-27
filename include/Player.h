@@ -9,6 +9,7 @@
 
 #include <btBulletDynamicsCommon.h>
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
+#include <BulletDynamics/Character/btKinematicCharacterController.h>
 #include <osgbBullet/Utils.h>
 #include <osgbBullet/CollisionShapes.h>
 
@@ -22,15 +23,24 @@ class Player
 private:
     osg::PositionAttitudeTransform *_player;
     
-    btDynamicsWorld *_world;
-    btGhostObject *_playerGhostObject;
+    btPairCachingGhostObject *_playerGhostObject;
+    btKinematicCharacterController *_playerController;
     
     void initializePlayerModel();
     void initializePlayerPhysics();
     
 public:
     Player();
-    Player(btDynamicsWorld *world);
+    
+    // player control
+    void moveLeft(bool &keyState);
+    void moveRight(bool &keyState);
+    void accelerate(bool &keyState);
+    void decelerate(bool &keyState);
+    void jump(bool &keyState);
+    
+    // getter methods
     osg::PositionAttitudeTransform *getNode();
-    btGhostObject *getPlayerGhostObject();
+    btCollisionObject *getCollisionObject();
+    btKinematicCharacterController *getController();
 };

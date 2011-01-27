@@ -6,8 +6,15 @@ Game::Game(osgViewer::Viewer *viewer) :
     _level = new Level("resources/levels/level1.xml");
     _player = new Player();
     
+    _controller = new PlayerController(_player);
+    
     initializeScene();
     initializePhysics();
+    
+    _world->addCollisionObject(_player->getCollisionObject(),
+                               btBroadphaseProxy::CharacterFilter,
+                               btBroadphaseProxy::StaticFilter|btBroadphaseProxy::DefaultFilter);
+    _world->addAction(_player->getController());
 }
 
 void Game::initializeScene()
@@ -39,6 +46,7 @@ void Game::initializePhysics()
 	
 	// setup sweep axis
 	btAxisSweep3 *sweepBP = new btAxisSweep3(worldMin,worldMax);
+	sweepBP->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
 	
 	_overlappingPairCache = sweepBP;
 
@@ -49,4 +57,17 @@ void Game::initializePhysics()
 	                                     _overlappingPairCache,
 	                                     _constraintSolver,
 	                                     _collisionConfiguration);
+
+    // set the worlds gravity
+    //_world->setGravity(WORLD_GRAVITY);
+}
+
+void Game::prepare(osgViewer::Viewer *viewer)
+{
+    viewer->addEventHandler(_controller);
+}
+
+void Game::cleanup(osgViewer::Viewer *viewer)
+{
+    viewer->getEventHandlers().remove(_controller);
 }

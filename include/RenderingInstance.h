@@ -17,4 +17,9 @@ protected:
 public:
     RenderingInstance(osgViewer::Viewer *viewer);
     osg::Group *getRootNode();
+    
+    // methods to implement preparation before and cleanup
+    // after switching RenderingInstances
+    virtual void prepare(osgViewer::Viewer *viewer) = 0;
+    virtual void cleanup(osgViewer::Viewer *viewer) = 0;
 };
