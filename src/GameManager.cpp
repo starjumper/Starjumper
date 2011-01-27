@@ -1,6 +1,7 @@
 #include "GameManager.h"
 
-GameManager::GameManager()
+GameManager::GameManager() :
+    _activeRenderingInstance(NULL)
 {    
     // configure viewer to use the primary screen only
     _viewer.setUpViewOnSingleScreen(0);
@@ -21,7 +22,11 @@ void GameManager::addRenderingInstance(std::string name, RenderingInstance *inst
 
 void GameManager::selectRenderingInstance(std::string name)
 {
+    if(_activeRenderingInstance)
+        _activeRenderingInstance->cleanup(&_viewer);
+    
     _activeRenderingInstance = _renderingInstances[name];
+    _activeRenderingInstance->prepare(&_viewer);
     _viewer.setSceneData(_activeRenderingInstance->getRootNode());
 }
 

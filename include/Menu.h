@@ -32,4 +32,7 @@ private:
 public:
 	Menu(osgViewer::Viewer *viewer);
 	void addButton(const char* label, std::tr1::function<void ()> callback);
+	
+	virtual void prepare(osgViewer::Viewer *viewer);
+    virtual void cleanup(osgViewer::Viewer *viewer);
 };

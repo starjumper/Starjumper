@@ -39,4 +39,5 @@ public:
     void addTunnel(const rapidxml::xml_node<> &tunnelNode);
     
     osg::PositionAttitudeTransform *getNode();
+    btCompoundShape *getCollisionShape();
 };
