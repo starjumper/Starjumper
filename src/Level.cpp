@@ -108,10 +108,7 @@ void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
 	tunnelTransform->setPosition(position);
 	tunnelTransform->setScale(osg::Vec3f(1.0f, atof(tunnelNode.first_attribute("length")->value()), 1.0f));
 	
-	_level->addChild(tunnelTransform);
-    
-    std::cout << "center" << " " << "x:" << position.x() << " y:" << position.y() << " z:" << position.z() << std::endl;
-    
+	_level->addChild(tunnelTransform);    
 	
     /*
 	btConvexTriangleMeshShape* mesh = osgbBullet::btConvexTriMeshCollisionShapeFromOSG(tunnelPat);

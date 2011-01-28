@@ -1,6 +1,5 @@
 #pragma HeadUpDisplay_H__
 
-#include <iostream>
 #include <sstream>
 
 #include <osg/Geode>
