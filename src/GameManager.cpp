@@ -6,6 +6,9 @@ GameManager::GameManager() :
     // configure viewer to use the primary screen only
     _viewer.setUpViewOnSingleScreen(0);
     
+    // avoids segfaults when updating the HUD
+    _viewer.setThreadingModel(osgViewer::Viewer::SingleThreaded);
+	
 	// set background color
 	_viewer.getCamera()->setClearColor(osg::Vec4( 0., 0., 0., 1. )); 
 
