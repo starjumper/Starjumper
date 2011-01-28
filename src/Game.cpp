@@ -8,7 +8,7 @@ Game::Game(osgViewer::Viewer *viewer) :
     
     _controller = new PlayerController(_player);
     _headUpDisplay = new HeadUpDisplay(_player);
-	
+    	
     initializeScene();
     initializePhysics();
     
