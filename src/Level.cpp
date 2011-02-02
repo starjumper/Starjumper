@@ -67,9 +67,25 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
     osg::Vec3 from = getVectorFromXMLNode("position", cuboidNode);
     osg::Vec3 size = getVectorFromXMLNode("size", cuboidNode);
  
-    Cuboid *cuboid = new Cuboid(from, size);
+    Cuboid *cuboid = NULL;
+    
+    if(cuboidNode.first_attribute("type") != 0)
+    {
+        std::string type = cuboidNode.first_attribute("type")->value();
+
+        if(type == "accelerate")
+        {
+            cuboid = new AccelerationCuboid(from, size);
+        }            
+    }
+
+    if(cuboid == NULL)
+    {
+        cuboid = new Cuboid(from, size);
+    }
     
     _level->addChild(cuboid->getNode());
+    
     
     /*
     // create Bullet bounding box
