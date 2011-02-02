@@ -63,28 +63,13 @@ osg::Vec3 Level::getVectorFromXMLNode(const std::string &name, const rapidxml::x
 };
 
 void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
-{
+{    
     osg::Vec3 from = getVectorFromXMLNode("position", cuboidNode);
-    osg::Vec3 to = from + getVectorFromXMLNode("size", cuboidNode);
+    osg::Vec3 size = getVectorFromXMLNode("size", cuboidNode);
+ 
+    Cuboid *cuboid = new Cuboid(from, size);
     
-    osg::ShapeDrawable *cuboid;
-    
-    osg::Vec3 center = osg::Vec3(
-							0.5 * (from.x() + to.x()),
-							0.5 * (from.y() + to.y()),
-							0.5 * (from.z() + to.z()));
-
-	float width = fabs(from.x() - to.x());
-	float depth = fabs(from.y() - to.y());
-	float height = fabs(from.z() - to.z());
-		
-	cuboid = new osg::ShapeDrawable(new osg::Box(center, width, depth, height));
-	cuboid->setColor(DEFAULT_COLOR);
-
-	osg::Geode *geode = new osg::Geode();
-	geode->addDrawable(cuboid);	
-	
-    _level->addChild(geode);
+    _level->addChild(cuboid->getNode());
     
     /*
     // create Bullet bounding box

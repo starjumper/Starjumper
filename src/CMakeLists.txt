@@ -10,6 +10,7 @@ SET(SOURCE
     LazyCameraManipulator.cpp
     PlayerController.cpp
 	HeadUpDisplay.cpp
+	Cuboid.cpp
 )
 
 FIND_PACKAGE( OpenGL )

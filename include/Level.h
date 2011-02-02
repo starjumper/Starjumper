@@ -5,7 +5,6 @@
 
 #include <osg/Group>
 #include <osg/Geode>
-#include <osg/ShapeDrawable>
 #include <osg/PositionAttitudeTransform>
 #include <osgDB/ReadFile>
 
@@ -16,6 +15,8 @@
 #include "RapidXML/rapidxml.hpp"
 #include "RapidXML/rapidxml_iterators.hpp"
 #include "RapidXML/rapidxml_utils.hpp"
+
+#include "Cuboid.h"
 
 #define TUNNEL_MODEL_FILE		"resources/models/tunnel.osg"
 #define DEFAULT_COLOR	        osg::Vec4f(0.8f, 0.5f, 0.7f, 1.0f)

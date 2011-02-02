@@ -1,4 +1,4 @@
-#pragma HeadUpDisplay_H__
+#pragma once
 
 #include <sstream>
 
