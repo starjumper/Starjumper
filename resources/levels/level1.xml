@@ -16,7 +16,7 @@
 		<position x="-2.0" y="40" z="0" />
 		<size x="4.0" y="20" z="0.1" />
 	</cuboid>
-	<cuboid>
+	<cuboid type="accelerate">
 		<position x="-8.0" y="90" z="0.0" />
 		<size x="2.0" y="50" z="5.0" />
 	</cuboid>
@@ -32,7 +32,7 @@
 		<position x="3.0" y="60" z="0" />
 		<size x="2.0" y="100" z="0.1" />
 	</cuboid>
-    <cuboid>
+    <cuboid type="accelerate">
 		<position x="6.0" y="100" z="0" />
 		<size x="2.0" y="50" z="5.0" />
 	</cuboid>
