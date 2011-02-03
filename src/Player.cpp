@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "PlayerUpdater.h"
 
 #include <iostream>
 
@@ -26,6 +27,14 @@ void Player::initializePlayerModel()
     patPlayer->setPosition(osg::Vec3(0.0, 10.0, 5.0));
 
     _player->addChild(patPlayer);
+    
+    PlayerUpdater *p_up = new PlayerUpdater(this);
+    patPlayer->setUpdateCallback(p_up);
+    
+    _moveLeft = false;
+    _moveRight = false;
+    _accelerate = false;
+    _decelerate = false;
 }
 
 void Player::initializePlayerPhysics()
@@ -48,21 +57,25 @@ void Player::initializePlayerPhysics()
 void Player::moveLeft(bool &keyState)
 {
     std::cout << "moveLeft" << std::endl;
+    _moveLeft = keyState;
 }
 
 void Player::moveRight(bool &keyState)
 {
     std::cout << "moveRight" << std::endl;
+    _moveRight = keyState;
 }
 
 void Player::accelerate(bool &keyState)
 {
     std::cout << "accelerate" << std::endl;
+    _accelerate = keyState;
 }
 
 void Player::decelerate(bool &keyState)
 {
     std::cout << "decelerate" << std::endl;
+    _decelerate = keyState;
 }
 
 void Player::jump(bool &keyState)

@@ -9,6 +9,7 @@ SET(SOURCE
     Player.cpp
     LazyCameraManipulator.cpp
     PlayerController.cpp
+    PlayerUpdater.cpp
 	HeadUpDisplay.cpp
 	Cuboid.cpp
 )

@@ -85,14 +85,9 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
     }
     
     _level->addChild(cuboid->getNode());
-    
-    
-
+    /*
     // create Bullet bounding box
     btBoxShape *bsCuboid = new btBoxShape(osgbBullet::asBtVector3(osg::Vec3(width, depth, height) / 2.0f));
-
-    // create CollisionShape for the cuboid
-    btCollisionShape *bsCuboid = new btBoxShape(osgbBullet::asBtVector3(osg::Vec3(width, depth, height) / 2.0f));
     
     // create MotionState for the cuboid
     btDefaultMotionState *msCuboid = new btDefaultMotionState();
@@ -103,7 +98,7 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
     // construct rigid body from previously specified construction info
     btRigidBody* rbCuboid = new btRigidBody(rbciCuboid);
     
-    _collisionObjects.push_back(rbCuboid);
+    _collisionObjects.push_back(rbCuboid);*/
     
     /*btTransform shapeTransform;
     shapeTransform.setIdentity();

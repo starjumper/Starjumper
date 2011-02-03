@@ -43,4 +43,10 @@ public:
     osg::PositionAttitudeTransform *getNode();
     btCollisionObject *getCollisionObject();
     btKinematicCharacterController *getController();
+    
+    // TODO: outsource these in a seperate PlayerState class (?)
+    bool _accelerate;
+    bool _decelerate;
+    bool _moveLeft;
+    bool _moveRight;
 };
