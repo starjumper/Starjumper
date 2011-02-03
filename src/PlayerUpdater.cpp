@@ -41,15 +41,14 @@ osg::Vec3 PlayerUpdater::updatePhysics(PlayerState *playerState)
     btKinematicCharacterController *playerController = _player->getController();
     
     if(playerState->requestMoveLeft())
-        direction -= btVector3(1, 0, 0);
+        direction -= btVector3(0.2, 0, 0);
     
     if(playerState->requestMoveRight())
-        direction += btVector3(1, 0, 0);
+        direction += btVector3(0.2, 0, 0);
     
     if(playerState->requestAccelerate())
     {
         float speed = playerState->getSpeed();
-        
         direction += btVector3(0, 1, 0);
     }
         
