@@ -5,16 +5,25 @@ Game::Game(osgViewer::Viewer *viewer) :
 {
     _level = new Level("resources/levels/level1.xml");
     _player = new Player();
-    
     _controller = new PlayerController(_player);
     _headUpDisplay = new HeadUpDisplay(_player);
     	
     initializeScene();
     initializePhysics();
     
+    // get level components and insert as rigid bodies into world
+    std::vector<btRigidBody *> levelRBs = _level->getCollisionObjects();
+    for(size_t i = 0; i < levelRBs.size(); ++i)
+    {
+        _world->addRigidBody(levelRBs[i]);
+    }
+    
+    // add player ghost object to world
     _world->addCollisionObject(_player->getCollisionObject(),
                                btBroadphaseProxy::CharacterFilter,
                                btBroadphaseProxy::StaticFilter|btBroadphaseProxy::DefaultFilter);
+    
+    // register PlayerController
     _world->addAction(_player->getController());
 }
 
@@ -61,7 +70,7 @@ void Game::initializePhysics()
 	                                     _collisionConfiguration);
 
     // set the worlds gravity
-    //_world->setGravity(WORLD_GRAVITY);
+    _world->setGravity(WORLD_GRAVITY);
 }
 
 void Game::prepare(osgViewer::Viewer *viewer)

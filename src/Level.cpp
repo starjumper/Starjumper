@@ -87,11 +87,25 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
     _level->addChild(cuboid->getNode());
     
     
-    /*
+
     // create Bullet bounding box
     btBoxShape *bsCuboid = new btBoxShape(osgbBullet::asBtVector3(osg::Vec3(width, depth, height) / 2.0f));
+
+    // create CollisionShape for the cuboid
+    btCollisionShape *bsCuboid = new btBoxShape(osgbBullet::asBtVector3(osg::Vec3(width, depth, height) / 2.0f));
     
-    btTransform shapeTransform;
+    // create MotionState for the cuboid
+    btDefaultMotionState *msCuboid = new btDefaultMotionState();
+    
+    // passing 0 as first and a null-vector as last argument means this object is immovable
+    btRigidBody::btRigidBodyConstructionInfo rbciCuboid(0, msCuboid, bsCuboid, btVector3(0,0,0));
+    
+    // construct rigid body from previously specified construction info
+    btRigidBody* rbCuboid = new btRigidBody(rbciCuboid);
+    
+    _collisionObjects.push_back(rbCuboid);
+    
+    /*btTransform shapeTransform;
     shapeTransform.setIdentity();
     shapeTransform.setOrigin(osgbBullet::asBtVector3(center));
     
@@ -128,4 +142,9 @@ osg::PositionAttitudeTransform *Level::getNode()
 btCompoundShape *Level::getCollisionShape()
 {
     return _collisionShapes;
+}
+
+std::vector<btRigidBody *> Level::getCollisionObjects()
+{
+    return _collisionObjects;
 }

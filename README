@@ -59,7 +59,12 @@ CODING CONVENTIONS
 	- License and commented-out code: /* ... */
 	- All other comments:             // ...
 	- No capital letters at the beginning
-	
+
+- for-loops
+	- unless required otherwise, use size_t as type for run variable
+	- preincrement, not postincrement the run variable
+	- e.g.: for(size_t i = 0; i < 100; ++i)
+
 - Don't use if constructs without brackets
 
 	Good:
@@ -75,4 +80,4 @@ CODING CONVENTIONS
 			std::cout << "haha" << std::cout;
 			
 - Don't use namespaces!
-- use const if it possible!
+- use const if possible!

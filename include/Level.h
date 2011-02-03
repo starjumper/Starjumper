@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include <vector>
 
 #include <osg/Group>
 #include <osg/Geode>
@@ -29,16 +30,18 @@ private:
     
     btDynamicsWorld *_world;
     btCompoundShape *_collisionShapes;
+    std::vector<btRigidBody *> _collisionObjects;
 
     osg::Vec3 getVectorFromXMLNode(const std::string &name, const rapidxml::xml_node<> &node) const;
     void addCuboid(const rapidxml::xml_node<> &cuboidNode);
     void addTunnel(const rapidxml::xml_node<> &tunnelNode);
   
 public:
-    Level(/*btDynamicsWorld *world, */const std::string mapfile);
+    Level(const std::string mapfile);
     
     void loadMapFromFile(const std::string mapfile);
     
     osg::PositionAttitudeTransform *getNode();
     btCompoundShape *getCollisionShape();
+    std::vector<btRigidBody *> getCollisionObjects();
 };

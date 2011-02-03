@@ -18,11 +18,12 @@ void Player::initializePlayerModel()
         throw std::runtime_error("Unable to load player model file!");
     }
     
-    osg::PositionAttitudeTransform *patPlayer = new osg::PositionAttitudeTransform;   
+    osg::PositionAttitudeTransform *patPlayer = new osg::PositionAttitudeTransform;
 
     patPlayer->addChild(playerModel);
     patPlayer->setScale(PLAYER_SCALE);
     patPlayer->setAttitude(PLAYER_ATTITUDE);
+    patPlayer->setPosition(osg::Vec3(0.0, 10.0, 5.0));
 
     _player->addChild(patPlayer);
 }
@@ -37,8 +38,8 @@ void Player::initializePlayerPhysics()
     _playerGhostObject->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
     
     btTransform playerTransform;
-	playerTransform.setIdentity ();
-	playerTransform.setOrigin (btVector3(0.0, 4.0, 0.0));
+	playerTransform.setIdentity();
+	playerTransform.setOrigin(btVector3(0.0, 4.0, 0.0));
 	_playerGhostObject->setWorldTransform(playerTransform);
 	
 	_playerController = new btKinematicCharacterController(_playerGhostObject, boundingBox, btScalar(0.35));

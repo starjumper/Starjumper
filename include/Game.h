@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include <osg/Group>
 
 #include <btBulletDynamicsCommon.h>
