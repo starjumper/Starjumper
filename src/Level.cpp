@@ -5,7 +5,7 @@
 Level::Level(const std::string mapfile)
 {
     _level = new osg::PositionAttitudeTransform();
-    
+
     loadMapFromFile(mapfile);
     
     // setup physics components
@@ -83,7 +83,7 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
     {
         cuboid = new Cuboid(from, size);
     }
-    
+	
     _level->addChild(cuboid->getNode());
     /*
     // create Bullet bounding box

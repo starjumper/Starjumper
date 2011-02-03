@@ -22,6 +22,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
     stateSet->setMode(GL_BLEND, osg::StateAttribute::ON);
     
     getNode()->setStateSet(stateSet);
+    getNode()->setNodeMask(RECEIVE_SHADOW_MASK);
 }
 
 osg::Node *Cuboid::getNode()

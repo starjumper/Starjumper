@@ -10,6 +10,8 @@
 
 #include <osgDB/ReadFile>
 
+#include "types.h"
+
 #define DEFAULT_CUBOID_COLOR        osg::Vec4f(0.8f, 0.5f, 0.7f, 0.5f)
 #define ACCELERATION_CUBOID_TEXTURE "resources/textures/example.png"
 

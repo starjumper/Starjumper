@@ -13,10 +13,12 @@
 #include <osgbBullet/Utils.h>
 #include <osgbBullet/CollisionShapes.h>
 
+#include "types.h"
+
 #define PLAYER_MODEL        "resources/models/player.osg"
-#define PLAYER_SCALE        osg::Vec3(0.5, 0.5, 0.5)
-#define PLAYER_ATTITUDE     osg::Quat(osg::DegreesToRadians(180.0f), osg::Vec3(0.0,0.0,1.0))
-#define PLAYER_BBOX_EXTENTS btVector3(0.3, 0.3, 0.3)
+#define PLAYER_SCALE        osg::Vec3(0.2, 0.2, 0.2)
+#define PLAYER_ATTITUDE     osg::Quat(osg::DegreesToRadians(180.0f), osg::Vec3(0.0,0.0,5.0))
+#define PLAYER_BBOX_EXTENTS btVector3(1, 1, 1)
 
 class Player
 {

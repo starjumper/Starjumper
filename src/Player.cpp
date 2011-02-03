@@ -26,8 +26,9 @@ void Player::initializePlayerModel()
     patPlayer->setAttitude(PLAYER_ATTITUDE);
     patPlayer->setPosition(osg::Vec3(0.0, 10.0, 5.0));
 
+    _player->setNodeMask(CAST_SHADOW_MASK);
     _player->addChild(patPlayer);
-    
+	
     PlayerUpdater *p_up = new PlayerUpdater(this);
     patPlayer->setUpdateCallback(p_up);
     

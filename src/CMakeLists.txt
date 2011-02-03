@@ -2,7 +2,7 @@ SET(SOURCE
     main.cpp
     GameManager.cpp
     RenderingInstance.cpp
-	MenuButton.cpp
+    MenuButton.cpp
     Menu.cpp
     Game.cpp
     Level.cpp
@@ -12,6 +12,7 @@ SET(SOURCE
     PlayerUpdater.cpp
 	HeadUpDisplay.cpp
 	Cuboid.cpp
+    Lighting.cpp
 )
 
 FIND_PACKAGE( OpenGL )
@@ -23,6 +24,7 @@ LINK_LIBRARIES(
 	BulletDynamics
 	BulletCollision
 	LinearMath
+	osgShadow
 	${OPENGL_gl_LIBRARY}
 	${OPENGL_glu_LIBRARY}
 )
