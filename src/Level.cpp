@@ -118,6 +118,7 @@ void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
 	tunnelTransform->setPosition(position);
 	tunnelTransform->setScale(osg::Vec3f(1.0f, atof(tunnelNode.first_attribute("length")->value()), 1.0f));
 	
+	tunnelTransform->setNodeMask(RECEIVE_SHADOW_MASK);
 	_level->addChild(tunnelTransform);    
 	
     /*

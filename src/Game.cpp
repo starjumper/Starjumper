@@ -35,7 +35,7 @@ void Game::initializeScene()
 	shadowedScene->setReceivesShadowTraversalMask(RECEIVE_SHADOW_MASK);
 	shadowedScene->setCastsShadowTraversalMask(CAST_SHADOW_MASK);
 
-	osg::ref_ptr<osgShadow::SoftShadowMap> sm = new osgShadow::SoftShadowMap;
+	osg::ref_ptr<osgShadow::ShadowMap> sm = new osgShadow::ShadowMap;
 	shadowedScene->setShadowTechnique(sm.get());
 
 	//int mapres = 1024;

@@ -12,9 +12,9 @@ osg::Node* Lighting::getLights(osg::StateSet* rootStateSet)
 	osg::Light* light = new osg::Light;
 	light->setLightNum(1);
 	light->setSpecular(osg::Vec4d(1.0, 1.0, 1.0, 1.0));
-	light->setAmbient(osg::Vec4(0.3f,0.3f,0.3f,1.0f));
-	light->setDiffuse(osg::Vec4(1.0f,1.0f,1.0f,1.0f));
-	light->setConstantAttenuation(1.0f);
+	//light->setAmbient(osg::Vec4(1.0f,1.0f,1.0f,1.0f));
+	//light->setDiffuse(osg::Vec4(1.0f,1.0f,1.0f,1.0f));
+	//light->setConstantAttenuation(1.0f);
 	light->setPosition(osg::Vec4d(0.0, 0.0, 1.5, 1.0));
 
 	osg::LightSource* lightSource = new osg::LightSource;   
