@@ -2,8 +2,9 @@
 
 #include <iostream>
 
-Player::Player()
+Player::Player(const int shadowMask)
 {
+	_shadowMask = &shadowMask;
     initializePlayerModel();
     initializePlayerPhysics();
 }
@@ -23,8 +24,10 @@ void Player::initializePlayerModel()
     patPlayer->addChild(playerModel);
     patPlayer->setScale(PLAYER_SCALE);
     patPlayer->setAttitude(PLAYER_ATTITUDE);
+	patPlayer->setPosition(osg::Vec3(0.0,0.0,5.0));
 
     _player->addChild(patPlayer);
+	_player->setNodeMask(*_shadowMask);
 }
 
 void Player::initializePlayerPhysics()

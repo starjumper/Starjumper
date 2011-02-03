@@ -2,10 +2,11 @@
 
 //Level::Level(btDynamicsWorld *world, const std::string mapfile) :
 //    _world(world)
-Level::Level(const std::string mapfile)
+Level::Level(const std::string mapfile, const int shadowMask)
 {
     _level = new osg::PositionAttitudeTransform();
-    
+    _shadowMask = &shadowMask;
+
     loadMapFromFile(mapfile);
     
     // setup physics components
@@ -83,6 +84,7 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
 
 	osg::Geode *geode = new osg::Geode();
 	geode->addDrawable(cuboid);	
+	geode->setNodeMask(*_shadowMask);
 	
     _level->addChild(geode);
     

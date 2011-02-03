@@ -1,10 +1,12 @@
 #include "Game.h"
 
 Game::Game(osgViewer::Viewer *viewer) :
-	RenderingInstance(viewer)
+	RenderingInstance(viewer),
+	_receivesShadowTraversalMask((const int) 0x1),
+	_castsShadowTraversalMask((const int) 0x2)
 {
-    _level = new Level("resources/levels/level1.xml");
-    _player = new Player();
+	_level = new Level("resources/levels/level1.xml", _receivesShadowTraversalMask);
+    _player = new Player(_castsShadowTraversalMask);
     
     _controller = new PlayerController(_player);
     _headUpDisplay = new HeadUpDisplay(_player);
@@ -20,18 +22,37 @@ Game::Game(osgViewer::Viewer *viewer) :
 
 void Game::initializeScene()
 {
+	// prepare shadowing
+	osg::ref_ptr<osgShadow::ShadowedScene> shadowedScene = new osgShadow::ShadowedScene;
+
+	shadowedScene->setReceivesShadowTraversalMask(_receivesShadowTraversalMask);
+	shadowedScene->setCastsShadowTraversalMask(_castsShadowTraversalMask);
+
+	osg::ref_ptr<osgShadow::SoftShadowMap> sm = new osgShadow::SoftShadowMap;
+	shadowedScene->setShadowTechnique(sm.get());
+
+	//int mapres = 1024;
+	//sm->setTextureSize(osg::Vec2s(mapres,mapres));
+
     // initialize members
     _cameraManipulator = new LazyCameraManipulator();
     
     // setup manipulator to track the player
     _cameraManipulator->setTrackNode(_player->getNode());
     _cameraManipulator->setHomePosition(CAMERA_HOME_EYE, CAMERA_HOME_CENTER, CAMERA_HOME_UP);
-    
+
     // add level and player to scene and setup heads up display
-    getRootNode()->addChild(_level->getNode());
-    getRootNode()->addChild(_player->getNode());
+    shadowedScene->addChild(_level->getNode());
+    shadowedScene->addChild(_player->getNode());
     getRootNode()->addChild(_headUpDisplay->getCamera());
-    
+
+	// add lighting
+	osg::StateSet* rootStateSet = new osg::StateSet;
+	getRootNode()->setStateSet(rootStateSet);
+
+	shadowedScene->addChild(_lighting->getLights(rootStateSet));
+    getRootNode()->addChild(shadowedScene);
+
     // set _cameraManipulator as manipulator for the scene
     getViewer()->setCameraManipulator(_cameraManipulator);
 }

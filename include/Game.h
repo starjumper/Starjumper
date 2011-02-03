@@ -1,6 +1,14 @@
 #pragma once
 
 #include <osg/Group>
+#include <osgShadow/ShadowedScene>
+#include <osgShadow/ShadowVolume>
+#include <osgShadow/ShadowTexture>
+#include <osgShadow/ShadowMap>
+#include <osgShadow/SoftShadowMap>
+#include <osgShadow/ParallelSplitShadowMap>
+#include <osgShadow/LightSpacePerspectiveShadowMap>
+#include <osgShadow/StandardShadowMap>
 
 #include <btBulletDynamicsCommon.h>
 
@@ -10,6 +18,7 @@
 #include "Player.h"
 #include "PlayerController.h"
 #include "HeadUpDisplay.h"
+#include "Lighting.h"
 
 #define WORLD_MIN          -1000, -1000, -1000
 #define WORLD_MAX          1000, 1000, 1000
@@ -26,6 +35,9 @@ private:
     PlayerController *_controller;
     LazyCameraManipulator *_cameraManipulator;
     HeadUpDisplay *_headUpDisplay;
+	Lighting *_lighting;
+	const int _receivesShadowTraversalMask;
+	const int _castsShadowTraversalMask;
     
     btDynamicsWorld *_world;
     btDefaultCollisionConfiguration *_collisionConfiguration;
