@@ -12,6 +12,7 @@
 
 #include <btBulletDynamicsCommon.h>
 
+#include "types.h"
 #include "RenderingInstance.h"
 #include "LazyCameraManipulator.h"
 #include "Level.h"
@@ -36,8 +37,6 @@ private:
     LazyCameraManipulator *_cameraManipulator;
     HeadUpDisplay *_headUpDisplay;
 	Lighting *_lighting;
-	const int _receivesShadowTraversalMask;
-	const int _castsShadowTraversalMask;
     
     btDynamicsWorld *_world;
     btDefaultCollisionConfiguration *_collisionConfiguration;

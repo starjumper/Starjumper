@@ -13,6 +13,8 @@
 #include <osgbBullet/Utils.h>
 #include <osgbBullet/CollisionShapes.h>
 
+#include "types.h"
+
 #define PLAYER_MODEL        "resources/models/player.osg"
 #define PLAYER_SCALE        osg::Vec3(0.2, 0.2, 0.2)
 #define PLAYER_ATTITUDE     osg::Quat(osg::DegreesToRadians(180.0f), osg::Vec3(0.0,0.0,5.0))
@@ -22,7 +24,6 @@ class Player
 {
 private:
     osg::PositionAttitudeTransform *_player;
-	const int *_shadowMask;
     
     btPairCachingGhostObject *_playerGhostObject;
     btKinematicCharacterController *_playerController;
@@ -31,7 +32,7 @@ private:
     void initializePlayerPhysics();
     
 public:
-    Player(const int shadowMask);
+    Player();
     
     // player control
     void moveLeft(bool &keyState);

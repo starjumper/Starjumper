@@ -17,6 +17,8 @@
 #include "RapidXML/rapidxml_iterators.hpp"
 #include "RapidXML/rapidxml_utils.hpp"
 
+#include "types.h"
+
 #define TUNNEL_MODEL_FILE		"resources/models/tunnel.osg"
 #define DEFAULT_COLOR	        osg::Vec4f(0.0f, 0.5f, 0.7f, 1.0f)
 
@@ -24,7 +26,6 @@ class Level
 {
 private:
     osg::PositionAttitudeTransform *_level;
-	const int *_shadowMask;
     
     btDynamicsWorld *_world;
     btCompoundShape *_collisionShapes;
@@ -34,7 +35,7 @@ private:
     void addTunnel(const rapidxml::xml_node<> &tunnelNode);
   
 public:
-    Level(/*btDynamicsWorld *world, */const std::string mapfile, const int shadowMask);
+    Level(/*btDynamicsWorld *world, */const std::string mapfile);
     
     void loadMapFromFile(const std::string mapfile);
     

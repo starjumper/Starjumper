@@ -1,12 +1,10 @@
 #include "Game.h"
 
 Game::Game(osgViewer::Viewer *viewer) :
-	RenderingInstance(viewer),
-	_receivesShadowTraversalMask((const int) 0x1),
-	_castsShadowTraversalMask((const int) 0x2)
+	RenderingInstance(viewer)
 {
-	_level = new Level("resources/levels/level1.xml", _receivesShadowTraversalMask);
-    _player = new Player(_castsShadowTraversalMask);
+	_level = new Level("resources/levels/level1.xml");
+    _player = new Player();
     
     _controller = new PlayerController(_player);
     _headUpDisplay = new HeadUpDisplay(_player);
@@ -25,8 +23,8 @@ void Game::initializeScene()
 	// prepare shadowing
 	osg::ref_ptr<osgShadow::ShadowedScene> shadowedScene = new osgShadow::ShadowedScene;
 
-	shadowedScene->setReceivesShadowTraversalMask(_receivesShadowTraversalMask);
-	shadowedScene->setCastsShadowTraversalMask(_castsShadowTraversalMask);
+	shadowedScene->setReceivesShadowTraversalMask(RECEIVE_SHADOW_MASK);
+	shadowedScene->setCastsShadowTraversalMask(CAST_SHADOW_MASK);
 
 	osg::ref_ptr<osgShadow::SoftShadowMap> sm = new osgShadow::SoftShadowMap;
 	shadowedScene->setShadowTechnique(sm.get());

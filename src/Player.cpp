@@ -2,9 +2,8 @@
 
 #include <iostream>
 
-Player::Player(const int shadowMask)
+Player::Player()
 {
-	_shadowMask = &shadowMask;
     initializePlayerModel();
     initializePlayerPhysics();
 }
@@ -27,7 +26,7 @@ void Player::initializePlayerModel()
 	patPlayer->setPosition(osg::Vec3(0.0,0.0,5.0));
 
     _player->addChild(patPlayer);
-	_player->setNodeMask(*_shadowMask);
+	_player->setNodeMask(CAST_SHADOW_MASK);
 }
 
 void Player::initializePlayerPhysics()
