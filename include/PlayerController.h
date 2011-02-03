@@ -3,6 +3,7 @@
 #include <osgGA/GUIEventHandler>
 
 #include "Player.h"
+#include "PlayerState.h"
 
 #define K_LEFT  osgGA::GUIEventAdapter::KEY_Left
 #define K_RIGHT osgGA::GUIEventAdapter::KEY_Right

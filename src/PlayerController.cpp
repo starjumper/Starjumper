@@ -32,19 +32,19 @@ bool PlayerController::handle(const osgGA::GUIEventAdapter &ea, osgGA::GUIAction
 	switch(ea.getKey())
 	{
 		case K_LEFT:
-            _player->moveLeft(keyState);
+            _player->getPlayerState()->setRequestMoveLeft(keyState);
 			break;
 		case K_RIGHT:
-			_player->moveRight(keyState);
+			_player->getPlayerState()->setRequestMoveRight(keyState);
 			break;
 		case K_UP:
-			_player->accelerate(keyState);
+			_player->getPlayerState()->setRequestAccelerate(keyState);
 			break;
 		case K_DOWN:
-			_player->decelerate(keyState);
+			_player->getPlayerState()->setRequestDecelerate(keyState);
 			break;
 		case K_JUMP:
-			_player->jump(keyState);
+			_player->getPlayerState()->setRequestJump(keyState);
 			break;
 		case K_EXIT:
             exit(0);     // TODO: replace this by something useful
@@ -54,7 +54,6 @@ bool PlayerController::handle(const osgGA::GUIEventAdapter &ea, osgGA::GUIAction
 	}
 
 	return true;
-
 }
 
 void PlayerController::accept(osgGA::GUIEventHandlerVisitor &v)

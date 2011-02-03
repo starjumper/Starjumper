@@ -10,6 +10,7 @@ SET(SOURCE
     LazyCameraManipulator.cpp
     PlayerController.cpp
     PlayerUpdater.cpp
+    PlayerState.cpp
 	HeadUpDisplay.cpp
 	Cuboid.cpp
     Lighting.cpp

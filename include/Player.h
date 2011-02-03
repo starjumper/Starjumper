@@ -14,7 +14,9 @@
 #include <osgbBullet/CollisionShapes.h>
 
 #include "types.h"
+#include "PlayerState.h"
 
+// global Player settings
 #define PLAYER_MODEL        "resources/models/player.osg"
 #define PLAYER_SCALE        osg::Vec3(0.2, 0.2, 0.2)
 #define PLAYER_ATTITUDE     osg::Quat(osg::DegreesToRadians(180.0f), osg::Vec3(0.0,0.0,5.0))
@@ -24,31 +26,24 @@ class Player
 {
 private:
     osg::PositionAttitudeTransform *_player;
+    osg::PositionAttitudeTransform *patPlayer;
     
     btPairCachingGhostObject *_playerGhostObject;
     btKinematicCharacterController *_playerController;
+    PlayerState *_playerState;
     
     void initializePlayerModel();
     void initializePlayerPhysics();
     
 public:
     Player();
-    
-    // player control
-    void moveLeft(bool &keyState);
-    void moveRight(bool &keyState);
-    void accelerate(bool &keyState);
-    void decelerate(bool &keyState);
-    void jump(bool &keyState);
+    ~Player();
     
     // getter methods
     osg::PositionAttitudeTransform *getNode();
     btCollisionObject *getCollisionObject();
     btKinematicCharacterController *getController();
+    PlayerState *getPlayerState();
     
-    // TODO: outsource these in a seperate PlayerState class (?)
-    bool _accelerate;
-    bool _decelerate;
-    bool _moveLeft;
-    bool _moveRight;
+    void setPosition(osg::Vec3 position);
 };

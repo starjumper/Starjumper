@@ -7,6 +7,13 @@ Player::Player()
 {
     initializePlayerModel();
     initializePlayerPhysics();
+    
+    _playerState = new PlayerState();
+}
+
+Player::~Player()
+{
+    delete _playerState;
 }
 
 void Player::initializePlayerModel()
@@ -19,7 +26,7 @@ void Player::initializePlayerModel()
         throw std::runtime_error("Unable to load player model file!");
     }
     
-    osg::PositionAttitudeTransform *patPlayer = new osg::PositionAttitudeTransform;
+    patPlayer = new osg::PositionAttitudeTransform;
 
     patPlayer->addChild(playerModel);
     patPlayer->setScale(PLAYER_SCALE);
@@ -31,11 +38,6 @@ void Player::initializePlayerModel()
 	
     PlayerUpdater *p_up = new PlayerUpdater(this);
     patPlayer->setUpdateCallback(p_up);
-    
-    _moveLeft = false;
-    _moveRight = false;
-    _accelerate = false;
-    _decelerate = false;
 }
 
 void Player::initializePlayerPhysics()
@@ -55,34 +57,35 @@ void Player::initializePlayerPhysics()
 	_playerController = new btKinematicCharacterController(_playerGhostObject, boundingBox, btScalar(0.35));
 }
 
-void Player::moveLeft(bool &keyState)
+/*void Player::moveLeft(bool &keyState)
 {
     std::cout << "moveLeft" << std::endl;
-    _moveLeft = keyState;
+    _playerState->setRequestMoveLeft(keyState);
 }
 
 void Player::moveRight(bool &keyState)
 {
     std::cout << "moveRight" << std::endl;
-    _moveRight = keyState;
+    _playerState->setRequestMoveRight(keyState);
 }
 
 void Player::accelerate(bool &keyState)
 {
     std::cout << "accelerate" << std::endl;
-    _accelerate = keyState;
+    _playerState->setRequestAccelerate(keyState);
 }
 
 void Player::decelerate(bool &keyState)
 {
     std::cout << "decelerate" << std::endl;
-    _decelerate = keyState;
+    _playerState->setRequestDecelerate(keyState);
 }
 
 void Player::jump(bool &keyState)
 {
     std::cout << "jump" << std::endl;
-}
+    _playerState->setRequestJump(keyState);
+}*/
 
 osg::PositionAttitudeTransform *Player::getNode()
 {
@@ -97,4 +100,14 @@ btCollisionObject *Player::getCollisionObject()
 btKinematicCharacterController *Player::getController()
 {
     return _playerController;
+}
+
+PlayerState *Player::getPlayerState()
+{
+    return _playerState;
+}
+
+void Player::setPosition(osg::Vec3 position)
+{
+    patPlayer->setPosition(position);
 }
