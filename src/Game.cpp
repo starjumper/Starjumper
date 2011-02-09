@@ -25,6 +25,10 @@ Game::Game(osgViewer::Viewer *viewer) :
     
     // register PlayerController
     _world->addAction(_player->getController());
+    
+    // set world updater
+    WorldUpdater *worldUpdater = new WorldUpdater(this);
+    _level->getNode()->setUpdateCallback(worldUpdater); // TODO: find a better node than level (root does not work, produces segfault)
 }
 
 void Game::initializeScene()
@@ -92,6 +96,11 @@ void Game::initializePhysics()
     _world->setGravity(WORLD_GRAVITY);
 }
 
+btDynamicsWorld *Game::getWorld()
+{
+    return _world;
+}
+
 void Game::prepare(osgViewer::Viewer *viewer)
 {
     viewer->addEventHandler(_controller);
@@ -100,4 +109,17 @@ void Game::prepare(osgViewer::Viewer *viewer)
 void Game::cleanup(osgViewer::Viewer *viewer)
 {
     viewer->getEventHandlers().remove(_controller);
+}
+
+WorldUpdater::WorldUpdater(Game *game) :
+    _game(game)
+{
+    _previousSimTime = _game->getViewer()->getFrameStamp()->getSimulationTime();
+}
+
+void WorldUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
+{
+    double currentSimTime = _game->getViewer()->getFrameStamp()->getSimulationTime();
+    _game->getWorld()->stepSimulation(currentSimTime - _previousSimTime);
+    _previousSimTime = currentSimTime;
 }

@@ -20,5 +20,5 @@ public:
     
     virtual void operator()(osg::Node* node, osg::NodeVisitor* nv);
     
-    osg::Vec3 updatePhysics(PlayerState *playerState);
+    osg::Vec3 calculateNextPosition(PlayerState *playerState);
 };

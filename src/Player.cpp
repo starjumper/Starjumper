@@ -51,41 +51,12 @@ void Player::initializePlayerPhysics()
     
     btTransform playerTransform;
 	playerTransform.setIdentity();
-	playerTransform.setOrigin(btVector3(0.0, 4.0, 0.0));
+	playerTransform.setOrigin(btVector3(0.0, 10.0, 5.0));
 	_playerGhostObject->setWorldTransform(playerTransform);
 	
-	_playerController = new btKinematicCharacterController(_playerGhostObject, boundingBox, btScalar(0.35));
+	_playerController = new btKinematicCharacterController(_playerGhostObject, boundingBox, btScalar(0.1), 2);
+    _playerController->setFallSpeed(0.1);
 }
-
-/*void Player::moveLeft(bool &keyState)
-{
-    std::cout << "moveLeft" << std::endl;
-    _playerState->setRequestMoveLeft(keyState);
-}
-
-void Player::moveRight(bool &keyState)
-{
-    std::cout << "moveRight" << std::endl;
-    _playerState->setRequestMoveRight(keyState);
-}
-
-void Player::accelerate(bool &keyState)
-{
-    std::cout << "accelerate" << std::endl;
-    _playerState->setRequestAccelerate(keyState);
-}
-
-void Player::decelerate(bool &keyState)
-{
-    std::cout << "decelerate" << std::endl;
-    _playerState->setRequestDecelerate(keyState);
-}
-
-void Player::jump(bool &keyState)
-{
-    std::cout << "jump" << std::endl;
-    _playerState->setRequestJump(keyState);
-}*/
 
 osg::PositionAttitudeTransform *Player::getNode()
 {

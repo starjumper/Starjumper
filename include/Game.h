@@ -25,7 +25,7 @@
 
 #define WORLD_MIN          -1000, -1000, -1000
 #define WORLD_MAX          1000, 1000, 1000
-#define WORLD_GRAVITY      btVector3(0.0, 0.0, -9.81)
+#define WORLD_GRAVITY      btVector3(10.0, 0.0, 0.0)
 #define CAMERA_HOME_EYE    osg::Vec3(0.0, -5.0, 4.0)
 #define CAMERA_HOME_CENTER osg::Vec3(0.0, 20.0, 0.0)
 #define CAMERA_HOME_UP     osg::Vec3(0.0, -10.0, 10.0)
@@ -34,13 +34,13 @@ class Game : public RenderingInstance
 {
 private:
     Level *_level;
-    Player *_player;
+    //Player *_player;
     PlayerController *_controller;
     LazyCameraManipulator *_cameraManipulator;
     HeadUpDisplay *_headUpDisplay;
 	Lighting *_lighting;
     
-    btDynamicsWorld *_world;
+    //btDynamicsWorld *_world;
     btDefaultCollisionConfiguration *_collisionConfiguration;
     btCollisionDispatcher *_dispatcher;
     btBroadphaseInterface *_overlappingPairCache;
@@ -52,6 +52,20 @@ private:
 public:
     Game(osgViewer::Viewer *viewer);
     
+    btDynamicsWorld *getWorld();
+    Player *_player;
+    btDynamicsWorld *_world;
     virtual void prepare(osgViewer::Viewer *viewer);
     virtual void cleanup(osgViewer::Viewer *viewer);
+};
+
+class WorldUpdater : public osg::NodeCallback
+{
+private:
+    Game *_game;
+    double _previousSimTime;
+    
+public:
+    WorldUpdater(Game *game);
+    virtual void operator()(osg::Node *node, osg::NodeVisitor *nv);
 };

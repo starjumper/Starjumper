@@ -5,7 +5,7 @@ PlayerState::PlayerState()
     // initialize state variables
     _speed = 0.0f;
     
-    _direction = btVector3(0,0,0);
+    _direction = btVector3(0,0,4);
     
     _requestMoveLeft = false;
     _requestMoveRight = false;
