@@ -63,7 +63,7 @@ osg::PositionAttitudeTransform *Player::getNode()
     return _player;
 }
 
-btCollisionObject *Player::getCollisionObject()
+btPairCachingGhostObject *Player::getGhostObject()
 {
     return _playerGhostObject;
 }

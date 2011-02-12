@@ -9,22 +9,24 @@ Game::Game(osgViewer::Viewer *viewer) :
     _headUpDisplay = new HeadUpDisplay(_player);
     	
     initializeScene();
-    initializePhysics();
+    initializePhysicsWorld();
     
     // get level components and insert as rigid bodies into world
     std::vector<btRigidBody *> levelRBs = _level->getCollisionObjects();
-    for(size_t i = 0; i < levelRBs.size(); ++i)
+    for(std::vector<btRigidBody *>::iterator it = levelRBs.begin(); it != levelRBs.end(); ++it)
     {
-        _world->addRigidBody(levelRBs[i]);
+        _world->addRigidBody(*it);
     }
     
     // add player ghost object to world
-    _world->addCollisionObject(_player->getCollisionObject(),
+    _world->addCollisionObject(_player->getGhostObject(),
                                btBroadphaseProxy::CharacterFilter,
-                               btBroadphaseProxy::StaticFilter|btBroadphaseProxy::DefaultFilter);
+                               btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter);
     
     // register PlayerController
     _world->addAction(_player->getController());
+    
+    resetScene();
     
     // set world updater
     WorldUpdater *worldUpdater = new WorldUpdater(this);
@@ -68,7 +70,7 @@ void Game::initializeScene()
     getViewer()->setCameraManipulator(_cameraManipulator);
 }
 
-void Game::initializePhysics()
+void Game::initializePhysicsWorld()
 {
     // create CollisionConfiguration
 	_collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -78,12 +80,12 @@ void Game::initializePhysics()
     btVector3 worldMin(WORLD_MIN);
 	btVector3 worldMax(WORLD_MAX);
 	
-	// setup sweep axis
+	// setup overlapping pair cache
 	btAxisSweep3 *sweepBP = new btAxisSweep3(worldMin,worldMax);
 	sweepBP->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
-	
 	_overlappingPairCache = sweepBP;
 
+    // create default constraint solver
 	_constraintSolver = new btSequentialImpulseConstraintSolver();
 	
 	// initialize world
@@ -94,6 +96,44 @@ void Game::initializePhysics()
 
     // set the worlds gravity
     _world->setGravity(WORLD_GRAVITY);
+}
+
+void Game::resetScene()
+{
+    if(!_world)
+        return;
+    
+    btCollisionObjectArray collisionObjects = _world->getCollisionObjectArray();
+    size_t collisionObjectCount = _world->getNumCollisionObjects();
+    
+    for(size_t i = 0; i < collisionObjectCount; ++i)
+    {
+        btCollisionObject *collisionObject = collisionObjects[i];
+        btRigidBody* body = btRigidBody::upcast(collisionObject);
+        
+        if(!body)
+            continue;
+        
+        if(body->getMotionState())
+        {
+            btDefaultMotionState* motionState = (btDefaultMotionState*)body->getMotionState();
+			motionState->m_graphicsWorldTrans = motionState->m_startWorldTrans;
+			body->setCenterOfMassTransform(motionState->m_graphicsWorldTrans);
+			collisionObject->setInterpolationWorldTransform(motionState->m_startWorldTrans);
+			collisionObject->forceActivationState(ACTIVE_TAG);
+			collisionObject->activate();
+			collisionObject->setDeactivationTime(0);
+        }
+        
+        if (body && !body->isStaticObject())
+		{
+			btRigidBody::upcast(collisionObject)->setLinearVelocity(btVector3(0,0,0));
+			btRigidBody::upcast(collisionObject)->setAngularVelocity(btVector3(0,0,0));
+		}
+    }
+    
+    _world->getBroadphase()->resetPool(_world->getDispatcher());
+	_world->getConstraintSolver()->reset();
 }
 
 btDynamicsWorld *Game::getWorld()

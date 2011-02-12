@@ -47,7 +47,8 @@ private:
     btConstraintSolver *_constraintSolver;
     
     void initializeScene();
-    void initializePhysics();
+    void initializePhysicsWorld();
+    void resetScene();
     
 public:
     Game(osgViewer::Viewer *viewer);

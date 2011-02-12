@@ -29,7 +29,6 @@ private:
     osg::PositionAttitudeTransform *_level;
     
     btDynamicsWorld *_world;
-    btCompoundShape *_collisionShapes;
     std::vector<btRigidBody *> _collisionObjects;
 
     osg::Vec3 getVectorFromXMLNode(const std::string &name, const rapidxml::xml_node<> &node) const;
@@ -37,11 +36,10 @@ private:
     void addTunnel(const rapidxml::xml_node<> &tunnelNode);
   
 public:
-    Level(const std::string mapfile);
+    Level(const std::string &mapfile);
     
-    void loadMapFromFile(const std::string mapfile);
+    void loadMapFromFile(const std::string &mapfile);
     
-    osg::PositionAttitudeTransform *getNode();
-    btCompoundShape *getCollisionShape();
-    std::vector<btRigidBody *> getCollisionObjects();
+    osg::PositionAttitudeTransform *getNode() const;
+    std::vector<btRigidBody *> getCollisionObjects() const;
 };

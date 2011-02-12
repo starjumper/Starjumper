@@ -2,17 +2,14 @@
 
 //Level::Level(btDynamicsWorld *world, const std::string mapfile) :
 //    _world(world)
-Level::Level(const std::string mapfile)
+Level::Level(const std::string &mapfile)
 {
     _level = new osg::PositionAttitudeTransform();
 
     loadMapFromFile(mapfile);
-    
-    // setup physics components
-    _collisionShapes = new btCompoundShape();
 }
 
-void Level::loadMapFromFile(const std::string mapfile)
+void Level::loadMapFromFile(const std::string &mapfile)
 {
     // load XML document
     rapidxml::file<> mf(mapfile.c_str());
@@ -85,27 +82,7 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
     }
 	
     _level->addChild(cuboid->getNode());
-    /*
-    // create Bullet bounding box
-    btBoxShape *bsCuboid = new btBoxShape(osgbBullet::asBtVector3(osg::Vec3(width, depth, height) / 2.0f));
-    
-    // create MotionState for the cuboid
-    btDefaultMotionState *msCuboid = new btDefaultMotionState();
-    
-    // passing 0 as first and a null-vector as last argument means this object is immovable
-    btRigidBody::btRigidBodyConstructionInfo rbciCuboid(0, msCuboid, bsCuboid, btVector3(0,0,0));
-    
-    // construct rigid body from previously specified construction info
-    btRigidBody* rbCuboid = new btRigidBody(rbciCuboid);
-    
-    _collisionObjects.push_back(rbCuboid);*/
-    
-    /*btTransform shapeTransform;
-    shapeTransform.setIdentity();
-    shapeTransform.setOrigin(osgbBullet::asBtVector3(center));
-    
-    _collisionShapes->addChildShape(shapeTransform, bsCuboid);
-    */
+    _collisionObjects.push_back(cuboid->getRigidBody());
 }
 
 void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
@@ -130,17 +107,12 @@ void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
 	*/
 }
 
-osg::PositionAttitudeTransform *Level::getNode()
+osg::PositionAttitudeTransform *Level::getNode() const
 {
     return _level;
 }
 
-btCompoundShape *Level::getCollisionShape()
-{
-    return _collisionShapes;
-}
-
-std::vector<btRigidBody *> Level::getCollisionObjects()
+std::vector<btRigidBody *> Level::getCollisionObjects() const
 {
     return _collisionObjects;
 }

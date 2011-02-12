@@ -41,7 +41,7 @@ public:
     
     // getter methods
     osg::PositionAttitudeTransform *getNode();
-    btCollisionObject *getCollisionObject();
+    btPairCachingGhostObject *getGhostObject();
     btKinematicCharacterController *getController();
     PlayerState *getPlayerState();
     

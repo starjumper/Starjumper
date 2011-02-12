@@ -23,6 +23,28 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
     
     getNode()->setStateSet(stateSet);
     getNode()->setNodeMask(RECEIVE_SHADOW_MASK);
+    
+    constructRigidBody(center, width, depth, height);
+}
+
+void Cuboid::constructRigidBody(const osg::Vec3 &center, const float width, const float depth, const float height)
+{
+    // create start transform for the cuboid rigid body
+    btTransform shapeTransform;
+    shapeTransform.setIdentity();
+    shapeTransform.setOrigin(osgbBullet::asBtVector3(center));
+    
+    // create bounding box
+    btBoxShape *bsCuboid = new btBoxShape(osgbBullet::asBtVector3(osg::Vec3(width, depth, height) / 2.0f));
+    
+    // create MotionState for the cuboid
+    btDefaultMotionState *msCuboid = new btDefaultMotionState(shapeTransform);
+    
+    // passing 0 as first and a null-vector as last argument means this object is immovable
+    btRigidBody::btRigidBodyConstructionInfo rbciCuboid(0, msCuboid, bsCuboid, btVector3(0,0,0));
+    
+    // construct rigid body from previously specified construction info
+    _rigidBody = new btRigidBody(rbciCuboid);
 }
 
 osg::Node *Cuboid::getNode()
@@ -33,6 +55,11 @@ osg::Node *Cuboid::getNode()
 osg::ShapeDrawable *Cuboid::getShapeDrawable()
 {
     return _shapeDrawable;
+}
+
+btRigidBody *Cuboid::getRigidBody()
+{
+    return _rigidBody;
 }
 
 AccelerationCuboid::AccelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
