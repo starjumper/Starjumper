@@ -8,6 +8,7 @@ class PlayerState
 {
 private:
     float _speed;
+    float _angleY;
     
     btVector3 _direction;
     
@@ -20,21 +21,24 @@ private:
 public:
     PlayerState();
 
-    float getSpeed();
-    void setSpeed(float speed);
+    float getSpeed() const;
+    void setSpeed(const float speed);
+    
+    float getAngleY() const;
+    void setAngleY(const float angle);
     
     btVector3 &getDirection();
     void setDirection(btVector3 &direction);
 
-    void setRequestMoveLeft(bool activate);
-    void setRequestMoveRight(bool activate);
-    void setRequestAccelerate(bool activate);
-    void setRequestDecelerate(bool activate);
-    void setRequestJump(bool activate);
+    void setRequestMoveLeft(const bool activate);
+    void setRequestMoveRight(const bool activate);
+    void setRequestAccelerate(const bool activate);
+    void setRequestDecelerate(const bool activate);
+    void setRequestJump(const bool activate);
     
-    bool requestMoveLeft();
-    bool requestMoveRight();
-    bool requestAccelerate();
-    bool requestDecelerate();
-    bool requestJump();
+    bool requestMoveLeft() const;
+    bool requestMoveRight() const;
+    bool requestAccelerate() const;
+    bool requestDecelerate() const;
+    bool requestJump() const;
 };

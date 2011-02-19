@@ -78,7 +78,15 @@ PlayerState *Player::getPlayerState()
     return _playerState;
 }
 
-void Player::setPosition(osg::Vec3 position)
+void Player::setPosition(const osg::Vec3 position)
 {
     patPlayer->setPosition(position);
+}
+
+void Player::setAngles(const float angleX, const float angleY, const float angleZ)
+{
+    patPlayer->setAttitude(osg::Quat(
+        osg::DegreesToRadians(angleX), osg::Vec3(1.0,0.0,0.0),
+        osg::DegreesToRadians(angleY), osg::Vec3(0.0,1.0,0.0),
+        osg::DegreesToRadians(angleZ), osg::Vec3(0.0,0.0,1.0)));
 }

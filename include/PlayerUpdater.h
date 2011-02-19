@@ -1,5 +1,6 @@
 #pragma once
 
+#include <osg/Group>
 #include <osg/Node>
 #include <osg/NodeCallback>
 #include <osg/PositionAttitudeTransform>

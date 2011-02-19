@@ -4,6 +4,7 @@ PlayerState::PlayerState()
 {
     // initialize state variables
     _speed = 0.0f;
+    _angleY = 0.0f;
     
     _direction = btVector3(0,0,4);
     
@@ -14,14 +15,24 @@ PlayerState::PlayerState()
     _requestJump = false;
 }
 
-float PlayerState::getSpeed()
+float PlayerState::getSpeed() const
 {
     return _speed;
 }
 
-void PlayerState::setSpeed(float speed)
+void PlayerState::setSpeed(const float speed)
 {
     _speed = speed;
+}
+
+float PlayerState::getAngleY() const
+{
+    return _angleY;
+}
+
+void PlayerState::setAngleY(const float angle)
+{
+    _angleY = angle;
 }
 
 btVector3 &PlayerState::getDirection()
@@ -34,52 +45,52 @@ void PlayerState::setDirection(btVector3 &direction)
     _direction = direction;
 }
 
-void PlayerState::setRequestMoveLeft(bool activate)
+void PlayerState::setRequestMoveLeft(const bool activate)
 {
     _requestMoveLeft = activate;
 }
 
-void PlayerState::setRequestMoveRight(bool activate)
+void PlayerState::setRequestMoveRight(const bool activate)
 {
     _requestMoveRight = activate;
 }
 
-void PlayerState::setRequestAccelerate(bool activate)
+void PlayerState::setRequestAccelerate(const bool activate)
 {
     _requestAccelerate = activate;
 }
 
-void PlayerState::setRequestDecelerate(bool activate)
+void PlayerState::setRequestDecelerate(const bool activate)
 {
     _requestDecelerate = activate;
 }
 
-void PlayerState::setRequestJump(bool activate)
+void PlayerState::setRequestJump(const bool activate)
 {
     _requestJump = activate;
 }
 
-bool PlayerState::requestMoveLeft()
+bool PlayerState::requestMoveLeft() const
 {
     return _requestMoveLeft;
 }
 
-bool PlayerState::requestMoveRight()
+bool PlayerState::requestMoveRight() const
 {
     return _requestMoveRight;
 }
 
-bool PlayerState::requestAccelerate()
+bool PlayerState::requestAccelerate() const
 {
     return _requestAccelerate;
 }
 
-bool PlayerState::requestDecelerate()
+bool PlayerState::requestDecelerate() const
 {
     return _requestDecelerate;
 }
 
-bool PlayerState::requestJump()
+bool PlayerState::requestJump() const
 {
     return _requestJump;
 }
