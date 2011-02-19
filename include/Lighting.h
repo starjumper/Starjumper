@@ -13,9 +13,11 @@
 class Lighting
 {
 private:
+    osg::Light *_light;
+    
 public:
     Lighting();
     
     // getter methods
-	osg::Node* getLights(osg::StateSet* rootStateSet);
+	osg::Node *getLights(osg::StateSet *rootStateSet);
 };

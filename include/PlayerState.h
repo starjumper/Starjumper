@@ -9,7 +9,7 @@ class PlayerState
 private:
     float _speed;
     
-    btVector3 *_direction;
+    btVector3 _direction;
     
     bool _requestMoveLeft;
     bool _requestMoveRight;
@@ -23,8 +23,8 @@ public:
     float getSpeed();
     void setSpeed(float speed);
     
-    btVector3 getDirection();
-    void setDirection(btVector3 *direction);
+    btVector3 &getDirection();
+    void setDirection(btVector3 &direction);
 
     void setRequestMoveLeft(bool activate);
     void setRequestMoveRight(bool activate);

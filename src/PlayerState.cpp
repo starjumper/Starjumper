@@ -5,7 +5,7 @@ PlayerState::PlayerState()
     // initialize state variables
     _speed = 0.0f;
     
-    _direction = &btVector3(0,0,4);
+    _direction = btVector3(0,0,4);
     
     _requestMoveLeft = false;
     _requestMoveRight = false;
@@ -24,12 +24,12 @@ void PlayerState::setSpeed(float speed)
     _speed = speed;
 }
 
-btVector3 PlayerState::getDirection()
+btVector3 &PlayerState::getDirection()
 {
-    return *_direction;
+    return _direction;
 }
 
-void PlayerState::setDirection(btVector3 *direction)
+void PlayerState::setDirection(btVector3 &direction)
 {
     _direction = direction;
 }
