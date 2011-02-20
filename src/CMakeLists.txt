@@ -8,7 +8,7 @@ SET(SOURCE
     Level.cpp
     Player.cpp
     LazyCameraManipulator.cpp
-    PlayerController.cpp
+    GameKeyboardHandler.cpp
     PlayerUpdater.cpp
     PlayerState.cpp
 	HeadUpDisplay.cpp

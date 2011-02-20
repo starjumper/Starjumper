@@ -15,13 +15,13 @@
 #define K_PRESSED  true
 #define K_RELEASED false
 
-class PlayerController : public osgGA::GUIEventHandler
+class GameKeyboardHandler : public osgGA::GUIEventHandler
 {
 private:
     Player *_player;
     
 public:
-    PlayerController(Player *player);
+    GameKeyboardHandler(Player *player);
     void setPlayer(Player *player);
     virtual bool handle(const osgGA::GUIEventAdapter &ea, osgGA::GUIActionAdapter &aa);
     virtual void accept(osgGA::GUIEventHandlerVisitor &v);

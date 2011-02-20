@@ -5,7 +5,7 @@ Game::Game(osgViewer::Viewer *viewer) :
 {
 	_level = new Level("resources/levels/level1.xml");
     _player = new Player();
-    _controller = new PlayerController(_player);
+    _keyboardHandler = new GameKeyboardHandler(_player);
     _headUpDisplay = new HeadUpDisplay(_player);
     _lighting = new Lighting();
     	
@@ -24,7 +24,7 @@ Game::Game(osgViewer::Viewer *viewer) :
                                btBroadphaseProxy::CharacterFilter,
                                btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter);
     
-    // register PlayerController
+    // register player controller
     _world->addAction(_player->getController());
     
     resetScene();
@@ -144,12 +144,12 @@ btDynamicsWorld *Game::getWorld()
 
 void Game::prepare(osgViewer::Viewer *viewer)
 {
-    viewer->addEventHandler(_controller);
+    viewer->addEventHandler(_keyboardHandler);
 }
 
 void Game::cleanup(osgViewer::Viewer *viewer)
 {
-    viewer->getEventHandlers().remove(_controller);
+    viewer->getEventHandlers().remove(_keyboardHandler);
 }
 
 WorldUpdater::WorldUpdater(Game *game) :

@@ -19,23 +19,23 @@
 #include "LazyCameraManipulator.h"
 #include "Level.h"
 #include "Player.h"
-#include "PlayerController.h"
+#include "GameKeyboardHandler.h"
 #include "HeadUpDisplay.h"
 #include "Lighting.h"
 
 #define WORLD_MIN          -1000, -1000, -1000
 #define WORLD_MAX          1000, 1000, 1000
 #define WORLD_GRAVITY      btVector3(10.0, 0.0, 0.0)
-#define CAMERA_HOME_EYE    osg::Vec3(0.0, -5.0, 4.0)
-#define CAMERA_HOME_CENTER osg::Vec3(0.0, 20.0, 0.0)
-#define CAMERA_HOME_UP     osg::Vec3(0.0, -10.0, 10.0)
+#define CAMERA_HOME_EYE    osg::Vec3(0.0, -5.0, 3.0)
+#define CAMERA_HOME_CENTER osg::Vec3(0.0, 10.0, 0.0)
+#define CAMERA_HOME_UP     osg::Vec3(0.0, -10.0, 5.0)
 
 class Game : public RenderingInstance
 {
 private:
     Level *_level;
     //Player *_player;
-    PlayerController *_controller;
+    GameKeyboardHandler *_keyboardHandler;
     LazyCameraManipulator *_cameraManipulator;
     HeadUpDisplay *_headUpDisplay;
 	Lighting *_lighting;

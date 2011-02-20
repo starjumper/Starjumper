@@ -1,17 +1,17 @@
-#include "PlayerController.h"
+#include "GameKeyboardHandler.h"
 
-PlayerController::PlayerController(Player *player) :
+GameKeyboardHandler::GameKeyboardHandler(Player *player) :
     _player(player)
 {
 
 }
 
-void PlayerController::setPlayer(Player *player)
+void GameKeyboardHandler::setPlayer(Player *player)
 {
     _player = player;
 }
 
-bool PlayerController::handle(const osgGA::GUIEventAdapter &ea, osgGA::GUIActionAdapter &aa)
+bool GameKeyboardHandler::handle(const osgGA::GUIEventAdapter &ea, osgGA::GUIActionAdapter &aa)
 {
     bool keyState;
 
@@ -56,7 +56,7 @@ bool PlayerController::handle(const osgGA::GUIEventAdapter &ea, osgGA::GUIAction
 	return true;
 }
 
-void PlayerController::accept(osgGA::GUIEventHandlerVisitor &v)
+void GameKeyboardHandler::accept(osgGA::GUIEventHandlerVisitor &v)
 {
     v.visit(*this);
 }
