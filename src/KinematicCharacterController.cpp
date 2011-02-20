@@ -22,25 +22,6 @@ getNormalizedVector(const btVector3& v)
 	return n;
 }
 
-/*class btKinematicClosestNotMeRayResultCallback : public btCollisionWorld::ClosestRayResultCallback
-{
-public:
-	btKinematicClosestNotMeRayResultCallback (btCollisionObject* me) : btCollisionWorld::ClosestRayResultCallback(btVector3(0.0, 0.0, 0.0), btVector3(0.0, 0.0, 0.0))
-	{
-		m_me = me;
-	}
-
-	virtual btScalar addSingleResult(btCollisionWorld::LocalRayResult& rayResult,bool normalInWorldSpace)
-	{
-		if (rayResult.m_collisionObject == m_me)
-			return 1.0;
-
-		return ClosestRayResultCallback::addSingleResult (rayResult, normalInWorldSpace);
-	}
-protected:
-	btCollisionObject* m_me;
-};*/
-
 class KinematicClosestNotMeConvexResultCallback : public btCollisionWorld::ClosestConvexResultCallback
 {
 public:
@@ -87,7 +68,7 @@ btVector3 KinematicCharacterController::perpindicularComponent (const btVector3&
 	return direction - parallelComponent(direction, normal);
 }
 
-KinematicCharacterController::KinematicCharacterController (btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btScalar stepHeight, int upAxis)
+KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btScalar stepHeight, int upAxis)
 {
 	m_upAxis = upAxis;
 	m_addedMargin = 0.02f;
@@ -99,10 +80,15 @@ KinematicCharacterController::KinematicCharacterController (btPairCachingGhostOb
 	m_convexShape=convexShape;	
 	m_useWalkDirection = true;	// use walk direction by default, legacy behavior
 	m_velocityTimeInterval = 0.0;
+    
+    m_jumpSpeed = 20.0f;
+    m_fallSpeed = 0.0f;
+    m_onGround = false;
 }
 
 KinematicCharacterController::~KinematicCharacterController ()
 {
+
 }
 
 btPairCachingGhostObject* KinematicCharacterController::getGhostObject()
@@ -331,11 +317,15 @@ void KinematicCharacterController::stepForwardAndStrafe ( btCollisionWorld* coll
 void KinematicCharacterController::stepDown ( btCollisionWorld* collisionWorld, btScalar dt)
 {
 	btTransform start, end;
+	
+    btScalar gravity;
+    btDynamicsWorld *dynamicsWorld = dynamic_cast<btDynamicsWorld *>(collisionWorld);
+    if(dynamicsWorld)
+        gravity = dynamicsWorld->getGravity().getZ();
+    else
+        gravity = -10.0f;
 
-	// phase 3: down
-	btVector3 step_drop = upAxisDirection[m_upAxis] * m_currentStepOffset;
-	btVector3 gravity_drop = upAxisDirection[m_upAxis] * m_stepHeight; 
-	m_targetPosition -= (step_drop + gravity_drop);
+	m_targetPosition -= upAxisDirection[m_upAxis] * (m_currentStepOffset - m_fallSpeed * dt);
 
 	start.setIdentity ();
 	end.setIdentity ();
@@ -350,7 +340,8 @@ void KinematicCharacterController::stepDown ( btCollisionWorld* collisionWorld, 
 	if (m_useGhostObjectSweepTest)
 	{
 		m_ghostObject->convexSweepTest (m_convexShape, start, end, callback, collisionWorld->getDispatchInfo().m_allowedCcdPenetration);
-	} else
+	}
+	else
 	{
 		collisionWorld->convexSweepTest (m_convexShape, start, end, callback, collisionWorld->getDispatchInfo().m_allowedCcdPenetration);
 	}
@@ -358,11 +349,16 @@ void KinematicCharacterController::stepDown ( btCollisionWorld* collisionWorld, 
 	if (callback.hasHit())
 	{
 		// we dropped a fraction of the height -> hit floor
-		m_currentPosition.setInterpolate3 (m_currentPosition, m_targetPosition, callback.m_closestHitFraction);
-	} else {
+		m_currentPosition.setInterpolate3(m_currentPosition, m_targetPosition, callback.m_closestHitFraction);
+        m_onGround = true;
+        m_fallSpeed = 0.0f;
+	}
+	else
+	{
 		// we dropped the full height
-		
 		m_currentPosition = m_targetPosition;
+        m_onGround = false;
+        m_fallSpeed += gravity * dt;
 	}
 }
 
@@ -503,20 +499,12 @@ void KinematicCharacterController::jump ()
 	if (!canJump())
 		return;
 
-#if 0
-	currently no jumping.
-	btTransform xform;
-	m_rigidBody->getMotionState()->getWorldTransform (xform);
-	btVector3 up = xform.getBasis()[1];
-	up.normalize ();
-	btScalar magnitude = (btScalar(1.0)/m_rigidBody->getInvMass()) * btScalar(8.0);
-	m_rigidBody->applyCentralImpulse (up * magnitude);
-#endif
+    m_fallSpeed = m_jumpSpeed;
 }
 
-bool KinematicCharacterController::onGround () const
+bool KinematicCharacterController::onGround() const
 {
-	return true;
+	return m_onGround;
 }
 
 

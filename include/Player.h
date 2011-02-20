@@ -9,7 +9,6 @@
 
 #include <btBulletDynamicsCommon.h>
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
-//#include <BulletDynamics/Character/btKinematicCharacterController.h>
 #include <osgbBullet/Utils.h>
 #include <osgbBullet/CollisionShapes.h>
 

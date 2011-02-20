@@ -63,7 +63,7 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(PlayerState *playerState)
     }
     
     if(playerState->requestJump())
-        direction += btVector3(0, 0, 0.5);
+        playerController->jump();
     
     playerController->setWalkDirection(direction);
     

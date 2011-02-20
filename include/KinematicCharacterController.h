@@ -1,9 +1,11 @@
 #pragma once
 
 #include <LinearMath/btVector3.h>
+#include <btBulletDynamicsCommon.h>
 #include <BulletDynamics/Character/btCharacterControllerInterface.h>
 #include <BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h>
 
+#define PLAYER_MASS 2.0f
 
 class btCollisionShape;
 class btRigidBody;
@@ -15,6 +17,8 @@ class btPairCachingGhostObject;
  * The KinematicCharacterController - as the name suggests - is a customized version
  * of the btKinematicCharacterController provided by the Bullet Physics Library.
  * Basically it respects the worlds gravity for fall speed calculation and fixes jumping.
+ *
+ * For reference see http://www.bulletphysics.com/Bullet/BulletFull/classbtKinematicCharacterController.html
  */
 class KinematicCharacterController : public btCharacterControllerInterface
 {
@@ -53,6 +57,8 @@ protected:
 	bool m_useWalkDirection;
 	float m_velocityTimeInterval;
 	int m_upAxis;
+	
+    bool m_onGround;
 	
 	btVector3 computeReflectionDirection(const btVector3 &direction, const btVector3 &normal);
 	btVector3 parallelComponent(const btVector3 &direction, const btVector3 &normal);
