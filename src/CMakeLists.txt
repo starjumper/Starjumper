@@ -14,6 +14,7 @@ SET(SOURCE
 	HeadUpDisplay.cpp
 	Cuboid.cpp
     Lighting.cpp
+    KinematicCharacterController
 )
 
 FIND_PACKAGE( OpenGL )

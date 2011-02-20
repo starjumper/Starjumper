@@ -54,26 +54,26 @@ void Player::initializePlayerPhysics()
 	playerTransform.setOrigin(btVector3(0.0, 10.0, 5.0));
 	_playerGhostObject->setWorldTransform(playerTransform);
 	
-	_playerController = new btKinematicCharacterController(_playerGhostObject, boundingBox, btScalar(0.1), 2);
+	_playerController = new KinematicCharacterController(_playerGhostObject, boundingBox, btScalar(0.1), 2);
     _playerController->setFallSpeed(0.1);
 }
 
-osg::PositionAttitudeTransform *Player::getNode()
+osg::PositionAttitudeTransform *Player::getNode() const
 {
     return _player;
 }
 
-btPairCachingGhostObject *Player::getGhostObject()
+btPairCachingGhostObject *Player::getGhostObject() const
 {
     return _playerGhostObject;
 }
 
-btKinematicCharacterController *Player::getController()
+KinematicCharacterController *Player::getController() const
 {
     return _playerController;
 }
 
-PlayerState *Player::getPlayerState()
+PlayerState *Player::getPlayerState() const
 {
     return _playerState;
 }

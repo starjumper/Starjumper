@@ -9,10 +9,11 @@
 
 #include <btBulletDynamicsCommon.h>
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
-#include <BulletDynamics/Character/btKinematicCharacterController.h>
+//#include <BulletDynamics/Character/btKinematicCharacterController.h>
 #include <osgbBullet/Utils.h>
 #include <osgbBullet/CollisionShapes.h>
 
+#include "KinematicCharacterController.h"
 #include "types.h"
 #include "PlayerState.h"
 
@@ -29,7 +30,7 @@ private:
     osg::PositionAttitudeTransform *patPlayer;
     
     btPairCachingGhostObject *_playerGhostObject;
-    btKinematicCharacterController *_playerController;
+    KinematicCharacterController *_playerController;
     PlayerState *_playerState;
     
     void initializePlayerModel();
@@ -40,10 +41,10 @@ public:
     ~Player();
     
     // getter methods
-    osg::PositionAttitudeTransform *getNode();
-    btPairCachingGhostObject *getGhostObject();
-    btKinematicCharacterController *getController();
-    PlayerState *getPlayerState();
+    osg::PositionAttitudeTransform *getNode() const;
+    btPairCachingGhostObject *getGhostObject() const;
+    KinematicCharacterController *getController() const;
+    PlayerState *getPlayerState() const;
     
     void setPosition(const osg::Vec3 position);
     void setAngles(const float angleX = 0.0f, const float angleY = 0.0f, const float angleZ = 180.0f);

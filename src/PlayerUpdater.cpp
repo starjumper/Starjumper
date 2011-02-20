@@ -18,7 +18,7 @@ void PlayerUpdater::operator()(osg::Node* node, osg::NodeVisitor* nv)
 
 osg::Vec3 PlayerUpdater::calculateNextPosition(PlayerState *playerState)
 {
-    btKinematicCharacterController *playerController = _player->getController();
+    KinematicCharacterController *playerController = _player->getController();
     float speed = playerState->getSpeed();
     float angleY = playerState->getAngleY();
     
