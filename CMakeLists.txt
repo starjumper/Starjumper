@@ -22,7 +22,7 @@ IF( WIN32 AND MSVC )
     ENDIF( WIN32_USE_MP )
 ENDIF( WIN32 AND MSVC )
 
-#add cmake macros, don't know why yet
+#add cmake macros
 INCLUDE( CMakeMacros )
 
 #try to find necessary libraries
