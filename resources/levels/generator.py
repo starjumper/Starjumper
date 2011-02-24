@@ -21,7 +21,7 @@ for i in range(1, 30):
 	print "</cuboid>"
 
 	x += random.randint(jump_x_range[0], jump_x_range[1])
-	y += 10 + random.randint(jump_y_range[0], jump_y_range[1])
+	y += 30 + random.randint(jump_y_range[0], jump_y_range[1])
 	z += height + random.randint(jump_z_range[0], jump_z_range[1])
 	
 
