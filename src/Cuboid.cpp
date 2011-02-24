@@ -15,6 +15,83 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
 	_shapeDrawable = new osg::ShapeDrawable(new osg::Box(center, width, depth, height));
 	_shapeDrawable->setColor(DEFAULT_CUBOID_COLOR);
 
+    /********** <new part> **********/
+    osg::Geometry *cuboidGeometry = new osg::Geometry();
+    osg::Vec3Array *pyramidVertices = new osg::Vec3Array();
+    {
+        pyramidVertices->push_back( from + osg::Vec3(0, 0, size.z()));
+        pyramidVertices->push_back( from + osg::Vec3(size.x(), 0, size.z()));
+        pyramidVertices->push_back( from + osg::Vec3(size.x(), 0, 0));
+        pyramidVertices->push_back( from );
+
+        pyramidVertices->push_back( from + osg::Vec3(0, size.y(), size.z()));
+        pyramidVertices->push_back( from + osg::Vec3(size.x(), size.y(), size.z()));
+        pyramidVertices->push_back( from + osg::Vec3(size.x(), size.y(), 0));
+        pyramidVertices->push_back( from + osg::Vec3(0, size.y(), 0) );
+    }
+    
+    // front
+    {
+        osg::DrawElementsUInt *face = new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
+        face->push_back(0);
+        face->push_back(1);
+        face->push_back(2);
+        face->push_back(3);
+        cuboidGeometry->addPrimitiveSet(face);
+    }
+    
+    // back
+    {
+        osg::DrawElementsUInt *face = new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
+        face->push_back(4);
+        face->push_back(5);
+        face->push_back(6);
+        face->push_back(7);
+        cuboidGeometry->addPrimitiveSet(face);
+    }
+    
+    // left
+    {
+        osg::DrawElementsUInt *face = new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
+        face->push_back(0);
+        face->push_back(4);
+        face->push_back(7);
+        face->push_back(3);
+        cuboidGeometry->addPrimitiveSet(face);
+    }
+    
+    // right
+    {
+        osg::DrawElementsUInt *face = new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
+        face->push_back(1);
+        face->push_back(5);
+        face->push_back(6);
+        face->push_back(2);
+        cuboidGeometry->addPrimitiveSet(face);
+    }
+    
+    // top
+    {
+        osg::DrawElementsUInt *face = new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
+        face->push_back(0);
+        face->push_back(1);
+        face->push_back(5);
+        face->push_back(4);
+        cuboidGeometry->addPrimitiveSet(face);
+    }
+    
+    // bottom
+    {
+        osg::DrawElementsUInt *face = new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
+        face->push_back(3);
+        face->push_back(2);
+        face->push_back(6);
+        face->push_back(7);
+        cuboidGeometry->addPrimitiveSet(face);
+    }
+    
+    /********** </new part> **********/
+
 	_node = new osg::Geode();
 	_node->addDrawable(_shapeDrawable);
 	
