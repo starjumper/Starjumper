@@ -53,8 +53,9 @@ void HeadUpDisplay::updateSpeedBar()
 {
 	float playerSpeed = _player->getPlayerState()->getSpeed();
 
-    _speedBar->setColor(osg::Vec4(1.0, 0.9, 0.8, 0.5));
-    ((osg::Box *)_speedBar->getShape())->setHalfLengths(osg::Vec3(SPEEDBAR_WIDTH, SPEEDBAR_MAX_LENGTH * playerSpeed, 1));
+//    _speedBar->setColor(osg::Vec4(1.0, 0.005, 0.8, 0.5));
+    _speedBar->setColor(osg::Vec4(1.0, playerSpeed, 0.0, 0.5));
+    ((osg::Box *)_speedBar->getShape())->setHalfLengths(osg::Vec3(SPEEDBAR_WIDTH, SPEEDBAR_MAX_LENGTH * playerSpeed, 1.0f));
 
     /*
 	speedDrawable->setColor(osg::Vec4(1.0 * playerSpeed, 0.3, 0.8, 1.0));
