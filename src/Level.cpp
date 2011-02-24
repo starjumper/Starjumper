@@ -20,17 +20,11 @@ void Level::loadMapFromFile(const std::string &mapfile)
     for(rapidxml::node_iterator<char> it(xml_doc.first_node()); it.dereference() != NULL; ++it)
     {
         if(strcmp(it->name(), "cuboid") == 0)
-        {
             addCuboid(*it);
-        }
         else if(strcmp(it->name(), "tunnel") == 0)
-        {
             addTunnel(*it);
-        }
 		else
-        {
             throw std::runtime_error("Error: Unrecognized element in level file!");
-        }
     }
 }
 
@@ -71,13 +65,9 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
         std::string type = cuboidNode.first_attribute("type")->value();
 
         if(type == "accelerate")
-        {
             cuboid = new AccelerationCuboid(from, size);
-        }            
         else if(type == "decelerate")
-        {
             cuboid = new DecelerationCuboid(from, size);
-        }            
     }
 
     if(cuboid == NULL)
