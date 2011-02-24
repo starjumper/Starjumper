@@ -36,16 +36,67 @@ Menu::Menu(osgViewer::Viewer *viewer) :
 
 void Menu::initializeBackground()
 {
-	osg::ref_ptr<osg::Node> playerModel = osgDB::readNodeFile(PLAYER_MODEL);
-	if(!playerModel)
+
+	// set up animationpath
+    osg::Vec3 center(0.0f,13.0f,5.0f);
+    float radius = 4.5f;
+	float looptime = 10.0f;
+
+
+	osg::AnimationPath* animationPath = new osg::AnimationPath;
+    animationPath->setLoopMode(osg::AnimationPath::LOOP);
+    
+    int numSamples = 40;
+    float yaw = 0.0f;
+    float yaw_delta = 2.0f*osg::PI/((float)numSamples-1.0f);
+    float roll = osg::inDegrees(30.0f);
+    
+    double time=0.0f;
+    double time_delta = looptime/(double)numSamples;
+    for(int i=0;i<numSamples;++i)
     {
-        throw std::runtime_error("Unable to load player model file!");
+        osg::Vec3 position(center+osg::Vec3(sinf(yaw)*radius,cosf(yaw)*radius,0.0f));
+        osg::Quat rotation(osg::Quat(roll*time*2,osg::Vec3(0.0,1.0,0.0))*osg::Quat(-(yaw+osg::inDegrees(90.0f)),osg::Vec3(0.0,0.0,1.0)));
+        
+        animationPath->insert(time,osg::AnimationPath::ControlPoint(position,rotation));
+
+        yaw += yaw_delta;
+        time += time_delta;
     }
-	
-	osg::PositionAttitudeTransform *backgroundModel = new osg::PositionAttitudeTransform;
-	backgroundModel->addChild(playerModel);
-	backgroundModel->setPosition(osg::Vec3(0.0,5.0,5.0));
-	getRootNode()->addChild(backgroundModel);
+
+
+
+
+
+
+
+
+
+    osg::Group* model = new osg::Group;
+ 
+    osg::Node* ship = osgDB::readNodeFile(PLAYER_MODEL);
+    if (ship)
+    {
+        const osg::BoundingSphere& bs = ship->getBound();
+
+        float size = radius/bs.radius()*0.3f;
+        osg::MatrixTransform* positioned = new osg::MatrixTransform;
+        positioned->setDataVariance(osg::Object::STATIC);
+        positioned->setMatrix(osg::Matrix::translate(-bs.center())*
+                              osg::Matrix::scale(size,size,size)*
+                              osg::Matrix::rotate(osg::inDegrees(180.0f),0.0f,0.0f,2.0f));
+    
+        positioned->addChild(ship);
+    
+        osg::MatrixTransform* xform = new osg::MatrixTransform;
+        xform->setUpdateCallback(new osg::AnimationPathCallback(animationPath,0.0f,2.0));
+        xform->addChild(positioned);
+
+        model->addChild(xform);
+    }
+
+
+	getRootNode()->addChild(model);
 }
 
 void Menu::addButton(const char* label, std::tr1::function<void ()> callback)
