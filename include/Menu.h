@@ -16,6 +16,7 @@
 #include "types.h"
 #include "RenderingInstance.h"
 #include "MenuButton.h"
+#include "Player.h"
 
 #define MENU_BACKGROUND_COLOR   1.0f, 1.0f, 1.0f, 0.0f
 
@@ -28,6 +29,8 @@ class Menu : public RenderingInstance
 private:
 	osgWidget::WindowManager *_windowManager;
 	osgWidget::Box *_buttonList;
+
+	void initializeBackground();
 
 public:
 	Menu(osgViewer::Viewer *viewer);
