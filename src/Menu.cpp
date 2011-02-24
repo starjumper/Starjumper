@@ -1,8 +1,5 @@
 #include "Menu.h"
 
-// test
-#include "Player.h"
-
 Menu::Menu(osgViewer::Viewer *viewer) :
     RenderingInstance(viewer)
 {
@@ -34,11 +31,11 @@ Menu::Menu(osgViewer::Viewer *viewer) :
     
     getViewer()->addEventHandler(new osgWidget::MouseHandler(_windowManager));
 
+	initializeBackground();
+}
 
-
-
-
-	// menu background ship
+void Menu::initializeBackground()
+{
 	osg::ref_ptr<osg::Node> playerModel = osgDB::readNodeFile(PLAYER_MODEL);
 	if(!playerModel)
     {
