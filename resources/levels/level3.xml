@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map>
+	<cuboid type="accelerate">
+		<position x="-2.0" y="0" z="0" />
+		<size x="4.0" y="20.0" z="1" />
+	</cuboid>
+	<cuboid>
+		<position x="-5.0" y="20" z="0" />
+		<size x="4.0" y="20" z="0.1" />
+	</cuboid>
+	<cuboid>
+		<position x="1.0" y="20" z="0" />
+		<size x="4.0" y="20" z="0.1" />
+	</cuboid>
+	<cuboid>
+		<position x="-2.0" y="40" z="0" />
+		<size x="4.0" y="20" z="0.1" />
+	</cuboid>
+	<cuboid type="accelerate">
+		<position x="-8.0" y="90" z="0.0" />
+		<size x="2.0" y="50" z="5.0" />
+	</cuboid>
+	<cuboid>
+		<position x="-1.0" y="60" z="0" />
+		<size x="2.0" y="200" z="0.1" />
+	</cuboid>
+	<cuboid>
+		<position x="-5.0" y="60" z="0" />
+		<size x="2.0" y="100" z="0.1" />
+	</cuboid>
+	<cuboid>
+		<position x="3.0" y="60" z="0" />
+		<size x="2.0" y="100" z="0.1" />
+	</cuboid>
+    <cuboid type="accelerate">
+		<position x="6.0" y="100" z="0" />
+		<size x="2.0" y="50" z="5.0" />
+	</cuboid>
+	<tunnel length="50">
+		<position x="0" y="60" z="0" />
+	</tunnel>
+	<cuboid>
+		<position x="-2.0" y="260" z="0" />
+		<size x="4.0" y="40" z="1" />
+	</cuboid>
+	<cuboid>
+		<position x="-1.0" y="300" z="0" />
+		<size x="2.0" y="40" z="0.1" />
+	</cuboid>
+	<cuboid>
+		<position x="-2.0" y="340" z="0" />
+		<size x="4.0" y="40" z="0.1" />
+	</cuboid>
+	<cuboid>
+		<position x="-1.0" y="380" z="0" />
+		<size x="2.0" y="40" z="0.1" />
+	</cuboid>
+	<cuboid>
+		<position x="-1.0" y="420" z="-1" />
+		<size x="2.0" y="40" z="0.1" />
+	</cuboid>
+	<cuboid>
+		<position x="-1.0" y="460" z="-2" />
+		<size x="2.0" y="100" z="0.1" />
+	</cuboid>
+</map>

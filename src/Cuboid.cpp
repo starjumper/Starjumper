@@ -103,14 +103,14 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
     }
     
     osg::Vec2Array* texcoords = new osg::Vec2Array(8);
-       (*texcoords)[0].set(0.00f, 0.0f); // tex coord for vertex 0 
-       (*texcoords)[1].set(1.0f,  0.0f); // tex coord for vertex 1 
-       (*texcoords)[2].set(1.0f,  1.0f); // ""
-       (*texcoords)[3].set(0.0f,  1.0f); // "" 
-       (*texcoords)[4].set(0.00f, 0.0f); // tex coord for vertex 0 
-       (*texcoords)[5].set(1.0f,  0.0f); // tex coord for vertex 1 
-       (*texcoords)[6].set(1.0f,  1.0f); // ""
-       (*texcoords)[7].set(0.0f,  1.0f); // "" 
+       (*texcoords)[0].set(0.00f, 0.0f); // TOP
+       (*texcoords)[1].set(0.0f,  width); // TOP
+       (*texcoords)[2].set(width,  width); // ""
+       (*texcoords)[3].set(0.0f,  width); // "" 
+       (*texcoords)[4].set(depth, 0.0f); // TOP
+       (*texcoords)[5].set(depth,  width); // TOP
+       (*texcoords)[6].set(width,  width); // ""
+       (*texcoords)[7].set(0.0f,  width); // "" 
        
        _drawable->setTexCoordArray(0,texcoords);
     
@@ -169,6 +169,8 @@ AccelerationCuboid::AccelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &s
 
     osg::Image *image = osgDB::readImageFile(ACCELERATION_CUBOID_TEXTURE);
     texture->setImage(image);
+    texture->setWrap(osg::Texture::WRAP_S, osg::Texture::REPEAT); 
+    texture->setWrap(osg::Texture::WRAP_T, osg::Texture::REPEAT);
         
     osg::StateSet* stateSet = getNode()->getStateSet();
     stateSet->setTextureAttributeAndModes(0, texture, osg::StateAttribute::ON);
