@@ -28,12 +28,12 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(PlayerState *playerState)
     
     if(playerState->requestMoveLeft())
     {
-        direction -= btVector3(0.2, 0, 0);
+        direction -= btVector3(speed / 10.0f, 0, 0);
         playerState->setAngleY(angleY + 3 < 30 ? angleY + 3 : 30);
     }
     else if(playerState->requestMoveRight())
     {
-        direction += btVector3(0.2, 0, 0);
+        direction += btVector3(speed / 10.0f, 0, 0);
         playerState->setAngleY(angleY - 3 > -30 ? angleY - 3 : -30);
     }
     else
