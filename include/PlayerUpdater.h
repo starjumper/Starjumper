@@ -10,6 +10,7 @@
 #include <osgbBullet/Utils.h>
 
 #include "Player.h"
+#include "Cuboid.h"
 
 class PlayerUpdater : public osg::NodeCallback 
 {

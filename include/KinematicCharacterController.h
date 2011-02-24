@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 #include <LinearMath/btVector3.h>
 #include <btBulletDynamicsCommon.h>
 #include <BulletDynamics/Character/btCharacterControllerInterface.h>
@@ -59,6 +61,7 @@ protected:
 	int m_upAxis;
 	
     bool m_onGround;
+    void *m_groundObject;
 	
 	btVector3 computeReflectionDirection(const btVector3 &direction, const btVector3 &normal);
 	btVector3 parallelComponent(const btVector3 &direction, const btVector3 &normal);
@@ -112,4 +115,5 @@ public:
     void setUseGhostSweepTest(bool useGhostObjectSweepTest);
 
 	bool onGround () const;
+    void *getGroundObject();
 };

@@ -52,8 +52,14 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(PlayerState *playerState)
         playerState->setSpeed(speed - 0.04 >= 0 ? speed - 0.04 : 0);
 //    else
 //        playerState->setSpeed(speed - 0.05 >= 0 ? speed - 0.05 : 0);
+
+    if(playerController->onGround())
+    {
+        Cuboid *groundObject = (Cuboid *)playerController->getGroundObject();
+        groundObject->applyTo(_player);
+    }
     
-    direction += btVector3(0, speed, 0);
+    direction += btVector3(0, playerState->getSpeed(), 0);
 
     if(playerState->requestJump())
         playerController->jump();

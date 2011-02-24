@@ -15,6 +15,7 @@
 #include <osgbBullet/CollisionShapes.h>
 
 #include "types.h"
+#include "Player.h"
 
 #define DEFAULT_CUBOID_COLOR        osg::Vec4f(0.8f, 0.5f, 0.7f, 0.5f)
 #define ACCELERATION_CUBOID_TEXTURE "resources/textures/acceleration.png"
@@ -38,16 +39,20 @@ class Cuboid : public osg::Referenced
         osg::Node *getNode();
         osg::Drawable *getDrawable();
         btRigidBody *getRigidBody();
+        
+        virtual void applyTo(Player *player) { };
 };
 
 class AccelerationCuboid : public Cuboid
 {
     public:
         AccelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size);
+        void applyTo(Player *player);
 };
 
 class DecelerationCuboid : public Cuboid
 {
     public:
         DecelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size);
+        void applyTo(Player *player);
 };

@@ -28,20 +28,6 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
     }
     
     _drawable->setVertexArray( pyramidVertices ); 
-/*    
-    osg::Vec4Array* colors = new osg::Vec4Array;
-    colors->push_back(osg::Vec4(1.0f, 0.0f, 0.0f, 1.0f) ); //index 0 red
-    colors->push_back(osg::Vec4(0.0f, 1.0f, 0.0f, 1.0f) ); //index 1 green
-    colors->push_back(osg::Vec4(0.0f, 0.0f, 1.0f, 1.0f) ); //index 2 blue
-    colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f) ); //index 3 white 
-    colors->push_back(osg::Vec4(1.0f, 0.0f, 0.0f, 1.0f) ); //index 4 red
-    colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f) ); //index 5 white 
-    colors->push_back(osg::Vec4(1.0f, 1.0f, 0.0f, 1.0f) ); //index 6 red
-    colors->push_back(osg::Vec4(1.0f, 1.0f, 0.0f, 1.0f) ); //index 7 red
-    
-    _drawable->setColorArray(colors);
-    _drawable->setColorBinding(osg::Geometry::BIND_PER_VERTEX);
-*/
     
     // front
     {
@@ -151,6 +137,7 @@ void Cuboid::constructRigidBody(const osg::Vec3 &center, const float width, cons
     
     // construct rigid body from previously specified construction info
     _rigidBody = new btRigidBody(rbciCuboid);
+    _rigidBody->setUserPointer(this);
 }
 
 osg::Node *Cuboid::getNode()
@@ -175,9 +162,19 @@ AccelerationCuboid::AccelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &s
     _texture->setImage(image);
 }
 
+void AccelerationCuboid::applyTo(Player *player)
+{
+    std::cout << "accelerate" << std::endl;
+}
+
 DecelerationCuboid::DecelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
     Cuboid(from, size)
 {    
     osg::Image *image = osgDB::readImageFile(DECELERATION_CUBOID_TEXTURE);
     _texture->setImage(image);
+}
+
+void DecelerationCuboid::applyTo(Player *player)
+{
+    std::cout << "decelerate" << std::endl;
 }

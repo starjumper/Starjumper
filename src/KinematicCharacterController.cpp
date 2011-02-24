@@ -84,6 +84,7 @@ KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObj
     m_jumpSpeed = 20.0f;
     m_fallSpeed = 0.0f;
     m_onGround = false;
+    m_groundObject = NULL;
 }
 
 KinematicCharacterController::~KinematicCharacterController ()
@@ -348,14 +349,17 @@ void KinematicCharacterController::stepDown ( btCollisionWorld* collisionWorld, 
 
 	if (callback.hasHit())
 	{
+        m_groundObject = callback.m_hitCollisionObject->getUserPointer();
+                     
 		// we dropped a fraction of the height -> hit floor
 		m_currentPosition.setInterpolate3(m_currentPosition, m_targetPosition, callback.m_closestHitFraction);
         m_onGround = true;
-        m_fallSpeed = 0.0f;
+        m_fallSpeed = 0.0f;        
 	}
 	else
 	{
 		// we dropped the full height
+		m_groundObject = NULL;
 		m_currentPosition = m_targetPosition;
         m_onGround = false;
         m_fallSpeed += gravity * dt;
@@ -506,6 +510,12 @@ bool KinematicCharacterController::onGround() const
 {
 	return m_onGround;
 }
+
+void *KinematicCharacterController::getGroundObject()
+{
+    return m_groundObject;
+}
+
 
 
 void KinematicCharacterController::debugDraw(btIDebugDraw* debugDrawer)
