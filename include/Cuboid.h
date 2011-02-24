@@ -18,6 +18,7 @@
 
 #define DEFAULT_CUBOID_COLOR        osg::Vec4f(0.8f, 0.5f, 0.7f, 0.5f)
 #define ACCELERATION_CUBOID_TEXTURE "resources/textures/acceleration.png"
+#define DECELERATION_CUBOID_TEXTURE "resources/textures/deceleration.png"
 
 class Cuboid : public osg::Referenced
 {
@@ -43,4 +44,10 @@ class AccelerationCuboid : public Cuboid
 {
     public:
         AccelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size);
+};
+
+class DecelerationCuboid : public Cuboid
+{
+    public:
+        DecelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size);
 };

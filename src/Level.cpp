@@ -74,6 +74,10 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
         {
             cuboid = new AccelerationCuboid(from, size);
         }            
+        else if(type == "decelerate")
+        {
+            cuboid = new DecelerationCuboid(from, size);
+        }            
     }
 
     if(cuboid == NULL)

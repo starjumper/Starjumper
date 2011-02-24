@@ -174,3 +174,10 @@ AccelerationCuboid::AccelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &s
     osg::Image *image = osgDB::readImageFile(ACCELERATION_CUBOID_TEXTURE);
     _texture->setImage(image);
 }
+
+DecelerationCuboid::DecelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
+    Cuboid(from, size)
+{    
+    osg::Image *image = osgDB::readImageFile(DECELERATION_CUBOID_TEXTURE);
+    _texture->setImage(image);
+}
