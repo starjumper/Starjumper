@@ -28,7 +28,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
     }
     
     _drawable->setVertexArray( pyramidVertices ); 
-    
+/*    
     osg::Vec4Array* colors = new osg::Vec4Array;
     colors->push_back(osg::Vec4(1.0f, 0.0f, 0.0f, 1.0f) ); //index 0 red
     colors->push_back(osg::Vec4(0.0f, 1.0f, 0.0f, 1.0f) ); //index 1 green
@@ -41,6 +41,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
     
     _drawable->setColorArray(colors);
     _drawable->setColorBinding(osg::Geometry::BIND_PER_VERTEX);
+*/
     
     // front
     {

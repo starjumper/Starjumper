@@ -47,21 +47,14 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(PlayerState *playerState)
     }
     
     if(playerState->requestAccelerate())
-    {
-        direction += btVector3(0, 1 * speed, 0);
-        playerState->setSpeed(speed + 0.1 <= 2 ? speed + 0.1 : 2);
-    }
+        playerState->setSpeed(speed + 0.02 <= 2 ? speed + 0.02 : 2);
     else if(playerState->requestDecelerate())
-    {
-        direction -= btVector3(0, 1 * speed, 0);
-        playerState->setSpeed(speed - 0.3 >= 0 ? speed - 0.3 : 0);
-    }
-    else
-    {
-        direction += btVector3(0, 1 * speed, 0);
-        playerState->setSpeed(speed - 0.05 >= 0 ? speed - 0.05 : 0);
-    }
+        playerState->setSpeed(speed - 0.04 >= 0 ? speed - 0.04 : 0);
+//    else
+//        playerState->setSpeed(speed - 0.05 >= 0 ? speed - 0.05 : 0);
     
+    direction += btVector3(0, speed, 0);
+
     if(playerState->requestJump())
         playerController->jump();
     

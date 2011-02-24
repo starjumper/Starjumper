@@ -14,7 +14,7 @@ for i in range(1, 30):
 	height = 1.1
 	width = random.randint(2, 5)
 
-	print "<cuboid>"
+	print "<cuboid type=\"accelerate\">"
 	print "\t<position x=\"%f\" y=\"%d\" z=\"%d\" />" % (x - (width / 2.0), y, z)
 	print "\t<size x=\"%d\" y=\"%d\" z=\"%d\" />" % (width, length, height)	
 	print "</cuboid>"
