@@ -104,14 +104,14 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
     }
     
     osg::Vec2Array* texcoords = new osg::Vec2Array(8);
-       (*texcoords)[0].set(0.00f, 0.0f); // TOP
-       (*texcoords)[1].set(0.0f,  width); // TOP
-       (*texcoords)[2].set(width,  width); // ""
-       (*texcoords)[3].set(0.0f,  width); // "" 
-       (*texcoords)[4].set(depth, 0.0f); // TOP
-       (*texcoords)[5].set(depth,  width); // TOP
-       (*texcoords)[6].set(width,  width); // ""
-       (*texcoords)[7].set(0.0f,  width); // "" 
+       (*texcoords)[0].set(width, 0.0f); // TOP
+       (*texcoords)[1].set(0.0f, 0.0f); // TOP
+       (*texcoords)[2].set(0.0f,  0.0f); // ""
+       (*texcoords)[3].set(0.0f,  0.0f); // "" 
+       (*texcoords)[4].set(width, depth / 3.0f); // TOP
+       (*texcoords)[5].set(0.0f,  depth / 3.0f); // TOP
+       (*texcoords)[6].set(0.0f,  0.0f); // ""
+       (*texcoords)[7].set(0.0f,  0.0f); // "" 
        
        _drawable->setTexCoordArray(0,texcoords);
     
