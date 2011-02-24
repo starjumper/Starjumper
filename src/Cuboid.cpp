@@ -12,9 +12,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
 	float depth = fabs(from.y() - to.y());
 	float height = fabs(from.z() - to.z());
 		
-    /********** <new part> **********/
     osg::Geometry *_drawable = new osg::Geometry();
-//	_drawable->setColor(DEFAULT_CUBOID_COLOR);
 
     osg::Vec3Array *pyramidVertices = new osg::Vec3Array();
     {
@@ -104,8 +102,18 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
         _drawable->addPrimitiveSet(face);
     }
     
-    /********** </new part> **********/
-
+    osg::Vec2Array* texcoords = new osg::Vec2Array(8);
+       (*texcoords)[0].set(0.00f, 0.0f); // tex coord for vertex 0 
+       (*texcoords)[1].set(1.0f,  0.0f); // tex coord for vertex 1 
+       (*texcoords)[2].set(1.0f,  1.0f); // ""
+       (*texcoords)[3].set(0.0f,  1.0f); // "" 
+       (*texcoords)[4].set(0.00f, 0.0f); // tex coord for vertex 0 
+       (*texcoords)[5].set(1.0f,  0.0f); // tex coord for vertex 1 
+       (*texcoords)[6].set(1.0f,  1.0f); // ""
+       (*texcoords)[7].set(0.0f,  1.0f); // "" 
+       
+       _drawable->setTexCoordArray(0,texcoords);
+    
 	_node = new osg::Geode();
 	_node->addDrawable(_drawable);
 	
