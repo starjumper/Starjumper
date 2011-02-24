@@ -18,10 +18,10 @@
 #include "RenderingInstance.h"
 #include "LazyCameraManipulator.h"
 #include "Level.h"
+#include "Lighting.h"
 #include "Player.h"
 #include "GameKeyboardHandler.h"
 #include "HeadUpDisplay.h"
-#include "Lighting.h"
 
 #define WORLD_MIN          -1000, -1000, -1000
 #define WORLD_MAX          1000, 1000, 1000

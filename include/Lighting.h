@@ -1,3 +1,5 @@
+#pragma once
+
 #include <osg/Group>
 #include <osg/Node>
 
@@ -20,4 +22,5 @@ public:
     
     // getter methods
 	osg::Node *getLights(osg::StateSet *rootStateSet);
+	void setLightPosition(osg::Vec3 position);
 };

@@ -21,7 +21,7 @@
 
 #define SPEEDBAR_POSITION   osg::Vec3f(60, SCREEN_HEIGHT / 2.0f, 0)
 #define SPEEDBAR_WIDTH      20.0f
-#define SPEEDBAR_MAX_LENGTH 400.0f
+#define SPEEDBAR_MAX_LENGTH 200.0f
 
 
 class HeadUpDisplay : public osg::Referenced

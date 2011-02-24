@@ -3,7 +3,8 @@
 
 #include <iostream>
 
-Player::Player()
+Player::Player(Lighting *playerLight) :
+	_playerLight(playerLight)
 {
     initializePlayerModel();
     initializePlayerPhysics();
@@ -81,6 +82,7 @@ PlayerState *Player::getPlayerState() const
 void Player::setPosition(const osg::Vec3 position)
 {
     patPlayer->setPosition(position);
+	_playerLight->setLightPosition(position + osg::Vec3(0.0, 0.0, 2.0f));
 }
 
 void Player::setAngles(const float angleX, const float angleY, const float angleZ)

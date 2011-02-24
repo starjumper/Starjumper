@@ -24,3 +24,8 @@ osg::Node *Lighting::getLights(osg::StateSet *rootStateSet)
 
 	return lightGroup;
 }
+
+void Lighting::setLightPosition(osg::Vec3 position)
+{
+	_light->setPosition(osg::Vec4(position, 1.0));
+}

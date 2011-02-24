@@ -4,10 +4,10 @@ Game::Game(osgViewer::Viewer *viewer) :
 	RenderingInstance(viewer)
 {
 	_level = new Level("resources/levels/level1.xml");
-    _player = new Player();
+    _lighting = new Lighting();
+	_player = new Player(_lighting);
     _keyboardHandler = new GameKeyboardHandler(_player);
     _headUpDisplay = new HeadUpDisplay(_player);
-    _lighting = new Lighting();
     	
     initializeScene();
     initializePhysicsWorld();
