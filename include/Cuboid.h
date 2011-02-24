@@ -4,7 +4,7 @@
 
 #include <osg/Node>
 #include <osg/Geode>
-#include <osg/ShapeDrawable>
+#include <osg/Drawable>
 #include <osg/Texture2D>
 #include <osg/Material>
 
@@ -23,7 +23,7 @@ class Cuboid : public osg::Referenced
 {
     private:
     	osg::Geode *_node;
-    	osg::ShapeDrawable *_shapeDrawable;
+    	osg::Drawable *_drawable;
     	
         btRigidBody *_rigidBody;
         void constructRigidBody(const osg::Vec3 &center, const float width, const float depth, const float height);
@@ -32,7 +32,7 @@ class Cuboid : public osg::Referenced
         Cuboid(const osg::Vec3 &from, const osg::Vec3 &size);
         
         osg::Node *getNode();
-        osg::ShapeDrawable *getShapeDrawable();
+        osg::Drawable *getDrawable();
         btRigidBody *getRigidBody();
 };
 

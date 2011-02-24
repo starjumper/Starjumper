@@ -12,11 +12,10 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
 	float depth = fabs(from.y() - to.y());
 	float height = fabs(from.z() - to.z());
 		
-	_shapeDrawable = new osg::ShapeDrawable(new osg::Box(center, width, depth, height));
-	_shapeDrawable->setColor(DEFAULT_CUBOID_COLOR);
-
     /********** <new part> **********/
-    osg::Geometry *cuboidGeometry = new osg::Geometry();
+    osg::Geometry *_drawable = new osg::Geometry();
+//	_drawable->setColor(DEFAULT_CUBOID_COLOR);
+
     osg::Vec3Array *pyramidVertices = new osg::Vec3Array();
     {
         pyramidVertices->push_back( from + osg::Vec3(0, 0, size.z()));
@@ -30,6 +29,21 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
         pyramidVertices->push_back( from + osg::Vec3(0, size.y(), 0) );
     }
     
+    _drawable->setVertexArray( pyramidVertices ); 
+    
+    osg::Vec4Array* colors = new osg::Vec4Array;
+    colors->push_back(osg::Vec4(1.0f, 0.0f, 0.0f, 1.0f) ); //index 0 red
+    colors->push_back(osg::Vec4(0.0f, 1.0f, 0.0f, 1.0f) ); //index 1 green
+    colors->push_back(osg::Vec4(0.0f, 0.0f, 1.0f, 1.0f) ); //index 2 blue
+    colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f) ); //index 3 white 
+    colors->push_back(osg::Vec4(1.0f, 0.0f, 0.0f, 1.0f) ); //index 4 red
+    colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f) ); //index 5 white 
+    colors->push_back(osg::Vec4(1.0f, 1.0f, 0.0f, 1.0f) ); //index 6 red
+    colors->push_back(osg::Vec4(1.0f, 1.0f, 0.0f, 1.0f) ); //index 7 red
+    
+    _drawable->setColorArray(colors);
+    _drawable->setColorBinding(osg::Geometry::BIND_PER_VERTEX);
+    
     // front
     {
         osg::DrawElementsUInt *face = new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
@@ -37,7 +51,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
         face->push_back(1);
         face->push_back(2);
         face->push_back(3);
-        cuboidGeometry->addPrimitiveSet(face);
+        _drawable->addPrimitiveSet(face);
     }
     
     // back
@@ -47,7 +61,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
         face->push_back(5);
         face->push_back(6);
         face->push_back(7);
-        cuboidGeometry->addPrimitiveSet(face);
+        _drawable->addPrimitiveSet(face);
     }
     
     // left
@@ -57,7 +71,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
         face->push_back(4);
         face->push_back(7);
         face->push_back(3);
-        cuboidGeometry->addPrimitiveSet(face);
+        _drawable->addPrimitiveSet(face);
     }
     
     // right
@@ -67,7 +81,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
         face->push_back(5);
         face->push_back(6);
         face->push_back(2);
-        cuboidGeometry->addPrimitiveSet(face);
+        _drawable->addPrimitiveSet(face);
     }
     
     // top
@@ -77,7 +91,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
         face->push_back(1);
         face->push_back(5);
         face->push_back(4);
-        cuboidGeometry->addPrimitiveSet(face);
+        _drawable->addPrimitiveSet(face);
     }
     
     // bottom
@@ -87,13 +101,13 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
         face->push_back(2);
         face->push_back(6);
         face->push_back(7);
-        cuboidGeometry->addPrimitiveSet(face);
+        _drawable->addPrimitiveSet(face);
     }
     
     /********** </new part> **********/
 
 	_node = new osg::Geode();
-	_node->addDrawable(_shapeDrawable);
+	_node->addDrawable(_drawable);
 	
 	osg::StateSet* stateSet = new osg::StateSet();
     stateSet->setMode(GL_BLEND, osg::StateAttribute::ON);
@@ -129,9 +143,9 @@ osg::Node *Cuboid::getNode()
     return _node;
 }
 
-osg::ShapeDrawable *Cuboid::getShapeDrawable()
+osg::Drawable *Cuboid::getDrawable()
 {
-    return _shapeDrawable;
+    return _drawable;
 }
 
 btRigidBody *Cuboid::getRigidBody()
