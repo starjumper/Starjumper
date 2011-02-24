@@ -15,6 +15,7 @@
 #include "KinematicCharacterController.h"
 #include "types.h"
 #include "PlayerState.h"
+#include "Lighting.h"
 
 // global Player settings
 #define PLAYER_MODEL        "resources/models/player.osg"
@@ -31,12 +32,14 @@ private:
     btPairCachingGhostObject *_playerGhostObject;
     KinematicCharacterController *_playerController;
     PlayerState *_playerState;
+
+	Lighting *_playerLight;
     
     void initializePlayerModel();
     void initializePlayerPhysics();
     
 public:
-    Player();
+    Player(Lighting *playerLight);
     ~Player();
     
     // getter methods
