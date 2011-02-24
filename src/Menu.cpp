@@ -47,7 +47,7 @@ Menu::Menu(osgViewer::Viewer *viewer) :
 	
 	osg::PositionAttitudeTransform *backgroundModel = new osg::PositionAttitudeTransform;
 	backgroundModel->addChild(playerModel);
-	backgroundModel->setPosition(osg::Vec3(1.0,5.0,5.0));
+	backgroundModel->setPosition(osg::Vec3(0.0,5.0,5.0));
 	getRootNode()->addChild(backgroundModel);
 }
 
