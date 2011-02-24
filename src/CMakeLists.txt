@@ -17,6 +17,26 @@ SET(SOURCE
     KinematicCharacterController
 )
 
+#dirty!
+SET(HEADER
+	../include/Cuboid.h
+	../include/Game.h
+	../include/GameKeyboardHandler.h
+	../include/GameManager.h
+	../include/HeadUpDisplay.h
+	../include/KinematicCharacterController.h
+	../include/LazyCameraManipulator.h
+	../include/Level.h
+	../include/Lighting.h
+	../include/Menu.h
+	../include/MenuButton.h
+	../include/Player.h
+	../include/PlayerState.h
+	../include/PlayerUpdater.h
+	../include/RenderingInstance.h
+	../include/types.h
+)
+
 FIND_PACKAGE( OpenGL )
 IF( APPLE )
     SET( CMAKE_CXX_LINK_FLAGS "-framework OpenGL -framework GLUT" )
