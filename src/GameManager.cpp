@@ -12,6 +12,9 @@ GameManager::GameManager() :
 	// set background color
 	_viewer.getCamera()->setClearColor(osg::Vec4( 0., 0., 0., 1. )); 
 
+	// window view for testing purpose, uncomment if needed
+	_viewer.setUpViewInWindow(40, 40, 800, 600, 0);
+
 	buildMenus();
     addRenderingInstance("game", new Game(&_viewer));
 
@@ -26,7 +29,9 @@ void GameManager::addRenderingInstance(std::string name, RenderingInstance *inst
 void GameManager::selectRenderingInstance(std::string name)
 {
     if(_activeRenderingInstance)
+	{
         _activeRenderingInstance->cleanup(&_viewer);
+	}
     
     _activeRenderingInstance = _renderingInstances[name];
     _activeRenderingInstance->prepare(&_viewer);

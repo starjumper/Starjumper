@@ -1,5 +1,8 @@
 #include "Menu.h"
 
+// test
+#include "Player.h"
+
 Menu::Menu(osgViewer::Viewer *viewer) :
     RenderingInstance(viewer)
 {
@@ -30,6 +33,22 @@ Menu::Menu(osgViewer::Viewer *viewer) :
     getRootNode()->addChild(camera);
     
     getViewer()->addEventHandler(new osgWidget::MouseHandler(_windowManager));
+
+
+
+
+
+	// menu background ship
+	osg::ref_ptr<osg::Node> playerModel = osgDB::readNodeFile(PLAYER_MODEL);
+	if(!playerModel)
+    {
+        throw std::runtime_error("Unable to load player model file!");
+    }
+	
+	osg::PositionAttitudeTransform *backgroundModel = new osg::PositionAttitudeTransform;
+	backgroundModel->addChild(playerModel);
+	backgroundModel->setPosition(osg::Vec3(1.0,5.0,5.0));
+	getRootNode()->addChild(backgroundModel);
 }
 
 void Menu::addButton(const char* label, std::tr1::function<void ()> callback)
