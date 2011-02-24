@@ -68,10 +68,6 @@ void Menu::initializeBackground()
 
 
 
-
-
-
-
     osg::Group* model = new osg::Group;
  
     osg::Node* ship = osgDB::readNodeFile(PLAYER_MODEL);
