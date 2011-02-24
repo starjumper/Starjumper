@@ -26,7 +26,7 @@
 #define WORLD_MIN          -1000, -1000, -1000
 #define WORLD_MAX          1000, 1000, 1000
 #define WORLD_GRAVITY      btVector3(0.0, 0.0, -40.0)
-#define CAMERA_HOME_EYE    osg::Vec3(0.0, -5.0, 3.0)
+#define CAMERA_HOME_EYE    osg::Vec3(0.0, -2.0, 2.0)
 #define CAMERA_HOME_CENTER osg::Vec3(0.0, 10.0, 0.0)
 #define CAMERA_HOME_UP     osg::Vec3(0.0, -10.0, 5.0)
 

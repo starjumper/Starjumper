@@ -47,7 +47,7 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(PlayerState *playerState)
     }
     
     if(playerState->requestAccelerate())
-        playerState->setSpeed(speed + 0.02 <= 2 ? speed + 0.02 : 2);
+        playerState->setSpeed(speed + 0.02 <= 1.0 ? speed + 0.02 : 1.0);
     else if(playerState->requestDecelerate())
         playerState->setSpeed(speed - 0.04 >= 0 ? speed - 0.04 : 0);
 //    else

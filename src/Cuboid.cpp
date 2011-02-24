@@ -117,13 +117,19 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
     
 	_node = new osg::Geode();
 	_node->addDrawable(_drawable);
-	
-	osg::StateSet* stateSet = new osg::StateSet();
-    stateSet->setMode(GL_BLEND, osg::StateAttribute::ON);
+	    
+    _texture = new osg::Texture2D;
+    _texture->setDataVariance(osg::Object::DYNAMIC); 
+    _texture->setWrap(osg::Texture::WRAP_S, osg::Texture::REPEAT); 
+    _texture->setWrap(osg::Texture::WRAP_T, osg::Texture::REPEAT);
+    
+    osg::StateSet* stateSet = new osg::StateSet();
+
+    stateSet->setTextureAttributeAndModes(0, _texture, osg::StateAttribute::ON);
     
     getNode()->setStateSet(stateSet);
     getNode()->setNodeMask(RECEIVE_SHADOW_MASK);
-    
+	    
     constructRigidBody(center, width, depth, height);
 }
 
@@ -165,14 +171,6 @@ btRigidBody *Cuboid::getRigidBody()
 AccelerationCuboid::AccelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
     Cuboid(from, size)
 {    
-    osg::Texture2D *texture = new osg::Texture2D;
-    texture->setDataVariance(osg::Object::DYNAMIC); 
-
     osg::Image *image = osgDB::readImageFile(ACCELERATION_CUBOID_TEXTURE);
-    texture->setImage(image);
-    texture->setWrap(osg::Texture::WRAP_S, osg::Texture::REPEAT); 
-    texture->setWrap(osg::Texture::WRAP_T, osg::Texture::REPEAT);
-        
-    osg::StateSet* stateSet = getNode()->getStateSet();
-    stateSet->setTextureAttributeAndModes(0, texture, osg::StateAttribute::ON);
+    _texture->setImage(image);
 }

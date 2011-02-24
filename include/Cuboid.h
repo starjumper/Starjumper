@@ -27,6 +27,9 @@ class Cuboid : public osg::Referenced
     	
         btRigidBody *_rigidBody;
         void constructRigidBody(const osg::Vec3 &center, const float width, const float depth, const float height);
+
+    protected:
+        osg::Texture2D *_texture;        
                 
     public:  
         Cuboid(const osg::Vec3 &from, const osg::Vec3 &size);

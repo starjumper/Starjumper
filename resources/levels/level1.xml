@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map>
-<cuboid type="accelerate">
+<cuboid type="decelerate">
 	<position x="-1.000000" y="0" z="0" />
 	<size x="2" y="75" z="1" />
 </cuboid>
