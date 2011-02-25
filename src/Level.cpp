@@ -77,6 +77,17 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
 	
     _level->addChild(cuboid->getNode());
     _collisionObjects.push_back(cuboid->getRigidBody());
+    
+    // save minimal x values for buckets of close y values
+    // needed for detection whether player is falling to dead    
+    int yBucketIndex = (int)(from.y() / 20.0f);
+	
+	while(_minZValues.size() <= yBucketIndex)
+        _minZValues.push_back(from.z());
+    
+    // if current cuboid is lower then z -> adjust bucket value
+    if(from.z() < _minZValues[yBucketIndex])    
+        _minZValues[yBucketIndex] = from.z();
 }
 
 void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
@@ -90,7 +101,7 @@ void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
 	tunnelTransform->setScale(osg::Vec3f(1.0f, atof(tunnelNode.first_attribute("length")->value()), 1.0f));
 	
 	tunnelTransform->setNodeMask(RECEIVE_SHADOW_MASK);
-	_level->addChild(tunnelTransform);    
+	_level->addChild(tunnelTransform);
 	
     /*
 	btConvexTriangleMeshShape* mesh = osgbBullet::btConvexTriMeshCollisionShapeFromOSG(tunnelPat);

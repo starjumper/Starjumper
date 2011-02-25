@@ -50,13 +50,19 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(PlayerState *playerState)
         playerState->setSpeed(speed + 0.02 <= 1.0 ? speed + 0.02 : 1.0);
     else if(playerState->requestDecelerate())
         playerState->setSpeed(speed - 0.04 >= 0 ? speed - 0.04 : 0);
-//    else
-//        playerState->setSpeed(speed - 0.05 >= 0 ? speed - 0.05 : 0);
 
     if(playerController->onGround())
     {
+        // apply special attributes from ground to player
         Cuboid *groundObject = (Cuboid *)playerController->getGroundObject();
         groundObject->applyTo(_player);
+    }
+    else
+    {
+        // check whether player is falling and whether there is no more possibility
+        // to fall on a block
+        
+        
     }
     
     direction += btVector3(0, playerState->getSpeed(), 0);

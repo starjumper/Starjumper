@@ -31,6 +31,8 @@ private:
     btDynamicsWorld *_world;
     std::vector<btRigidBody *> _collisionObjects;
 
+    std::vector<float> _minZValues;
+
     osg::Vec3 getVectorFromXMLNode(const std::string &name, const rapidxml::xml_node<> &node) const;
     void addCuboid(const rapidxml::xml_node<> &cuboidNode);
     void addTunnel(const rapidxml::xml_node<> &tunnelNode);

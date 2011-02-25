@@ -13,7 +13,7 @@ GameManager::GameManager() :
 	_viewer.getCamera()->setClearColor(osg::Vec4( 0., 0., 0., 1. )); 
 
 	// window view for testing purpose, uncomment if needed
-	_viewer.setUpViewInWindow(40, 40, 800, 600, 0);
+	//_viewer.setUpViewInWindow(40, 40, 800, 600, 0);
 
 	buildMenus();
     addRenderingInstance("game", new Game(&_viewer));
