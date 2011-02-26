@@ -1,5 +1,8 @@
 #pragma once
 
+#include <iostream>
+#include <algorithm>
+
 #include <osg/Group>
 #include <osg/Node>
 #include <osg/NodeCallback>

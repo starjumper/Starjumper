@@ -61,8 +61,13 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(PlayerState *playerState)
     {
         // check whether player is falling and whether there is no more possibility
         // to fall on a block
-        
-        
+
+        btVector3 position = playerController->getGhostObject()->getWorldTransform().getOrigin();
+        int yBucketIndex = (int)(position.y() / 20.0f);
+        float min = std::min((*(_player->getDeadlyAltitudes()))[yBucketIndex], (*(_player->getDeadlyAltitudes()))[yBucketIndex + 1]);
+                
+        if(position.z() < (min - 5.0f))
+            exit(0);
     }
     
     direction += btVector3(0, playerState->getSpeed(), 0);

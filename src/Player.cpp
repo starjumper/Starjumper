@@ -92,3 +92,13 @@ void Player::setAngles(const float angleX, const float angleY, const float angle
         osg::DegreesToRadians(angleY), osg::Vec3(0.0,1.0,0.0),
         osg::DegreesToRadians(angleZ), osg::Vec3(0.0,0.0,1.0)));
 }
+
+void Player::setDeadlyAltitudes(const std::vector<float> *values)
+{
+    _deadlyAltitudes = values;
+}
+
+const std::vector<float> *Player::getDeadlyAltitudes()
+{
+    return _deadlyAltitudes;
+}

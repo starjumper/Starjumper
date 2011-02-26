@@ -6,6 +6,8 @@ Game::Game(osgViewer::Viewer *viewer) :
 	_level = new Level("resources/levels/level1.xml");
     _lighting = new Lighting();
 	_player = new Player(_lighting);
+    _player->setDeadlyAltitudes(_level->getMinZValues());
+    
     _keyboardHandler = new GameKeyboardHandler(_player);
     _headUpDisplay = new HeadUpDisplay(_player);
     	

@@ -44,4 +44,6 @@ public:
     
     osg::PositionAttitudeTransform *getNode() const;
     std::vector<btRigidBody *> getCollisionObjects() const;
+    
+    const std::vector<float> *getMinZValues();
 };
