@@ -1,0 +1,149 @@
+Group {
+  UniqueID uniqid_Group_49
+  name "Root"
+  cullingActive TRUE
+  StateSet {
+    UniqueID uniqid_StateSet_51
+    GL_LIGHT0 ON
+    LightModel {
+      UniqueID uniqid_LightModel_53
+      ambientIntensity 0.00000 0.00000 0.00000 1.00000
+      colorControl SEPARATE_SPECULAR_COLOR
+      localViewer FALSE
+    }
+  }
+  num_children 2
+  MatrixTransform {
+    UniqueID uniqid_MatrixTransform_0
+    name "Cube"
+    cullingActive TRUE
+    Matrix {
+      2.00000 0.00000 0.00000 0.00000
+      0.00000 2.00000 0.00000 0.00000
+      0.00000 0.00000 2.00000 0.00000
+      0.00000 0.00000 0.00000 1.00000
+    }
+    num_children 1
+    Geode {
+      UniqueID uniqid_Geode_2
+      name "GeodeCube"
+      cullingActive TRUE
+      num_drawables 1
+      Geometry {
+        UniqueID uniqid_Geometry_4
+        name "Cube"
+        Primitives 1 {
+          DrawElementsUByte QUADS 24 {
+            0 1 2 3 
+            4 5 6 7 
+            8 9 10 11 
+            12 13 14 15 
+            16 17 18 19 
+            20 21 22 23 
+          }
+        }
+        VertexArray UniqueID VertexArray_6 Vec3Array 24
+        {
+          1.00000 1.00000 -1.00000
+          1.00000 -1.00000 -1.00000
+          -1.00000 -1.00000 -1.00000
+          -1.00000 1.00000 -1.00000
+          1.00000 1.00000 1.00000
+          -1.00000 1.00000 1.00000
+          -1.00000 -1.00000 1.00000
+          1.00000 -1.00000 1.00000
+          1.00000 1.00000 -1.00000
+          1.00000 1.00000 1.00000
+          1.00000 -1.00000 1.00000
+          1.00000 -1.00000 -1.00000
+          1.00000 -1.00000 -1.00000
+          1.00000 -1.00000 1.00000
+          -1.00000 -1.00000 1.00000
+          -1.00000 -1.00000 -1.00000
+          -1.00000 -1.00000 -1.00000
+          -1.00000 -1.00000 1.00000
+          -1.00000 1.00000 1.00000
+          -1.00000 1.00000 -1.00000
+          1.00000 1.00000 1.00000
+          1.00000 1.00000 -1.00000
+          -1.00000 1.00000 -1.00000
+          -1.00000 1.00000 1.00000
+        }
+        NormalBinding PER_VERTEX
+        NormalArray UniqueID NormalArray_8 Vec3Array 24
+        {
+          0.00000 0.00000 -1.00000
+          0.00000 0.00000 -1.00000
+          0.00000 0.00000 -1.00000
+          0.00000 0.00000 -1.00000
+          0.00000 -0.00000 1.00000
+          0.00000 -0.00000 1.00000
+          0.00000 -0.00000 1.00000
+          0.00000 -0.00000 1.00000
+          1.00000 -0.00000 0.00000
+          1.00000 -0.00000 0.00000
+          1.00000 -0.00000 0.00000
+          1.00000 -0.00000 0.00000
+          -0.00000 -1.00000 -0.00000
+          -0.00000 -1.00000 -0.00000
+          -0.00000 -1.00000 -0.00000
+          -0.00000 -1.00000 -0.00000
+          -1.00000 0.00000 -0.00000
+          -1.00000 0.00000 -0.00000
+          -1.00000 0.00000 -0.00000
+          -1.00000 0.00000 -0.00000
+          0.00000 1.00000 0.00000
+          0.00000 1.00000 0.00000
+          0.00000 1.00000 0.00000
+          0.00000 1.00000 0.00000
+        }
+        StateSet {
+          UniqueID uniqid_StateSet_13
+          name "Material"
+          Material {
+            UniqueID uniqid_Material_15
+            name "Material"
+            ColorMode OFF
+            ambientColor 0.40000 0.40000 0.40000 1.00000
+            diffuseColor 0.64000 0.64000 0.64000 1.00000
+            specularColor 0.50000 0.50000 0.50000 1.00000
+            emissionColor 0.00000 0.00000 0.00000 1.00000
+            shininess 12.50000
+          }
+        }
+      }
+    }
+  }
+  MatrixTransform {
+    UniqueID uniqid_MatrixTransform_31
+    name "Lamp"
+    cullingActive TRUE
+    Matrix {
+      -0.29086 0.95517 -0.05519 0.00000
+      -0.77110 -0.19988 0.60452 0.00000
+      0.56639 0.21839 0.79467 0.00000
+      4.07625 1.00545 5.90386 1.00000
+    }
+    num_children 1
+    LightSource {
+      UniqueID uniqid_LightSource_33
+      name "Lamp"
+      cullingActive FALSE
+      Light {
+        light_num 0
+        ambient 0.05000 0.05000 0.05000 1.00000
+        diffuse 1.00000 1.00000 1.00000 1.00000
+        specular 1.00000 1.00000 1.00000 1.00000
+        position 0.00000 0.00000 0.00000 1.00000
+        direction 0.00000 0.00000 -1.00000
+        constant_attenuation 1.00000
+        linear_attenuation 0.00000
+        quadratic_attenuation 0.00111
+        spot_exponent 0.00000
+        spot_cutoff 180.00000
+      }
+      num_children 0
+    }
+  }
+}
+
