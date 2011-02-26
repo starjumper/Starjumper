@@ -1,4 +1,5 @@
 #include "PlayerUpdater.h"
+#define min(a,b) (((a) < (b)) ? (a) : (b))
 
 PlayerUpdater::PlayerUpdater(Player *player) :
     _player(player)
@@ -64,9 +65,9 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(PlayerState *playerState)
 
         btVector3 position = playerController->getGhostObject()->getWorldTransform().getOrigin();
         int yBucketIndex = (int)(position.y() / 20.0f);
-        float min = std::min((*(_player->getDeadlyAltitudes()))[yBucketIndex], (*(_player->getDeadlyAltitudes()))[yBucketIndex + 1]);
+        float minimum = min((*(_player->getDeadlyAltitudes()))[yBucketIndex], (*(_player->getDeadlyAltitudes()))[yBucketIndex + 1]);
                 
-        if(position.z() < (min - 5.0f))
+        if(position.z() < (minimum - 5.0f))
             exit(0);
     }
     
