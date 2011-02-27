@@ -19,6 +19,7 @@
 
 // global Player settings
 #define PLAYER_MODEL        "resources/models/player.osg"
+#define PLAYER_MODEL_HIGH	"resources/models/player_high.osg"
 #define PLAYER_SCALE        osg::Vec3(0.2, 0.2, 0.2)
 #define PLAYER_ATTITUDE     osg::Quat(osg::DegreesToRadians(180.0f), osg::Vec3(0.0,0.0,1.0))
 #define PLAYER_BBOX_EXTENTS btVector3(0.5, 0.5, 0.5)
