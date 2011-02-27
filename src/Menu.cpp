@@ -13,8 +13,8 @@ Menu::Menu(osgViewer::Viewer *viewer) :
 	_buttonList = new osgWidget::Box("menu", osgWidget::Box::VERTICAL);
 	
 	// position the menu in the window
-	_buttonList->setAnchorVertical(osgWidget::Window::VA_TOP);
-    _buttonList->setAnchorHorizontal(osgWidget::Window::HA_LEFT);
+	_buttonList->setAnchorVertical(osgWidget::Window::VA_CENTER);
+    _buttonList->setAnchorHorizontal(osgWidget::Window::HA_CENTER);
 
   	_buttonList->getBackground()->setColor(MENU_BACKGROUND_COLOR);
 
@@ -49,7 +49,7 @@ void Menu::initializeBackground()
 	osg::MatrixTransform* transMatrix = new osg::MatrixTransform;
 	transMatrix->addChild(_rotate);
 
-	transMatrix->setMatrix(osg::Matrix::translate(0.0, 18.0, 2.5) * osg::Matrix::scale(1.0, 1.0, 1.0));
+	transMatrix->setMatrix(osg::Matrix::translate(-2.0, 20.0, 0.0) * osg::Matrix::scale(1.0, 1.0, 1.0));
 
 	MenuUpdater* menuUpdater = new MenuUpdater(this);
 	_rotate->setUpdateCallback(menuUpdater);
