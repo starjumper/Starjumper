@@ -36,6 +36,57 @@ Menu::Menu(osgViewer::Viewer *viewer) :
 
 void Menu::initializeBackground()
 {
+	_rotate = new osg::Quat;
+	_matTrans = new osg::MatrixTransform;
+
+	// rotating model
+	osg::Node* rotModel = osgDB::readNodeFile(PLAYER_MODEL);
+	if(!rotModel)
+	{
+		throw std::runtime_error("Unable to load player model file!");
+	}
+	//osg::PositionAttitudeTransform* rotModelTransform = new osg::PositionAttitudeTransform;
+	//rotModelTransform->addChild(rotModel);
+	//rotModelTransform->setPosition(osg::Vec3f(-1.0, 9.0, 5.0));
+	//rotModelTransform->setScale(osg::Vec3f(0.5, 0.5, 0.5));
+	//getRootNode()->addChild(rotModelTransform);
+
+	//_transform = new osg::PositionAttitudeTransform;
+	//_transform->addChild(rotModel);
+	//_transform->setPosition(osg::Vec3f(-1.0, 9.0, 5.0));
+	//_transform->setScale(osg::Vec3f(0.5, 0.5, 0.5));
+
+	//_transform->addChild(_matTrans);
+	//_matTrans->addChild(_transform);
+
+	//_matTrans->setDataVariance(osg::Object::STATIC);
+
+
+	osg::MatrixTransform* lol = new osg::MatrixTransform;
+
+	_matTrans->addChild(rotModel);
+
+	lol->addChild(_matTrans);
+
+
+	lol->setMatrix(osg::Matrix::translate(0.0, 16.0, 0.0)*
+                              osg::Matrix::scale(1.0, 1.0, 1.0)*
+                              osg::Matrix::rotate(osg::inDegrees(180.0f),0.0f,0.0f,0.0f));
+
+
+
+	//_matTrans->setMatrix(osg::Matrix::translate(0.0, 16.0, 0.0)*
+ //                             osg::Matrix::scale(1.0, 1.0, 1.0)*
+ //                             osg::Matrix::rotate(osg::inDegrees(180.0f),0.0f,0.0f,0.0f));
+
+
+	MenuUpdater* menuUpdater = new MenuUpdater(this);
+	//_transform->setUpdateCallback(menuUpdater);
+	_matTrans->setUpdateCallback(menuUpdater);
+
+	getRootNode()->addChild(lol);
+	//getRootNode()->addChild(_transform);
+
 
 	// set up animationpath
     osg::Vec3 center(0.0f,13.0f,5.0f);
@@ -110,4 +161,17 @@ void Menu::prepare(osgViewer::Viewer *viewer)
 void Menu::cleanup(osgViewer::Viewer *viewer)
 {
     
+}
+
+MenuUpdater::MenuUpdater(Menu *menu) :
+    _menu(menu)
+{
+
+}
+
+void MenuUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
+{
+	_menu->_matTrans->postMult(osg::Matrix::rotate(osg::inDegrees(0.5f),0.0f,0.0f,1.0f));
+	//_menu->_rotate->makeRotate(osg::DegreesToRadians(number), 0, 0, 1);
+	//_menu->_transform->setAttitude(*(_menu->_rotate));
 }

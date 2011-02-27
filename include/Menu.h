@@ -34,8 +34,21 @@ private:
 
 public:
 	Menu(osgViewer::Viewer *viewer);
+	osg::PositionAttitudeTransform *_transform;
+	osg::Quat *_rotate;
+	osg::MatrixTransform *_matTrans;
 	void addButton(const char* label, std::tr1::function<void ()> callback);
-	
+
 	virtual void prepare(osgViewer::Viewer *viewer);
     virtual void cleanup(osgViewer::Viewer *viewer);
+};
+
+class MenuUpdater : public osg::NodeCallback
+{
+private:
+	Menu *_menu;
+
+public:
+	MenuUpdater(Menu *menu);
+	virtual void operator()(osg::Node *node, osg::NodeVisitor *nv);
 };
