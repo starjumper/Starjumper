@@ -13,8 +13,8 @@ Menu::Menu(osgViewer::Viewer *viewer) :
 	_buttonList = new osgWidget::Box("menu", osgWidget::Box::VERTICAL);
 	
 	// position the menu in the window
-	_buttonList->setAnchorVertical(osgWidget::Window::VA_CENTER);
-    _buttonList->setAnchorHorizontal(osgWidget::Window::HA_CENTER);
+	_buttonList->setAnchorVertical(osgWidget::Window::VA_TOP);
+    _buttonList->setAnchorHorizontal(osgWidget::Window::HA_LEFT);
 
   	_buttonList->getBackground()->setColor(MENU_BACKGROUND_COLOR);
 
