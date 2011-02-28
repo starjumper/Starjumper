@@ -46,6 +46,8 @@ private:
     btBroadphaseInterface *_overlappingPairCache;
     btConstraintSolver *_constraintSolver;
     
+    bool _running;
+    
     void initializeScene();
     void initializePhysicsWorld();
     void resetScene();
@@ -57,6 +59,7 @@ public:
     Player *getPlayer();
 
     void restartLevel();
+    bool isRunning();
 
     virtual void prepare(osgViewer::Viewer *viewer);
     virtual void cleanup(osgViewer::Viewer *viewer);

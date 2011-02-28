@@ -48,10 +48,18 @@ void GameManager::buildMenus()
 		menu->addButton("Quit", std::tr1::bind(&GameManager::quit, this));
 		menu->addButton("Highscore", std::tr1::bind(&GameManager::quit, this));
 		menu->addButton("Settings", std::tr1::bind(&GameManager::quit, this));
+		menu->addButton("Select road", std::tr1::bind(&GameManager::roadSelectMenu, this));
 		menu->addButton("Start game", std::tr1::bind(&GameManager::startGame, this));
 
     	addRenderingInstance("main_menu", menu);
 	}
+	
+	// road select menu
+	{
+	    LevelOverview *menu = new LevelOverview(&_viewer);
+		
+	 	addRenderingInstance("road_select_menu", menu);   
+	}	
 }
 
 void GameManager::run()
@@ -67,4 +75,9 @@ void GameManager::quit()
 void GameManager::startGame()
 {
     selectRenderingInstance("game");
+}
+
+void GameManager::roadSelectMenu()
+{
+    selectRenderingInstance("road_select_menu");
 }

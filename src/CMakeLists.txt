@@ -4,6 +4,7 @@ SET(SOURCE
     RenderingInstance.cpp
     MenuButton.cpp
     Menu.cpp
+    LevelOverview.cpp
     Game.cpp
     Level.cpp
     Player.cpp
@@ -28,6 +29,7 @@ SET(HEADER
 	../include/LazyCameraManipulator.h
 	../include/Level.h
 	../include/Lighting.h
+	../include/LevelOverview.h
 	../include/Menu.h
 	../include/MenuButton.h
 	../include/Player.h

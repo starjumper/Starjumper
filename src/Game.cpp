@@ -3,6 +3,7 @@
 Game::Game(osgViewer::Viewer *viewer) :
 	RenderingInstance(viewer)
 {
+    _running = false;
 	_level = new Level("resources/levels/level1.xml");
     _lighting = new Lighting();
 	_player = new Player(_lighting);
@@ -158,6 +159,7 @@ Player *Game::getPlayer()
 void Game::prepare(osgViewer::Viewer *viewer)
 {
     viewer->addEventHandler(_keyboardHandler);
+    _running = true;
 }
 
 void Game::cleanup(osgViewer::Viewer *viewer)
@@ -165,21 +167,37 @@ void Game::cleanup(osgViewer::Viewer *viewer)
     viewer->getEventHandlers().remove(_keyboardHandler);
 }
 
+bool Game::isRunning()
+{
+    return _running;
+}
+
 WorldUpdater::WorldUpdater(Game *game) :
     _game(game)
 {
-    _previousSimTime = _game->getViewer()->getFrameStamp()->getSimulationTime();
+    _previousSimTime = 0.0f;
 }
 
 void WorldUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
 {
-    double currentSimTime = _game->getViewer()->getFrameStamp()->getSimulationTime();
-    _game->getWorld()->stepSimulation(currentSimTime - _previousSimTime);
-    _previousSimTime = currentSimTime;
-    
-    if(_game->getPlayer()->getPlayerState()->isDead())
+    if(_game->isRunning())
     {
-        _game->getPlayer()->getPlayerState()->beAlive();
-        _game->restartLevel(); 
+        if(_previousSimTime == 0.0f)
+        {
+            _previousSimTime = _game->getViewer()->getFrameStamp()->getSimulationTime();
+        }
+        else
+        {
+            double currentSimTime = _game->getViewer()->getFrameStamp()->getSimulationTime();
+            _game->getWorld()->stepSimulation(currentSimTime - _previousSimTime);
+            _previousSimTime = currentSimTime;
+    
+            // restart level if player is dead
+            if(_game->getPlayer()->getPlayerState()->isDead())
+            {
+                _game->getPlayer()->getPlayerState()->beAlive();
+                _game->restartLevel(); 
+            }
+        }
     }
 }
