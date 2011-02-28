@@ -1,10 +1,8 @@
 #include "Level.h"
 
-//Level::Level(btDynamicsWorld *world, const std::string mapfile) :
-//    _world(world)
 Level::Level(const std::string &mapfile)
 {
-    _level = new osg::PositionAttitudeTransform();
+    _level = new osg::PositionAttitudeTransform();    
 
     loadMapFromFile(mapfile);
 }
@@ -25,7 +23,7 @@ void Level::loadMapFromFile(const std::string &mapfile)
             addTunnel(*it);
 		else
             throw std::runtime_error("Error: Unrecognized element in level file!");
-    }
+    }    
 }
 
 osg::Vec3 Level::getVectorFromXMLNode(const std::string &name, const rapidxml::xml_node<> &node) const

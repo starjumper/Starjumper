@@ -4,14 +4,19 @@ Game::Game(osgViewer::Viewer *viewer) :
 	RenderingInstance(viewer)
 {
     _running = false;
-	_level = new Level("resources/levels/level1.xml");
+	_level = NULL;
     _lighting = new Lighting();
 	_player = new Player(_lighting);
-    _player->setDeadlyAltitudes(_level->getMinZValues());
     
     _keyboardHandler = new GameKeyboardHandler(_player);
     _headUpDisplay = new HeadUpDisplay(_player);
-    	
+}
+
+void Game::runLevel(const std::string &mapfile)
+{
+    _level = new Level(mapfile);
+    _player->setDeadlyAltitudes(_level->getMinZValues());
+
     initializeScene();
     initializePhysicsWorld();
     
@@ -21,7 +26,7 @@ Game::Game(osgViewer::Viewer *viewer) :
     {
         _world->addRigidBody(*it);
     }
-    
+        
     // add player ghost object to world
     _world->addCollisionObject(_player->getGhostObject(),
                                btBroadphaseProxy::CharacterFilter,
@@ -34,7 +39,9 @@ Game::Game(osgViewer::Viewer *viewer) :
     
     // set world updater
     WorldUpdater *worldUpdater = new WorldUpdater(this);
-    _level->getNode()->setUpdateCallback(worldUpdater); // TODO: find a better node than level (root does not work, produces segfault)
+    _level->getNode()->setUpdateCallback(worldUpdater); // TODO: find a better node than level (root does not work, produces segfault)	
+
+    _running = true;
 }
 
 void Game::initializeScene()
@@ -159,7 +166,6 @@ Player *Game::getPlayer()
 void Game::prepare(osgViewer::Viewer *viewer)
 {
     viewer->addEventHandler(_keyboardHandler);
-    _running = true;
 }
 
 void Game::cleanup(osgViewer::Viewer *viewer)
@@ -179,7 +185,7 @@ WorldUpdater::WorldUpdater(Game *game) :
 }
 
 void WorldUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
-{
+{    
     if(_game->isRunning())
     {
         if(_previousSimTime == 0.0f)

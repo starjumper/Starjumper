@@ -11,6 +11,10 @@
 
 #include <osgViewer/Viewer>
 
+#include "RapidXML/rapidxml.hpp"
+#include "RapidXML/rapidxml_iterators.hpp"
+#include "RapidXML/rapidxml_utils.hpp"
+
 #include "types.h"
 #include "RenderingInstance.h"
 #include "Menu.h"
@@ -34,6 +38,6 @@ public:
 
     void run();
 	void quit();
-    void startGame();
+    void runLevel(const std::string &mapFile);
     void roadSelectMenu();
 };

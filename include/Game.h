@@ -60,6 +60,8 @@ public:
 
     void restartLevel();
     bool isRunning();
+    
+    void runLevel(const std::string &mapfile);
 
     virtual void prepare(osgViewer::Viewer *viewer);
     virtual void cleanup(osgViewer::Viewer *viewer);

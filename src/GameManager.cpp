@@ -16,8 +16,8 @@ GameManager::GameManager() :
 	// push with fullscreen ONLY!!!
 	// _viewer.setUpViewInWindow(40, 40, 800, 600, 0);
 
-	buildMenus();
     addRenderingInstance("game", new Game(&_viewer));
+	buildMenus();
 
     selectRenderingInstance("main_menu");
 }
@@ -49,7 +49,7 @@ void GameManager::buildMenus()
 		menu->addButton("Highscore", std::tr1::bind(&GameManager::quit, this));
 		menu->addButton("Settings", std::tr1::bind(&GameManager::quit, this));
 		menu->addButton("Select road", std::tr1::bind(&GameManager::roadSelectMenu, this));
-		menu->addButton("Start game", std::tr1::bind(&GameManager::startGame, this));
+		menu->addButton("Start game", std::tr1::bind(&GameManager::runLevel, this, "resources/levels/level1.xml"));
 
     	addRenderingInstance("main_menu", menu);
 	}
@@ -57,6 +57,25 @@ void GameManager::buildMenus()
 	// road select menu
 	{
 	    LevelOverview *menu = new LevelOverview(&_viewer);
+		
+		// load XML document
+        rapidxml::file<> mf("resources/levels/overview.xml");
+        rapidxml::xml_document<> xml_doc;
+        xml_doc.parse<0>(mf.data());
+
+        // parse XML document
+        for(rapidxml::node_iterator<char> it(xml_doc.first_node()); it.dereference() != NULL; ++it)
+        {
+            if(strcmp(it->name(), "road") == 0)
+            {         
+                std::string mapfile = it->first_attribute("filename")->value();
+                menu->addButton(it->first_attribute("name")->value(), std::tr1::bind(&GameManager::runLevel, this, mapfile));
+            }
+    		else
+    		{
+                throw std::runtime_error("Error: Unrecognized element in level file!");
+    		}
+        }
 		
 	 	addRenderingInstance("road_select_menu", menu);   
 	}	
@@ -72,9 +91,10 @@ void GameManager::quit()
 	exit(0);
 }
 
-void GameManager::startGame()
+void GameManager::runLevel(const std::string &mapFile)
 {
     selectRenderingInstance("game");
+    ((Game *)_renderingInstances["game"])->runLevel(mapFile);
 }
 
 void GameManager::roadSelectMenu()
