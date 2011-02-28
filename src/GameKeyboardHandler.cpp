@@ -46,9 +46,6 @@ bool GameKeyboardHandler::handle(const osgGA::GUIEventAdapter &ea, osgGA::GUIAct
 		case K_JUMP:
 			_player->getPlayerState()->setRequestJump(keyState);
 			break;
-		case K_EXIT:
-            exit(0);     // TODO: replace this by something useful
-            break;
 		default:
 			return false;
 	}
