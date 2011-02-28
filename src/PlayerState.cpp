@@ -13,6 +13,7 @@ PlayerState::PlayerState()
     _requestAccelerate = false;
     _requestDecelerate = false;
     _requestJump = false;
+    _dead = false;
 }
 
 float PlayerState::getSpeed() const
@@ -93,4 +94,19 @@ bool PlayerState::requestDecelerate() const
 bool PlayerState::requestJump() const
 {
     return _requestJump;
+}
+
+void PlayerState::beDead()
+{
+    _dead = true;
+}
+
+void PlayerState::beAlive()
+{
+    _dead = false;
+}
+
+bool PlayerState::isDead() const
+{
+    return _dead;
 }

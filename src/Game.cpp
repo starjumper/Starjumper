@@ -139,9 +139,19 @@ void Game::resetScene()
 	_world->getConstraintSolver()->reset();
 }
 
+void Game::restartLevel()
+{
+    _player->toHomePosition();
+}
+
 btDynamicsWorld *Game::getWorld()
 {
     return _world;
+}
+
+Player *Game::getPlayer()
+{
+    return _player;
 }
 
 void Game::prepare(osgViewer::Viewer *viewer)
@@ -165,4 +175,10 @@ void WorldUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
     double currentSimTime = _game->getViewer()->getFrameStamp()->getSimulationTime();
     _game->getWorld()->stepSimulation(currentSimTime - _previousSimTime);
     _previousSimTime = currentSimTime;
+    
+    if(_game->getPlayer()->getPlayerState()->isDead())
+    {
+        _game->getPlayer()->getPlayerState()->beAlive();
+        _game->restartLevel(); 
+    }
 }

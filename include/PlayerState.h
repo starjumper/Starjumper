@@ -18,6 +18,8 @@ private:
     bool _requestDecelerate;
     bool _requestJump;
     
+    bool _dead;
+    
 public:
     PlayerState();
 
@@ -41,4 +43,9 @@ public:
     bool requestAccelerate() const;
     bool requestDecelerate() const;
     bool requestJump() const;
+    
+    void beDead();
+    void beAlive();
+    
+    bool isDead() const;
 };

@@ -59,6 +59,16 @@ void Player::initializePlayerPhysics()
     _playerController->setFallSpeed(0.1);
 }
 
+void Player::toHomePosition()
+{
+    patPlayer->setPosition(osg::Vec3(0.0, 10.0, 5.0));
+    
+    btTransform playerTransform;
+	playerTransform.setIdentity();
+	playerTransform.setOrigin(btVector3(0.0, 10.0, 5.0));
+	_playerGhostObject->setWorldTransform(playerTransform);
+}
+
 osg::PositionAttitudeTransform *Player::getNode() const
 {
     return _player;

@@ -34,13 +34,13 @@ class Game : public RenderingInstance
 {
 private:
     Level *_level;
-    //Player *_player;
+    Player *_player;
     GameKeyboardHandler *_keyboardHandler;
     LazyCameraManipulator *_cameraManipulator;
     HeadUpDisplay *_headUpDisplay;
 	Lighting *_lighting;
+	btDynamicsWorld *_world;
     
-    //btDynamicsWorld *_world;
     btDefaultCollisionConfiguration *_collisionConfiguration;
     btCollisionDispatcher *_dispatcher;
     btBroadphaseInterface *_overlappingPairCache;
@@ -54,8 +54,10 @@ public:
     Game(osgViewer::Viewer *viewer);
     
     btDynamicsWorld *getWorld();
-    Player *_player;
-    btDynamicsWorld *_world;
+    Player *getPlayer();
+
+    void restartLevel();
+
     virtual void prepare(osgViewer::Viewer *viewer);
     virtual void cleanup(osgViewer::Viewer *viewer);
 };

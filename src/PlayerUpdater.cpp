@@ -68,7 +68,7 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(PlayerState *playerState)
         float minimum = min((*(_player->getDeadlyAltitudes()))[yBucketIndex], (*(_player->getDeadlyAltitudes()))[yBucketIndex + 1]);
                 
         if(position.z() < (minimum - 5.0f))
-            exit(0);
+            playerState->beDead();
     }
     
     direction += btVector3(0, playerState->getSpeed(), 0);

@@ -54,6 +54,8 @@ public:
     void setPosition(const osg::Vec3 position);
     void setAngles(const float angleX = 0.0f, const float angleY = 0.0f, const float angleZ = 180.0f);
     
+    void toHomePosition();
+    
     void setDeadlyAltitudes(const std::vector<float> *values);
     const std::vector<float> *getDeadlyAltitudes();
     
