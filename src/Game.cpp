@@ -10,6 +10,16 @@ Game::Game(osgViewer::Viewer *viewer) :
     
     _keyboardHandler = new GameKeyboardHandler(_player);
     _headUpDisplay = new HeadUpDisplay(_player);
+    
+    // initialize members
+    _cameraManipulator = new LazyCameraManipulator();
+    
+    // setup manipulator to track the player
+    _cameraManipulator->setTrackNode(_player->getNode());
+    _cameraManipulator->setHomePosition(CAMERA_HOME_EYE, CAMERA_HOME_CENTER, CAMERA_HOME_UP);
+    
+    // set _cameraManipulator as manipulator for the scene
+    getViewer()->setCameraManipulator(_cameraManipulator);
 }
 
 void Game::runLevel(const std::string &mapfile)
@@ -55,16 +65,6 @@ void Game::initializeScene()
 	osg::ref_ptr<osgShadow::ShadowMap> sm = new osgShadow::ShadowMap;
 	shadowedScene->setShadowTechnique(sm.get());
 
-	//int mapres = 1024;
-	//sm->setTextureSize(osg::Vec2s(mapres,mapres));
-
-    // initialize members
-    _cameraManipulator = new LazyCameraManipulator();
-    
-    // setup manipulator to track the player
-    _cameraManipulator->setTrackNode(_player->getNode());
-    _cameraManipulator->setHomePosition(CAMERA_HOME_EYE, CAMERA_HOME_CENTER, CAMERA_HOME_UP);
-
     // add level and player to scene and setup heads up display
     shadowedScene->addChild(_level->getNode());
     shadowedScene->addChild(_player->getNode());
@@ -76,9 +76,6 @@ void Game::initializeScene()
 
 	shadowedScene->addChild(_lighting->getLights(rootStateSet));
     getRootNode()->addChild(shadowedScene);
-
-    // set _cameraManipulator as manipulator for the scene
-    getViewer()->setCameraManipulator(_cameraManipulator);
 }
 
 void Game::initializePhysicsWorld()
