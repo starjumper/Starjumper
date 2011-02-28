@@ -1,5 +1,4 @@
 #include "PlayerUpdater.h"
-#define min(a,b) (((a) < (b)) ? (a) : (b))
 
 PlayerUpdater::PlayerUpdater(Player *player) :
     _player(player)
@@ -12,7 +11,7 @@ void PlayerUpdater::operator()(osg::Node* node, osg::NodeVisitor* nv)
     PlayerState *playerState = _player->getPlayerState();
     osg::Vec3 newPosition = calculateNextPosition(playerState);
     _player->setPosition(newPosition);
-    _player->setAngles(0.0f, playerState->getAngleY());
+    _player->setAngles(playerState->getAngleX(), playerState->getAngleY());
   
     traverse(node, nv); 
 }
@@ -22,6 +21,7 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(PlayerState *playerState)
     KinematicCharacterController *playerController = _player->getController();
     float speed = playerState->getSpeed();
     float angleY = playerState->getAngleY();
+    float angleX = playerState->getAngleX();
     
     btVector3 direction = btVector3(0, 0, 0);
     
@@ -48,10 +48,25 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(PlayerState *playerState)
     }
     
     if(playerState->requestAccelerate())
+    {
         playerState->setSpeed(speed + 0.02 <= 1.0 ? speed + 0.02 : 1.0);
+        playerState->setAngleX(angleX - 3 > -15 ? angleX - 3 : -15);
+    }
     else if(playerState->requestDecelerate())
+    {
         playerState->setSpeed(speed - 0.04 >= 0 ? speed - 0.04 : 0);
-
+        playerState->setAngleX(angleX + 3 < 15 ? angleX + 3 : 15);
+    }
+    else
+    {
+        if(angleX > 0)
+            playerState->setAngleX(angleX - 1 > 0 ? angleX - 1 : 0);
+        else if(angleX < 0)
+            playerState->setAngleX(angleX + 1 < 0 ? angleX + 1 : 0);
+        else
+            playerState->setAngleX(0);
+    }
+    
     if(playerController->onGround())
     {
         // apply special attributes from ground to player

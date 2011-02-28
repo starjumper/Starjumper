@@ -15,6 +15,8 @@
 #include "Player.h"
 #include "Cuboid.h"
 
+#define min(a,b) (((a) < (b)) ? (a) : (b))
+
 class PlayerUpdater : public osg::NodeCallback 
 {
 private:

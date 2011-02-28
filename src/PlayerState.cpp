@@ -4,6 +4,7 @@ PlayerState::PlayerState()
 {
     // initialize state variables
     _speed = 0.0f;
+    _angleX = 0.0f;
     _angleY = 0.0f;
     
     _direction = btVector3(0,0,4);
@@ -24,6 +25,16 @@ float PlayerState::getSpeed() const
 void PlayerState::setSpeed(const float speed)
 {
     _speed = speed;
+}
+
+float PlayerState::getAngleX() const
+{
+    return _angleX;
+}
+
+void PlayerState::setAngleX(const float angle)
+{
+    _angleX = angle;
 }
 
 float PlayerState::getAngleY() const

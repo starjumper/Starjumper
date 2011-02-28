@@ -8,6 +8,7 @@ class PlayerState
 {
 private:
     float _speed;
+    float _angleX;
     float _angleY;
     
     btVector3 _direction;
@@ -25,6 +26,9 @@ public:
 
     float getSpeed() const;
     void setSpeed(const float speed);
+
+    float getAngleX() const;
+    void setAngleX(const float angle);
     
     float getAngleY() const;
     void setAngleY(const float angle);
