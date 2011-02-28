@@ -1,399 +1,399 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map>
 <cuboid type="decelerate">
-	<position x="-1.000000" y="0" z="0" />
-	<size x="2" y="82" z="0.300000" />
+	<position x="-2.500000" y="0" z="0" />
+	<size x="5" y="44" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-8.000000" y="42" z="0" />
-	<size x="4" y="76" z="0.300000" />
+	<position x="-6.500000" y="43" z="0" />
+	<size x="3" y="80" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-6.000000" y="79" z="0" />
-	<size x="4" y="31" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-11.500000" y="133" z="-1" />
-	<size x="5" y="76" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-15.500000" y="191" z="0" />
-	<size x="3" y="95" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-10.500000" y="230" z="-2" />
-	<size x="5" y="75" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-9.000000" y="277" z="0" />
-	<size x="2" y="28" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-12.500000" y="312" z="-1" />
+	<position x="-4.500000" y="96" z="2" />
 	<size x="5" y="49" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-9.000000" y="345" z="0" />
-	<size x="2" y="25" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-2.000000" y="399" z="-1" />
-	<size x="2" y="54" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="3.000000" y="449" z="-4" />
-	<size x="2" y="100" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-2.000000" y="506" z="-1" />
-	<size x="4" y="44" z="0.300000" />
+	<position x="-1.500000" y="127" z="4" />
+	<size x="3" y="87" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-6.500000" y="545" z="-4" />
+	<position x="0.000000" y="158" z="2" />
+	<size x="2" y="30" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-4.500000" y="218" z="5" />
 	<size x="3" y="51" z="0.300000" />
 </cuboid>
-<cuboid type="decelerate">
-	<position x="-10.000000" y="592" z="-3" />
-	<size x="2" y="44" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-6.500000" y="622" z="-2" />
-	<size x="5" y="53" z="0.300000" />
-</cuboid>
 <cuboid type="accelerate">
-	<position x="-11.500000" y="655" z="-3" />
-	<size x="5" y="57" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-16.500000" y="688" z="-6" />
-	<size x="5" y="37" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-20.500000" y="737" z="-3" />
-	<size x="5" y="50" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-24.000000" y="770" z="-2" />
-	<size x="4" y="22" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-25.000000" y="823" z="-4" />
-	<size x="2" y="39" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-24.500000" y="868" z="-4" />
-	<size x="5" y="51" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-28.500000" y="908" z="-1" />
-	<size x="5" y="22" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-23.500000" y="968" z="-1" />
-	<size x="5" y="95" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-20.000000" y="1012" z="0" />
+	<position x="-5.000000" y="251" z="3" />
 	<size x="4" y="25" z="0.300000" />
 </cuboid>
 <cuboid type="accelerate">
-	<position x="-21.500000" y="1070" z="0" />
-	<size x="3" y="93" z="0.300000" />
+	<position x="-1.000000" y="296" z="7" />
+	<size x="2" y="37" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-6.000000" y="353" z="9" />
+	<size x="4" y="44" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-27.000000" y="1111" z="0" />
-	<size x="4" y="51" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-32.000000" y="1170" z="3" />
-	<size x="2" y="54" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-39.000000" y="1202" z="7" />
-	<size x="4" y="74" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-39.500000" y="1244" z="9" />
-	<size x="5" y="66" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-35.000000" y="1292" z="8" />
-	<size x="2" y="84" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-35.000000" y="1344" z="12" />
-	<size x="2" y="82" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-39.500000" y="1386" z="10" />
-	<size x="5" y="24" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-41.000000" y="1438" z="12" />
-	<size x="2" y="81" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-40.500000" y="1483" z="13" />
-	<size x="5" y="80" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-41.000000" y="1526" z="11" />
-	<size x="2" y="73" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-47.500000" y="1572" z="13" />
-	<size x="3" y="26" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-43.000000" y="1605" z="13" />
-	<size x="4" y="48" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-37.500000" y="1662" z="13" />
-	<size x="5" y="56" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-37.500000" y="1710" z="16" />
-	<size x="3" y="47" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-44.500000" y="1761" z="16" />
-	<size x="3" y="22" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-52.500000" y="1810" z="17" />
-	<size x="5" y="61" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-45.500000" y="1855" z="20" />
-	<size x="3" y="87" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-43.500000" y="1914" z="21" />
-	<size x="3" y="75" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-36.000000" y="1974" z="21" />
-	<size x="2" y="68" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-44.000000" y="2008" z="23" />
-	<size x="4" y="39" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-47.500000" y="2063" z="26" />
-	<size x="5" y="60" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-47.000000" y="2095" z="25" />
-	<size x="4" y="69" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-49.500000" y="2145" z="24" />
-	<size x="3" y="50" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-48.000000" y="2181" z="24" />
-	<size x="2" y="81" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-50.500000" y="2231" z="23" />
-	<size x="5" y="96" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-52.000000" y="2278" z="21" />
-	<size x="4" y="43" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-55.500000" y="2318" z="22" />
-	<size x="5" y="36" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-51.000000" y="2376" z="20" />
-	<size x="2" y="98" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-58.500000" y="2420" z="19" />
-	<size x="3" y="50" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-57.000000" y="2467" z="19" />
-	<size x="4" y="81" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-55.500000" y="2503" z="17" />
-	<size x="5" y="44" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-59.000000" y="2536" z="16" />
-	<size x="4" y="78" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-58.000000" y="2570" z="19" />
-	<size x="2" y="54" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-64.500000" y="2613" z="20" />
-	<size x="5" y="22" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-71.000000" y="2644" z="21" />
-	<size x="4" y="62" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-70.500000" y="2685" z="19" />
-	<size x="3" y="93" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-73.000000" y="2724" z="19" />
-	<size x="2" y="81" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-73.500000" y="2763" z="22" />
-	<size x="5" y="87" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-68.500000" y="2813" z="24" />
-	<size x="5" y="24" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-63.000000" y="2857" z="23" />
-	<size x="4" y="48" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-68.000000" y="2901" z="21" />
-	<size x="2" y="82" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-68.000000" y="2944" z="24" />
-	<size x="4" y="57" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-75.000000" y="2993" z="24" />
-	<size x="4" y="24" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-81.500000" y="3050" z="23" />
-	<size x="3" y="30" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-82.000000" y="3109" z="24" />
+	<position x="-9.000000" y="406" z="12" />
 	<size x="2" y="61" z="0.300000" />
 </cuboid>
+<cuboid type="decelerate">
+	<position x="-12.500000" y="464" z="12" />
+	<size x="3" y="69" z="0.300000" />
+</cuboid>
 <cuboid type="accelerate">
-	<position x="-84.500000" y="3151" z="27" />
-	<size x="3" y="71" z="0.300000" />
+	<position x="-17.500000" y="518" z="13" />
+	<size x="3" y="36" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-86.000000" y="3207" z="26" />
-	<size x="4" y="35" z="0.300000" />
+	<position x="-24.000000" y="550" z="14" />
+	<size x="2" y="69" z="0.300000" />
 </cuboid>
 <cuboid type="accelerate">
-	<position x="-89.500000" y="3246" z="29" />
-	<size x="3" y="78" z="0.300000" />
+	<position x="-27.000000" y="607" z="15" />
+	<size x="2" y="39" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-32.000000" y="658" z="17" />
+	<size x="4" y="82" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-85.500000" y="3276" z="28" />
-	<size x="3" y="72" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-87.000000" y="3317" z="26" />
-	<size x="2" y="82" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-82.500000" y="3359" z="28" />
+	<position x="-36.500000" y="701" z="16" />
 	<size x="5" y="84" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-83.500000" y="3391" z="28" />
+	<position x="-36.500000" y="760" z="19" />
+	<size x="5" y="84" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-30.000000" y="817" z="19" />
+	<size x="2" y="97" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-32.500000" y="869" z="18" />
+	<size x="3" y="48" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-33.000000" y="902" z="15" />
+	<size x="2" y="91" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-30.000000" y="943" z="16" />
+	<size x="4" y="98" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-23.500000" y="977" z="18" />
+	<size x="5" y="76" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-23.500000" y="1023" z="16" />
 	<size x="5" y="60" z="0.300000" />
 </cuboid>
+<cuboid type="decelerate">
+	<position x="-21.500000" y="1056" z="14" />
+	<size x="5" y="41" z="0.300000" />
+</cuboid>
 <cuboid type="accelerate">
-	<position x="-90.000000" y="3433" z="29" />
-	<size x="4" y="71" z="0.300000" />
+	<position x="-27.000000" y="1113" z="16" />
+	<size x="2" y="67" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-90.500000" y="3481" z="26" />
-	<size x="3" y="99" z="0.300000" />
+	<position x="-26.000000" y="1152" z="14" />
+	<size x="4" y="82" z="0.300000" />
 </cuboid>
 <cuboid type="accelerate">
-	<position x="-90.500000" y="3530" z="24" />
-	<size x="3" y="61" z="0.300000" />
+	<position x="-27.000000" y="1189" z="16" />
+	<size x="2" y="27" z="0.300000" />
 </cuboid>
 <cuboid type="accelerate">
-	<position x="-89.500000" y="3590" z="25" />
-	<size x="5" y="32" z="0.300000" />
+	<position x="-34.000000" y="1222" z="18" />
+	<size x="4" y="47" z="0.300000" />
 </cuboid>
 <cuboid type="accelerate">
-	<position x="-83.500000" y="3638" z="22" />
-	<size x="3" y="73" z="0.300000" />
+	<position x="-26.500000" y="1257" z="18" />
+	<size x="3" y="68" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-33.500000" y="1299" z="19" />
+	<size x="3" y="96" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-35.000000" y="1352" z="18" />
+	<size x="2" y="52" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-86.500000" y="3677" z="24" />
-	<size x="3" y="45" z="0.300000" />
+	<position x="-41.500000" y="1397" z="15" />
+	<size x="3" y="81" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-89.000000" y="3727" z="27" />
+	<position x="-49.500000" y="1435" z="13" />
+	<size x="5" y="45" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-45.000000" y="1467" z="14" />
+	<size x="4" y="44" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-42.000000" y="1509" z="17" />
+	<size x="2" y="71" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-39.500000" y="1540" z="18" />
+	<size x="5" y="36" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-42.000000" y="1577" z="16" />
 	<size x="4" y="55" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-90.000000" y="3768" z="29" />
-	<size x="4" y="89" z="0.300000" />
+	<position x="-36.500000" y="1627" z="16" />
+	<size x="3" y="31" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-93.500000" y="3799" z="27" />
-	<size x="5" y="29" z="0.300000" />
+	<position x="-32.000000" y="1658" z="13" />
+	<size x="4" y="84" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-31.000000" y="1698" z="12" />
+	<size x="4" y="61" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-34.500000" y="1736" z="11" />
+	<size x="5" y="80" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-34.000000" y="1780" z="10" />
+	<size x="2" y="82" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-34.500000" y="1820" z="11" />
+	<size x="3" y="74" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-39.000000" y="1877" z="14" />
+	<size x="2" y="76" z="0.300000" />
 </cuboid>
 <cuboid type="accelerate">
-	<position x="-92.500000" y="3855" z="27" />
-	<size x="5" y="72" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-92.500000" y="3896" z="29" />
-	<size x="5" y="67" z="0.300000" />
+	<position x="-35.000000" y="1909" z="13" />
+	<size x="2" y="96" z="0.300000" />
 </cuboid>
 <cuboid type="accelerate">
-	<position x="-97.000000" y="3931" z="27" />
-	<size x="2" y="59" z="0.300000" />
+	<position x="-30.000000" y="1942" z="13" />
+	<size x="2" y="25" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-101.000000" y="3972" z="30" />
+	<position x="-28.500000" y="1973" z="14" />
+	<size x="3" y="44" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-23.500000" y="2017" z="17" />
+	<size x="3" y="22" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-20.000000" y="2050" z="16" />
+	<size x="4" y="67" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-12.500000" y="2104" z="18" />
+	<size x="3" y="88" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-10.000000" y="2157" z="20" />
+	<size x="2" y="56" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-18.000000" y="2199" z="18" />
+	<size x="4" y="47" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-10.000000" y="2236" z="18" />
+	<size x="2" y="40" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-15.000000" y="2290" z="20" />
+	<size x="2" y="23" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-19.500000" y="2325" z="22" />
+	<size x="3" y="54" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-27.500000" y="2365" z="22" />
+	<size x="5" y="23" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-28.500000" y="2418" z="25" />
+	<size x="5" y="27" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-21.000000" y="2466" z="29" />
+	<size x="2" y="29" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-28.000000" y="2516" z="30" />
+	<size x="2" y="51" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-25.000000" y="2567" z="31" />
+	<size x="4" y="66" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-24.500000" y="2598" z="33" />
+	<size x="5" y="75" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-19.500000" y="2630" z="36" />
+	<size x="3" y="100" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-20.500000" y="2683" z="37" />
+	<size x="5" y="90" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-13.000000" y="2730" z="38" />
+	<size x="2" y="38" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-15.500000" y="2763" z="39" />
+	<size x="5" y="100" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-18.500000" y="2804" z="40" />
+	<size x="3" y="62" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-17.000000" y="2847" z="37" />
+	<size x="2" y="82" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-21.500000" y="2885" z="41" />
+	<size x="5" y="76" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-17.500000" y="2930" z="40" />
+	<size x="3" y="98" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-12.500000" y="2972" z="38" />
+	<size x="5" y="98" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-7.000000" y="3004" z="40" />
+	<size x="4" y="57" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-6.000000" y="3058" z="43" />
+	<size x="2" y="38" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-5.000000" y="3117" z="42" />
 	<size x="2" y="36" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-109.000000" y="4023" z="34" />
-	<size x="4" y="83" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-113.000000" y="4066" z="31" />
-	<size x="2" y="79" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-109.500000" y="4116" z="33" />
-	<size x="3" y="20" z="0.300000" />
+	<position x="-2.000000" y="3171" z="45" />
+	<size x="4" y="93" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-109.500000" y="4154" z="32" />
-	<size x="5" y="49" z="0.300000" />
+	<position x="-9.000000" y="3201" z="44" />
+	<size x="4" y="80" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-115.000000" y="4199" z="31" />
-	<size x="2" y="99" z="0.300000" />
-</cuboid>
-<cuboid type="decelerate">
-	<position x="-117.000000" y="4230" z="31" />
-	<size x="2" y="52" z="0.300000" />
+	<position x="-4.500000" y="3241" z="47" />
+	<size x="5" y="69" z="0.300000" />
 </cuboid>
 <cuboid type="accelerate">
-	<position x="-114.500000" y="4267" z="30" />
-	<size x="5" y="32" z="0.300000" />
-</cuboid>
-<cuboid type="accelerate">
-	<position x="-120.000000" y="4297" z="34" />
-	<size x="2" y="44" z="0.300000" />
+	<position x="-1.000000" y="3298" z="44" />
+	<size x="2" y="29" z="0.300000" />
 </cuboid>
 <cuboid type="decelerate">
-	<position x="-124.500000" y="4351" z="35" />
-	<size x="3" y="99" z="0.300000" />
+	<position x="0.500000" y="3340" z="43" />
+	<size x="3" y="63" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="5.500000" y="3373" z="43" />
+	<size x="3" y="55" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="3.500000" y="3413" z="44" />
+	<size x="3" y="57" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="3.500000" y="3473" z="44" />
+	<size x="5" y="61" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="0.000000" y="3510" z="43" />
+	<size x="2" y="89" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-6.500000" y="3543" z="40" />
+	<size x="5" y="94" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-6.500000" y="3574" z="37" />
+	<size x="3" y="52" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-3.500000" y="3606" z="37" />
+	<size x="5" y="34" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-4.500000" y="3663" z="37" />
+	<size x="3" y="98" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-9.500000" y="3707" z="38" />
+	<size x="3" y="98" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-2.000000" y="3752" z="36" />
+	<size x="2" y="46" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-3.000000" y="3782" z="35" />
+	<size x="4" y="85" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="2.500000" y="3842" z="38" />
+	<size x="3" y="89" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="0.500000" y="3881" z="41" />
+	<size x="5" y="85" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-2.500000" y="3925" z="42" />
+	<size x="5" y="92" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="0.000000" y="3957" z="40" />
+	<size x="2" y="54" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="-8.000000" y="3999" z="42" />
+	<size x="4" y="57" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-3.500000" y="4057" z="44" />
+	<size x="5" y="58" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="1.500000" y="4099" z="42" />
+	<size x="5" y="78" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="7.000000" y="4158" z="39" />
+	<size x="2" y="25" z="0.300000" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="1.000000" y="4194" z="41" />
+	<size x="2" y="95" z="0.300000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-4.500000" y="4230" z="41" />
+	<size x="3" y="33" z="0.300000" />
 </cuboid>
 </map>
