@@ -83,6 +83,4 @@ MenuUpdater::MenuUpdater(Menu *menu) :
 void MenuUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
 {
 	_menu->_rotate->postMult(osg::Matrix::rotate(osg::inDegrees(0.5f),0.0f,0.0f,1.0f));
-	//_menu->_rotate->makeRotate(osg::DegreesToRadians(number), 0, 0, 1);
-	//_menu->_transform->setAttitude(*(_menu->_rotate));
 }
