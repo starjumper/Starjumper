@@ -29,12 +29,12 @@ class Menu : public RenderingInstance
 private:
 	osgWidget::WindowManager *_windowManager;
 	osgWidget::Box *_buttonList;
-
+	osg::MatrixTransform *_rotate;
 	void initializeBackground();
 
 public:
 	Menu(osgViewer::Viewer *viewer);
-	osg::MatrixTransform *rotate;
+	osg::MatrixTransform *getRotate();
 	void addButton(const char* label, std::tr1::function<void ()> callback);
 
 	virtual void prepare(osgViewer::Viewer *viewer);

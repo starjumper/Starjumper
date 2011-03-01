@@ -43,18 +43,23 @@ void Menu::initializeBackground()
 		throw std::runtime_error("Unable to load player model file!");
 	}
 
-	rotate = new osg::MatrixTransform;
-	rotate->addChild(rotModel);
+	_rotate = new osg::MatrixTransform;
+	_rotate->addChild(rotModel);
 
 	osg::MatrixTransform* transMatrix = new osg::MatrixTransform;
-	transMatrix->addChild(rotate);
+	transMatrix->addChild(_rotate);
 
 	transMatrix->setMatrix(osg::Matrix::translate(-2.0, 20.0, 0.0) * osg::Matrix::scale(1.0, 1.0, 1.0));
 
 	MenuUpdater* menuUpdater = new MenuUpdater(this);
-	rotate->setUpdateCallback(menuUpdater);
+	_rotate->setUpdateCallback(menuUpdater);
 
 	getRootNode()->addChild(transMatrix);
+}
+
+osg::MatrixTransform *Menu::getRotate()
+{
+	return _rotate;
 }
 
 void Menu::addButton(const char* label, std::tr1::function<void ()> callback)
@@ -82,5 +87,5 @@ MenuUpdater::MenuUpdater(Menu *menu) :
 
 void MenuUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
 {
-	_menu->rotate->postMult(osg::Matrix::rotate(osg::inDegrees(0.5f),0.0f,0.0f,1.0f));
+	_menu->getRotate()->postMult(osg::Matrix::rotate(osg::inDegrees(0.5f),0.0f,0.0f,1.0f));
 }
