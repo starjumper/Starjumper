@@ -61,8 +61,7 @@ void GameManager::buildMenus()
 		menu->addButton("Quit", std::tr1::bind(&GameManager::quit, this));
 		menu->addButton("Highscore", std::tr1::bind(&GameManager::quit, this));
 		menu->addButton("Settings", std::tr1::bind(&GameManager::quit, this));
-		menu->addButton("Select road", std::tr1::bind(&GameManager::roadSelectMenu, this));
-		menu->addButton("Start game", std::tr1::bind(&GameManager::runLevel, this, "resources/levels/level1.xml"));
+		menu->addButton("Start game", std::tr1::bind(&GameManager::roadSelectMenu, this));
 
     	addRenderingInstance("main_menu", menu);
 	}

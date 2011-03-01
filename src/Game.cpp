@@ -8,7 +8,6 @@ Game::Game(osgViewer::Viewer *viewer) :
     _lighting = new Lighting();
 	_player = new Player(_lighting);
     
-    _keyboardHandler = new GameKeyboardHandler(_player);
     _headUpDisplay = new HeadUpDisplay(_player);
     
     // initialize members
@@ -20,6 +19,8 @@ Game::Game(osgViewer::Viewer *viewer) :
     
     // set _cameraManipulator as manipulator for the scene
     getViewer()->setCameraManipulator(_cameraManipulator);
+    
+    _keyboardHandler = new GameKeyboardHandler(_player);
 }
 
 void Game::runLevel(const std::string &mapfile)
@@ -29,7 +30,7 @@ void Game::runLevel(const std::string &mapfile)
 
     initializeScene();
     initializePhysicsWorld();
-    
+        
     // get level components and insert as rigid bodies into world
     std::vector<btRigidBody *> levelRBs = _level->getCollisionObjects();
     for(std::vector<btRigidBody *>::iterator it = levelRBs.begin(); it != levelRBs.end(); ++it)
@@ -166,8 +167,11 @@ void Game::prepare(osgViewer::Viewer *viewer)
 }
 
 void Game::cleanup(osgViewer::Viewer *viewer)
-{
+{    
     viewer->getEventHandlers().remove(_keyboardHandler);
+    
+    // clean up player position
+    restartLevel();
 }
 
 bool Game::isRunning()
