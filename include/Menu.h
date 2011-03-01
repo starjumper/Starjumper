@@ -39,6 +39,12 @@ public:
 
 	virtual void prepare(osgViewer::Viewer *viewer);
     virtual void cleanup(osgViewer::Viewer *viewer);
+
+
+
+
+	// test
+	osg::MatrixTransform *_stationRot;
 };
 
 class MenuUpdater : public osg::NodeCallback

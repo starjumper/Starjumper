@@ -55,6 +55,64 @@ void Menu::initializeBackground()
 	_rotate->setUpdateCallback(menuUpdater);
 
 	getRootNode()->addChild(transMatrix);
+
+
+
+
+
+
+	//test
+
+
+
+	osg::AnimationPath *path = new osg::AnimationPath;
+	path->setLoopMode(osg::AnimationPath::LOOP);
+	path->insert(0.0, *(new osg::AnimationPath::ControlPoint(osg::Vec3f(-2.0, 20, 0.0))));
+	path->insert(2.0, *(new osg::AnimationPath::ControlPoint(osg::Vec3f(-2.0, 40.0, 1.0))));
+	path->insert(4.0, *(new osg::AnimationPath::ControlPoint(osg::Vec3f(-1.0, 50.0, 1.0))));
+	path->insert(4.0, *(new osg::AnimationPath::ControlPoint(osg::Vec3f(1.0, 40.0, 0.0))));
+	path->insert(10.0, *(new osg::AnimationPath::ControlPoint(osg::Vec3f(-2.0, 20, 0.0))));
+
+
+
+	osg::Node* ship = osgDB::readNodeFile("resources/models/player_model.osg");
+	osg::Node* station1 = osgDB::readNodeFile("resources/models/station1.osg");
+	osg::Node* station2 = osgDB::readNodeFile("resources/models/station2.osg");
+
+
+	osg::PositionAttitudeTransform* shipTrans = new osg::PositionAttitudeTransform;
+	shipTrans->setUpdateCallback(new osg::AnimationPathCallback(path));
+	shipTrans->addChild(ship);
+
+	getRootNode()->addChild(shipTrans);
+
+
+
+
+
+	_stationRot = new osg::MatrixTransform;
+	_stationRot->addChild(station2);
+
+	osg::MatrixTransform * stationTrans = new osg::MatrixTransform;
+
+	stationTrans->addChild(_stationRot);
+	stationTrans->addChild(station1);
+	
+	stationTrans->setMatrix(osg::Matrix::rotate(osg::inDegrees(140.0f),0.0f,0.0f,1.0f) * osg::Matrix::translate(2.0, 70.0, 4.0) * osg::Matrix::scale(0.7, 0.7, 0.7));
+
+	getRootNode()->addChild(stationTrans);
+
+	_stationRot->setUpdateCallback(menuUpdater);
+
+
+
+
+
+
+
+
+
+
 }
 
 osg::MatrixTransform *Menu::getRotate()
@@ -88,4 +146,5 @@ MenuUpdater::MenuUpdater(Menu *menu) :
 void MenuUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
 {
 	_menu->getRotate()->postMult(osg::Matrix::rotate(osg::inDegrees(0.5f),0.0f,0.0f,1.0f));
+	_menu->_stationRot->postMult(osg::Matrix::rotate(osg::inDegrees(0.5f),0.0f,1.0f,0.0f));
 }
