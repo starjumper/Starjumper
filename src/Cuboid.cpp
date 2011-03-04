@@ -167,7 +167,10 @@ void AccelerationCuboid::applyTo(Player *player)
     float speed = player->getPlayerState()->getSpeed();
     
     if(!player->getPlayerState()->requestDecelerate())
+    {
         player->getPlayerState()->setSpeed(speed + 0.02 <= 1.0 ? speed + 0.02 : 1.0);
+        player->setEnginesAccelerating(speed + 0.02 <= 1.0 ? speed + 0.02 : 1.0);
+    }
 }
 
 DecelerationCuboid::DecelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
@@ -182,5 +185,8 @@ void DecelerationCuboid::applyTo(Player *player)
     float speed = player->getPlayerState()->getSpeed();
 
     if(!player->getPlayerState()->requestAccelerate())
-        player->getPlayerState()->setSpeed(speed - 0.04 >= 0 ? speed - 0.04 : 0);    
+    {
+        player->getPlayerState()->setSpeed(speed - 0.04 >= 0 ? speed - 0.04 : 0);
+        player->setEnginesDecelerating(speed - 0.04 >= 0 ? speed - 0.04 : 0);
+    }
 }

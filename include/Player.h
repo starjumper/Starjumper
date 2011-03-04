@@ -30,6 +30,10 @@ class Player
 private:
     osg::PositionAttitudeTransform *_player;
     osg::PositionAttitudeTransform *patPlayer;
+    
+    ParticleEffect *_mainEngine;
+    ParticleEffect *_leftEngine;
+    ParticleEffect *_rightEngine;
     osg::Group *_particleEffects;
     
     btPairCachingGhostObject *_playerGhostObject;
@@ -63,4 +67,6 @@ public:
     void setDeadlyAltitudes(const std::vector<float> *values);
     const std::vector<float> *getDeadlyAltitudes();
     
+    void setEnginesAccelerating(const float speed);
+    void setEnginesDecelerating(const float speed);
 };

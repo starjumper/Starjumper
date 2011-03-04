@@ -4,14 +4,14 @@
 // ParticleEffect
 // ##############
 
-ParticleEffect::ParticleEffect(osgParticle::Particle *particleTemplate, osgParticle::Counter *counter, osgParticle::Placer *placer, osgParticle::Shooter *shooter)
+ParticleEffect::ParticleEffect(osgParticle::Particle *particleTemplate, osgParticle::Placer *placer, osgParticle::Shooter *shooter)
 {
     _effectRoot = new osg::Group;
     
     configureTemplateParticle(particleTemplate);
     
     _particleSystem = new osgParticle::ParticleSystem;
-    _particleSystem->setDefaultAttributes("resources/particles/circle.png", false, false);
+    _particleSystem->setDefaultAttributes("resources/particles/circle.png", true, false);
     _particleSystem->setDefaultParticleTemplate(_templateParticle);
     
     _updater = new osgParticle::ParticleSystemUpdater;
@@ -20,7 +20,9 @@ ParticleEffect::ParticleEffect(osgParticle::Particle *particleTemplate, osgParti
     osg::Geode *particleSystemGeode = new osg::Geode;
     particleSystemGeode->addDrawable(_particleSystem);
     
-    configureCounter(counter);
+    _counter = new osgParticle::RandomRateCounter;
+    _counter->setRateRange(50, 50);
+    
     configurePlacer(placer);
     configureShooter(shooter);
     
@@ -55,24 +57,12 @@ void ParticleEffect::configureTemplateParticle(osgParticle::Particle *templatePa
         return;
     }
     
-    _templateParticle.setLifeTime(3);
-    _templateParticle.setSizeRange(osgParticle::rangef(0.1f, 0.2f));
+    _templateParticle.setLifeTime(2);
+    _templateParticle.setSizeRange(osgParticle::rangef(0.01f, 0.09f));
     _templateParticle.setAlphaRange(osgParticle::rangef(1.0f, 0.0f));
-    _templateParticle.setColorRange(osgParticle::rangev4(osg::Vec4(1, 0.5f, 0.3f, 1.0f), osg::Vec4(0, 0.7f, 1.0f, 0.0f)));
+    _templateParticle.setColorRange(osgParticle::rangev4(osg::Vec4(0.0f, 0.7f, 1.0f, 0.5f), osg::Vec4(0.0f, 0.7f, 1.0f, 0.5f)));
     _templateParticle.setRadius(0.01f);
-    _templateParticle.setMass(0.00f);
-}
-
-void ParticleEffect::configureCounter(osgParticle::Counter *counter)
-{
-    if(counter)
-    {
-        _counter = counter;
-        return;
-    }
-    
-    _counter = new osgParticle::RandomRateCounter;
-    ((osgParticle::RandomRateCounter*)_counter)->setRateRange(200, 250);
+    _templateParticle.setMass(0.01f);
 }
 
 void ParticleEffect::configurePlacer(osgParticle::Placer *placer)
@@ -104,6 +94,33 @@ void ParticleEffect::configureShooter(osgParticle::Shooter *shooter)
 osg::Group *ParticleEffect::getEffectRoot()
 {
     return _effectRoot;
+}
+
+void ParticleEffect::setRate(const double rate)
+{
+    ((osgParticle::RandomRateCounter*)_emitter->getCounter())->setRateRange(rate, rate + 10.0);
+}
+
+void ParticleEffect::setColor(const osg::Vec4 &color)
+{
+    _templateParticle.setColorRange(osgParticle::rangev4(color, color));
+    _particleSystem->setDefaultParticleTemplate(_templateParticle);
+}
+
+void ParticleEffect::setSize(const float size)
+{
+    _templateParticle.setSizeRange(osgParticle::rangef(size + 0.01f, size + 0.05f));
+    _particleSystem->setDefaultParticleTemplate(_templateParticle);
+}
+
+void ParticleEffect::enable()
+{
+    removeChild(_emitter);
+}
+
+void ParticleEffect::disable()
+{
+    addChild(_emitter);
 }
 
 // #####################

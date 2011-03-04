@@ -11,8 +11,8 @@ void PlayerUpdater::operator()(osg::Node* node, osg::NodeVisitor* nv)
     PlayerState *playerState = _player->getPlayerState();
     osg::Vec3 newPosition = calculateNextPosition(playerState);
     _player->setPosition(newPosition);
-    _player->setAngles(playerState->getAngleX(), playerState->getAngleY());
-  
+    //_player->setAngles(playerState->getAngleX(), playerState->getAngleY());
+    _player->setAngles(0, playerState->getAngleY());
     traverse(node, nv); 
 }
 
@@ -50,12 +50,14 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(PlayerState *playerState)
     if(playerState->requestAccelerate())
     {
         playerState->setSpeed(speed + 0.02 <= 1.0 ? speed + 0.02 : 1.0);
-        playerState->setAngleX(angleX - 3 > -15 ? angleX - 3 : -15);
+        playerState->setAngleX(angleX - 3 > -10 ? angleX - 3 : -10);
+        _player->setEnginesAccelerating(speed);
     }
     else if(playerState->requestDecelerate())
     {
         playerState->setSpeed(speed - 0.04 >= 0 ? speed - 0.04 : 0);
-        playerState->setAngleX(angleX + 3 < 15 ? angleX + 3 : 15);
+        playerState->setAngleX(angleX + 3 < 10 ? angleX + 3 : 10);
+        _player->setEnginesDecelerating(speed);
     }
     else
     {

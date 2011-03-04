@@ -22,20 +22,26 @@ private:
     
     osgParticle::Particle _templateParticle;
     osgParticle::ModularEmitter *_emitter;
-    osgParticle::Counter *_counter;
+    osgParticle::RandomRateCounter *_counter;
     osgParticle::Placer *_placer;
     osgParticle::Shooter *_shooter;
     osgParticle::ModularProgram *_program;
     
     void configureTemplateParticle(osgParticle::Particle *particleTemplate = NULL);
-    void configureCounter(osgParticle::Counter *counter = NULL);
     void configurePlacer(osgParticle::Placer *placer = NULL);
     void configureShooter(osgParticle::Shooter *shooter = NULL);
     
 public:
-    ParticleEffect(osgParticle::Particle *particleTemplate = NULL, osgParticle::Counter *counter = NULL, osgParticle::Placer *placer = NULL, osgParticle::Shooter *shooter = NULL);
+    ParticleEffect(osgParticle::Particle *particleTemplate = NULL, osgParticle::Placer *placer = NULL, osgParticle::Shooter *shooter = NULL);
     
     osg::Group *getEffectRoot();
+    
+    void setRate(const double rate);
+    void setColor(const osg::Vec4 &color);
+    void setSize(const float size);
+    
+    void enable();
+    void disable();
 };
 
 class ParticleEffectFactory
