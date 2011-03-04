@@ -15,7 +15,8 @@ SET(SOURCE
 	HeadUpDisplay.cpp
 	Cuboid.cpp
     Lighting.cpp
-    KinematicCharacterController
+    KinematicCharacterController.cpp
+    ParticleEffectFactory.cpp
 )
 
 #dirty!

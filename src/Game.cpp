@@ -77,6 +77,8 @@ void Game::initializeScene()
 
 	shadowedScene->addChild(_lighting->getLights(rootStateSet));
     getRootNode()->addChild(shadowedScene);
+    
+    getRootNode()->addChild(_player->getEffectNode());
 }
 
 void Game::initializePhysicsWorld()

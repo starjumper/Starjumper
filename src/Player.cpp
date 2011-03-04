@@ -8,6 +8,7 @@ Player::Player(Lighting *playerLight) :
 {
     initializePlayerModel();
     initializePlayerPhysics();
+    initializePlayerEffects();
     
     _playerState = new PlayerState();
 }
@@ -59,6 +60,26 @@ void Player::initializePlayerPhysics()
     _playerController->setFallSpeed(0.1);
 }
 
+void Player::initializePlayerEffects()
+{
+    _particleEffects = new osg::Group;
+    
+    ParticleEffect *pe1 = ParticleEffectFactory::createRearEngineEffect();
+    
+    // position the particle effect emitter
+    pe1->setScale(PLAYER_SCALE);
+    pe1->setPosition(osg::Vec3(0.0, 6.5, 1.4));
+    pe1->setAttitude(osg::Quat(
+            osg::DegreesToRadians(90.0),
+            osg::Vec3(1.0, 0.0, 0.0)
+        ));
+    
+    patPlayer->addChild(pe1);
+    
+    // add the other components to the scene
+    _particleEffects->addChild(pe1->getEffectRoot());
+}
+
 void Player::toHomePosition()
 {
     patPlayer->setPosition(osg::Vec3(0.0, 10.0, 5.0));
@@ -72,6 +93,11 @@ void Player::toHomePosition()
 osg::PositionAttitudeTransform *Player::getNode() const
 {
     return _player;
+}
+
+osg::Group *Player::getEffectNode() const
+{
+    return _particleEffects;
 }
 
 btPairCachingGhostObject *Player::getGhostObject() const

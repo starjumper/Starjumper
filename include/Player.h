@@ -16,6 +16,7 @@
 #include "types.h"
 #include "PlayerState.h"
 #include "Lighting.h"
+#include "ParticleEffectFactory.h"
 
 // global Player settings
 #define PLAYER_MODEL        "resources/models/player.osg"
@@ -29,6 +30,7 @@ class Player
 private:
     osg::PositionAttitudeTransform *_player;
     osg::PositionAttitudeTransform *patPlayer;
+    osg::Group *_particleEffects;
     
     btPairCachingGhostObject *_playerGhostObject;
     KinematicCharacterController *_playerController;
@@ -40,6 +42,7 @@ private:
     
     void initializePlayerModel();
     void initializePlayerPhysics();
+    void initializePlayerEffects();
     
 public:
     Player(Lighting *playerLight);
@@ -47,6 +50,7 @@ public:
     
     // getter methods
     osg::PositionAttitudeTransform *getNode() const;
+    osg::Group *getEffectNode() const;
     btPairCachingGhostObject *getGhostObject() const;
     KinematicCharacterController *getController() const;
     PlayerState *getPlayerState() const;
