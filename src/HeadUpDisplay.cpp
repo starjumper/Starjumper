@@ -39,7 +39,7 @@ void HeadUpDisplay::initializeSpeedBar()
 
 void HeadUpDisplay::initializeTimer()
 {
-    _startTime = clock();
+    resetTimer();
     
 	_timer = new osgText::Text();
 	_timer->setFont(TIMER_FONT);
@@ -48,6 +48,11 @@ void HeadUpDisplay::initializeTimer()
     _node->addDrawable(_timer);
 }
 
+void HeadUpDisplay::resetTimer()
+{
+    _startTime = clock();
+    _timePassed = 0;
+}
 
 void HeadUpDisplay::updateSpeedBar()
 {
@@ -64,13 +69,23 @@ void HeadUpDisplay::updateSpeedBar()
 
 void HeadUpDisplay::updateTimer()
 {
+    _timePassed = (clock() - _startTime) / 1000;
+    
 	std::stringstream ss;
-	ss << (clock() - _startTime) / 1000;
+	ss << _timePassed;
 	std::string timeString = ss.str();
 	
     if(timeString.size() > 2)
     {
         timeString.insert(timeString.size() - 2, ":", 1);
+    }
+    else if(timeString.size() == 2)
+    {
+        timeString = std::string("0:") + timeString;
+    }
+    else if(timeString.size() == 1)
+    {
+        timeString = std::string("0:0") + timeString;
     }
     
     _timer->setText(timeString);

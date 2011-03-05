@@ -53,4 +53,5 @@ public:
     ParticleEffectFactory(osg::Group *rootNode);
     
     static ParticleEffect *createRearEngineEffect();
+    static ParticleEffect *createSteerEngineEffect();
 };

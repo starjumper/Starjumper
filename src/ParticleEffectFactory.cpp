@@ -136,3 +136,11 @@ ParticleEffect *ParticleEffectFactory::createRearEngineEffect()
 {
     return new ParticleEffect();
 }
+
+ParticleEffect *ParticleEffectFactory::createSteerEngineEffect()
+{
+    osgParticle::PointPlacer *placer = new osgParticle::PointPlacer;
+    placer->setCenter(osg::Vec3(0, 0, 0));
+    
+    return new ParticleEffect(NULL, placer);
+}
