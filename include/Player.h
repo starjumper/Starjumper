@@ -6,6 +6,9 @@
 #include <osg/Node>
 #include <osg/PositionAttitudeTransform>
 #include <osgDB/ReadFile>
+#include <osg/Light>
+#include <osg/LightSource>
+#include <osg/StateAttribute>
 
 #include <btBulletDynamicsCommon.h>
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
@@ -15,7 +18,6 @@
 #include "KinematicCharacterController.h"
 #include "types.h"
 #include "PlayerState.h"
-#include "Lighting.h"
 #include "ParticleEffectFactory.h"
 
 // global Player settings
@@ -39,8 +41,6 @@ private:
     btPairCachingGhostObject *_playerGhostObject;
     KinematicCharacterController *_playerController;
     PlayerState *_playerState;
-
-	Lighting *_playerLight;
 	
     const std::vector<float> *_deadlyAltitudes;
     
@@ -49,7 +49,7 @@ private:
     void initializePlayerEffects();
     
 public:
-    Player(Lighting *playerLight);
+    Player();
     ~Player();
     
     // getter methods

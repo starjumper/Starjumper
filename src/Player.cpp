@@ -1,14 +1,14 @@
 #include "Player.h"
 #include "PlayerUpdater.h"
 
-Player::Player(Lighting *playerLight) :
-	_playerLight(playerLight)
+Player::Player()
 {
     initializePlayerModel();
     initializePlayerPhysics();
     initializePlayerEffects();
     
     _playerState = new PlayerState();
+	
 }
 
 Player::~Player()
@@ -32,6 +32,19 @@ void Player::initializePlayerModel()
     patPlayer->setScale(PLAYER_SCALE);
     patPlayer->setAttitude(PLAYER_ATTITUDE);
     patPlayer->setPosition(osg::Vec3(0.0, 10.0, 5.0));
+
+	// add Light for player shadow
+	osg::Light *playerLight = new osg::Light();
+	playerLight->setLightNum(3);
+	osg::LightSource *lightSource = new osg::LightSource;   
+	lightSource->setLight(playerLight);
+	osg::StateSet *stateset = new osg::StateSet;
+	lightSource->setStateSetModes(*stateset, osg::StateAttribute::ON);
+	playerLight->setPosition(osg::Vec4(osg::Vec3(0.0, 10.0, 12.0),1.0));
+	playerLight->setDiffuse(osg::Vec4(1.0,0.0,0.0,0.5));
+	playerLight->setAmbient(osg::Vec4(1.0,1.0,1.0,1.0));
+
+	patPlayer->addChild(lightSource);
 
     _player->setNodeMask(CAST_SHADOW_MASK);
     _player->addChild(patPlayer);
@@ -136,7 +149,6 @@ PlayerState *Player::getPlayerState() const
 void Player::setPosition(const osg::Vec3 position)
 {
     patPlayer->setPosition(position);
-	_playerLight->setLightPosition(position + osg::Vec3(0.0, 0.0, 2.0f));
 }
 
 void Player::setAngles(const float angleX, const float angleY, const float angleZ)

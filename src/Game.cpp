@@ -5,8 +5,7 @@ Game::Game(osgViewer::Viewer *viewer) :
 {
     _running = false;
 	_level = NULL;
-    _lighting = new Lighting();
-	_player = new Player(_lighting);
+	_player = new Player();
     
     _headUpDisplay = new HeadUpDisplay(_player);
     
@@ -19,6 +18,9 @@ Game::Game(osgViewer::Viewer *viewer) :
     
     // set _cameraManipulator as manipulator for the scene
     getViewer()->setCameraManipulator(_cameraManipulator);
+
+	// set Lighting Mode for the scene
+	//getViewer()->setLightingMode(osg::View::NO_LIGHT);
     
     _keyboardHandler = new GameKeyboardHandler(_player);
 }
@@ -71,11 +73,6 @@ void Game::initializeScene()
     shadowedScene->addChild(_player->getNode());
     getRootNode()->addChild(_headUpDisplay->getCamera());
 
-	// add lighting
-	osg::StateSet* rootStateSet = new osg::StateSet;
-	getRootNode()->setStateSet(rootStateSet);
-
-	shadowedScene->addChild(_lighting->getLights(rootStateSet));
     getRootNode()->addChild(shadowedScene);
     
     getRootNode()->addChild(_player->getEffectNode());

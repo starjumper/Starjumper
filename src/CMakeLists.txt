@@ -14,7 +14,6 @@ SET(SOURCE
     PlayerState.cpp
 	HeadUpDisplay.cpp
 	Cuboid.cpp
-    Lighting.cpp
     KinematicCharacterController.cpp
     ParticleEffectFactory.cpp
 )
@@ -29,7 +28,6 @@ SET(HEADER
 	../include/KinematicCharacterController.h
 	../include/LazyCameraManipulator.h
 	../include/Level.h
-	../include/Lighting.h
 	../include/LevelOverview.h
 	../include/Menu.h
 	../include/MenuButton.h

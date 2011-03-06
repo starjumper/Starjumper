@@ -18,7 +18,6 @@
 #include "RenderingInstance.h"
 #include "LazyCameraManipulator.h"
 #include "Level.h"
-#include "Lighting.h"
 #include "Player.h"
 #include "GameKeyboardHandler.h"
 #include "HeadUpDisplay.h"
@@ -38,7 +37,6 @@ private:
     GameKeyboardHandler *_keyboardHandler;
     LazyCameraManipulator *_cameraManipulator;
     HeadUpDisplay *_headUpDisplay;
-	Lighting *_lighting;
 	btDynamicsWorld *_world;
     
     btDefaultCollisionConfiguration *_collisionConfiguration;
