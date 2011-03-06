@@ -2,20 +2,27 @@
 
 #include <osgGA/NodeTrackerManipulator>
 
-#define MAX_CAMERA_DISTANCE_TO_MODEL 2.0f
-#define RESET_LAZY_CAMERA_INTERVAL   0.1f
+#define MAX_FRAME_DELAY 200.0
 
 class LazyCameraManipulator : public osgGA::NodeTrackerManipulator
 {
     private:
-        float _oldNodeXPosition;
-        float _newCameraXPosition;
+        osg::Vec3 _oldNodePosition;
+        osg::Vec3 _oldCameraPosition;
+        osg::Vec3 _newCameraPosition;
+        
+        int _directionOfMovementX;
+        size_t _durationOfMovementX;
+        
+        bool _firstRun;
         
     public:
         LazyCameraManipulator(); 
         
         osg::Matrixd getInverseMatrix() const;
         bool handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us);
+        
+        void resetCamera();
 
     protected:
         ~LazyCameraManipulator();
