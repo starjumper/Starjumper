@@ -24,6 +24,8 @@ private:
 public:
     PlayerState();
 
+    void reset();
+
     float getSpeed() const;
     void setSpeed(const float speed);
 

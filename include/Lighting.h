@@ -15,7 +15,7 @@
 class Lighting
 {
 private:
-    osg::Light *_light;
+    osg::ref_ptr<osg::Light> _light;
     
 public:
     Lighting();

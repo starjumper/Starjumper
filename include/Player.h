@@ -28,7 +28,7 @@
 class Player
 {
 private:
-    osg::PositionAttitudeTransform *_player;
+    osg::ref_ptr<osg::PositionAttitudeTransform> _player;
     osg::PositionAttitudeTransform *patPlayer;
     
     ParticleEffect *_mainEngine;
@@ -36,7 +36,7 @@ private:
     ParticleEffect *_rightEngine;
     ParticleEffect *_leftSteer;
     ParticleEffect *_rightSteer;
-    osg::Group *_particleEffects;
+    osg::ref_ptr<osg::Group> _particleEffects;
     
     btPairCachingGhostObject *_playerGhostObject;
     KinematicCharacterController *_playerController;

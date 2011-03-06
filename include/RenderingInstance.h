@@ -16,6 +16,8 @@ public:
     osg::Group *getRootNode();
     osgViewer::Viewer *getViewer();
     
+    void clearSceneData();
+    
     // methods to implement preparation before and cleanup
     // after switching RenderingInstances
     virtual void prepare(osgViewer::Viewer *viewer) = 0;

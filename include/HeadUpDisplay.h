@@ -27,7 +27,7 @@
 class HeadUpDisplay : public osg::Referenced
 {
 private:
-	osg::Camera *_camera;
+	osg::ref_ptr<osg::Camera> _camera;
 	osg::Geode *_node;
 	osg::ShapeDrawable *_speedBar;
     osgText::Text *_timer;
