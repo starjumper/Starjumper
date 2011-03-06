@@ -123,6 +123,13 @@ void ParticleEffect::disable()
     addChild(_emitter);
 }
 
+void ParticleEffect::clearParticles()
+{
+    // delete all current particles
+    for(size_t i = 0; i < _particleSystem->numParticles(); ++i)
+        _particleSystem->destroyParticle(i);
+}
+
 // #####################
 // ParticleEffectFactory
 // #####################
