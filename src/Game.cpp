@@ -150,6 +150,7 @@ void Game::restartLevel()
 {
     _player->getPlayerState()->setSpeed(0.0f);
     _player->toHomePosition();
+    _cameraManipulator->resetCamera();
     _headUpDisplay->resetTimer();
 }
 
