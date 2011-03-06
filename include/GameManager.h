@@ -11,6 +11,7 @@
 
 #include <osgViewer/Viewer>
 #include <osgGA/GUIEventHandler>
+#include <osgUtil/Optimizer>
 
 #include "RapidXML/rapidxml.hpp"
 #include "RapidXML/rapidxml_iterators.hpp"

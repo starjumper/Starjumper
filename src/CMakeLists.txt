@@ -48,6 +48,7 @@ LINK_LIBRARIES(
 	BulletCollision
 	LinearMath
 	osgShadow
+    osgEphemeris
 	${OPENGL_gl_LIBRARY}
 	${OPENGL_glu_LIBRARY}
 )

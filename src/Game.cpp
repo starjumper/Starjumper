@@ -20,7 +20,7 @@ Game::Game(osgViewer::Viewer *viewer) :
     getViewer()->setCameraManipulator(_cameraManipulator);
 
 	// set Lighting Mode for the scene
-	//getViewer()->setLightingMode(osg::View::NO_LIGHT);
+	getViewer()->setLightingMode(osg::View::NO_LIGHT);
     
     _keyboardHandler = new GameKeyboardHandler(_player);
 }
@@ -30,6 +30,7 @@ void Game::runLevel(const std::string &mapfile)
     _level = new Level(mapfile);
     _player->setDeadlyAltitudes(_level->getMinZValues());
 
+	initializeEphemeris();
     initializeScene();
     initializePhysicsWorld();
         
@@ -106,6 +107,17 @@ void Game::initializePhysicsWorld()
 
     // set the worlds gravity
     _world->setGravity(WORLD_GRAVITY);
+}
+
+void Game::initializeEphemeris() {
+	osg::ref_ptr<osgEphemeris::EphemerisModel> ephemerisModel = new osgEphemeris::EphemerisModel;
+	ephemerisModel->setSkyDomeRadius(1000);
+	ephemerisModel->setLatitude(11.4765);
+	ephemerisModel->setLongitude(53.493);
+	ephemerisModel->setDateTime(osgEphemeris::DateTime(2011,1,1));
+	ephemerisModel->setSunLightNum(5);
+
+	getRootNode()->addChild(ephemerisModel);
 }
 
 void Game::resetScene()

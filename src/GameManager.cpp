@@ -43,6 +43,10 @@ void GameManager::selectRenderingInstance(std::string name)
     _activeRenderingInstanceName = name;
     _activeRenderingInstance = _renderingInstances[name];
     _activeRenderingInstance->prepare(&_viewer);
+
+	osgUtil::Optimizer optimizer;
+	optimizer.optimize(_activeRenderingInstance->getRootNode());
+
     _viewer.setSceneData(_activeRenderingInstance->getRootNode());
 }
 
