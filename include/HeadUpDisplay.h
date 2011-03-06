@@ -29,17 +29,13 @@ class HeadUpDisplay : public osg::Referenced
 {
 private:
 	osg::Camera *_camera;
+	osg::PositionAttitudeTransform *_pat;
+	osg::Geode *_node;
 	osg::ShapeDrawable *_speedBar;
     osgText::Text *_timer;
 
     Player *_player;
     clock_t _startTime;
-
-
-
-
-	
-
 
 public:
 	HeadUpDisplay(Player *player);
@@ -51,13 +47,6 @@ public:
 	
 	void updateSpeedBar();
 	void updateTimer();
-
-
-	osg::MatrixTransform *_lol;
-	osg::MatrixTransform *_lolOld;
-	osg::MatrixTransform *_rot;
-	osg::Geode *_node;
-	osg::PositionAttitudeTransform *_pat;
 };
 
 class HeadUpDisplayUpdateCallback : public osg::NodeCallback

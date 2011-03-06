@@ -1,5 +1,10 @@
 #include "HeadUpDisplay.h"
 
+// _camera -> _node
+//         -> _pat ->
+
+
+
 HeadUpDisplay::HeadUpDisplay(Player *player) : 
     _player(player)
 {
@@ -22,8 +27,6 @@ void HeadUpDisplay::initializeCamera()
 	_camera->setViewMatrix(osg::Matrix::identity());
 	_camera->setClearMask(GL_DEPTH_BUFFER_BIT);
 	_camera->setRenderOrder(osg::Camera::POST_RENDER);
-	_pat = new osg::PositionAttitudeTransform;
-    _camera->addChild(_pat);
 }
 
 osg::Camera *HeadUpDisplay::getCamera()
@@ -33,9 +36,12 @@ osg::Camera *HeadUpDisplay::getCamera()
 
 void HeadUpDisplay::initializeSpeedBar()
 {
+	_pat = new osg::PositionAttitudeTransform;
+    _camera->addChild(_pat);
+
     _speedBar = new osg::ShapeDrawable(new osg::Box(SPEEDBAR_POSITION, SPEEDBAR_WIDTH, 250, 5));
 	_node->addDrawable(_speedBar);
-	_pat->addChild(_node);
+	//_pat->addChild(_node);
 	_pat->setPosition(osg::Vec3f(300, 150, 0));
 }
 
@@ -54,16 +60,8 @@ void HeadUpDisplay::initializeTimer()
 void HeadUpDisplay::updateSpeedBar()
 {
 	float playerSpeed = _player->getPlayerState()->getSpeed();
-
-//    _speedBar->setColor(osg::Vec4(1.0, 0.005, 0.8, 0.5));
     _speedBar->setColor(osg::Vec4(1.0, playerSpeed, 0.0, 0.5));
-
-
 	_pat->setAttitude(osg::Quat(osg::DegreesToRadians(-80+(playerSpeed*150.0)), 1.0, 0.0, 0.0));
-
-	/*
-	speedDrawable->setColor(osg::Vec4(1.0 * playerSpeed, 0.3, 0.8, 1.0));
-	speedBar->setHalfLengths(osg::Vec3(40, 150 * playerSpeed, 1));*/
 }
 
 void HeadUpDisplay::updateTimer()
