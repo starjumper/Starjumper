@@ -34,6 +34,7 @@ private:
 
     Player *_player;
     clock_t _startTime;
+    clock_t _timePassed;
 
 public:
 	HeadUpDisplay(Player *player);
@@ -43,6 +44,7 @@ public:
 	void initializeSpeedBar();
 	void initializeTimer();
 	
+    void resetTimer();
 	void updateSpeedBar();
 	void updateTimer();
 };

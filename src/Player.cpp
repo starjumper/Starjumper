@@ -78,6 +78,8 @@ void Player::initializePlayerEffects()
     _mainEngine = ParticleEffectFactory::createRearEngineEffect();
     _leftEngine = ParticleEffectFactory::createRearEngineEffect();
     _rightEngine = ParticleEffectFactory::createRearEngineEffect();
+    //_leftSteer = ParticleEffectFactory::createSteerEngineEffect();
+    //_rightSteer = ParticleEffectFactory::createSteerEngineEffect();
     
     // position the particle effect emitters
     _mainEngine->setScale(PLAYER_SCALE);
@@ -101,14 +103,32 @@ void Player::initializePlayerEffects()
             osg::Vec3(1.0, 0.0, 0.0)
         ));
     
+   /* _leftSteer->setScale(PLAYER_SCALE);
+    _leftSteer->setPosition(osg::Vec3(-1.8, 5.0, 0.7));
+    _leftSteer->setAttitude(osg::Quat(
+            osg::DegreesToRadians(180.0),
+            osg::Vec3(1.0, 0.0, 0.0)
+        ));
+    
+    _rightSteer->setScale(PLAYER_SCALE);
+    _rightSteer->setPosition(osg::Vec3(1.8, 4.0, 0.7));
+/*    _leftSteer->setAttitude(osg::Quat(
+            osg::DegreesToRadians(90.0),
+            osg::Vec3(1.0, 0.0, 0.0)
+        ));*/
+    
     patPlayer->addChild(_mainEngine);
     patPlayer->addChild(_leftEngine);
     patPlayer->addChild(_rightEngine);
+    //patPlayer->addChild(_leftSteer);
+    //patPlayer->addChild(_rightSteer);
     
     // add the other components to the scene
     _particleEffects->addChild(_mainEngine->getEffectRoot());
     _particleEffects->addChild(_leftEngine->getEffectRoot());
     _particleEffects->addChild(_rightEngine->getEffectRoot());
+    //_particleEffects->addChild(_leftSteer->getEffectRoot());
+    //_particleEffects->addChild(_rightSteer->getEffectRoot());
 }
 
 void Player::toHomePosition()
@@ -171,9 +191,9 @@ const std::vector<float> *Player::getDeadlyAltitudes()
 
 void Player::setEnginesAccelerating(const float speed)
 {
-    _mainEngine->setRate(200 * speed);
-    _leftEngine->setRate(200 * speed);
-    _rightEngine->setRate(200 * speed);
+    _mainEngine->setRate(250 * speed);
+    _leftEngine->setRate(250 * speed);
+    _rightEngine->setRate(250 * speed);
     
     _mainEngine->setColor(osg::Vec4(1.0f, 0.7f, 0.1f, 0.8f));
     _leftEngine->setColor(osg::Vec4(1.0f, 0.7f, 0.1f, 0.9f));
@@ -186,9 +206,9 @@ void Player::setEnginesAccelerating(const float speed)
 
 void Player::setEnginesDecelerating(const float speed)
 {
-    _mainEngine->setRate(200 * speed);
-    _leftEngine->setRate(200 * speed);
-    _rightEngine->setRate(200 * speed);
+    _mainEngine->setRate(250 * speed);
+    _leftEngine->setRate(250 * speed);
+    _rightEngine->setRate(250 * speed);
     
     _mainEngine->setColor(osg::Vec4(0.0f, 0.7f, 1.0f, 0.5f));
     _leftEngine->setColor(osg::Vec4(0.0f, 0.7f, 1.0f, 0.4f));

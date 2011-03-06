@@ -36,6 +36,8 @@ private:
     ParticleEffect *_mainEngine;
     ParticleEffect *_leftEngine;
     ParticleEffect *_rightEngine;
+    ParticleEffect *_leftSteer;
+    ParticleEffect *_rightSteer;
     osg::Group *_particleEffects;
     
     btPairCachingGhostObject *_playerGhostObject;

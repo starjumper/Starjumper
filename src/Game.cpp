@@ -54,6 +54,8 @@ void Game::runLevel(const std::string &mapfile)
     WorldUpdater *worldUpdater = new WorldUpdater(this);
     _level->getNode()->setUpdateCallback(worldUpdater); // TODO: find a better node than level (root does not work, produces segfault)	
 
+    _headUpDisplay->resetTimer();
+
     _running = true;
 }
 
@@ -148,6 +150,7 @@ void Game::restartLevel()
 {
     _player->getPlayerState()->setSpeed(0.0f);
     _player->toHomePosition();
+    _headUpDisplay->resetTimer();
 }
 
 btDynamicsWorld *Game::getWorld()
