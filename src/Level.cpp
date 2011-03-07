@@ -96,7 +96,7 @@ void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
 
 	tunnelTransform->addChild(tunnelModel);
 	tunnelTransform->setPosition(position);
-	tunnelTransform->setScale(osg::Vec3f(1.0f, atof(tunnelNode.first_attribute("length")->value()), 1.0f));
+	tunnelTransform->setScale(osg::Vec3f(10.0f, atof(tunnelNode.first_attribute("length")->value()), 10.0f));
 	
 	tunnelTransform->setNodeMask(RECEIVE_SHADOW_MASK);
 	_level->addChild(tunnelTransform);
@@ -104,24 +104,14 @@ void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
     
 	btConvexTriangleMeshShape* mesh = osgbBullet::btConvexTriMeshCollisionShapeFromOSG(tunnelTransform);
 
-    // create start transform for the cuboid rigid body
-    btTransform shapeTransform;
-    shapeTransform.setIdentity();
-    shapeTransform.setOrigin(osgbBullet::asBtVector3(position));
-        
     // create MotionState for the cuboid
-    btDefaultMotionState *msCuboid = new btDefaultMotionState(shapeTransform);
+    btDefaultMotionState *msCuboid = new btDefaultMotionState();
     
     // passing 0 as first and a null-vector as last argument means this object is immovable
     btRigidBody::btRigidBodyConstructionInfo rbciCuboid(0, msCuboid, mesh, btVector3(0,0,0));
     
     // construct rigid body from previously specified construction info
     _collisionObjects.push_back(new btRigidBody(rbciCuboid));
-/*
-	btTransform shapeTransform;
-	shapeTransform.setIdentity();
-	cs->addChildShape(shapeTransform, mesh);
-	*/
 }
 
 osg::PositionAttitudeTransform *Level::getNode() const
