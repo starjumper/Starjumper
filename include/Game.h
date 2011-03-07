@@ -7,10 +7,6 @@
 #include <osgShadow/ShadowVolume>
 #include <osgShadow/ShadowTexture>
 #include <osgShadow/ShadowMap>
-#include <osgShadow/SoftShadowMap>
-#include <osgShadow/ParallelSplitShadowMap>
-#include <osgShadow/LightSpacePerspectiveShadowMap>
-#include <osgShadow/StandardShadowMap>
 
 #include <btBulletDynamicsCommon.h>
 
@@ -21,6 +17,7 @@
 #include "Player.h"
 #include "GameKeyboardHandler.h"
 #include "HeadUpDisplay.h"
+#include "Skybox.h"
 
 #define WORLD_MIN          -1000, -1000, -1000
 #define WORLD_MAX          1000, 1000, 1000

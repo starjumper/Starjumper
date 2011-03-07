@@ -20,7 +20,7 @@ Game::Game(osgViewer::Viewer *viewer) :
     getViewer()->setCameraManipulator(_cameraManipulator);
 
 	// set Lighting Mode for the scene
-	//getViewer()->setLightingMode(osg::View::NO_LIGHT);
+	getViewer()->setLightingMode(osg::View::NO_LIGHT);
     
     _keyboardHandler = new GameKeyboardHandler(_player);
 }
@@ -76,6 +76,8 @@ void Game::initializeScene()
     getRootNode()->addChild(_headUpDisplay->getCamera());
 
     getRootNode()->addChild(shadowedScene);
+
+	getRootNode()->addChild(createSkyBoxCubeMap());
     
     getRootNode()->addChild(_player->getEffectNode());
 }

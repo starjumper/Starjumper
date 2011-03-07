@@ -16,6 +16,7 @@ SET(SOURCE
 	Cuboid.cpp
     KinematicCharacterController.cpp
     ParticleEffectFactory.cpp
+	Skybox.cpp
 )
 
 #dirty!
@@ -36,6 +37,7 @@ SET(HEADER
 	../include/PlayerUpdater.h
 	../include/RenderingInstance.h
 	../include/types.h
+	../include/Skybox.h
 )
 
 FIND_PACKAGE( OpenGL )
