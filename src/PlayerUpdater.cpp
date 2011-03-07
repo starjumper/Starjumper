@@ -72,8 +72,8 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(PlayerState *playerState)
     if(playerController->onGround())
     {
         // apply special attributes from ground to player
-        Cuboid *groundObject = (Cuboid *)playerController->getGroundObject();
-        groundObject->applyTo(_player);
+//        Cuboid *groundObject = (Cuboid *)playerController->getGroundObject();
+ //       groundObject->applyTo(_player);
     }
     else
     {

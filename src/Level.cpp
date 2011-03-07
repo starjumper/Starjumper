@@ -101,9 +101,23 @@ void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
 	tunnelTransform->setNodeMask(RECEIVE_SHADOW_MASK);
 	_level->addChild(tunnelTransform);
 	
-    /*
-	btConvexTriangleMeshShape* mesh = osgbBullet::btConvexTriMeshCollisionShapeFromOSG(tunnelPat);
+    
+	btConvexTriangleMeshShape* mesh = osgbBullet::btConvexTriMeshCollisionShapeFromOSG(tunnelTransform);
 
+    // create start transform for the cuboid rigid body
+    btTransform shapeTransform;
+    shapeTransform.setIdentity();
+    shapeTransform.setOrigin(osgbBullet::asBtVector3(position));
+        
+    // create MotionState for the cuboid
+    btDefaultMotionState *msCuboid = new btDefaultMotionState(shapeTransform);
+    
+    // passing 0 as first and a null-vector as last argument means this object is immovable
+    btRigidBody::btRigidBodyConstructionInfo rbciCuboid(0, msCuboid, mesh, btVector3(0,0,0));
+    
+    // construct rigid body from previously specified construction info
+    _collisionObjects.push_back(new btRigidBody(rbciCuboid));
+/*
 	btTransform shapeTransform;
 	shapeTransform.setIdentity();
 	cs->addChildShape(shapeTransform, mesh);
