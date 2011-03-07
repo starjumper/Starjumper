@@ -16,7 +16,7 @@ SET(SOURCE
 	Cuboid.cpp
     KinematicCharacterController.cpp
     ParticleEffectFactory.cpp
-	Skybox.cpp
+    Skybox.cpp
 )
 
 #dirty!

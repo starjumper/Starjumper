@@ -42,6 +42,7 @@ public:
     
     void enable();
     void disable();
+    void clearParticles();
 };
 
 class ParticleEffectFactory

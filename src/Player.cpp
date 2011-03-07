@@ -139,6 +139,9 @@ void Player::toHomePosition()
 	playerTransform.setIdentity();
 	playerTransform.setOrigin(btVector3(0.0, 10.0, 5.0));
 	_playerGhostObject->setWorldTransform(playerTransform);
+    _mainEngine->clearParticles();
+    _leftEngine->clearParticles();
+    _rightEngine->clearParticles();
 }
 
 osg::PositionAttitudeTransform *Player::getNode() const

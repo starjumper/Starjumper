@@ -2,7 +2,11 @@
 
 PlayerState::PlayerState()
 {
-    // initialize state variables
+    reset();
+}
+
+void PlayerState::reset()
+{
     _speed = 0.0f;
     _angleX = 0.0f;
     _angleY = 0.0f;

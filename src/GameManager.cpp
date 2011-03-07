@@ -105,8 +105,8 @@ void GameManager::quit()
 
 void GameManager::runLevel(const std::string &mapFile)
 {
-    selectRenderingInstance("game");
     ((Game *)_renderingInstances["game"])->runLevel(mapFile);
+    selectRenderingInstance("game");
 }
 
 void GameManager::roadSelectMenu()

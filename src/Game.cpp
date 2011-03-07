@@ -27,6 +27,15 @@ Game::Game(osgViewer::Viewer *viewer) :
 
 void Game::runLevel(const std::string &mapfile)
 {
+    // clear scene if game was running
+    if(_running)
+    {
+        clearSceneData();
+        delete _level;
+        delete _world;
+        _player->getPlayerState()->reset();
+    }
+    
     _level = new Level(mapfile);
     _player->setDeadlyAltitudes(_level->getMinZValues());
 

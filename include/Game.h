@@ -31,7 +31,7 @@ class Game : public RenderingInstance
 private:
     Level *_level;
     Player *_player;
-    GameKeyboardHandler *_keyboardHandler;
+    osg::ref_ptr<GameKeyboardHandler> _keyboardHandler;
     LazyCameraManipulator *_cameraManipulator;
     HeadUpDisplay *_headUpDisplay;
 	btDynamicsWorld *_world;
