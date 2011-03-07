@@ -15,9 +15,9 @@
 // relevant files.
 //---------------------------------------------------------------------------
 
-#ifndef __SKYBOX_H__
-#define __SKYBOX_H__ 1
-#define BACKGROUND_IMAGE   "resources/textures/background.png"
+#pragma once
+
+#define BACKGROUND_IMAGE   "resources/textures/space.jpg"
 
 #include <string>
 #include <osg/Node>
@@ -25,5 +25,3 @@
 
 osg::Node* createSkyBoxCubeMap(osg::StateSet* stateset = 0);
 osg::TextureCubeMap* loadCubeMap();
-
-#endif

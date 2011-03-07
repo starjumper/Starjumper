@@ -15,6 +15,7 @@
 #include <osg/Depth>
 #include <osg/TextureCubeMap>
 #include <osg/TexEnv>
+#include <osg/PositionAttitudeTransform>
 #include <osgDB/ReadFile>
 #include <osgUtil/CullVisitor>
 
@@ -79,7 +80,7 @@ osg::TextureCubeMap* loadCubeMap() {
 
 osg::Node* createSkyBoxCubeMap(osg::StateSet* stateset)
 {
-    float radius = 100.0f;
+    float radius = 50.0f;
 
     if (!stateset)
         stateset = new osg::StateSet;
@@ -203,11 +204,13 @@ osg::Node* createSkyBoxCubeMap(osg::StateSet* stateset)
 
     // Create a transform and set it to absolute so it does not influence
     // the viewer's bounds computation (for initial camera settings).
-    osg::Transform* transform = new SkyboxTransform;
-    transform->setCullingActive(false);
-    transform->addChild(geode);
-    transform->setReferenceFrame(osg::Transform::ABSOLUTE_RF);
-    transform->setName("SkyboxTransform");
+    osg::PositionAttitudeTransform *pat = new osg::PositionAttitudeTransform;
+    pat->setCullingActive(false);
+    pat->setReferenceFrame(osg::Transform::ABSOLUTE_RF);
+    pat->addChild(geode);
+    pat->setScale(osg::Vec3(10.0, 10.0, 10.0));
+    //pat->setAttitude(osg::Quat(osg::DegreesToRadians(-30.0), osg::Vec3(1.0,0.0,0.0)));
 
-    return transform;
+    //return transform;
+    return pat;
 }
