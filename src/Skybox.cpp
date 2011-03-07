@@ -104,9 +104,6 @@ osg::Node* createSkyBoxCubeMap(osg::StateSet* stateset)
     osg::Depth* depth = new osg::Depth(osg::Depth::LEQUAL, 1.0, 1.0);
     stateset->setAttributeAndModes(depth, osg::StateAttribute::ON);
 
-    // Make sure it is drawn last
-    stateset->setRenderBinDetails(1000, "RenderBin");
-
     // Create a drawable for the skybox
     osg::Geometry* drawable = new osg::Geometry;
 
@@ -202,8 +199,6 @@ osg::Node* createSkyBoxCubeMap(osg::StateSet* stateset)
         texture->setWrap(osg::Texture::WRAP_S, osg::Texture::CLAMP_TO_EDGE);
         texture->setWrap(osg::Texture::WRAP_T, osg::Texture::CLAMP_TO_EDGE);
         stateset->setTextureAttributeAndModes(0, texture.get(), osg::StateAttribute::ON);
-
-		texture->setTextureHeight(5);
     }
 
     // Create a transform and set it to absolute so it does not influence
