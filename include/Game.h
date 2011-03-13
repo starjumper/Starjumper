@@ -30,7 +30,7 @@ class Game : public RenderingInstance
 {
 private:
     Level *_level;
-    Player *_player;
+    osg::ref_ptr<Player> _player;
     osg::ref_ptr<GameKeyboardHandler> _keyboardHandler;
     LazyCameraManipulator *_cameraManipulator;
     HeadUpDisplay *_headUpDisplay;

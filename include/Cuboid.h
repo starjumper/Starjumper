@@ -21,26 +21,23 @@
 #define ACCELERATION_CUBOID_TEXTURE "resources/textures/acceleration.png"
 #define DECELERATION_CUBOID_TEXTURE "resources/textures/deceleration.png"
 
-class Cuboid : public osg::Referenced
+class Cuboid : public osg::Geode
 {
-    private:
-    	osg::Geode *_node;
-    	osg::Drawable *_drawable;
-    	
-        btRigidBody *_rigidBody;
-        void constructRigidBody(const osg::Vec3 &center, const float width, const float depth, const float height);
-
-    protected:
-        osg::Texture2D *_texture;        
-                
-    public:  
-        Cuboid(const osg::Vec3 &from, const osg::Vec3 &size);
-        
-        osg::Node *getNode();
-        osg::Drawable *getDrawable();
-        btRigidBody *getRigidBody();
-        
-        virtual void applyTo(Player *player) { };
+private:
+    btRigidBody *_rigidBody;
+    osg::Texture2D *_texture;
+    
+protected:
+    void constructRigidBody(const osg::Vec3 &center, const float width, const float depth, const float height);
+    
+public:  
+    Cuboid(const osg::Vec3 &from, const osg::Vec3 &size);
+    
+    void setTexture(osg::Image *image);
+    
+    btRigidBody *getRigidBody() const;
+    
+    virtual void applyTo(Player *player) { };
 };
 
 class AccelerationCuboid : public Cuboid

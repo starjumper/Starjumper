@@ -13,6 +13,7 @@ Player::Player()
 
 Player::~Player()
 {
+    delete _deadlyAltitudes;
     delete _playerState;
 }
 

@@ -30,9 +30,8 @@ void Game::runLevel(const std::string &mapfile)
     // clear scene if game was running
     if(_running)
     {
-        clearSceneData();
-        delete _level;
         delete _world;
+        clearSceneData();
         _player->getPlayerState()->reset();
     }
     
@@ -61,7 +60,7 @@ void Game::runLevel(const std::string &mapfile)
     
     // set world updater
     WorldUpdater *worldUpdater = new WorldUpdater(this);
-    _level->getNode()->setUpdateCallback(worldUpdater); // TODO: find a better node than level (root does not work, produces segfault)	
+    _level->setUpdateCallback(worldUpdater); // TODO: find a better node than level (root does not work, produces segfault)	
 
     _headUpDisplay->resetTimer();
 
@@ -80,7 +79,7 @@ void Game::initializeScene()
 	shadowedScene->setShadowTechnique(sm.get());
 
     // add level and player to scene and setup heads up display
-    shadowedScene->addChild(_level->getNode());
+    shadowedScene->addChild(_level);
     shadowedScene->addChild(_player);
     getRootNode()->addChild(_headUpDisplay->getCamera());
 

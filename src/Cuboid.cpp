@@ -12,7 +12,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
 	float depth = fabs(from.y() - to.y());
 	float height = fabs(from.z() - to.z());
 		
-    osg::Geometry *_drawable = new osg::Geometry();
+    osg::Geometry *drawable = new osg::Geometry();
 
     osg::Vec3Array *pyramidVertices = new osg::Vec3Array();
     {
@@ -27,7 +27,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
         pyramidVertices->push_back( from + osg::Vec3(0, size.y(), 0) );
     }
     
-    _drawable->setVertexArray( pyramidVertices ); 
+    drawable->setVertexArray( pyramidVertices ); 
     
     // front
     {
@@ -36,7 +36,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
         face->push_back(1);
         face->push_back(2);
         face->push_back(3);
-        _drawable->addPrimitiveSet(face);
+        drawable->addPrimitiveSet(face);
     }
     
     // back
@@ -46,7 +46,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
         face->push_back(5);
         face->push_back(6);
         face->push_back(7);
-        _drawable->addPrimitiveSet(face);
+        drawable->addPrimitiveSet(face);
     }
     
     // left
@@ -56,7 +56,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
         face->push_back(4);
         face->push_back(7);
         face->push_back(3);
-        _drawable->addPrimitiveSet(face);
+        drawable->addPrimitiveSet(face);
     }
     
     // right
@@ -66,7 +66,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
         face->push_back(5);
         face->push_back(6);
         face->push_back(2);
-        _drawable->addPrimitiveSet(face);
+        drawable->addPrimitiveSet(face);
     }
     
     // top
@@ -76,7 +76,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
         face->push_back(1);
         face->push_back(5);
         face->push_back(4);
-        _drawable->addPrimitiveSet(face);
+        drawable->addPrimitiveSet(face);
     }
     
     // bottom
@@ -86,7 +86,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
         face->push_back(2);
         face->push_back(6);
         face->push_back(7);
-        _drawable->addPrimitiveSet(face);
+        drawable->addPrimitiveSet(face);
     }
     
     osg::Vec2Array* texcoords = new osg::Vec2Array(8);
@@ -99,10 +99,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
        (*texcoords)[6].set(0.0f,  0.0f); // ""
        (*texcoords)[7].set(0.0f,  0.0f); // "" 
        
-       _drawable->setTexCoordArray(0,texcoords);
-    
-	_node = new osg::Geode();
-	_node->addDrawable(_drawable);
+       drawable->setTexCoordArray(0,texcoords);
 	    
     _texture = new osg::Texture2D;
     _texture->setDataVariance(osg::Object::DYNAMIC); 
@@ -110,11 +107,11 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
     _texture->setWrap(osg::Texture::WRAP_T, osg::Texture::REPEAT);
     
     osg::StateSet* stateSet = new osg::StateSet();
-
     stateSet->setTextureAttributeAndModes(0, _texture, osg::StateAttribute::ON);
     
-    getNode()->setStateSet(stateSet);
-    getNode()->setNodeMask(RECEIVE_SHADOW_MASK);
+    setStateSet(stateSet);
+    setNodeMask(RECEIVE_SHADOW_MASK);
+    addDrawable(drawable);
 	    
     constructRigidBody(center, width, depth, height);
 }
@@ -140,17 +137,12 @@ void Cuboid::constructRigidBody(const osg::Vec3 &center, const float width, cons
     _rigidBody->setUserPointer(this);
 }
 
-osg::Node *Cuboid::getNode()
+void Cuboid::setTexture(osg::Image *image)
 {
-    return _node;
+    _texture->setImage(image);
 }
 
-osg::Drawable *Cuboid::getDrawable()
-{
-    return _drawable;
-}
-
-btRigidBody *Cuboid::getRigidBody()
+btRigidBody *Cuboid::getRigidBody() const
 {
     return _rigidBody;
 }
@@ -159,7 +151,7 @@ AccelerationCuboid::AccelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &s
     Cuboid(from, size)
 {    
     osg::Image *image = osgDB::readImageFile(ACCELERATION_CUBOID_TEXTURE);
-    _texture->setImage(image);
+    setTexture(image);
 }
 
 void AccelerationCuboid::applyTo(Player *player)
@@ -177,7 +169,7 @@ DecelerationCuboid::DecelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &s
     Cuboid(from, size)
 {    
     osg::Image *image = osgDB::readImageFile(DECELERATION_CUBOID_TEXTURE);
-    _texture->setImage(image);
+    setTexture(image);
 }
 
 void DecelerationCuboid::applyTo(Player *player)

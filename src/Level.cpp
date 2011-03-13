@@ -2,8 +2,6 @@
 
 Level::Level(const std::string &mapfile)
 {
-    _level = new osg::PositionAttitudeTransform();    
-
     loadMapFromFile(mapfile);
 }
 
@@ -73,7 +71,7 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
         cuboid = new Cuboid(from, size);
     }
 	
-    _level->addChild(cuboid->getNode());
+    addChild(cuboid);
     _collisionObjects.push_back(cuboid->getRigidBody());
     
     // save minimal x values for buckets of close y values
@@ -99,7 +97,7 @@ void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
 	tunnelTransform->setScale(osg::Vec3f(10.0f, atof(tunnelNode.first_attribute("length")->value()), 10.0f));
 	
 	tunnelTransform->setNodeMask(RECEIVE_SHADOW_MASK);
-	_level->addChild(tunnelTransform);
+	addChild(tunnelTransform);
 	
     
 	btConvexTriangleMeshShape* mesh = osgbBullet::btConvexTriMeshCollisionShapeFromOSG(tunnelTransform);
@@ -114,17 +112,12 @@ void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
     _collisionObjects.push_back(new btRigidBody(rbciCuboid));
 }
 
-osg::PositionAttitudeTransform *Level::getNode() const
-{
-    return _level;
-}
-
 std::vector<btRigidBody *> Level::getCollisionObjects() const
 {
     return _collisionObjects;
 }
 
-const std::vector<float> *Level::getMinZValues()
+const std::vector<float> *Level::getMinZValues() const
 {
     return &_minZValues;
 }

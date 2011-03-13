@@ -43,6 +43,7 @@ private:
 	
     const std::vector<float> *_deadlyAltitudes;
     
+protected:
     void initializePlayerModel();
     void initializePlayerPhysics();
     void initializePlayerEffects();
