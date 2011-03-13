@@ -13,7 +13,7 @@ Game::Game(osgViewer::Viewer *viewer) :
     _cameraManipulator = new LazyCameraManipulator();
     
     // setup manipulator to track the player
-    _cameraManipulator->setTrackNode(_player->getNode());
+    _cameraManipulator->setTrackNode(_player);
     _cameraManipulator->setHomePosition(CAMERA_HOME_EYE, CAMERA_HOME_CENTER, CAMERA_HOME_UP);
     
     // set _cameraManipulator as manipulator for the scene
@@ -81,14 +81,12 @@ void Game::initializeScene()
 
     // add level and player to scene and setup heads up display
     shadowedScene->addChild(_level->getNode());
-    shadowedScene->addChild(_player->getNode());
+    shadowedScene->addChild(_player);
     getRootNode()->addChild(_headUpDisplay->getCamera());
 
     getRootNode()->addChild(shadowedScene);
 
 	getRootNode()->addChild(createSkyBoxCubeMap());
-    
-    getRootNode()->addChild(_player->getEffectNode());
 }
 
 void Game::initializePhysicsWorld()

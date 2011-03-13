@@ -27,17 +27,14 @@
 #define PLAYER_ATTITUDE     osg::Quat(osg::DegreesToRadians(180.0f), osg::Vec3(0.0,0.0,1.0))
 #define PLAYER_BBOX_EXTENTS btVector3(0.5, 0.5, 0.5)
 
-class Player
+class Player : public osg::Group
 {
 private:
-    osg::ref_ptr<osg::PositionAttitudeTransform> _player;
-    osg::PositionAttitudeTransform *patPlayer;
+    osg::ref_ptr<osg::PositionAttitudeTransform> _playerPAT;
     
     ParticleEffect *_mainEngine;
     ParticleEffect *_leftEngine;
     ParticleEffect *_rightEngine;
-    ParticleEffect *_leftSteer;
-    ParticleEffect *_rightSteer;
     osg::ref_ptr<osg::Group> _particleEffects;
     
     btPairCachingGhostObject *_playerGhostObject;
@@ -55,8 +52,7 @@ public:
     ~Player();
     
     // getter methods
-    osg::PositionAttitudeTransform *getNode() const;
-    osg::Group *getEffectNode() const;
+    osg::PositionAttitudeTransform *getPlayerPAT() const;
     btPairCachingGhostObject *getGhostObject() const;
     KinematicCharacterController *getController() const;
     PlayerState *getPlayerState() const;

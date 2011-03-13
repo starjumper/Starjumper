@@ -1,4 +1,5 @@
 #include "LazyCameraManipulator.h"
+#include "Player.h"
 
 #include <iostream>
 
@@ -26,10 +27,8 @@ bool LazyCameraManipulator::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAc
 {     
     if(ea.getEventType() == osgGA::GUIEventAdapter::FRAME)
     {
-        osg::Vec3d nodePosition;
-        osg::Quat nodeRotation;
-    
-        computeNodeCenterAndRotation(nodePosition, nodeRotation);
+        const Player *player = dynamic_cast<const Player *>(getTrackNode());
+        const osg::Vec3d nodePosition = player->getPlayerPAT()->getPosition();
 
         float positionDiffX = nodePosition.x() - _oldNodePosition.x();
         int newDirectionX = positionDiffX > 0 ? 1 : positionDiffX < 0 ? -1 : 0;
@@ -63,18 +62,20 @@ bool LazyCameraManipulator::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAc
 
 osg::Matrixd LazyCameraManipulator::getInverseMatrix() const
 {
-    osg::Vec3d nodeCenter;
-    osg::Quat nodeRotation;
+    const Player *player = dynamic_cast<const Player *>(getTrackNode());
+    const osg::Vec3d nodePosition = player->getPlayerPAT()->getPosition();
     
     osg::Matrixd localToWorld, worldToLocal;
     computeNodeLocalToWorld(localToWorld);
     computeNodeWorldToLocal(worldToLocal);
 
-    osg::Vec3d currentNodePosition = osg::Vec3d(_trackNodePath.back()->getBound().center()) * localToWorld;
+    osg::Vec3d currentNodePosition = nodePosition * localToWorld;
     
-    computeNodeCenterAndRotation(nodeCenter,nodeRotation);
+    osg::Vec3d nc;
+    osg::Quat nodeRotation;
+    computeNodeCenterAndRotation(nc, nodeRotation);
                 
-    return osg::Matrixd::translate(-_newCameraPosition.x(), -nodeCenter[1], -nodeCenter[2]) * osg::Matrixd::rotate(nodeRotation.inverse())*osg::Matrixd::rotate(_rotation.inverse())*osg::Matrixd::translate(0.0,0.0,-_distance);
+    return osg::Matrixd::translate(-_newCameraPosition.x(), -nodePosition[1], -nodePosition[2]) * osg::Matrixd::rotate(nodeRotation.inverse())*osg::Matrixd::rotate(_rotation.inverse())*osg::Matrixd::translate(0.0,0.0,-_distance);
 }
 
 void LazyCameraManipulator::resetCamera()

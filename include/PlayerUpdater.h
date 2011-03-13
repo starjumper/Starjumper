@@ -19,13 +19,9 @@
 
 class PlayerUpdater : public osg::NodeCallback 
 {
-private:
-    Player *_player;
-    
 public:
-    PlayerUpdater(Player *player);
+    PlayerUpdater();
     
     virtual void operator()(osg::Node* node, osg::NodeVisitor* nv);
-    
-    osg::Vec3 calculateNextPosition(PlayerState *playerState);
+    osg::Vec3 calculateNextPosition(Player *player);
 };

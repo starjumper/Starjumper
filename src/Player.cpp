@@ -18,20 +18,19 @@ Player::~Player()
 
 void Player::initializePlayerModel()
 {
-    _player = new osg::PositionAttitudeTransform;
-    
     osg::ref_ptr<osg::Node> playerModel = osgDB::readNodeFile(PLAYER_MODEL);
     if(!playerModel)
     {
         throw std::runtime_error("Unable to load player model file!");
     }
     
-    patPlayer = new osg::PositionAttitudeTransform;
+    _playerPAT = new osg::PositionAttitudeTransform;
+    addChild(_playerPAT);
 
-    patPlayer->addChild(playerModel);
-    patPlayer->setScale(PLAYER_SCALE);
-    patPlayer->setAttitude(PLAYER_ATTITUDE);
-    patPlayer->setPosition(osg::Vec3(0.0, 10.0, 5.0));
+    _playerPAT->addChild(playerModel);
+    _playerPAT->setScale(PLAYER_SCALE);
+    _playerPAT->setAttitude(PLAYER_ATTITUDE);
+    _playerPAT->setPosition(osg::Vec3(0.0, 10.0, 5.0));
 
 	// add Light for player shadow
 	osg::Light *playerLight = new osg::Light();
@@ -44,13 +43,11 @@ void Player::initializePlayerModel()
 	playerLight->setDiffuse(osg::Vec4(1.0,0.0,0.0,0.5));
 	playerLight->setAmbient(osg::Vec4(1.0,1.0,1.0,1.0));
 
-	patPlayer->addChild(lightSource);
-
-    _player->setNodeMask(CAST_SHADOW_MASK);
-    _player->addChild(patPlayer);
+	_playerPAT->addChild(lightSource);
+    _playerPAT->setNodeMask(CAST_SHADOW_MASK);
 	
-    PlayerUpdater *p_up = new PlayerUpdater(this);
-    patPlayer->setUpdateCallback(p_up);
+    PlayerUpdater *playerUpdater = new PlayerUpdater();
+    setUpdateCallback(playerUpdater);
 }
 
 void Player::initializePlayerPhysics()
@@ -78,8 +75,6 @@ void Player::initializePlayerEffects()
     _mainEngine = ParticleEffectFactory::createRearEngineEffect();
     _leftEngine = ParticleEffectFactory::createRearEngineEffect();
     _rightEngine = ParticleEffectFactory::createRearEngineEffect();
-    //_leftSteer = ParticleEffectFactory::createSteerEngineEffect();
-    //_rightSteer = ParticleEffectFactory::createSteerEngineEffect();
     
     // position the particle effect emitters
     _mainEngine->setScale(PLAYER_SCALE);
@@ -103,37 +98,19 @@ void Player::initializePlayerEffects()
             osg::Vec3(1.0, 0.0, 0.0)
         ));
     
-   /* _leftSteer->setScale(PLAYER_SCALE);
-    _leftSteer->setPosition(osg::Vec3(-1.8, 5.0, 0.7));
-    _leftSteer->setAttitude(osg::Quat(
-            osg::DegreesToRadians(180.0),
-            osg::Vec3(1.0, 0.0, 0.0)
-        ));
-    
-    _rightSteer->setScale(PLAYER_SCALE);
-    _rightSteer->setPosition(osg::Vec3(1.8, 4.0, 0.7));
-/*    _leftSteer->setAttitude(osg::Quat(
-            osg::DegreesToRadians(90.0),
-            osg::Vec3(1.0, 0.0, 0.0)
-        ));*/
-    
-    patPlayer->addChild(_mainEngine);
-    patPlayer->addChild(_leftEngine);
-    patPlayer->addChild(_rightEngine);
-    //patPlayer->addChild(_leftSteer);
-    //patPlayer->addChild(_rightSteer);
+    _playerPAT->addChild(_mainEngine);
+    _playerPAT->addChild(_leftEngine);
+    _playerPAT->addChild(_rightEngine);
     
     // add the other components to the scene
-    _particleEffects->addChild(_mainEngine->getEffectRoot());
-    _particleEffects->addChild(_leftEngine->getEffectRoot());
-    _particleEffects->addChild(_rightEngine->getEffectRoot());
-    //_particleEffects->addChild(_leftSteer->getEffectRoot());
-    //_particleEffects->addChild(_rightSteer->getEffectRoot());
+    addChild(_mainEngine->getEffectRoot());
+    addChild(_leftEngine->getEffectRoot());
+    addChild(_rightEngine->getEffectRoot());
 }
 
 void Player::toHomePosition()
 {
-    patPlayer->setPosition(osg::Vec3(0.0, 10.0, 5.0));
+    _playerPAT->setPosition(osg::Vec3(0.0, 10.0, 5.0));
     
     btTransform playerTransform;
 	playerTransform.setIdentity();
@@ -144,14 +121,9 @@ void Player::toHomePosition()
     _rightEngine->clearParticles();
 }
 
-osg::PositionAttitudeTransform *Player::getNode() const
+osg::PositionAttitudeTransform *Player::getPlayerPAT() const
 {
-    return _player;
-}
-
-osg::Group *Player::getEffectNode() const
-{
-    return _particleEffects;
+    return _playerPAT;
 }
 
 btPairCachingGhostObject *Player::getGhostObject() const
@@ -171,12 +143,12 @@ PlayerState *Player::getPlayerState() const
 
 void Player::setPosition(const osg::Vec3 position)
 {
-    patPlayer->setPosition(position);
+    _playerPAT->setPosition(position);
 }
 
 void Player::setAngles(const float angleX, const float angleY, const float angleZ)
 {
-    patPlayer->setAttitude(osg::Quat(
+    _playerPAT->setAttitude(osg::Quat(
         osg::DegreesToRadians(angleX), osg::Vec3(1.0,0.0,0.0),
         osg::DegreesToRadians(angleY), osg::Vec3(0.0,1.0,0.0),
         osg::DegreesToRadians(angleZ), osg::Vec3(0.0,0.0,1.0)));
