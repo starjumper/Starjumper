@@ -29,9 +29,11 @@ bool LazyCameraManipulator::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAc
     {
         const Player *player = dynamic_cast<const Player *>(getTrackNode());
         const osg::Vec3d nodePosition = player->getPlayerPAT()->getPosition();
+        PlayerState *playerState = player->getPlayerState();
 
-        float positionDiffX = nodePosition.x() - _oldNodePosition.x();
-        int newDirectionX = positionDiffX > 0 ? 1 : positionDiffX < 0 ? -1 : 0;
+        //float positionDiffX = nodePosition.x() - _oldNodePosition.x();
+        //int newDirectionX = positionDiffX > 0 ? 1 : positionDiffX < 0 ? -1 : 0;
+        int newDirectionX = playerState->requestMoveRight() ? 1 : playerState->requestMoveLeft() ? -1 : 0;
 
         if(fabs(_oldCameraPosition.x() - nodePosition.x()) < 0.0001 || _firstRun)
         {
