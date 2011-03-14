@@ -11,6 +11,7 @@ private:
     float _angleX;
     float _angleY;
     
+    int _directionX;
     btVector3 _direction;
     
     bool _requestMoveLeft;
@@ -34,6 +35,9 @@ public:
     
     float getAngleY() const;
     void setAngleY(const float angle);
+    
+    int getDirectionX() const;
+    void setDirectionX(const int directionX);
     
     btVector3 &getDirection();
     void setDirection(btVector3 &direction);

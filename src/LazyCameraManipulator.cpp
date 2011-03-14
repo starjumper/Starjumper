@@ -27,37 +27,54 @@ bool LazyCameraManipulator::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAc
 {     
     if(ea.getEventType() == osgGA::GUIEventAdapter::FRAME)
     {
+        // retrieve player position and direction of movement
         const Player *player = dynamic_cast<const Player *>(getTrackNode());
         const osg::Vec3d nodePosition = player->getPlayerPAT()->getPosition();
-        PlayerState *playerState = player->getPlayerState();
-
-        //float positionDiffX = nodePosition.x() - _oldNodePosition.x();
-        //int newDirectionX = positionDiffX > 0 ? 1 : positionDiffX < 0 ? -1 : 0;
-        int newDirectionX = playerState->requestMoveRight() ? 1 : playerState->requestMoveLeft() ? -1 : 0;
-
-        if(fabs(_oldCameraPosition.x() - nodePosition.x()) < 0.0001 || _firstRun)
+        const PlayerState *playerState = player->getPlayerState();
+        const int newDirectionX = playerState->getDirectionX();
+        
+        // if this is the first run, follow node directly
+        if(_firstRun)
         {
             _newCameraPosition.x() = nodePosition.x();
             _oldCameraPosition.x() = nodePosition.x();
+            _oldNodePosition = nodePosition;
+            _durationOfMovementX = 0;
             _firstRun = false;
             return true;
         }
 
-        if(newDirectionX == _directionOfMovementX)
-        {
-            _durationOfMovementX += 1;
-            _newCameraPosition.x() = _oldCameraPosition.x() + (nodePosition.x() - _oldCameraPosition.x()) * (_durationOfMovementX / MAX_FRAME_DELAY);
-        }
-        else
+        // +++ step 1 +++
+        // check if direction of movement has changed
+        bool directionChanged = false;
+        if(newDirectionX != _directionOfMovementX)
         {
             if(newDirectionX != 0)
+            {
                 _durationOfMovementX = 0;
+                directionChanged = true;
+            }
             _directionOfMovementX = newDirectionX;
         }
 
+        // +++ step 2 +++
+        // if direction has not changed, check if we were already following the node
+        if(!directionChanged && fabs(_oldCameraPosition.x() - _oldNodePosition.x()) < 0.001 && _durationOfMovementX > 10)
+        {
+            _newCameraPosition.x() = nodePosition.x();
+            _oldCameraPosition.x() = nodePosition.x();
+            _oldNodePosition = nodePosition;
+            return true;
+        }
+        
+        // +++ step 3 +++
+        // in any other case continue (or begin) approaching the node
+        _durationOfMovementX += 1;
+        _newCameraPosition.x() = _oldCameraPosition.x() + (nodePosition.x() - _oldCameraPosition.x()) * (_durationOfMovementX / MAX_FRAME_DELAY);
+
         _oldNodePosition = nodePosition;
         _oldCameraPosition = _newCameraPosition;
-     }
+    }
 
 	return true;
 }

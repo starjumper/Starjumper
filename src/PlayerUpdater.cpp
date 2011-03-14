@@ -34,11 +34,13 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(Player *player)
     {
         direction -= btVector3(speed / 10.0f, 0, 0);
         playerState->setAngleY(angleY + 3 < 30 ? angleY + 3 : 30);
+        playerState->setDirectionX(-1);
     }
     else if(playerState->requestMoveRight())
     {
         direction += btVector3(speed / 10.0f, 0, 0);
         playerState->setAngleY(angleY - 3 > -30 ? angleY - 3 : -30);
+        playerState->setDirectionX(1);
     }
     else
     {
@@ -48,6 +50,7 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(Player *player)
             playerState->setAngleY(angleY + 5 < 0 ? angleY + 5 : 0);
         else
             playerState->setAngleY(0);
+        playerState->setDirectionX(0);
     }
     
     if(playerState->requestAccelerate())

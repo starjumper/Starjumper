@@ -11,6 +11,7 @@ void PlayerState::reset()
     _angleX = 0.0f;
     _angleY = 0.0f;
     
+    _directionX = 0;
     _direction = btVector3(0,0,4);
     
     _requestMoveLeft = false;
@@ -49,6 +50,16 @@ float PlayerState::getAngleY() const
 void PlayerState::setAngleY(const float angle)
 {
     _angleY = angle;
+}
+
+int PlayerState::getDirectionX() const
+{
+    return _directionX;
+}
+
+void PlayerState::setDirectionX(const int directionX)
+{
+    _directionX = directionX;
 }
 
 btVector3 &PlayerState::getDirection()
