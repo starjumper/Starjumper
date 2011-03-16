@@ -88,28 +88,11 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
 
 void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
 {
-	osg::Node *tunnelModel = osgDB::readNodeFile(TUNNEL_MODEL_FILE);
-	osg::PositionAttitudeTransform *tunnelTransform = new osg::PositionAttitudeTransform();
-    osg::Vec3 position = getVectorFromXMLNode("position", tunnelNode);
+	osg::Vec3 position = getVectorFromXMLNode("position", tunnelNode);
+	Tunnel *tunnel = new Tunnel(position, atof(tunnelNode.first_attribute("length")->value()));
 
-	tunnelTransform->addChild(tunnelModel);
-	tunnelTransform->setPosition(position);
-	tunnelTransform->setScale(osg::Vec3f(10.0f, atof(tunnelNode.first_attribute("length")->value()), 10.0f));
-	
-	tunnelTransform->setNodeMask(RECEIVE_SHADOW_MASK);
-	addChild(tunnelTransform);
-	
-    
-	btCollisionShape *mesh = osgbBullet::btTriMeshCollisionShapeFromOSG(tunnelTransform);
-
-    // create MotionState for the cuboid
-    btDefaultMotionState *msCuboid = new btDefaultMotionState();
-    
-    // passing 0 as first and a null-vector as last argument means this object is immovable
-    btRigidBody::btRigidBodyConstructionInfo rbciCuboid(0, msCuboid, mesh, btVector3(0,0,0));
-    
-    // construct rigid body from previously specified construction info
-    _collisionObjects.push_back(new btRigidBody(rbciCuboid));
+	addChild(tunnel->getNode());
+	_collisionObjects.push_back(tunnel->getRigidBody());
 }
 
 std::vector<btRigidBody *> Level::getCollisionObjects() const

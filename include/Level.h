@@ -19,8 +19,8 @@
 #include "RapidXML/rapidxml_utils.hpp"
 
 #include "Cuboid.h"
+#include "Tunnel.h"
 
-#define TUNNEL_MODEL_FILE		"resources/models/tunnel.osg"
 #define DEFAULT_COLOR	        osg::Vec4f(0.0f, 0.5f, 0.7f, 1.0f)
 
 class Level : public osg::Group
