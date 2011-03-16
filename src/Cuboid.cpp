@@ -133,18 +133,13 @@ void Cuboid::constructRigidBody(const osg::Vec3 &center, const float width, cons
     btRigidBody::btRigidBodyConstructionInfo rbciCuboid(0, msCuboid, bsCuboid, btVector3(0,0,0));
     
     // construct rigid body from previously specified construction info
-    _rigidBody = new btRigidBody(rbciCuboid);
-    _rigidBody->setUserPointer(this);
+	setRigidBody(new btRigidBody(rbciCuboid));
+	getRigidBody()->setUserPointer(this);
 }
 
 void Cuboid::setTexture(osg::Image *image)
 {
     _texture->setImage(image);
-}
-
-btRigidBody *Cuboid::getRigidBody() const
-{
-    return _rigidBody;
 }
 
 AccelerationCuboid::AccelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size) :

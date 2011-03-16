@@ -15,16 +15,16 @@
 #include <osgbBullet/CollisionShapes.h>
 
 #include "types.h"
+#include "EnvironmentObject.h"
 #include "Player.h"
 
 #define DEFAULT_CUBOID_COLOR        osg::Vec4f(0.8f, 0.5f, 0.7f, 0.5f)
 #define ACCELERATION_CUBOID_TEXTURE "resources/textures/acceleration.png"
 #define DECELERATION_CUBOID_TEXTURE "resources/textures/deceleration.png"
 
-class Cuboid : public osg::Geode
+class Cuboid : public EnvironmentObject
 {
 private:
-    btRigidBody *_rigidBody;
     osg::Texture2D *_texture;
     
 protected:
@@ -34,9 +34,7 @@ public:
     Cuboid(const osg::Vec3 &from, const osg::Vec3 &size);
     
     void setTexture(osg::Image *image);
-    
-    btRigidBody *getRigidBody() const;
-    
+        
     virtual void applyTo(Player *player) { };
 };
 

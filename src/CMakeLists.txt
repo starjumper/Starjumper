@@ -13,6 +13,7 @@ SET(SOURCE
     PlayerUpdater.cpp
     PlayerState.cpp
 	HeadUpDisplay.cpp
+	EnvironmentObject.cpp
 	Cuboid.cpp
     KinematicCharacterController.cpp
     ParticleEffectFactory.cpp
@@ -21,6 +22,7 @@ SET(SOURCE
 
 #dirty!
 SET(HEADER
+	../include/EnvironmentObject.h
 	../include/Cuboid.h
 	../include/Game.h
 	../include/GameKeyboardHandler.h

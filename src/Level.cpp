@@ -100,7 +100,7 @@ void Level::addTunnel(const rapidxml::xml_node<> &tunnelNode)
 	addChild(tunnelTransform);
 	
     
-	btConvexTriangleMeshShape* mesh = osgbBullet::btConvexTriMeshCollisionShapeFromOSG(tunnelTransform);
+	btCollisionShape *mesh = osgbBullet::btTriMeshCollisionShapeFromOSG(tunnelTransform);
 
     // create MotionState for the cuboid
     btDefaultMotionState *msCuboid = new btDefaultMotionState();
