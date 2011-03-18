@@ -207,7 +207,7 @@ void WorldUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
         else
         {
             double currentSimTime = _game->getViewer()->getFrameStamp()->getSimulationTime();
-            _game->getWorld()->stepSimulation(currentSimTime - _previousSimTime);
+            _game->getWorld()->stepSimulation(currentSimTime - _previousSimTime, 0);
             _previousSimTime = currentSimTime;
     
             // restart level if player is dead
