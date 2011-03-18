@@ -34,7 +34,6 @@ protected:
     osg::Vec3 getVectorFromXMLNode(const std::string &name, const rapidxml::xml_node<> &node) const;
     void addCuboid(const rapidxml::xml_node<> &cuboidNode);
     void addTunnel(const rapidxml::xml_node<> &tunnelNode);
-    void addCuboidTunnel(const rapidxml::xml_node<> &tunnelNode);
   
 public:
     Level(const std::string &mapfile);
