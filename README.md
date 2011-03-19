@@ -3,7 +3,7 @@
 ## Requirements
 
 ### OpenSceneGraph
-**get Version [2.8.3](http://www.openscenegraph.org/projects/osg/wiki/Downloads)**
+get Version [2.8.3](http://www.openscenegraph.org/projects/osg/wiki/Downloads)
 
 **for Mac OS X (32 Bit)**
 	$ cmake -DOSG_WINDOWING_SYSTEM=Cocoa -DOSG_DEFAULT_IMAGE_PLUGIN_FOR_OSX=imageio
