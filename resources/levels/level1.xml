@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map>
+	
 <cuboid type="accelerate">
 	<position x="-100" y="0" z="0" />
 	<size x="200" y="1000" z="0.300000" />
 </cuboid>
 
-<tunnel length="100">
+<tunnel length="20">
 	<position x="2.000000" y="50" z="0" />
 </tunnel>
+
+<cuboidtunnel length="20">
+	<position x="2.000000" y="300" z="0" />
+</cuboidtunnel>
 
 </map>
