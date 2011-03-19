@@ -3,7 +3,7 @@
 ## Requirements
 
 ### OpenSceneGraph
- * get Version [2.8.3](http://www.openscenegraph.org/projects/osg/wiki/Downloads)
+ get Version [2.8.3](http://www.openscenegraph.org/projects/osg/wiki/Downloads)
 
  1. for Mac OS X (32 Bit)
  	$ cmake -DOSG_WINDOWING_SYSTEM=Cocoa -DOSG_DEFAULT_IMAGE_PLUGIN_FOR_OSX=imageio
@@ -11,9 +11,9 @@
  	$ sudo make install
 
  2. for Mac OS X (64 Bit)
- 	$ cmake -DOSG_WINDOWING_SYSTEM=Cocoa -DOSG_DEFAULT_IMAGE_PLUGIN_FOR_OSX=imageio -DCMAKE_OSX_ARCHITECTURES=x86_64
- 	$ make
- 	$ sudo make install
+	$ cmake -DOSG_WINDOWING_SYSTEM=Cocoa -DOSG_DEFAULT_IMAGE_PLUGIN_FOR_OSX=imageio -DCMAKE_OSX_ARCHITECTURES=x86_64
+	$ make
+	$ sudo make install
 
 ### Bullet Physics Library
 ### osgBullet
