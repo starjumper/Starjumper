@@ -1,6 +1,7 @@
 #pragma once
 
 #include <sstream>
+#include <sys/timeb.h>
 
 #include <osg/Geode>
 #include <osg/Depth>
@@ -33,8 +34,7 @@ private:
     osgText::Text *_timer;
 
     Player *_player;
-    clock_t _startTime;
-    clock_t _timePassed;
+    struct timeb _startTime;
 
 public:
 	HeadUpDisplay(Player *player);

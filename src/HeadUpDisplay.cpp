@@ -50,8 +50,7 @@ void HeadUpDisplay::initializeTimer()
 
 void HeadUpDisplay::resetTimer()
 {
-    _startTime = clock();
-    _timePassed = 0;
+    ftime(&_startTime);
 }
 
 void HeadUpDisplay::updateSpeedBar()
@@ -69,7 +68,12 @@ void HeadUpDisplay::updateSpeedBar()
 
 void HeadUpDisplay::updateTimer()
 {
-    _timePassed = (clock() - _startTime) / 1000;
+    struct timeb currentTime;
+
+    ftime(&currentTime);
+    
+    time_t _timePassed = (((currentTime.time - _startTime.time) * 1000) + (currentTime.millitm - _startTime.millitm)) / 10;
+        
     
 	std::stringstream ss;
 	ss << _timePassed;
