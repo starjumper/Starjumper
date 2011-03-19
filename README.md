@@ -1,20 +1,29 @@
-##############
-# STARJUMPER #
-##############
+# Starjumper
 
-REQUIREMENTS
-============
+## Requirements
 
-- OpenSceneGraph
-- bullet Physics Library
+### OpenSceneGraph
+ * get Version 2.8.3 from http://www.openscenegraph.org/projects/osg/wiki/Downloads
 
-INSTALL
-=======
+ 1. for Mac OS X (32 Bit)
+ > cmake -DOSG_WINDOWING_SYSTEM=Cocoa -DOSG_DEFAULT_IMAGE_PLUGIN_FOR_OSX=imageio
+ > make
+ > sudo make install
+
+ 2. for Mac OS X (64 Bit)
+ > cmake -DOSG_WINDOWING_SYSTEM=Cocoa -DOSG_DEFAULT_IMAGE_PLUGIN_FOR_OSX=imageio -DCMAKE_OSX_ARCHITECTURES=x86_64
+ > make
+ > sudo make install
+
+### Bullet Physics Library
+### osgBullet
+
+## Install and run Starjumper
 cmake .
 make
+./bin/Starjumper
 
-CODING CONVENTIONS
-==================
+## Coding Conventions
 
 - Tabs: 4 Whitespaces
 
@@ -64,20 +73,6 @@ CODING CONVENTIONS
 	- unless required otherwise, use size_t as type for run variable
 	- preincrement, not postincrement the run variable
 	- e.g.: for(size_t i = 0; i < 100; ++i)
-
-- Don't use if constructs without brackets
-
-	Good:
-
-		if(your_mother == your_grandma)
-		{
-			std::cout << "haha" << std::cout;
-		}
-		
-	Bad:
 	
-		if(your_mother == your_grandma)
-			std::cout << "haha" << std::cout;
-			
 - Don't use namespaces!
 - use const if possible!
