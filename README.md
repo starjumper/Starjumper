@@ -16,7 +16,16 @@ get Version [2.8.3](http://www.openscenegraph.org/projects/osg/wiki/Downloads)
 	$ sudo make install
 
 ### Bullet Physics Library
+get Version [2.75]
+install as described in the instructions	
+
+### osgWorks
+get [latest Version](http://code.google.com/p/osgworks/)
+install as described in the instructions	
+	
 ### osgBullet
+get [latest Version](http://code.google.com/p/osgbullet/)
+install as described in the instructions	
 
 ## Install and run Starjumper
 	$ cmake .
