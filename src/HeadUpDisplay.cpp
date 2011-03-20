@@ -3,15 +3,22 @@
 HeadUpDisplay::HeadUpDisplay(Player *player) : 
     _player(player)
 {
-    _node = new osg::Geode;
-    _node->getOrCreateStateSet()->setMode(GL_LIGHTING,osg::StateAttribute::OFF);
+    //_node = new osg::Geode;
+    //_node->getOrCreateStateSet()->setMode(GL_LIGHTING,osg::StateAttribute::OFF);
     
-    _node->setUserData(this);
-    _node->setUpdateCallback(new HeadUpDisplayUpdateCallback);
+    //_node->setUserData(this);
+    //_node->setUpdateCallback(new HeadUpDisplayUpdateCallback);
     
+	//initializeCamera();
+	//initializeSpeedBar();
+    //initializeTimer();
+
+	_hudPat = new osg::PositionAttitudeTransform();
+	_hudPat->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
+	_hudPat->setUserData(this);
+	_hudPat->setUpdateCallback(new HeadUpDisplayUpdateCallback);
+
 	initializeCamera();
-	initializeSpeedBar();
-    initializeTimer();
 }
 
 void HeadUpDisplay::initializeCamera()
@@ -22,7 +29,8 @@ void HeadUpDisplay::initializeCamera()
 	_camera->setViewMatrix(osg::Matrix::identity());
 	_camera->setClearMask(GL_DEPTH_BUFFER_BIT);
 	_camera->setRenderOrder(osg::Camera::POST_RENDER);
-    _camera->addChild(_node);
+    //_camera->addChild(__node);
+	_camera->addChild(_hudPat);
 }
 
 osg::Camera *HeadUpDisplay::getCamera()
@@ -32,9 +40,16 @@ osg::Camera *HeadUpDisplay::getCamera()
 
 void HeadUpDisplay::initializeSpeedBar()
 {
-    _speedBar = new osg::ShapeDrawable(new osg::Box(SPEEDBAR_POSITION, SPEEDBAR_WIDTH, 0, 0));
+    //_speedBar = new osg::ShapeDrawable(new osg::Box(SPEEDBAR_POSITION, SPEEDBAR_WIDTH, 0, 0));
+	//_node->addDrawable(_speedBar);
 
-	_node->addDrawable(_speedBar);
+	_speedPat = new osg::PositionAttitudeTransform();
+
+	_hudPat->addChild(speedPat);
+}
+
+void HeadUpDisplay::initializeSpeedMeter()
+{
 }
 
 void HeadUpDisplay::initializeTimer()
@@ -45,7 +60,7 @@ void HeadUpDisplay::initializeTimer()
 	_timer->setFont(TIMER_FONT);
 	_timer->setPosition(TIMER_POSITION);
 	
-    _node->addDrawable(_timer);
+    //_node->addDrawable(_timer);
 }
 
 void HeadUpDisplay::resetTimer()
@@ -59,8 +74,9 @@ void HeadUpDisplay::updateSpeedBar()
 	float playerSpeed = _player->getPlayerState()->getSpeed();
 
 //    _speedBar->setColor(osg::Vec4(1.0, 0.005, 0.8, 0.5));
-    _speedBar->setColor(osg::Vec4(1.0, playerSpeed, 0.0, 0.5));
-    ((osg::Box *)_speedBar->getShape())->setHalfLengths(osg::Vec3(SPEEDBAR_WIDTH, SPEEDBAR_MAX_LENGTH * playerSpeed, 1.0f));
+
+    //_speedBar->setColor(osg::Vec4(1.0, playerSpeed, 0.0, 0.5));
+    //((osg::Box *)_speedBar->getShape())->setHalfLengths(osg::Vec3(SPEEDBAR_WIDTH, SPEEDBAR_MAX_LENGTH * playerSpeed, 1.0f));
 
     /*
 	speedDrawable->setColor(osg::Vec4(1.0 * playerSpeed, 0.3, 0.8, 1.0));
@@ -95,6 +111,6 @@ void HeadUpDisplayUpdateCallback::operator()(osg::Node *node, osg::NodeVisitor *
 {
     osg::ref_ptr<HeadUpDisplay> hud = dynamic_cast<HeadUpDisplay *> (node->getUserData());
 
-    hud->updateSpeedBar();
-    hud->updateTimer();
+    //hud->updateSpeedBar();
+    //hud->updateTimer();
 }

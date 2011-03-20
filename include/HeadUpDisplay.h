@@ -36,6 +36,9 @@ private:
     clock_t _startTime;
     clock_t _timePassed;
 
+	osg::PositionAttitudeTransform *_hudPat;
+	osg::PositionAttitudeTransform *_speedPat;
+
 public:
 	HeadUpDisplay(Player *player);
     osg::Camera *getCamera();
@@ -43,6 +46,8 @@ public:
 	void initializeCamera();
 	void initializeSpeedBar();
 	void initializeTimer();
+
+	void initializeSpeedMeter();
 	
     void resetTimer();
 	void updateSpeedBar();
