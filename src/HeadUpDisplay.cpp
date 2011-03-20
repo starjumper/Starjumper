@@ -1,5 +1,9 @@
 #include "HeadUpDisplay.h"
 
+
+// _camera -> _hudPat -> _timeNode -> _timer
+//		              -> _speedPat
+
 HeadUpDisplay::HeadUpDisplay(Player *player) : 
     _player(player)
 {
@@ -19,6 +23,7 @@ HeadUpDisplay::HeadUpDisplay(Player *player) :
 	_hudPat->setUpdateCallback(new HeadUpDisplayUpdateCallback);
 
 	initializeCamera();
+	initializeTimer();
 }
 
 void HeadUpDisplay::initializeCamera()
@@ -45,22 +50,21 @@ void HeadUpDisplay::initializeSpeedBar()
 
 	_speedPat = new osg::PositionAttitudeTransform();
 
-	_hudPat->addChild(speedPat);
-}
-
-void HeadUpDisplay::initializeSpeedMeter()
-{
+	_hudPat->addChild(_speedPat);
 }
 
 void HeadUpDisplay::initializeTimer()
 {
     resetTimer();
     
+	_timeNode = new osg::Geode();
+
 	_timer = new osgText::Text();
 	_timer->setFont(TIMER_FONT);
 	_timer->setPosition(TIMER_POSITION);
 	
-    //_node->addDrawable(_timer);
+    _timeNode->addDrawable(_timer);
+	_hudPat->addChild(_timeNode);
 }
 
 void HeadUpDisplay::resetTimer()
@@ -112,5 +116,5 @@ void HeadUpDisplayUpdateCallback::operator()(osg::Node *node, osg::NodeVisitor *
     osg::ref_ptr<HeadUpDisplay> hud = dynamic_cast<HeadUpDisplay *> (node->getUserData());
 
     //hud->updateSpeedBar();
-    //hud->updateTimer();
+    hud->updateTimer();
 }

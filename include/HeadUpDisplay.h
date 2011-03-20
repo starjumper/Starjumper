@@ -28,7 +28,7 @@ class HeadUpDisplay : public osg::Referenced
 {
 private:
 	osg::ref_ptr<osg::Camera> _camera;
-	osg::Geode *_node;
+	osg::Geode *_timeNode;
 	osg::ShapeDrawable *_speedBar;
     osgText::Text *_timer;
 
@@ -46,8 +46,6 @@ public:
 	void initializeCamera();
 	void initializeSpeedBar();
 	void initializeTimer();
-
-	void initializeSpeedMeter();
 	
     void resetTimer();
 	void updateSpeedBar();
