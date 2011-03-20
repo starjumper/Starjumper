@@ -82,7 +82,7 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
     // needed for detection whether player is falling to dead    
     int yBucketIndex = (int)((from.y() + size.y()) / 20.0f);
 	
-	while(_minZValues.size() <= yBucketIndex)
+	while((int)_minZValues.size() <= yBucketIndex)
         _minZValues.push_back(from.z());
     
     // if current cuboid is lower then z -> adjust bucket value
