@@ -1,6 +1,6 @@
 #include "Cuboid.h"
 
-Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
+Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size, const osg::Vec3 &color)
 {
     osg::Vec3 to = from + size;
     osg::Vec3 center = osg::Vec3(
@@ -89,7 +89,21 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
         drawable->addPrimitiveSet(face);
     }
     
+    osg::Vec4Array* colors = new osg::Vec4Array;
+    {
+        colors->push_back(osg::Vec4(color, 1.0f) );
+        colors->push_back(osg::Vec4(color, 1.0f) ); 
+        colors->push_back(osg::Vec4(color, 1.0f) ); 
+        colors->push_back(osg::Vec4(color, 1.0f) ); 
+        colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, 0.0f) ); // textured top surface
+        colors->push_back(osg::Vec4(color, 1.0f) );
+        
+        drawable->setColorArray(colors);
+        drawable->setColorBinding(osg::Geometry::BIND_PER_PRIMITIVE);
+    }
+    
     osg::Vec2Array* texcoords = new osg::Vec2Array(8);
+    {
        (*texcoords)[0].set(width, 0.0f); // TOP
        (*texcoords)[1].set(0.0f, 0.0f); // TOP
        (*texcoords)[2].set(0.0f,  0.0f); // ""
@@ -100,6 +114,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size)
        (*texcoords)[7].set(0.0f,  0.0f); // "" 
        
        drawable->setTexCoordArray(0,texcoords);
+   }
 	    
     _texture = new osg::Texture2D;
     _texture->setDataVariance(osg::Object::DYNAMIC); 
@@ -142,8 +157,8 @@ void Cuboid::setTexture(osg::Image *image)
     _texture->setImage(image);
 }
 
-AccelerationCuboid::AccelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
-    Cuboid(from, size)
+AccelerationCuboid::AccelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size, const osg::Vec3 &color) :
+    Cuboid(from, size, color)
 {    
     osg::Image *image = osgDB::readImageFile(ACCELERATION_CUBOID_TEXTURE);
     setTexture(image);
@@ -160,8 +175,8 @@ void AccelerationCuboid::applyTo(Player *player)
     }
 }
 
-DecelerationCuboid::DecelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
-    Cuboid(from, size)
+DecelerationCuboid::DecelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size, const osg::Vec3 &color) :
+    Cuboid(from, size, color)
 {    
     osg::Image *image = osgDB::readImageFile(DECELERATION_CUBOID_TEXTURE);
     setTexture(image);

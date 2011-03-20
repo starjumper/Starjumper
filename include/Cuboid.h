@@ -31,7 +31,7 @@ protected:
     void constructRigidBody(const osg::Vec3 &center, const float width, const float depth, const float height);
     
 public:  
-    Cuboid(const osg::Vec3 &from, const osg::Vec3 &size);
+    Cuboid(const osg::Vec3 &from, const osg::Vec3 &size, const osg::Vec3 &color);
     
     void setTexture(osg::Image *image);
         
@@ -41,13 +41,13 @@ public:
 class AccelerationCuboid : public Cuboid
 {
     public:
-        AccelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size);
+        AccelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size, const osg::Vec3 &color);
         void applyTo(Player *player);
 };
 
 class DecelerationCuboid : public Cuboid
 {
     public:
-        DecelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size);
+        DecelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size, const osg::Vec3 &color);
         void applyTo(Player *player);
 };
