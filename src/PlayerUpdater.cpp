@@ -81,9 +81,6 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(Player *player)
             playerState->beDead();
     }
     
-    std::cout << "----> 2" << std::endl;
-    
-    
     direction += btVector3(0, playerState->getSpeed(), 0);
     playerController->setWalkDirection(direction);
 
@@ -92,8 +89,6 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(Player *player)
         playerController->jump();
     
     btVector3 position = playerController->getGhostObject()->getWorldTransform().getOrigin();
-    
-    std::cout << "----> 3" << std::endl;
-    
+        
     return osgbBullet::asOsgVec3(position);
 }

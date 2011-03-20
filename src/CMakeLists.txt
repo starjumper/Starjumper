@@ -16,6 +16,7 @@ SET(SOURCE
 	EnvironmentObject.cpp
 	Cuboid.cpp
 	Tunnel.cpp
+	Goal.cpp
     KinematicCharacterController.cpp
     ParticleEffectFactory.cpp
     Skybox.cpp
@@ -26,6 +27,7 @@ SET(HEADER
 	../include/EnvironmentObject.h
 	../include/Cuboid.h
 	../include/Tunnel.h
+	../include/Goal.h
 	../include/Game.h
 	../include/GameKeyboardHandler.h
 	../include/GameManager.h
