@@ -198,8 +198,6 @@ WorldUpdater::WorldUpdater(Game *game) :
 
 void WorldUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
 {    
-    if(_game->isRunning())
-    {        
         if(_previousSimTime == 0.0f)
         {
             _previousSimTime = _game->getViewer()->getFrameStamp()->getSimulationTime();
@@ -217,5 +215,4 @@ void WorldUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
                 _game->restartLevel(); 
             }
         }
-    }
 }

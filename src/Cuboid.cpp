@@ -95,7 +95,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size, const osg::Vec3 &co
         colors->push_back(osg::Vec4(color, 1.0f) ); 
         colors->push_back(osg::Vec4(color, 1.0f) ); 
         colors->push_back(osg::Vec4(color, 1.0f) ); 
-        colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, 0.0f) ); // textured top surface
+        colors->push_back(osg::Vec4(color, 1.0f) ); // textured top surface
         colors->push_back(osg::Vec4(color, 1.0f) );
         
         drawable->setColorArray(colors);
