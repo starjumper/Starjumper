@@ -83,13 +83,7 @@ osg::Matrixd LazyCameraManipulator::getInverseMatrix() const
 {
     const Player *player = dynamic_cast<const Player *>(getTrackNode());
     const osg::Vec3d nodePosition = player->getPlayerPAT()->getPosition();
-    
-    osg::Matrixd localToWorld, worldToLocal;
-    computeNodeLocalToWorld(localToWorld);
-    computeNodeWorldToLocal(worldToLocal);
-
-    osg::Vec3d currentNodePosition = nodePosition * localToWorld;
-    
+        
     osg::Vec3d nc;
     osg::Quat nodeRotation;
     computeNodeCenterAndRotation(nc, nodeRotation);

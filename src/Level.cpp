@@ -21,6 +21,8 @@ void Level::loadMapFromFile(const std::string &mapfile)
             addTunnel(*it);
         else if(strcmp(it->name(), "cuboidtunnel") == 0)
             addCuboidTunnel(*it);
+        else if(strcmp(it->name(), "goal") == 0)
+            addGoal(*it);
 		else
             throw std::runtime_error("Error: Unrecognized element in level file!");
     }    
@@ -104,6 +106,15 @@ void Level::addCuboidTunnel(const rapidxml::xml_node<> &tunnelNode)
 
 	addChild(tunnel->getNode());
 	_collisionObjects.push_back(tunnel->getRigidBody());
+}
+
+void Level::addGoal(const rapidxml::xml_node<> &goalNode)
+{
+	osg::Vec3 position = getVectorFromXMLNode("position", goalNode);
+	Goal *goal = new Goal(position);
+
+	addChild(goal->getNode());
+	_collisionObjects.push_back(goal->getRigidBody());
 }
 
 std::vector<btRigidBody *> Level::getCollisionObjects() const

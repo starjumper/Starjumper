@@ -68,4 +68,6 @@ public:
     
     void setEnginesAccelerating(const float speed);
     void setEnginesDecelerating(const float speed);
+    
+    void reset();
 };

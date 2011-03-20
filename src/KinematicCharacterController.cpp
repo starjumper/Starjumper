@@ -80,11 +80,8 @@ KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObj
 	m_convexShape=convexShape;	
 	m_useWalkDirection = true;	// use walk direction by default, legacy behavior
 	m_velocityTimeInterval = 0.0;
-    
-    m_jumpSpeed = 20.0f;
-    m_fallSpeed = 0.0f;
-    m_onGround = false;
-    m_groundObject = NULL;
+
+    reset();
 }
 
 KinematicCharacterController::~KinematicCharacterController ()
@@ -401,6 +398,10 @@ btScalar timeInterval
 
 void KinematicCharacterController::reset ()
 {
+    m_jumpSpeed = 20.0f;
+    m_fallSpeed = 0.0f;
+    m_onGround = false;
+    m_groundObject = NULL;
 }
 
 void KinematicCharacterController::warp (const btVector3& origin)

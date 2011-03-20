@@ -14,4 +14,8 @@
 	<position x="2.000000" y="300" z="0" />
 </cuboidtunnel>
 
+<goal>
+	<position x="2.000000" y="500" z="0" />
+</goal>
+
 </map>

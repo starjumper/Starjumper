@@ -32,7 +32,7 @@ void Game::runLevel(const std::string &mapfile)
     {
         delete _world;
         clearSceneData();
-        _player->getPlayerState()->reset();
+        _player->reset();
     }
     
     _level = new Level(mapfile);
@@ -199,7 +199,7 @@ WorldUpdater::WorldUpdater(Game *game) :
 void WorldUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
 {    
     if(_game->isRunning())
-    {
+    {        
         if(_previousSimTime == 0.0f)
         {
             _previousSimTime = _game->getViewer()->getFrameStamp()->getSimulationTime();
@@ -207,7 +207,7 @@ void WorldUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
         else
         {
             double currentSimTime = _game->getViewer()->getFrameStamp()->getSimulationTime();
-            _game->getWorld()->stepSimulation(currentSimTime - _previousSimTime);
+            _game->getWorld()->stepSimulation(currentSimTime - _previousSimTime, 0);
             _previousSimTime = currentSimTime;
     
             // restart level if player is dead

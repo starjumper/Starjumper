@@ -20,6 +20,7 @@
 
 #include "Cuboid.h"
 #include "Tunnel.h"
+#include "Goal.h"
 
 #define DEFAULT_COLOR	        osg::Vec4f(0.0f, 0.5f, 0.7f, 1.0f)
 
@@ -35,6 +36,7 @@ protected:
     void addCuboid(const rapidxml::xml_node<> &cuboidNode);
     void addTunnel(const rapidxml::xml_node<> &tunnelNode);
     void addCuboidTunnel(const rapidxml::xml_node<> &tunnelNode);
+    void addGoal(const rapidxml::xml_node<> &goalNode);
   
 public:
     Level(const std::string &mapfile);
