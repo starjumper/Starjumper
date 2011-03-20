@@ -194,3 +194,9 @@ void Player::setEnginesDecelerating(const float speed)
     _leftEngine->setSize(0.1f * speed);
     _rightEngine->setSize(0.1f * speed);
 }
+
+void Player::reset()
+{
+    getPlayerState()->reset();
+    getController()->reset();
+}

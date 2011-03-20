@@ -32,7 +32,7 @@ void Game::runLevel(const std::string &mapfile)
     {
         delete _world;
         clearSceneData();
-        _player->getPlayerState()->reset();
+        _player->reset();
     }
     
     _level = new Level(mapfile);
@@ -217,9 +217,5 @@ void WorldUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
                 _game->restartLevel(); 
             }
         }
-    }
-    else
-    {
-        std::cout << "not running" << std::endl;
     }
 }

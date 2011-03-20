@@ -35,9 +35,7 @@ protected:
 	btScalar m_maxJumpHeight;
 
 	btScalar m_turnAngle;
-	
 	btScalar m_stepHeight;
-
 	btScalar m_addedMargin;
 
 	///this is the desired walk direction, set by the user
