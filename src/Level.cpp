@@ -31,10 +31,10 @@ void Level::loadMapFromFile(const std::string &mapfile)
 osg::Vec3 Level::getVectorFromXMLNode(const std::string &name, const rapidxml::xml_node<> &node) const
 {
     rapidxml::xml_node<> *vectorNode = node.first_node(name.c_str());
-    
+        
     if(!vectorNode)
     {
-        throw std::runtime_error("Error: Level element missing position node!");
+        throw std::runtime_error("Error: Level element missing vector node!");
     }
         
     float x, y, z;
@@ -57,22 +57,23 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
 {    
     osg::Vec3 from = getVectorFromXMLNode("position", cuboidNode);
     osg::Vec3 size = getVectorFromXMLNode("size", cuboidNode);
+    osg::Vec3 color = getVectorFromXMLNode("color", cuboidNode);
  
     Cuboid *cuboid = NULL;
-    
+     
     if(cuboidNode.first_attribute("type") != 0)
     {
         std::string type = cuboidNode.first_attribute("type")->value();
 
         if(type == "accelerate")
-            cuboid = new AccelerationCuboid(from, size);
+            cuboid = new AccelerationCuboid(from, size, color);
         else if(type == "decelerate")
-            cuboid = new DecelerationCuboid(from, size);
+            cuboid = new DecelerationCuboid(from, size, color);
     }
 
     if(cuboid == NULL)
     {
-        cuboid = new Cuboid(from, size);
+        cuboid = new Cuboid(from, size, color);
     }
 	
     addChild(cuboid);
