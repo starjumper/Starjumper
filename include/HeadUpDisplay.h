@@ -17,7 +17,7 @@
 #define SCREEN_WIDTH        1024
 #define SCREEN_HEIGHT       768
 
-#define TIMER_POSITION      osg::Vec3(900, 700, 0)
+#define TIMER_POSITION      osg::Vec3(600, 700, 0)
 #define TIMER_FONT          "fonts/arial.ttf"
 
 
@@ -35,12 +35,12 @@ private:
 	osg::ref_ptr<osg::Camera> _camera;
 	osg::Geode *_timeNode;
 	osg::ShapeDrawable *_speedBar;
-    osgText::Text *_timer;
+    osgText::Text *_timer;	
 
     Player *_player;
     struct timeb _startTime;
 
-	osg::Geode *_speedNode;
+	osg::Geode *_speedBarNode;
 	osg::PositionAttitudeTransform *_hudPat;
 	osg::PositionAttitudeTransform *_speedPat;
 	osg::PositionAttitudeTransform *_speedBarPat;

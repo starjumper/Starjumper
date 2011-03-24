@@ -41,12 +41,21 @@ void HeadUpDisplay::initializeSpeedometer()
 	_speedBarPat = new osg::PositionAttitudeTransform();
 	_speedPat->addChild(_speedBarPat);
 
-	_speedNode = new osg::Geode();
+	_speedBarNode = new osg::Geode();
 	_speedBar = new osg::ShapeDrawable(new osg::Box(SPEEDBAR_POSITION, SPEEDBAR_LENGTH, SPEEDBAR_WIDTH, 5));
-	_speedNode->addDrawable(_speedBar);
-	_speedBarPat->addChild(_speedNode);
+	_speedBarNode->addDrawable(_speedBar);
+	_speedBarPat->addChild(_speedBarNode);
 
-	_speedBarPat->setPosition(osg::Vec3(-150, 0, 0));
+	//
+	osg::Node *_test = osgDB::readNodeFile("resources/models/needle.osg");
+	_speedPat->addChild(_test);
+	//
+
+
+	_speedBarPat->setPosition(osg::Vec3(150, 0, 0));
+
+
+
 
 	_speedBar->setColor(osg::Vec4(1.0, 0.5, 0.8, 0.5));
 	_speedPat->setPosition(SPEEDOMETER_POSITION);
@@ -74,7 +83,7 @@ void HeadUpDisplay::resetTimer()
 void HeadUpDisplay::updateSpeedometer()
 {
 	float playerSpeed = _player->getPlayerState()->getSpeed();
-	_speedPat->setAttitude(osg::Quat(osg::DegreesToRadians(-80+(playerSpeed*150.0)), 1.0, 0.0, 0.0));
+	_speedPat->setAttitude(osg::Quat(osg::DegreesToRadians(playerSpeed*180.0), 1.0, 0.0, 0.0));
  }
 
 void HeadUpDisplay::updateTimer()
