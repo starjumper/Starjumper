@@ -41,7 +41,11 @@ void HeadUpDisplay::initializeSpeedometer()
 	_speedBarMatrixTrans = new osg::MatrixTransform;
 	_speedPat->addChild(_speedBarMatrixTrans);
 
-	osg::Node *_speedBarNode = osgDB::readNodeFile("resources/models/speed_bar.osg");
+	osg::Node *_speedBarNode = osgDB::readNodeFile(SPEEDBAR_MODEL);
+	if(!_speedBarNode)
+    {
+        throw std::runtime_error("Unable to load player model file!");
+    }
 
 	_speedBarPat = new osg::PositionAttitudeTransform();
 	_speedBarPat->addChild(_speedBarNode);
