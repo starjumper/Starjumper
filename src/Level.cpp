@@ -25,7 +25,7 @@ void Level::loadMapFromFile(const std::string &mapfile)
             addGoal(*it);
 		else
             throw std::runtime_error("Error: Unrecognized element in level file!");
-    }    
+    }
 }
 
 osg::Vec3 Level::getVectorFromXMLNode(const std::string &name, const rapidxml::xml_node<> &node) const

@@ -14,6 +14,7 @@ GameManager::GameManager() :
 	
 	// set background color
 	_viewer.getCamera()->setClearColor(osg::Vec4( 0., 0., 0., 1. )); 
+    _viewer.getCamera()->setUpdateCallback(new GameManagerCallback(this));
 
 	// window view for testing purpose, uncomment if needed
 	// push with fullscreen ONLY!!!
@@ -36,9 +37,7 @@ void GameManager::addRenderingInstance(std::string name, RenderingInstance *inst
 void GameManager::selectRenderingInstance(std::string name)
 {
     if(_activeRenderingInstance)
-	{
         _activeRenderingInstance->cleanup(&_viewer);
-	}
     
     _activeRenderingInstanceName = name;
     _activeRenderingInstance = _renderingInstances[name];
@@ -49,6 +48,18 @@ void GameManager::selectRenderingInstance(std::string name)
 std::string GameManager::getActiveRenderingInstanceName()
 {
     return _activeRenderingInstanceName;
+}
+
+void GameManager::checkGameState()
+{
+    if(getActiveRenderingInstanceName() == "game")
+    {
+        if(((Game *)_activeRenderingInstance)->getLevelFinished())
+        {
+            _activeRenderingInstance->cleanup(&_viewer);
+            roadSelectMenu();
+        }
+    }    
 }
 
 
@@ -162,4 +173,14 @@ bool GameManagerKeyboardHandler::handle(const osgGA::GUIEventAdapter &ea, osgGA:
 void GameManagerKeyboardHandler::accept(osgGA::GUIEventHandlerVisitor &v)
 {
     v.visit(*this);
+}
+
+GameManagerCallback::GameManagerCallback(GameManager *gameManager)
+{
+    _gameManager = gameManager;
+}
+
+void GameManagerCallback::operator()(osg::Node* node, osg::NodeVisitor* nv)
+{
+    _gameManager->checkGameState();
 }

@@ -3,6 +3,7 @@
 Game::Game(osgViewer::Viewer *viewer) :
 	RenderingInstance(viewer)
 {
+    _levelFinished = false;
     _running = false;
 	_level = NULL;
 	_player = new Player();
@@ -179,6 +180,7 @@ void Game::prepare(osgViewer::Viewer *viewer)
 
 void Game::cleanup(osgViewer::Viewer *viewer)
 {    
+    setLevelFinished(false);
     viewer->getEventHandlers().remove(_keyboardHandler);
     
     // clean up player position
@@ -188,6 +190,16 @@ void Game::cleanup(osgViewer::Viewer *viewer)
 bool Game::isRunning()
 {
     return _running;
+}
+
+void Game::setLevelFinished(bool levelFinished)
+{
+    _levelFinished = levelFinished;
+}
+
+bool Game::getLevelFinished()
+{
+    return _levelFinished;
 }
 
 WorldUpdater::WorldUpdater(Game *game) :
@@ -224,6 +236,7 @@ void WorldUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
                 _game->restartLevel(); 
             }
             
+            // fade out when level is finished
             osg::Vec4 constantBlendColor = _blendColor->getConstantColor();
             float alpha = constantBlendColor.a();
             
@@ -238,7 +251,11 @@ void WorldUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
                 alpha -= 0.01f;
                 
                 if(alpha <= 0.0f)
-                    alpha = 0.0f;
+                {
+                    alpha = 0.0f;                 
+                    _game->setLevelFinished(true);
+                    _game->getPlayer()->getPlayerState()->setSpeed(0.0f);
+                }
                 
                 constantBlendColor[3] = alpha;
 

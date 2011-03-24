@@ -42,6 +42,7 @@ public:
 
     void selectRenderingInstance(std::string name);
     std::string getActiveRenderingInstanceName();
+    void checkGameState();
     
     void run();
 	void quit();
@@ -58,4 +59,14 @@ public:
     GameManagerKeyboardHandler(GameManager *gameManager);
     virtual bool handle(const osgGA::GUIEventAdapter &ea, osgGA::GUIActionAdapter &aa);
     virtual void accept(osgGA::GUIEventHandlerVisitor &v);
+};
+
+class GameManagerCallback : public osg::NodeCallback
+{
+private:
+    GameManager *_gameManager;
+public:
+    GameManagerCallback(GameManager *gameManager);
+    
+    virtual void operator()(osg::Node* node, osg::NodeVisitor* nv);
 };
