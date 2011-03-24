@@ -8,3 +8,8 @@ bin/StarJumper
 src/CMakeFiles/
 src/cmake_install.cmake
 src/Makefile
+
+doc/*.aux
+doc/*.log
+doc/*.pdf
+doc/*.gz
