@@ -22,9 +22,11 @@
 
 
 //#define SPEEDBAR_POSITION   osg::Vec3f(60, SCREEN_HEIGHT / 2.0f, 0)
+#define SPEEDOMETER_POSITION osg::Vec3(300.0, 300.0, 0.0)
+
 #define SPEEDBAR_POSITION   osg::Vec3(0 ,0 , 0)
-#define SPEEDBAR_WIDTH      20.0f
-#define SPEEDBAR_MAX_LENGTH 200.0f
+#define SPEEDBAR_WIDTH      10.0f
+#define SPEEDBAR_LENGTH		200.0f
 
 
 class HeadUpDisplay : public osg::Referenced
@@ -38,15 +40,9 @@ private:
     Player *_player;
     struct timeb _startTime;
 
-	//
-	//
-	//
-
 	osg::Geode *_speedNode;
-
 	osg::PositionAttitudeTransform *_hudPat;
 	osg::PositionAttitudeTransform *_speedPat;
-
 	osg::PositionAttitudeTransform *_speedBarPat;
 
 public:
@@ -54,11 +50,11 @@ public:
     osg::Camera *getCamera();
 
 	void initializeCamera();
-	void initializeSpeedBar();
+	void initializeSpeedometer();
 	void initializeTimer();
 	
     void resetTimer();
-	void updateSpeedBar();
+	void updateSpeedometer();
 	void updateTimer();
 };
 

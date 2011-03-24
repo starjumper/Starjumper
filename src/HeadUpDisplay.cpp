@@ -14,7 +14,7 @@ HeadUpDisplay::HeadUpDisplay(Player *player) :
 
 	initializeCamera();
 	initializeTimer();
-	initializeSpeedBar();
+	initializeSpeedometer();
 }
 
 void HeadUpDisplay::initializeCamera()
@@ -33,7 +33,7 @@ osg::Camera *HeadUpDisplay::getCamera()
     return _camera;
 }
 
-void HeadUpDisplay::initializeSpeedBar()
+void HeadUpDisplay::initializeSpeedometer()
 {
 	_speedPat = new osg::PositionAttitudeTransform();
 	_hudPat->addChild(_speedPat);
@@ -42,12 +42,14 @@ void HeadUpDisplay::initializeSpeedBar()
 	_speedPat->addChild(_speedBarPat);
 
 	_speedNode = new osg::Geode();
-	_speedBar = new osg::ShapeDrawable(new osg::Box(SPEEDBAR_POSITION, 500, 5, 5));
+	_speedBar = new osg::ShapeDrawable(new osg::Box(SPEEDBAR_POSITION, SPEEDBAR_LENGTH, SPEEDBAR_WIDTH, 5));
 	_speedNode->addDrawable(_speedBar);
 	_speedBarPat->addChild(_speedNode);
 
+	_speedBarPat->setPosition(osg::Vec3(-150, 0, 0));
+
 	_speedBar->setColor(osg::Vec4(1.0, 0.5, 0.8, 0.5));
-	_speedPat->setPosition(osg::Vec3d(800.0, 0.0, 0.0));
+	_speedPat->setPosition(SPEEDOMETER_POSITION);
 }
 
 void HeadUpDisplay::initializeTimer()
@@ -69,20 +71,11 @@ void HeadUpDisplay::resetTimer()
     ftime(&_startTime);
 }
 
-void HeadUpDisplay::updateSpeedBar()
+void HeadUpDisplay::updateSpeedometer()
 {
 	float playerSpeed = _player->getPlayerState()->getSpeed();
-
-	//_speedBar->setColor(osg::Vec4(1.0, 0.005, 0.8, 0.5));
-
-    //_speedBar->setColor(osg::Vec4(1.0, playerSpeed, 0.0, 0.5));
-    //((osg::Box *)_speedBar->getShape())->setHalfLengths(osg::Vec3(SPEEDBAR_WIDTH, SPEEDBAR_MAX_LENGTH * playerSpeed, 1.0f));
-
 	_speedPat->setAttitude(osg::Quat(osg::DegreesToRadians(-80+(playerSpeed*150.0)), 1.0, 0.0, 0.0));
- 
-	//speedDrawable->setColor(osg::Vec4(1.0 * playerSpeed, 0.3, 0.8, 1.0));
-	//_speedBar->set->setHalfLengths(osg::Vec3(40, 150 * playerSpeed, 1));
-}
+ }
 
 void HeadUpDisplay::updateTimer()
 {
@@ -117,6 +110,6 @@ void HeadUpDisplayUpdateCallback::operator()(osg::Node *node, osg::NodeVisitor *
 {
     osg::ref_ptr<HeadUpDisplay> hud = dynamic_cast<HeadUpDisplay *> (node->getUserData());
 
-    hud->updateSpeedBar();
+    hud->updateSpeedometer();
     hud->updateTimer();
 }
