@@ -22,7 +22,7 @@
 
 
 //#define SPEEDBAR_POSITION   osg::Vec3f(60, SCREEN_HEIGHT / 2.0f, 0)
-#define SPEEDBAR_POSITION   osg::Vec3(500,500, 0)
+#define SPEEDBAR_POSITION   osg::Vec3(0 ,0 , 0)
 #define SPEEDBAR_WIDTH      20.0f
 #define SPEEDBAR_MAX_LENGTH 200.0f
 

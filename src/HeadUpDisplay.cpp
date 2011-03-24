@@ -7,16 +7,6 @@
 HeadUpDisplay::HeadUpDisplay(Player *player) : 
     _player(player)
 {
-    //_node = new osg::Geode;
-    //_node->getOrCreateStateSet()->setMode(GL_LIGHTING,osg::StateAttribute::OFF);
-    
-    //_node->setUserData(this);
-    //_node->setUpdateCallback(new HeadUpDisplayUpdateCallback);
-    
-	//initializeCamera();
-	//initializeSpeedBar();
-    //initializeTimer();
-
 	_hudPat = new osg::PositionAttitudeTransform();
 	_hudPat->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
 	_hudPat->setUserData(this);
@@ -45,28 +35,19 @@ osg::Camera *HeadUpDisplay::getCamera()
 
 void HeadUpDisplay::initializeSpeedBar()
 {
-    //_speedBar = new osg::ShapeDrawable(new osg::Box(SPEEDBAR_POSITION, SPEEDBAR_WIDTH, 0, 0));
-	//_node->addDrawable(_speedBar);
-
 	_speedPat = new osg::PositionAttitudeTransform();
 	_hudPat->addChild(_speedPat);
 
-	//_speedBarPat = new osg::PositionAttitudeTransform();
-	//_speedPat->addChild(_speedBarPat);
-	//
-	_speedNode = new osg::Geode();
-	//_speedBarPat->addChild(_speedNode);
-	
-	
+	_speedBarPat = new osg::PositionAttitudeTransform();
+	_speedPat->addChild(_speedBarPat);
 
+	_speedNode = new osg::Geode();
 	_speedBar = new osg::ShapeDrawable(new osg::Box(SPEEDBAR_POSITION, 500, 5, 5));
 	_speedNode->addDrawable(_speedBar);
+	_speedBarPat->addChild(_speedNode);
 
 	_speedBar->setColor(osg::Vec4(1.0, 0.5, 0.8, 0.5));
-	_speedPat->addChild(_speedNode);
-	_hudPat->addChild(_speedPat);
-
-	//_speedPat->setPosition(osg::Vec3f(300, 150, 0));
+	_speedPat->setPosition(osg::Vec3d(800.0, 0.0, 0.0));
 }
 
 void HeadUpDisplay::initializeTimer()
@@ -90,13 +71,14 @@ void HeadUpDisplay::resetTimer()
 
 void HeadUpDisplay::updateSpeedBar()
 {
-	//float playerSpeed = _player->getPlayerState()->getSpeed();
+	float playerSpeed = _player->getPlayerState()->getSpeed();
 
 	//_speedBar->setColor(osg::Vec4(1.0, 0.005, 0.8, 0.5));
 
     //_speedBar->setColor(osg::Vec4(1.0, playerSpeed, 0.0, 0.5));
     //((osg::Box *)_speedBar->getShape())->setHalfLengths(osg::Vec3(SPEEDBAR_WIDTH, SPEEDBAR_MAX_LENGTH * playerSpeed, 1.0f));
 
+	_speedPat->setAttitude(osg::Quat(osg::DegreesToRadians(-80+(playerSpeed*150.0)), 1.0, 0.0, 0.0));
  
 	//speedDrawable->setColor(osg::Vec4(1.0 * playerSpeed, 0.3, 0.8, 1.0));
 	//_speedBar->set->setHalfLengths(osg::Vec3(40, 150 * playerSpeed, 1));
