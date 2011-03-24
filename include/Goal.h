@@ -24,8 +24,8 @@ protected:
 	        
 public:  
 	Goal(osg::Vec3 position);
-	 
-    virtual void applyTo(Player *player) { };
-
+	
 	osg::PositionAttitudeTransform *getNode();
+	
+	virtual void applyTo(Player *player);
 };

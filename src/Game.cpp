@@ -214,5 +214,10 @@ void WorldUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
                 _game->getPlayer()->getPlayerState()->beAlive();
                 _game->restartLevel(); 
             }
+            
+            if(_game->getPlayer()->reachedFinish())
+            {
+                ((LazyCameraManipulator *)_game->getViewer()->getCameraManipulator())->fadeOut();
+            }
         }
 }

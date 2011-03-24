@@ -383,11 +383,6 @@ const btVector3& velocity,
 btScalar timeInterval
 )
 {
-//	printf("setVelocity!\n");
-//	printf("  interval: %f\n", timeInterval);
-//	printf("  velocity: (%f, %f, %f)\n",
-//	    velocity.x(), velocity.y(), velocity.z());
-
 	m_useWalkDirection = false;
 	m_walkDirection = velocity;
 	m_normalizedDirection = getNormalizedVector(m_walkDirection);

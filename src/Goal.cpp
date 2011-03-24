@@ -30,3 +30,8 @@ osg::PositionAttitudeTransform *Goal::getNode()
 {
 	return _transform;
 }
+
+void Goal::applyTo(Player *player)
+{
+    player->setReachedFinish(true);
+}
