@@ -194,6 +194,15 @@ WorldUpdater::WorldUpdater(Game *game) :
     _game(game)
 {
     _previousSimTime = 0.0f;
+    _blendColor = new osg::BlendColor(osg::Vec4(1, 1, 1, 1));
+    
+    osg::BlendFunc *blendFunc = new osg::BlendFunc();
+
+    blendFunc->setSource(osg::BlendFunc::CONSTANT_ALPHA);
+    
+    blendFunc->setDestination(osg::BlendFunc::ONE_MINUS_CONSTANT_ALPHA);
+    _game->getRootNode()->getOrCreateStateSet()->setAttributeAndModes(blendFunc, osg::StateAttribute::ON);
+    _game->getRootNode()->getOrCreateStateSet()->setAttributeAndModes(_blendColor, osg::StateAttribute::ON);    
 }
 
 void WorldUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
@@ -215,9 +224,25 @@ void WorldUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
                 _game->restartLevel(); 
             }
             
-            if(_game->getPlayer()->reachedFinish())
+            osg::Vec4 constantBlendColor = _blendColor->getConstantColor();
+            float alpha = constantBlendColor.a();
+            
+            if(_game->getPlayer()->reachedFinish() && alpha == 1.0f)
             {
+                alpha -= 0.01f;
                 ((LazyCameraManipulator *)_game->getViewer()->getCameraManipulator())->fadeOut();
+            }
+
+            if(alpha < 1.0f)
+            {
+                alpha -= 0.01f;
+                
+                if(alpha <= 0.0f)
+                    alpha = 0.0f;
+                
+                constantBlendColor[3] = alpha;
+
+                _blendColor->setConstantColor(constantBlendColor);
             }
         }
 }

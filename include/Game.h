@@ -3,6 +3,10 @@
 #include <vector>
 
 #include <osg/Group>
+#include <osg/StateAttribute>
+#include <osg/BlendFunc>
+#include <osg/BlendColor>
+
 #include <osgShadow/ShadowedScene>
 #include <osgShadow/ShadowVolume>
 #include <osgShadow/ShadowTexture>
@@ -67,6 +71,7 @@ class WorldUpdater : public osg::NodeCallback
 private:
     Game *_game;
     double _previousSimTime;
+    osg::BlendColor *_blendColor;
     
 public:
     WorldUpdater(Game *game);
