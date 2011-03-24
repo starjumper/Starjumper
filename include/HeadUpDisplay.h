@@ -23,7 +23,8 @@
 
 
 #define SPEEDBAR_MODEL		"resources/models/speed_bar.osg"
-#define SPEEDOMETER_POSITION osg::Vec3(300.0, 300.0, 0.0)
+#define SPEEDBG_MODEL		"resources/models/speed_background.osg"
+#define SPEEDOMETER_POSITION osg::Vec3(150.0, 150.0, 0.0)
 
 #define SPEEDBAR_POSITION   osg::Vec3(150 ,0 , 0)
 #define SPEEDBAR_WIDTH      10.0f
@@ -44,6 +45,7 @@ private:
 	osg::PositionAttitudeTransform *_hudPat;
 	osg::PositionAttitudeTransform *_speedPat;
 	osg::PositionAttitudeTransform *_speedBarPat;
+	osg::PositionAttitudeTransform *_speedBarBackgroundPat;
 	osg::MatrixTransform *_speedBarMatrixTrans;
 
 public:

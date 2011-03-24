@@ -44,12 +44,25 @@ void HeadUpDisplay::initializeSpeedometer()
 	osg::Node *_speedBarNode = osgDB::readNodeFile(SPEEDBAR_MODEL);
 	if(!_speedBarNode)
     {
-        throw std::runtime_error("Unable to load player model file!");
+        throw std::runtime_error("Unable to load speedbar model file!");
     }
+
+	osg::Node *_speedBarBackgroundNode = osgDB::readNodeFile(SPEEDBG_MODEL);
+	if(!_speedBarNode)
+    {
+        throw std::runtime_error("Unable to load speedbar background model file!");
+    }
+
+	_speedBarBackgroundPat = new osg::PositionAttitudeTransform();
+	_speedBarBackgroundPat->addChild(_speedBarBackgroundNode);
+	_speedBarBackgroundPat->setScale(osg::Vec3d(60.0, 10.0, 60.0));
+	//_speedBarBackgroundPat->setPosition(osg::Vec3d(100.0, 100.0, 100.0));
+	_speedBarBackgroundPat->setAttitude(osg::Quat(osg::DegreesToRadians(270.0f), osg::Vec3(1.0f, 0.0f , 0.0f)));
+	_speedPat->addChild(_speedBarBackgroundPat);
 
 	_speedBarPat = new osg::PositionAttitudeTransform();
 	_speedBarPat->addChild(_speedBarNode);
-	_speedBarPat->setScale(osg::Vec3d(30.0, 10.0, 30.0));
+	_speedBarPat->setScale(osg::Vec3d(12.0, 10.0, 12.0));
 	_speedBarPat->setAttitude(osg::Quat(osg::DegreesToRadians(90.0f), osg::Vec3(0.0f, 1.0f , 0.0f)));
 	_speedBarMatrixTrans->addChild(_speedBarPat);
 	_speedPat->setPosition(SPEEDOMETER_POSITION);
