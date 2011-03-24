@@ -8,6 +8,7 @@
 #include <osg/Camera>
 #include <osgText/Text>
 #include <osg/ShapeDrawable>
+#include <osg/MatrixTransform>
 #include <osg/Node>
 #include <osg/NodeCallback>
 #include <osg/NodeVisitor>
@@ -24,7 +25,7 @@
 //#define SPEEDBAR_POSITION   osg::Vec3f(60, SCREEN_HEIGHT / 2.0f, 0)
 #define SPEEDOMETER_POSITION osg::Vec3(300.0, 300.0, 0.0)
 
-#define SPEEDBAR_POSITION   osg::Vec3(0 ,0 , 0)
+#define SPEEDBAR_POSITION   osg::Vec3(150 ,0 , 0)
 #define SPEEDBAR_WIDTH      10.0f
 #define SPEEDBAR_LENGTH		200.0f
 
@@ -43,7 +44,7 @@ private:
 	osg::Geode *_speedBarNode;
 	osg::PositionAttitudeTransform *_hudPat;
 	osg::PositionAttitudeTransform *_speedPat;
-	osg::PositionAttitudeTransform *_speedBarPat;
+	osg::MatrixTransform *_speedBarMatrixTrans;
 
 public:
 	HeadUpDisplay(Player *player);
