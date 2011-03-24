@@ -18,6 +18,21 @@
 #include "MenuButton.h"
 #include "Player.h"
 
+
+
+
+
+//
+#include <osg/ShapeDrawable>
+#include <osg/StateSet>
+#include <osg/Geometry>
+#include <iostream>
+//
+
+
+
+
+
 #define MENU_BACKGROUND_COLOR   1.0f, 1.0f, 1.0f, 0.0f
 
 // masks for the window manager

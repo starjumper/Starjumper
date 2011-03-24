@@ -44,7 +44,7 @@ void Menu::initializeBackground()
 	}
 
 	_rotate = new osg::MatrixTransform;
-	_rotate->addChild(rotModel);
+	//_rotate->addChild(rotModel);
 
 	osg::MatrixTransform* transMatrix = new osg::MatrixTransform;
 	transMatrix->addChild(_rotate);
@@ -55,6 +55,21 @@ void Menu::initializeBackground()
 	_rotate->setUpdateCallback(menuUpdater);
 
 	getRootNode()->addChild(transMatrix);
+
+
+	//
+	osg::Program *programObject = new osg::Program();
+	osg::Shader *vertexObject = new osg::Shader(osg::Shader::VERTEX);
+	osg::Shader *geometryObject = new osg::Shader(osg::Shader::GEOMETRY);
+	programObject->addShader(vertexObject);
+	programObject->addShader(geometryObject);
+	vertexObject->loadShaderSourceFromFile("resources/shaders/test.vert");
+	geometryObject->loadShaderSourceFromFile("resources/shaders/shrink.geom");
+
+	osg::StateSet *test = rotModel->getOrCreateStateSet();
+	test->setAttributeAndModes(programObject, osg::StateAttribute::ON);
+
+	_rotate->addChild(rotModel);
 }
 
 osg::MatrixTransform *Menu::getRotate()
