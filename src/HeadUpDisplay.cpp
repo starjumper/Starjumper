@@ -37,27 +37,34 @@ void HeadUpDisplay::initializeSpeedometer()
 {
 	_speedPat = new osg::PositionAttitudeTransform();
 	_hudPat->addChild(_speedPat);
+	
+	_speedBarMatrixTrans = new osg::MatrixTransform;
+	_speedPat->addChild(_speedBarMatrixTrans);
+
+	osg::Node *_speedBarNode = osgDB::readNodeFile(SPEEDBAR_MODEL);
+	if(!_speedBarNode)
+    {
+        throw std::runtime_error("Unable to load speedbar model file!");
+    }
+
+	osg::Node *_speedBarBackgroundNode = osgDB::readNodeFile(SPEEDBG_MODEL);
+	if(!_speedBarNode)
+    {
+        throw std::runtime_error("Unable to load speedbar background model file!");
+    }
+
+	_speedBarBackgroundPat = new osg::PositionAttitudeTransform();
+	_speedBarBackgroundPat->addChild(_speedBarBackgroundNode);
+	_speedBarBackgroundPat->setScale(osg::Vec3d(60.0, 10.0, 60.0));
+	//_speedBarBackgroundPat->setPosition(osg::Vec3d(100.0, 100.0, 100.0));
+	_speedBarBackgroundPat->setAttitude(osg::Quat(osg::DegreesToRadians(270.0f), osg::Vec3(1.0f, 0.0f , 0.0f)));
+	_speedPat->addChild(_speedBarBackgroundPat);
 
 	_speedBarPat = new osg::PositionAttitudeTransform();
-	_speedPat->addChild(_speedBarPat);
-
-	_speedBarNode = new osg::Geode();
-	_speedBar = new osg::ShapeDrawable(new osg::Box(SPEEDBAR_POSITION, SPEEDBAR_LENGTH, SPEEDBAR_WIDTH, 5));
-	_speedBarNode->addDrawable(_speedBar);
 	_speedBarPat->addChild(_speedBarNode);
-
-	//
-	osg::Node *_test = osgDB::readNodeFile("resources/models/needle.osg");
-	_speedPat->addChild(_test);
-	//
-
-
-	_speedBarPat->setPosition(osg::Vec3(150, 0, 0));
-
-
-
-
-	_speedBar->setColor(osg::Vec4(1.0, 0.5, 0.8, 0.5));
+	_speedBarPat->setScale(osg::Vec3d(12.0, 10.0, 12.0));
+	_speedBarPat->setAttitude(osg::Quat(osg::DegreesToRadians(90.0f), osg::Vec3(0.0f, 1.0f , 0.0f)));
+	_speedBarMatrixTrans->addChild(_speedBarPat);
 	_speedPat->setPosition(SPEEDOMETER_POSITION);
 }
 
@@ -83,7 +90,8 @@ void HeadUpDisplay::resetTimer()
 void HeadUpDisplay::updateSpeedometer()
 {
 	float playerSpeed = _player->getPlayerState()->getSpeed();
-	_speedPat->setAttitude(osg::Quat(osg::DegreesToRadians(playerSpeed*180.0), 1.0, 0.0, 0.0));
+	//_speedBarPat->setAttitude(osg::Quat(osg::DegreesToRadians(playerSpeed*180.0), 1.0, 0.0, 0.0));
+	_speedBarMatrixTrans->setMatrix(osg::Matrix::rotate(osg::inDegrees(-(playerSpeed*270) -135), 0.0f, 0.0f, 1.0f));
  }
 
 void HeadUpDisplay::updateTimer()
