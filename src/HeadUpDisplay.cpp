@@ -37,24 +37,18 @@ void HeadUpDisplay::initializeSpeedometer()
 {
 	_speedPat = new osg::PositionAttitudeTransform();
 	_hudPat->addChild(_speedPat);
-
-	_speedBarNode = new osg::Geode();
-	_speedBar = new osg::ShapeDrawable(new osg::Box(SPEEDBAR_POSITION, SPEEDBAR_LENGTH, SPEEDBAR_WIDTH, 5));
-	_speedBarNode->addDrawable(_speedBar);
-
-	//
-	osg::Node *_test = osgDB::readNodeFile("resources/models/needle.osg");
-	_speedPat->addChild(_test);
-	//
 	
 	_speedBarMatrixTrans = new osg::MatrixTransform;
-	_speedBarMatrixTrans->addChild(_speedBarNode);
 	_speedPat->addChild(_speedBarMatrixTrans);
 
-	_speedBar->setColor(osg::Vec4(1.0, 0.5, 0.8, 0.5));
-	_speedPat->setPosition(SPEEDOMETER_POSITION);
+	osg::Node *_speedBarNode = osgDB::readNodeFile("resources/models/speed_bar.osg");
 
-	
+	_speedBarPat = new osg::PositionAttitudeTransform();
+	_speedBarPat->addChild(_speedBarNode);
+	_speedBarPat->setScale(osg::Vec3d(30.0, 10.0, 30.0));
+	_speedBarPat->setAttitude(osg::Quat(osg::DegreesToRadians(90.0f), osg::Vec3(0.0f, 1.0f , 0.0f)));
+	_speedBarMatrixTrans->addChild(_speedBarPat);
+	_speedPat->setPosition(SPEEDOMETER_POSITION);
 }
 
 void HeadUpDisplay::initializeTimer()
