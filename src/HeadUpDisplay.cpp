@@ -24,6 +24,7 @@ HeadUpDisplay::HeadUpDisplay(Player *player) :
 
 	initializeCamera();
 	initializeTimer();
+	initializeSpeedBar();
 }
 
 void HeadUpDisplay::initializeCamera()
@@ -47,8 +48,8 @@ void HeadUpDisplay::initializeSpeedBar()
     //_speedBar = new osg::ShapeDrawable(new osg::Box(SPEEDBAR_POSITION, SPEEDBAR_WIDTH, 0, 0));
 	//_node->addDrawable(_speedBar);
 
-	//_speedPat = new osg::PositionAttitudeTransform();
-	//_hudPat->addChild(_speedPat);
+	_speedPat = new osg::PositionAttitudeTransform();
+	_hudPat->addChild(_speedPat);
 
 	//_speedBarPat = new osg::PositionAttitudeTransform();
 	//_speedPat->addChild(_speedBarPat);
@@ -58,12 +59,13 @@ void HeadUpDisplay::initializeSpeedBar()
 	
 	
 
-	_speedBar = new osg::ShapeDrawable(new osg::Box(SPEEDBAR_POSITION, 500, 1, 1));
+	_speedBar = new osg::ShapeDrawable(new osg::Box(SPEEDBAR_POSITION, 500, 5, 5));
 	_speedNode->addDrawable(_speedBar);
 
 	_speedBar->setColor(osg::Vec4(1.0, 0.5, 0.8, 0.5));
+	_speedPat->addChild(_speedNode);
+	_hudPat->addChild(_speedPat);
 
-	_hudPat->addChild(_speedNode);
 	//_speedPat->setPosition(osg::Vec3f(300, 150, 0));
 }
 
