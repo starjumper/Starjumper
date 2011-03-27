@@ -80,6 +80,7 @@ KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObj
 	m_convexShape=convexShape;	
 	m_useWalkDirection = true;	// use walk direction by default, legacy behavior
 	m_velocityTimeInterval = 0.0;
+    m_forwardHit = false;
 
     reset();
 }
@@ -270,7 +271,8 @@ void KinematicCharacterController::stepForwardAndStrafe ( btCollisionWorld* coll
 		fraction -= callback.m_closestHitFraction;
 
 		if (callback.hasHit())
-		{	
+		{
+            m_forwardHit = true;
 			// we moved only a fraction
 			btScalar hitDistance = (callback.m_hitPointWorld - m_currentPosition).length();
 			if (hitDistance<0.f)
@@ -507,12 +509,17 @@ bool KinematicCharacterController::onGround() const
 	return m_onGround;
 }
 
+bool KinematicCharacterController::frontalHit()
+{
+    bool result = m_forwardHit;
+    m_forwardHit = false;
+    return result;
+}
+
 void *KinematicCharacterController::getGroundObject()
 {
     return m_groundObject;
 }
-
-
 
 void KinematicCharacterController::debugDraw(btIDebugDraw* debugDrawer)
 {

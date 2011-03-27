@@ -59,6 +59,7 @@ protected:
 	int m_upAxis;
 	
     bool m_onGround;
+    bool m_forwardHit;
     void *m_groundObject;
 	
 	btVector3 computeReflectionDirection(const btVector3 &direction, const btVector3 &normal);
@@ -106,6 +107,7 @@ public:
 	void setMaxJumpHeight(btScalar maxJumpHeight);
 	
 	bool canJump() const;
+    bool frontalHit();
 	void jump();
 
 	btPairCachingGhostObject* getGhostObject();

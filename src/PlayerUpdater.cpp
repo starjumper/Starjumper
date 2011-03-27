@@ -1,4 +1,5 @@
 #include "PlayerUpdater.h"
+#include <iostream>
 
 PlayerUpdater::PlayerUpdater()
 {
@@ -30,6 +31,10 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(Player *player)
     
     // check for move requests
     
+    ///////////////////////
+    // sideways movement //
+    ///////////////////////
+    
     if(playerState->requestMoveLeft())
     {
         direction -= btVector3(speed / 10.0f, 0, 0);
@@ -52,7 +57,11 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(Player *player)
             playerState->setAngleY(0);
         playerState->setDirectionX(0);
     }
-            
+    
+    /////////////////////////////////
+    // acceleration / deceleration //
+    /////////////////////////////////
+    
     if(playerState->requestAccelerate())
     {
         playerState->setSpeed(speed + 0.02 <= 1.0 ? speed + 0.02 : 1.0);
@@ -63,26 +72,44 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(Player *player)
         playerState->setSpeed(speed - 0.04 >= 0 ? speed - 0.04 : 0);
         player->setEnginesDecelerating(speed);
     }
-        
-    if(playerController->onGround())
+    
+    ////////////////////////////////////////
+    // special floor attributes / falling //
+    ////////////////////////////////////////
+    
+    if(playerController->frontalHit())
     {
-        // player is on the floor, apply special attributes from ground to player
-        EnvironmentObject *groundObject = (EnvironmentObject *)playerController->getGroundObject();
-        groundObject->applyTo(player);
+        std::cout << "Frontal hit with speed=" << speed << std::endl;
+        if(speed > 0.8f)
+        {
+            playerState->beDead();
+        }
+        speed = 0;
+        playerState->setSpeed(0);
+        player->setEnginesDecelerating(0);
     }
     else
-    {        
-        // player is falling, kill player if there is no chance to land on ground anymore
-        btVector3 position = playerController->getGhostObject()->getWorldTransform().getOrigin();
-        int yBucketIndex = (int)(position.y() / 20.0f);
+    {
+        if(playerController->onGround())
+        {
+            // player is on the floor, apply special attributes from ground to player
+            EnvironmentObject *groundObject = (EnvironmentObject *)playerController->getGroundObject();
+            groundObject->applyTo(player);
+        }
+        else if(!playerController->onGround())
+        {        
+            // player is falling, kill player if there is no chance to land on ground anymore
+            btVector3 position = playerController->getGhostObject()->getWorldTransform().getOrigin();
+            int yBucketIndex = (int)(position.y() / 20.0f);
         
-        if(yBucketIndex >= player->getDeadlyAltitudes()->size())
-            yBucketIndex = player->getDeadlyAltitudes()->size() - 1;
+            if(yBucketIndex >= player->getDeadlyAltitudes()->size())
+                yBucketIndex = player->getDeadlyAltitudes()->size() - 1;
 
-        float minimum = min((*(player->getDeadlyAltitudes()))[yBucketIndex], (*(player->getDeadlyAltitudes()))[yBucketIndex + 1]);
+            float minimum = min((*(player->getDeadlyAltitudes()))[yBucketIndex], (*(player->getDeadlyAltitudes()))[yBucketIndex + 1]);
                 
-        if(position.z() < (minimum - 5.0f))
-            playerState->beDead();
+            if(position.z() < (minimum - 5.0f))
+                playerState->beDead();
+        }
     }
     
     direction += btVector3(0, playerState->getSpeed(), 0);
