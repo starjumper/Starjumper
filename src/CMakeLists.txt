@@ -20,6 +20,7 @@ SET(SOURCE
     KinematicCharacterController.cpp
     ParticleEffectFactory.cpp
     Skybox.cpp
+    Sound.cpp
 )
 
 #dirty!
@@ -44,6 +45,7 @@ SET(HEADER
 	../include/RenderingInstance.h
 	../include/types.h
 	../include/Skybox.h
+    ../include/Sound.h
 )
 
 FIND_PACKAGE( OpenGL )
@@ -56,6 +58,8 @@ LINK_LIBRARIES(
 	BulletCollision
 	LinearMath
 	osgShadow
+    osgAudio
+    openalpp
 	${OPENGL_gl_LIBRARY}
 	${OPENGL_glu_LIBRARY}
 )

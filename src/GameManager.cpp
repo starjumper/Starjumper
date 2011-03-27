@@ -19,10 +19,15 @@ GameManager::GameManager() :
 	// push with fullscreen ONLY!!!
 	// _viewer.setUpViewInWindow(40, 40, 800, 600, 0);
 
+	// initialize Soundmanager
+	Sound::initSoundManager();
+
+
     addRenderingInstance("game", new Game(&_viewer));
 	buildMenus();
 
     selectRenderingInstance("main_menu");
+	Sound::switchBackgroundMusic("48000_2chan.ogg", "MenuMusic");
     
     _keyboardHandler = new GameManagerKeyboardHandler(this);
     _viewer.addEventHandler(_keyboardHandler);
@@ -44,6 +49,10 @@ void GameManager::selectRenderingInstance(std::string name)
     _activeRenderingInstance = _renderingInstances[name];
     _activeRenderingInstance->prepare(&_viewer);
     _viewer.setSceneData(_activeRenderingInstance->getRootNode());
+	if(name == "game") 
+		Sound::switchBackgroundMusic(GAME_MUSIC_FILE, "GameMusic");
+	else
+		Sound::switchBackgroundMusic(MENU_MUSIC_FILE, "MenuMusic");
 }
 
 std::string GameManager::getActiveRenderingInstanceName()
@@ -142,7 +151,10 @@ bool GameManagerKeyboardHandler::handle(const osgGA::GUIEventAdapter &ea, osgGA:
                     else if(activeRenderingInstanceName == "road_select_menu")
                         _gameManager->selectRenderingInstance("main_menu");
                     else if(activeRenderingInstanceName == "main_menu")
+					{
+						//Sound::shutdownSoundManager();
                         exit(0);
+					}
                 
                     break;
                     

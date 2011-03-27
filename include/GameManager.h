@@ -18,9 +18,13 @@
 
 #include "types.h"
 #include "RenderingInstance.h"
+#include "Sound.h"
 #include "Menu.h"
 #include "LevelOverview.h"
 #include "Game.h"
+
+#define GAME_MUSIC_FILE "resources/sound/andromeda.ogg"
+#define MENU_MUSIC_FILE "resources/sound/48000_2chan.ogg"
 
 class GameManagerKeyboardHandler;
 

@@ -17,6 +17,7 @@
 #include "RenderingInstance.h"
 #include "MenuButton.h"
 #include "Player.h"
+#include "Sound.h"
 
 #define MENU_BACKGROUND_COLOR   1.0f, 1.0f, 1.0f, 0.0f
 

@@ -7,6 +7,10 @@
 #include <osgShadow/ShadowVolume>
 #include <osgShadow/ShadowTexture>
 #include <osgShadow/ShadowMap>
+#include <osgAudio/FileStream.h>
+#include <osgAudio/SoundManager.h>
+#include <osgAudio/SoundState.h>
+#include <osgAudio/SoundRoot.h>
 
 #include <btBulletDynamicsCommon.h>
 

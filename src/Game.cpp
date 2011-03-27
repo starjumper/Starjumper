@@ -57,7 +57,7 @@ void Game::runLevel(const std::string &mapfile)
     _world->addAction(_player->getController());
     
     resetScene();
-    
+
     // set world updater
     WorldUpdater *worldUpdater = new WorldUpdater(this);
     _level->setUpdateCallback(worldUpdater); // TODO: find a better node than level (root does not work, produces segfault)	
