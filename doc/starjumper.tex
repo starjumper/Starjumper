@@ -103,14 +103,18 @@ die im n\"achsten Abschnitt n\"aher erl\"autert werden.\\
 \textit{Details zu der Kombination aus \textbf{KinematicCharacterController} und \textbf{btGhostObject} finden sich im Abschnitt "Designentscheidungen".}
 
 \subsection{PlayerUpdater}
-
+Der \textbf{PlayerUpdater} als NodeCallback nutzt den \textbf{PlayerState}, um pro Step die neue Position des Players
+zu berechnen. Genauer wird diese aus der Physics Worlds extrahiert, die die Bewegung des Spielers simuliert und so
+eventuelle Kollisionen erkennen kann. Gleichzeitig werden diese Parameter aktualisiert, dies geschieht auf Basis von
+Anfragen, die der Benutzer \"uber einen Tastendruck absetzt und die im \textbf{PlayerState} vermerkt werden.\\
+Folgendes Sequenzdiagramm soll das Vorgehen des \textbf{PlayerUpdater}s veranschaulichen:
 
 \section{Designentscheidungen}
 \subsection{Levelfiles}
 \subsection{Physik}
 
 
-\section{Design Patterns ololol}
+\section{Design Patterns}
 
 
 
