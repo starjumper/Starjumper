@@ -25,6 +25,7 @@ GameManager::GameManager() :
 
     addRenderingInstance("game", new Game(&_viewer));
 	buildMenus();
+	buildCredits();
 
     selectRenderingInstance("main_menu");
 	Sound::switchBackgroundMusic("48000_2chan.ogg", "MenuMusic");
@@ -68,8 +69,7 @@ void GameManager::buildMenus()
 		Menu *menu = new Menu(&_viewer);
 
 		menu->addButton("Quit", std::tr1::bind(&GameManager::quit, this));
-		menu->addButton("Highscore", std::tr1::bind(&GameManager::quit, this));
-		menu->addButton("Settings", std::tr1::bind(&GameManager::quit, this));
+		menu->addButton("Credits", std::tr1::bind(&GameManager::showCredits, this));
 		menu->addButton("Start game", std::tr1::bind(&GameManager::roadSelectMenu, this));
 
     	addRenderingInstance("main_menu", menu);
@@ -102,6 +102,11 @@ void GameManager::buildMenus()
 	}	
 }
 
+void GameManager::buildCredits()
+{
+	addRenderingInstance("credits", new Credits(&_viewer));
+}
+
 void GameManager::run()
 {
     _viewer.run();
@@ -109,6 +114,7 @@ void GameManager::run()
 
 void GameManager::quit()
 {
+	Sound::shutdownSoundManager();
 	exit(0);
 }
 
@@ -121,6 +127,11 @@ void GameManager::runLevel(const std::string &mapFile)
 void GameManager::roadSelectMenu()
 {
     selectRenderingInstance("road_select_menu");
+}
+
+void GameManager::showCredits()
+{
+    selectRenderingInstance("credits");
 }
 
 // Handler for keyboard input
@@ -148,11 +159,11 @@ bool GameManagerKeyboardHandler::handle(const osgGA::GUIEventAdapter &ea, osgGA:
             
                     if(activeRenderingInstanceName == "game")
                         _gameManager->selectRenderingInstance("road_select_menu");
-                    else if(activeRenderingInstanceName == "road_select_menu")
+                    else if(activeRenderingInstanceName == "road_select_menu" || activeRenderingInstanceName == "credits")
                         _gameManager->selectRenderingInstance("main_menu");
                     else if(activeRenderingInstanceName == "main_menu")
 					{
-						//Sound::shutdownSoundManager();
+						Sound::shutdownSoundManager();
                         exit(0);
 					}
                 

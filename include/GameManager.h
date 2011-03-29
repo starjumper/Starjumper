@@ -20,6 +20,7 @@
 #include "RenderingInstance.h"
 #include "Sound.h"
 #include "Menu.h"
+#include "Credits.h"
 #include "LevelOverview.h"
 #include "Game.h"
 
@@ -40,6 +41,7 @@ private:
     void addRenderingInstance(std::string name, RenderingInstance *instance);
     
 	void buildMenus();
+	void buildCredits();
 
 public:
     GameManager();
@@ -51,6 +53,7 @@ public:
 	void quit();
     void runLevel(const std::string &mapFile);
     void roadSelectMenu();
+	void showCredits();
 };
 
 class GameManagerKeyboardHandler : public osgGA::GUIEventHandler

@@ -21,6 +21,7 @@ SET(SOURCE
     ParticleEffectFactory.cpp
     Skybox.cpp
     Sound.cpp
+	Credits.cpp
 )
 
 #dirty!
@@ -46,6 +47,7 @@ SET(HEADER
 	../include/types.h
 	../include/Skybox.h
     ../include/Sound.h
+	../include/Credits.h
 )
 
 FIND_PACKAGE( OpenGL )
