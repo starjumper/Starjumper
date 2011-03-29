@@ -1,6 +1,5 @@
 #include "HeadUpDisplay.h"
 
-
 // _camera -> _hudPat -> _timeNode -> _timer
 //		              -> _speedPat -> _speedBarPat -> _speedNode
 
@@ -52,6 +51,14 @@ void HeadUpDisplay::initializeSpeedometer()
     {
         throw std::runtime_error("Unable to load speedbar background model file!");
     }
+
+	osg::StateSet *speedBarBackgroundState = _speedBarBackgroundNode->getOrCreateStateSet();
+	osg::Material *material = new osg::Material();
+	material->setAlpha(osg::Material::FRONT_AND_BACK, HUD_TRANSPARENCY);
+	speedBarBackgroundState->setAttributeAndModes(material, osg::StateAttribute::ON);
+	osg::BlendFunc *blendfunc = new osg::BlendFunc(osg::BlendFunc::SRC_ALPHA, osg::BlendFunc::ONE_MINUS_SRC_ALPHA );
+	speedBarBackgroundState->setAttributeAndModes(blendfunc);
+	
 
 	_speedBarBackgroundPat = new osg::PositionAttitudeTransform();
 	_speedBarBackgroundPat->addChild(_speedBarBackgroundNode);

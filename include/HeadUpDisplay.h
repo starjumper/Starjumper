@@ -3,11 +3,13 @@
 #include <sstream>
 #include <sys/timeb.h>
 
+#include <osg/BlendFunc>
 #include <osg/Geode>
 #include <osg/Depth>
 #include <osg/Camera>
 #include <osgText/Text>
 #include <osg/ShapeDrawable>
+#include <osg/Material>
 #include <osg/MatrixTransform>
 #include <osg/Node>
 #include <osg/NodeCallback>
@@ -29,6 +31,8 @@
 #define SPEEDBAR_POSITION   osg::Vec3(150 ,0 , 0)
 #define SPEEDBAR_WIDTH      10.0f
 #define SPEEDBAR_LENGTH		200.0f
+
+#define HUD_TRANSPARENCY	0.2
 
 
 class HeadUpDisplay : public osg::Referenced
