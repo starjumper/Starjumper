@@ -15,10 +15,6 @@
 #include "RenderingInstance.h"
 #include "Player.h"
 
-#define TIMER_POSITION      osg::Vec3(900, 700, 0)
-#define TIMER_FONT          "fonts/arial.ttf"
-#define CREDITS_BACKGROUND_COLOR   1.0f, 1.0f, 1.0f, 0.0f
-
 class Credits : public RenderingInstance
 {
 private:
