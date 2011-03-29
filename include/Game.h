@@ -3,6 +3,10 @@
 #include <vector>
 
 #include <osg/Group>
+#include <osg/StateAttribute>
+#include <osg/BlendFunc>
+#include <osg/BlendColor>
+
 #include <osgShadow/ShadowedScene>
 #include <osgShadow/ShadowVolume>
 #include <osgShadow/ShadowTexture>
@@ -46,6 +50,7 @@ private:
     btConstraintSolver *_constraintSolver;
     
     bool _running;
+    bool _levelFinished;
     
     void initializeScene();
     void initializePhysicsWorld();
@@ -60,7 +65,9 @@ public:
     void restartLevel();
     bool isRunning();
     
-    void runLevel(const std::string &mapfile);
+    void runLevel(const std::string &mapfile);    
+    void setLevelFinished(bool levelFinished);
+    bool getLevelFinished();
 
     virtual void prepare(osgViewer::Viewer *viewer);
     virtual void cleanup(osgViewer::Viewer *viewer);
@@ -71,6 +78,7 @@ class WorldUpdater : public osg::NodeCallback
 private:
     Game *_game;
     double _previousSimTime;
+    osg::BlendColor *_blendColor;
     
 public:
     WorldUpdater(Game *game);

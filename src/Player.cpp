@@ -3,12 +3,13 @@
 
 Player::Player()
 {
+    setReachedFinish(false);
+
     initializePlayerModel();
     initializePlayerPhysics();
     initializePlayerEffects();
     
     _playerState = new PlayerState();
-	
 }
 
 Player::~Player()
@@ -199,4 +200,15 @@ void Player::reset()
 {
     getPlayerState()->reset();
     getController()->reset();
+    setReachedFinish(false);
+}
+
+void Player::setReachedFinish(bool reachedFinish)
+{
+    _reachedFinish = reachedFinish;
+}
+
+bool Player::reachedFinish()
+{
+    return _reachedFinish;
 }

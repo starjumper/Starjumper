@@ -15,6 +15,7 @@ class LazyCameraManipulator : public osgGA::NodeTrackerManipulator
         size_t _durationOfMovementX;
         
         bool _firstRun;
+        bool _fadeOut;
         
     public:
         LazyCameraManipulator(); 
@@ -23,6 +24,7 @@ class LazyCameraManipulator : public osgGA::NodeTrackerManipulator
         bool handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us);
         
         void resetCamera();
+        void fadeOut();
 
     protected:
         ~LazyCameraManipulator();

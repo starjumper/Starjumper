@@ -1,17 +1,19 @@
 #include "HeadUpDisplay.h"
 
+// _camera -> _hudPat -> _timeNode -> _timer
+//		              -> _speedPat -> _speedBarPat -> _speedNode
+
 HeadUpDisplay::HeadUpDisplay(Player *player) : 
     _player(player)
 {
-    _node = new osg::Geode;
-    _node->getOrCreateStateSet()->setMode(GL_LIGHTING,osg::StateAttribute::OFF);
-    
-    _node->setUserData(this);
-    _node->setUpdateCallback(new HeadUpDisplayUpdateCallback);
-    
+	_hudPat = new osg::PositionAttitudeTransform();
+	_hudPat->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
+	_hudPat->setUserData(this);
+	_hudPat->setUpdateCallback(new HeadUpDisplayUpdateCallback);
+
 	initializeCamera();
-	initializeSpeedBar();
-    initializeTimer();
+	initializeTimer();
+	initializeSpeedometer();
 }
 
 void HeadUpDisplay::initializeCamera()
@@ -22,7 +24,7 @@ void HeadUpDisplay::initializeCamera()
 	_camera->setViewMatrix(osg::Matrix::identity());
 	_camera->setClearMask(GL_DEPTH_BUFFER_BIT);
 	_camera->setRenderOrder(osg::Camera::POST_RENDER);
-    _camera->addChild(_node);
+	_camera->addChild(_hudPat);
 }
 
 osg::Camera *HeadUpDisplay::getCamera()
@@ -30,22 +32,61 @@ osg::Camera *HeadUpDisplay::getCamera()
     return _camera;
 }
 
-void HeadUpDisplay::initializeSpeedBar()
+void HeadUpDisplay::initializeSpeedometer()
 {
-    _speedBar = new osg::ShapeDrawable(new osg::Box(SPEEDBAR_POSITION, SPEEDBAR_WIDTH, 0, 0));
+	_speedPat = new osg::PositionAttitudeTransform();
+	_hudPat->addChild(_speedPat);
+	
+	_speedBarMatrixTrans = new osg::MatrixTransform;
+	_speedPat->addChild(_speedBarMatrixTrans);
 
-	_node->addDrawable(_speedBar);
+	osg::Node *_speedBarNode = osgDB::readNodeFile(SPEEDBAR_MODEL);
+	if(!_speedBarNode)
+    {
+        throw std::runtime_error("Unable to load speedbar model file!");
+    }
+
+	osg::Node *_speedBarBackgroundNode = osgDB::readNodeFile(SPEEDBG_MODEL);
+	if(!_speedBarNode)
+    {
+        throw std::runtime_error("Unable to load speedbar background model file!");
+    }
+
+	osg::StateSet *speedBarBackgroundState = _speedBarBackgroundNode->getOrCreateStateSet();
+	osg::Material *material = new osg::Material();
+	material->setAlpha(osg::Material::FRONT_AND_BACK, HUD_TRANSPARENCY);
+	speedBarBackgroundState->setAttributeAndModes(material, osg::StateAttribute::ON);
+	osg::BlendFunc *blendfunc = new osg::BlendFunc(osg::BlendFunc::SRC_ALPHA, osg::BlendFunc::ONE_MINUS_SRC_ALPHA );
+	speedBarBackgroundState->setAttributeAndModes(blendfunc);
+	
+
+	_speedBarBackgroundPat = new osg::PositionAttitudeTransform();
+	_speedBarBackgroundPat->addChild(_speedBarBackgroundNode);
+	_speedBarBackgroundPat->setScale(osg::Vec3d(60.0, 10.0, 60.0));
+	//_speedBarBackgroundPat->setPosition(osg::Vec3d(100.0, 100.0, 100.0));
+	_speedBarBackgroundPat->setAttitude(osg::Quat(osg::DegreesToRadians(270.0f), osg::Vec3(1.0f, 0.0f , 0.0f)));
+	_speedPat->addChild(_speedBarBackgroundPat);
+
+	_speedBarPat = new osg::PositionAttitudeTransform();
+	_speedBarPat->addChild(_speedBarNode);
+	_speedBarPat->setScale(osg::Vec3d(12.0, 10.0, 12.0));
+	_speedBarPat->setAttitude(osg::Quat(osg::DegreesToRadians(90.0f), osg::Vec3(0.0f, 1.0f , 0.0f)));
+	_speedBarMatrixTrans->addChild(_speedBarPat);
+	_speedPat->setPosition(SPEEDOMETER_POSITION);
 }
 
 void HeadUpDisplay::initializeTimer()
 {
     resetTimer();
     
+	_timeNode = new osg::Geode();
+
 	_timer = new osgText::Text();
 	_timer->setFont(TIMER_FONT);
 	_timer->setPosition(TIMER_POSITION);
 	
-    _node->addDrawable(_timer);
+    _timeNode->addDrawable(_timer);
+	_hudPat->addChild(_timeNode);
 }
 
 void HeadUpDisplay::resetTimer()
@@ -53,18 +94,12 @@ void HeadUpDisplay::resetTimer()
     ftime(&_startTime);
 }
 
-void HeadUpDisplay::updateSpeedBar()
+void HeadUpDisplay::updateSpeedometer()
 {
 	float playerSpeed = _player->getPlayerState()->getSpeed();
-
-//    _speedBar->setColor(osg::Vec4(1.0, 0.005, 0.8, 0.5));
-    _speedBar->setColor(osg::Vec4(1.0, playerSpeed, 0.0, 0.5));
-    ((osg::Box *)_speedBar->getShape())->setHalfLengths(osg::Vec3(SPEEDBAR_WIDTH, SPEEDBAR_MAX_LENGTH * playerSpeed, 1.0f));
-
-    /*
-	speedDrawable->setColor(osg::Vec4(1.0 * playerSpeed, 0.3, 0.8, 1.0));
-	speedBar->setHalfLengths(osg::Vec3(40, 150 * playerSpeed, 1));*/
-}
+	//_speedBarPat->setAttitude(osg::Quat(osg::DegreesToRadians(playerSpeed*180.0), 1.0, 0.0, 0.0));
+	_speedBarMatrixTrans->setMatrix(osg::Matrix::rotate(osg::inDegrees(-(playerSpeed*270) -135), 0.0f, 0.0f, 1.0f));
+ }
 
 void HeadUpDisplay::updateTimer()
 {
@@ -99,6 +134,6 @@ void HeadUpDisplayUpdateCallback::operator()(osg::Node *node, osg::NodeVisitor *
 {
     osg::ref_ptr<HeadUpDisplay> hud = dynamic_cast<HeadUpDisplay *> (node->getUserData());
 
-    hud->updateSpeedBar();
+    hud->updateSpeedometer();
     hud->updateTimer();
 }

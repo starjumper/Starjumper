@@ -91,15 +91,17 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size, const osg::Vec3 &co
     
     osg::Vec4Array* colors = new osg::Vec4Array;
     {
-        colors->push_back(osg::Vec4(color, 1.0f) );
-        colors->push_back(osg::Vec4(color, 1.0f) ); 
-        colors->push_back(osg::Vec4(color, 1.0f) ); 
-        colors->push_back(osg::Vec4(color, 1.0f) ); 
-        colors->push_back(osg::Vec4(color, 1.0f) ); // textured top surface
-        colors->push_back(osg::Vec4(color, 1.0f) );
+        colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f));
+        colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f)); 
+        colors->push_back(osg::Vec4(1.0f, 1.0f, 0.0f, 0.8f)); 
+        colors->push_back(osg::Vec4(1.0f, 1.0f, 0.0f, 0.8f)); 
+        colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f));
+        colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f));
+        colors->push_back(osg::Vec4(0.0f, 1.0f, 0.0f, 0.8f));
+        colors->push_back(osg::Vec4(0.0f, 1.0f, 0.0f, 0.8f));
         
         drawable->setColorArray(colors);
-        drawable->setColorBinding(osg::Geometry::BIND_PER_PRIMITIVE);
+        drawable->setColorBinding(osg::Geometry::BIND_PER_VERTEX);
     }
     
     osg::Vec2Array* texcoords = new osg::Vec2Array(8);
@@ -123,6 +125,9 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size, const osg::Vec3 &co
     
     osg::StateSet* stateSet = new osg::StateSet();
     stateSet->setTextureAttributeAndModes(0, _texture, osg::StateAttribute::ON);
+    stateSet->setMode(GL_ALPHA_TEST, osg::StateAttribute::ON); 
+    stateSet->setMode(GL_BLEND, osg::StateAttribute::ON);
+    stateSet->setRenderingHint( osg::StateSet::TRANSPARENT_BIN );
     
     setStateSet(stateSet);
     setNodeMask(RECEIVE_SHADOW_MASK);

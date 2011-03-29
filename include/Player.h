@@ -40,6 +40,8 @@ private:
     btPairCachingGhostObject *_playerGhostObject;
     KinematicCharacterController *_playerController;
     PlayerState *_playerState;
+    
+    bool _reachedFinish;
 	
     const std::vector<float> *_deadlyAltitudes;
     
@@ -70,4 +72,6 @@ public:
     void setEnginesDecelerating(const float speed);
     
     void reset();
+    void setReachedFinish(bool reachedFinish);
+    bool reachedFinish();
 };

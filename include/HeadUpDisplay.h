@@ -3,11 +3,14 @@
 #include <sstream>
 #include <sys/timeb.h>
 
+#include <osg/BlendFunc>
 #include <osg/Geode>
 #include <osg/Depth>
 #include <osg/Camera>
 #include <osgText/Text>
 #include <osg/ShapeDrawable>
+#include <osg/Material>
+#include <osg/MatrixTransform>
 #include <osg/Node>
 #include <osg/NodeCallback>
 #include <osg/NodeVisitor>
@@ -17,35 +20,48 @@
 #define SCREEN_WIDTH        1024
 #define SCREEN_HEIGHT       768
 
-#define TIMER_POSITION      osg::Vec3(900, 700, 0)
+#define TIMER_POSITION      osg::Vec3(600, 700, 0)
 #define TIMER_FONT          "fonts/arial.ttf"
 
-#define SPEEDBAR_POSITION   osg::Vec3f(60, SCREEN_HEIGHT / 2.0f, 0)
-#define SPEEDBAR_WIDTH      20.0f
-#define SPEEDBAR_MAX_LENGTH 200.0f
+
+#define SPEEDBAR_MODEL		"resources/models/speed_bar.osg"
+#define SPEEDBG_MODEL		"resources/models/speed_background.osg"
+#define SPEEDOMETER_POSITION osg::Vec3(150.0, 150.0, 0.0)
+
+#define SPEEDBAR_POSITION   osg::Vec3(150 ,0 , 0)
+#define SPEEDBAR_WIDTH      10.0f
+#define SPEEDBAR_LENGTH		200.0f
+
+#define HUD_TRANSPARENCY	0.2
 
 
 class HeadUpDisplay : public osg::Referenced
 {
 private:
 	osg::ref_ptr<osg::Camera> _camera;
-	osg::Geode *_node;
-	osg::ShapeDrawable *_speedBar;
-    osgText::Text *_timer;
+	osg::Geode *_timeNode;
+    osgText::Text *_timer;	
 
     Player *_player;
     struct timeb _startTime;
+
+	osg::Node *_speedBarNode;
+	osg::PositionAttitudeTransform *_hudPat;
+	osg::PositionAttitudeTransform *_speedPat;
+	osg::PositionAttitudeTransform *_speedBarPat;
+	osg::PositionAttitudeTransform *_speedBarBackgroundPat;
+	osg::MatrixTransform *_speedBarMatrixTrans;
 
 public:
 	HeadUpDisplay(Player *player);
     osg::Camera *getCamera();
 
 	void initializeCamera();
-	void initializeSpeedBar();
+	void initializeSpeedometer();
 	void initializeTimer();
 	
     void resetTimer();
-	void updateSpeedBar();
+	void updateSpeedometer();
 	void updateTimer();
 };
 

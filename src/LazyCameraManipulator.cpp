@@ -14,6 +14,7 @@ LazyCameraManipulator::LazyCameraManipulator():
     _durationOfMovementX = 0;
     
     _firstRun = true;
+    _fadeOut = false;
     
 	setTrackerMode(osgGA::NodeTrackerManipulator::NODE_CENTER);    	  
 }
@@ -27,6 +28,9 @@ bool LazyCameraManipulator::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAc
 {     
     if(ea.getEventType() == osgGA::GUIEventAdapter::FRAME)
     {
+        if(_fadeOut)
+            _distance += 10.0f;
+        
         // retrieve player position and direction of movement
         const Player *player = dynamic_cast<const Player *>(getTrackNode());
         const osg::Vec3d nodePosition = player->getPlayerPAT()->getPosition();
@@ -87,11 +91,17 @@ osg::Matrixd LazyCameraManipulator::getInverseMatrix() const
     osg::Vec3d nc;
     osg::Quat nodeRotation;
     computeNodeCenterAndRotation(nc, nodeRotation);
-                
+        
     return osg::Matrixd::translate(-_newCameraPosition.x(), -nodePosition[1], -nodePosition[2]) * osg::Matrixd::rotate(nodeRotation.inverse())*osg::Matrixd::rotate(_rotation.inverse())*osg::Matrixd::translate(0.0,0.0,-_distance);
 }
 
 void LazyCameraManipulator::resetCamera()
 {
     _firstRun = true;
+    _fadeOut = false;
+}
+
+void LazyCameraManipulator::fadeOut()
+{
+    _fadeOut = true;
 }

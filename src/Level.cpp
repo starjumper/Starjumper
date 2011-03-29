@@ -25,7 +25,7 @@ void Level::loadMapFromFile(const std::string &mapfile)
             addGoal(*it);
 		else
             throw std::runtime_error("Error: Unrecognized element in level file!");
-    }    
+    }
 }
 
 osg::Vec3 Level::getVectorFromXMLNode(const std::string &name, const rapidxml::xml_node<> &node) const
@@ -83,7 +83,7 @@ void Level::addCuboid(const rapidxml::xml_node<> &cuboidNode)
     // needed for detection whether player is falling to dead    
     int yBucketIndex = (int)((from.y() + size.y()) / 20.0f);
 	
-	while(_minZValues.size() <= yBucketIndex)
+	while((int)_minZValues.size() <= yBucketIndex)
         _minZValues.push_back(from.z());
     
     // if current cuboid is lower then z -> adjust bucket value
