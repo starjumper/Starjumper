@@ -27,6 +27,23 @@ install as described in the instructions
 get [latest Version](http://code.google.com/p/osgbullet/)
 install as described in the instructions	
 
+### OggVorbis
+get [latest Version](http://www.vorbis.com/)
+install as described in the instructions
+you will need libogg library as well as libvorbis library
+
+### OpenAL 
+get [latest Version](http://connect.creativelabs.com/openal/)
+install as described in the instructions	
+
+### freeALUT
+get [latest Version](http://connect.creativelabs.com/openal/)
+install as described in the instructions	
+
+### osgAudio
+get [latest Version](http://code.google.com/p/osgaudio/)
+install as described in the instructions
+
 ## Install and run Starjumper
 	$ cmake .
 	$ make
