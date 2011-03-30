@@ -2,12 +2,14 @@
 
 Player *Player::_instance = NULL;
 
-Player::Player()
+Player::Player() :
+    _playerState(new PlayerState())
 {
     loadPlayerModel();
     setScale(PLAYER_SCALE);
     setAttitude(PLAYER_ATTITUDE);
     resetPosition();
+    initializePhysics();    
 }
 
 Player *Player::getInstance()

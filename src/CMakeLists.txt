@@ -2,6 +2,7 @@ SET(SOURCE
     main.cpp
 	Level.cpp
 	Player.cpp
+	PlayerState.cpp
 	KinematicCharacterController.cpp
 	LazyCameraManipulator.cpp
 	CollisionObject.cpp
@@ -12,6 +13,7 @@ SET(SOURCE
 SET(HEADER
 	../include/Level.h
 	../include/Player.h
+	../include/PlayerState.h
 	../include/KinematicCharacterController.h
 	../include/LazyCameraManipulator.h
 	../include/CollisionObject.h

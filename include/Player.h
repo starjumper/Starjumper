@@ -11,6 +11,7 @@
 #include <osgbBullet/CollisionShapes.h>
 
 #include "KinematicCharacterController.h"
+#include "PlayerState.h"
 
 #define PLAYER_MODEL            "resources/models/player.osg"
 #define PLAYER_SCALE            osg::Vec3(0.2, 0.2, 0.2)
@@ -21,6 +22,8 @@
 class Player : public osg::PositionAttitudeTransform
 {
 private:
+    const PlayerState *_playerState;
+    
     static Player *_instance;
     
     btPairCachingGhostObject *_playerGhostObject;
@@ -34,4 +37,8 @@ private:
         
 public:
     static Player *getInstance();
+    
+    KinematicCharacterController *getController() const { return _playerController; }
+    btPairCachingGhostObject *getGhostObject() const { return _playerGhostObject; }  
+    const PlayerState *getPlayerState() { return _playerState; }  
 };

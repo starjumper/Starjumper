@@ -12,6 +12,14 @@ Level::Level(const std::string &mapfile)
     // add player to level
     addChild(Player::getInstance());
     
+    // add player ghost object to world
+    _physicsWorld->addCollisionObject(Player::getInstance()->getGhostObject(),
+                               btBroadphaseProxy::CharacterFilter,
+                               btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter);
+    
+    // register player controller
+    _physicsWorld->addAction(Player::getInstance()->getController());
+    
     // initialize members
     LazyCameraManipulator *cameraManipulator = new LazyCameraManipulator();
     
@@ -21,7 +29,6 @@ Level::Level(const std::string &mapfile)
     
     // set _cameraManipulator as manipulator for the scene
     viewer.setCameraManipulator(cameraManipulator);
-    
     
     LevelUpdater *stepCallback = new LevelUpdater(this);
     setUpdateCallback(stepCallback);
