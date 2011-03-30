@@ -2,6 +2,10 @@
 
 #include <osg/Group>
 #include <osgViewer/Viewer>
+#include <osgShadow/ShadowedScene>
+#include <osgShadow/ShadowVolume>
+#include <osgShadow/ShadowTexture>
+#include <osgShadow/ShadowMap>
 
 #include <btBulletDynamicsCommon.h>
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
@@ -10,11 +14,14 @@
 #include "RapidXML/rapidxml_iterators.hpp"
 #include "RapidXML/rapidxml_utils.hpp"
 
+#include "types.h"
 #include "LevelKeyboardHandler.h"
 #include "Player.h"
 #include "PlayerUpdater.h"
 #include "LazyCameraManipulator.h"
 #include "Cuboid.h"
+#include "HeadUpDisplay.h"
+#include "Skybox.h"
 
 #define PHYSICS_WORLD_MIN           -1000, -1000, -1000
 #define PHYSICS_WORLD_MAX           1000, 1000, 1000
@@ -27,11 +34,14 @@
 class Level : public osg::Group
 {
 private:    
+    osg::ref_ptr<osgShadow::ShadowedScene> _shadowedScene;
+    
     btDynamicsWorld *_physicsWorld;
 	std::vector<float> _deadlyAltitudes;
     
-    void loadMapFromFile(const std::string &mapfile);
+    void initializeLighting();
     void initializePhysicsWorld();
+    void loadMapFromFile(const std::string &mapfile);
     
     osg::Vec3 getVectorFromXMLNode(const std::string &name, const rapidxml::xml_node<> &node) const;
             
@@ -40,7 +50,7 @@ public:
     
     std::vector<float> getDeadlyAltitudes() { return _deadlyAltitudes; }
     
-    btDynamicsWorld *getPhysicsWorld() { return _physicsWorld; };    
+    btDynamicsWorld *getPhysicsWorld() { return _physicsWorld; };
 };
 
 class LevelUpdater : public osg::NodeCallback

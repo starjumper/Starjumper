@@ -10,10 +10,13 @@ SET(SOURCE
 	CollisionObject.cpp
 	Cuboid.cpp
 	ParticleEffectFactory.cpp
+	HeadUpDisplay.cpp
+	Skybox.cpp
 )
 
 #dirty!
 SET(HEADER
+	../include/types.h
 	../include/Level.h
 	../include/LevelKeyboardHandler.h
 	../include/Player.h
@@ -24,6 +27,8 @@ SET(HEADER
 	../include/CollisionObject.h
 	../include/Cuboid.h
 	../include/ParticleEffectFactory.h
+	../include/HeadUpDisplay.h
+	../include/Skybox.h
 )
 
 FIND_PACKAGE( OpenGL )

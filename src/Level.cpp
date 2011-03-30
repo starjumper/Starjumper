@@ -4,15 +4,26 @@ extern osgViewer::Viewer viewer;
 
 Level::Level(const std::string &mapfile)
 {
+    _shadowedScene = new osgShadow::ShadowedScene;
+    _shadowedScene->setReceivesShadowTraversalMask(RECEIVE_SHADOW_MASK);
+	_shadowedScene->setCastsShadowTraversalMask(CAST_SHADOW_MASK);
+	_shadowedScene->setShadowTechnique(new osgShadow::ShadowMap);
+    	
+    addChild(_shadowedScene);
+
+
+    HeadUpDisplay *hud = new HeadUpDisplay();
+    addChild(hud->getCamera());
+    
     initializePhysicsWorld();
     
     // load map from file
     loadMapFromFile(mapfile);
     
     // add player to level
-    addChild(Player::getInstance());
+    _shadowedScene->addChild(Player::getInstance());
     addChild(Player::getInstance()->getParticleEffects());
-    
+	
     // add player ghost object to world
     _physicsWorld->addCollisionObject(Player::getInstance()->getGhostObject(),
                                btBroadphaseProxy::CharacterFilter,
@@ -38,7 +49,28 @@ Level::Level(const std::string &mapfile)
     Player::getInstance()->setUpdateCallback(new PlayerUpdater());
     
     // player keyboard control
-    viewer.addEventHandler(new LevelKeyboardHandler());
+    viewer.addEventHandler(new LevelKeyboardHandler());  
+    
+    initializeLighting();
+}
+
+void Level::initializeLighting()
+{    
+    // add Light for player shadow
+	osg::Light *light = new osg::Light();
+	light->setLightNum(3);
+	
+	osg::LightSource *lightSource = new osg::LightSource;   
+	lightSource->setLight(light);
+	
+	osg::StateSet *stateset = new osg::StateSet;
+	lightSource->setStateSetModes(*stateset, osg::StateAttribute::ON);
+	
+	light->setPosition(osg::Vec4(osg::Vec3(0.0, 10.0, 1000.0),1.0));
+	light->setDiffuse(osg::Vec4(1.0,0.0,0.0,0.5));
+	light->setAmbient(osg::Vec4(1.0,1.0,1.0,1.0));
+
+	_shadowedScene->addChild(lightSource);
 }
 
 void Level::loadMapFromFile(const std::string &mapfile)
@@ -80,7 +112,7 @@ void Level::loadMapFromFile(const std::string &mapfile)
             
         if(collisionObject != 0)
         {
-            addChild(collisionObject);
+            _shadowedScene->addChild(collisionObject);
             _physicsWorld->addRigidBody(collisionObject->getRigidBody());
         }
     }

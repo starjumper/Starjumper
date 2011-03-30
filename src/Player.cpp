@@ -5,13 +5,14 @@ Player *Player::_instance = NULL;
 
 Player::Player() :
     _playerState(new PlayerState())
-{
+{    
     loadPlayerModel();
     setScale(PLAYER_SCALE);
     setAttitude(PLAYER_ATTITUDE);
     initializePhysics(); 
     initializePlayerEffects();   
     resetPosition();
+    setNodeMask(CAST_SHADOW_MASK);
 }
 
 Player *Player::getInstance()

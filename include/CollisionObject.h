@@ -6,6 +6,7 @@
 #include <osgbBullet/Utils.h>
 #include <osgbBullet/CollisionShapes.h>
 
+#include "types.h"
 
 class CollisionObject : public osg::Geode
 {    
