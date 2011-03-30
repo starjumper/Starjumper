@@ -41,11 +41,11 @@ void Player::initializePlayerModel()
 	lightSource->setLight(playerLight);
 	osg::StateSet *stateset = new osg::StateSet;
 	lightSource->setStateSetModes(*stateset, osg::StateAttribute::ON);
-	playerLight->setPosition(osg::Vec4(osg::Vec3(0.0, 10.0, 12.0),1.0));
+	playerLight->setPosition(osg::Vec4(osg::Vec3(0.0, 10.0, 1000.0),1.0));
 	playerLight->setDiffuse(osg::Vec4(1.0,0.0,0.0,0.5));
 	playerLight->setAmbient(osg::Vec4(1.0,1.0,1.0,1.0));
 
-	_playerPAT->addChild(lightSource);
+	addChild(lightSource);
     _playerPAT->setNodeMask(CAST_SHADOW_MASK);
 	
     PlayerUpdater *playerUpdater = new PlayerUpdater();
