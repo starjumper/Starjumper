@@ -11,7 +11,7 @@ SET(SOURCE
 	Cuboid.cpp
 	ParticleEffectFactory.cpp
 	HeadUpDisplay.cpp
-	Skybox.cpp
+	Sky.cpp
 )
 
 #dirty!
@@ -28,7 +28,7 @@ SET(HEADER
 	../include/Cuboid.h
 	../include/ParticleEffectFactory.h
 	../include/HeadUpDisplay.h
-	../include/Skybox.h
+	../include/Sky.h
 )
 
 FIND_PACKAGE( OpenGL )

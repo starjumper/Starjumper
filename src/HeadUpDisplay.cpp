@@ -21,7 +21,9 @@ void HeadUpDisplay::initializeCamera()
 	_camera->setProjectionMatrix(osg::Matrix::ortho2D(0, viewer.getCamera()->getViewport()->width(), 0, viewer.getCamera()->getViewport()->height()));
 	_camera->setReferenceFrame(osg::Transform::ABSOLUTE_RF);
 	_camera->setViewMatrix(osg::Matrix::identity());
-	_camera->setClearMask(GL_DEPTH_BUFFER_BIT);
+	
+    _camera->setClearMask(GL_DEPTH_BUFFER_BIT);
+    
 	_camera->setRenderOrder(osg::Camera::POST_RENDER);
 	_camera->addChild(_hudPat);
 }

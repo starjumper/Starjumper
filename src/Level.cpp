@@ -11,9 +11,8 @@ Level::Level(const std::string &mapfile)
     	
     addChild(_shadowedScene);
 
-
-    HeadUpDisplay *hud = new HeadUpDisplay();
-    addChild(hud->getCamera());
+    addChild((new HeadUpDisplay())->getCamera());
+    addChild((new Sky())->getCamera());
     
     initializePhysicsWorld();
     

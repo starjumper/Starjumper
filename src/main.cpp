@@ -18,7 +18,8 @@ int main(int argc, char *argv[])
 	
 	// set background color
 	viewer.getCamera()->setClearColor(osg::Vec4( 0., 0., 0., 1. ));
-    
+    viewer.getCamera()->setClearMask(GL_DEPTH_BUFFER_BIT);
+	
     Level *level = new Level("resources/levels/level1.xml");
 
     viewer.setSceneData(level);

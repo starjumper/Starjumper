@@ -81,7 +81,6 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(Player *player)
     
     if(playerController->frontalHit())
     {
-        std::cout << "Frontal hit with speed=" << speed << std::endl;
         if(speed > 0.8f)
         {
             playerState->beDead();

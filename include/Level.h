@@ -21,7 +21,7 @@
 #include "LazyCameraManipulator.h"
 #include "Cuboid.h"
 #include "HeadUpDisplay.h"
-#include "Skybox.h"
+#include "Sky.h"
 
 #define PHYSICS_WORLD_MIN           -1000, -1000, -1000
 #define PHYSICS_WORLD_MAX           1000, 1000, 1000
