@@ -9,6 +9,7 @@ SET(SOURCE
 	LazyCameraManipulator.cpp
 	CollisionObject.cpp
 	Cuboid.cpp
+	ParticleEffectFactory.cpp
 )
 
 #dirty!
@@ -22,6 +23,7 @@ SET(HEADER
 	../include/LazyCameraManipulator.h
 	../include/CollisionObject.h
 	../include/Cuboid.h
+	../include/ParticleEffectFactory.h
 )
 
 FIND_PACKAGE( OpenGL )

@@ -12,6 +12,7 @@
 
 #include "KinematicCharacterController.h"
 #include "PlayerState.h"
+#include "ParticleEffectFactory.h"
 
 #define PLAYER_MODEL            "resources/models/player.osg"
 #define PLAYER_SCALE            osg::Vec3(0.2, 0.2, 0.2)
@@ -19,10 +20,18 @@
 #define PLAYER_HOME_POSITION    osg::Vec3(0.0, 10.0, 5.0)
 #define PLAYER_BBOX_EXTENTS     btVector3(0.5, 0.5, 0.5)
 
+#define ACCELERATE              true
+#define DECELERATE              false
+
 class Player : public osg::PositionAttitudeTransform
 {
 private:
     PlayerState *_playerState;
+    
+    ParticleEffect *_mainEngine;
+    ParticleEffect *_leftEngine;
+    ParticleEffect *_rightEngine;
+    osg::ref_ptr<osg::Group> _particleEffects;
     
     static Player *_instance;
     
@@ -32,8 +41,9 @@ private:
     Player();
     
     void loadPlayerModel();
+    void initializePlayerEffects();
     void initializePhysics();
-    void resetPosition();
+    void resetPosition();    
         
 public:
     static Player *getInstance();
@@ -41,6 +51,8 @@ public:
     KinematicCharacterController *getController() const { return _playerController; }
     btPairCachingGhostObject *getGhostObject() const { return _playerGhostObject; }  
     PlayerState *getPlayerState() const { return _playerState; }
+    osg::ref_ptr<osg::Group> getParticleEffects() { return _particleEffects; }
     
     void setAngles(const float angleX = 0.0f, const float angleY = 0.0f, const float angleZ = 180.0f);
+    void setEngines(const float speed, bool accelerating);
 };

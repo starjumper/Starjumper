@@ -11,6 +11,7 @@ Level::Level(const std::string &mapfile)
     
     // add player to level
     addChild(Player::getInstance());
+    addChild(Player::getInstance()->getParticleEffects());
     
     // add player ghost object to world
     _physicsWorld->addCollisionObject(Player::getInstance()->getGhostObject(),
