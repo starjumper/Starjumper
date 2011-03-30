@@ -59,6 +59,7 @@ public:
     btPairCachingGhostObject *getGhostObject() const;
     KinematicCharacterController *getController() const;
     PlayerState *getPlayerState() const;
+    osg::Group *getParticleEffectGroup() const;
     
     void setPosition(const osg::Vec3 position);
     void setAngles(const float angleX = 0.0f, const float angleY = 0.0f, const float angleZ = 180.0f);

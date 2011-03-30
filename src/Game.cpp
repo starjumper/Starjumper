@@ -85,6 +85,7 @@ void Game::initializeScene()
     getRootNode()->addChild(_headUpDisplay->getCamera());
 
     getRootNode()->addChild(shadowedScene);
+    getRootNode()->addChild(_player->getParticleEffectGroup());
 
 	getRootNode()->addChild(createSkyBoxCubeMap());
 }

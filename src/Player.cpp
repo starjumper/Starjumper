@@ -105,9 +105,9 @@ void Player::initializePlayerEffects()
     _playerPAT->addChild(_rightEngine);
     
     // add the other components to the scene
-    addChild(_mainEngine->getEffectRoot());
-    addChild(_leftEngine->getEffectRoot());
-    addChild(_rightEngine->getEffectRoot());
+    _particleEffects->addChild(_mainEngine->getEffectRoot());
+    _particleEffects->addChild(_leftEngine->getEffectRoot());
+    _particleEffects->addChild(_rightEngine->getEffectRoot());
 }
 
 void Player::toHomePosition()
@@ -141,6 +141,11 @@ KinematicCharacterController *Player::getController() const
 PlayerState *Player::getPlayerState() const
 {
     return _playerState;
+}
+
+osg::Group *Player::getParticleEffectGroup() const
+{
+    return _particleEffects;
 }
 
 void Player::setPosition(const osg::Vec3 position)
