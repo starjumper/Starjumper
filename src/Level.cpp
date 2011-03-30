@@ -29,9 +29,15 @@ Level::Level(const std::string &mapfile)
     
     // set _cameraManipulator as manipulator for the scene
     viewer.setCameraManipulator(cameraManipulator);
-    
+            
     LevelUpdater *stepCallback = new LevelUpdater(this);
     setUpdateCallback(stepCallback);
+
+    // player must be updated after physic is updated
+    Player::getInstance()->setUpdateCallback(new PlayerUpdater());
+    
+    // player keyboard control
+    viewer.addEventHandler(new LevelKeyboardHandler());
 }
 
 void Level::loadMapFromFile(const std::string &mapfile)
@@ -133,8 +139,10 @@ LevelUpdater::LevelUpdater(Level *level) :
 }
 
 void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
-{
+{    
     double currentStepTime = viewer.getFrameStamp()->getSimulationTime();
     _level->getPhysicsWorld()->stepSimulation(currentStepTime - _previousStepTime, 0);
     _previousStepTime = currentStepTime;
+    
+    traverse(node, nv);
 }

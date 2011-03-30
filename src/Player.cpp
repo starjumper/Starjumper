@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "PlayerUpdater.h"
 
 Player *Player::_instance = NULL;
 
@@ -51,4 +52,12 @@ void Player::initializePhysics()
 void Player::resetPosition()
 {
     setPosition(PLAYER_HOME_POSITION);    
+}
+
+void Player::setAngles(const float angleX, const float angleY, const float angleZ)
+{
+    setAttitude(osg::Quat(
+        osg::DegreesToRadians(angleX), osg::Vec3(1.0,0.0,0.0),
+        osg::DegreesToRadians(angleY), osg::Vec3(0.0,1.0,0.0),
+        osg::DegreesToRadians(angleZ), osg::Vec3(0.0,0.0,1.0)));
 }

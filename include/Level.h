@@ -10,7 +10,9 @@
 #include "RapidXML/rapidxml_iterators.hpp"
 #include "RapidXML/rapidxml_utils.hpp"
 
+#include "LevelKeyboardHandler.h"
 #include "Player.h"
+#include "PlayerUpdater.h"
 #include "LazyCameraManipulator.h"
 #include "Cuboid.h"
 

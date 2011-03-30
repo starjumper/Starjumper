@@ -1,8 +1,10 @@
 SET(SOURCE
     main.cpp
 	Level.cpp
+	LevelKeyboardHandler.cpp
 	Player.cpp
 	PlayerState.cpp
+	PlayerUpdater.cpp
 	KinematicCharacterController.cpp
 	LazyCameraManipulator.cpp
 	CollisionObject.cpp
@@ -12,8 +14,10 @@ SET(SOURCE
 #dirty!
 SET(HEADER
 	../include/Level.h
+	../include/LevelKeyboardHandler.h
 	../include/Player.h
 	../include/PlayerState.h
+	../include/PlayerUpdater.h
 	../include/KinematicCharacterController.h
 	../include/LazyCameraManipulator.h
 	../include/CollisionObject.h

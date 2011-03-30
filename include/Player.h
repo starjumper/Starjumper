@@ -22,7 +22,7 @@
 class Player : public osg::PositionAttitudeTransform
 {
 private:
-    const PlayerState *_playerState;
+    PlayerState *_playerState;
     
     static Player *_instance;
     
@@ -40,5 +40,7 @@ public:
     
     KinematicCharacterController *getController() const { return _playerController; }
     btPairCachingGhostObject *getGhostObject() const { return _playerGhostObject; }  
-    const PlayerState *getPlayerState() { return _playerState; }  
+    PlayerState *getPlayerState() const { return _playerState; }
+    
+    void setAngles(const float angleX = 0.0f, const float angleY = 0.0f, const float angleZ = 180.0f);
 };
