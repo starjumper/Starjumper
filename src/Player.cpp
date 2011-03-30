@@ -28,6 +28,24 @@ void Player::loadPlayerModel()
     addChild(playerModel);
 }
 
+void Player::initializePhysics()
+{
+    _playerGhostObject = new btPairCachingGhostObject;
+    
+    // use a btBoxShape as collision shape for the player
+    btBoxShape *boundingBox = new btBoxShape(PLAYER_BBOX_EXTENTS);
+    _playerGhostObject->setCollisionShape(boundingBox);
+    _playerGhostObject->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
+    
+    btTransform playerTransform;
+	playerTransform.setIdentity();
+	playerTransform.setOrigin(osgbBullet::asBtVector3(PLAYER_HOME_POSITION));
+	_playerGhostObject->setWorldTransform(playerTransform);
+	
+	_playerController = new KinematicCharacterController(_playerGhostObject, boundingBox, btScalar(0.1), 2);
+    _playerController->setFallSpeed(0.1);
+}
+
 void Player::resetPosition()
 {
     setPosition(PLAYER_HOME_POSITION);    
