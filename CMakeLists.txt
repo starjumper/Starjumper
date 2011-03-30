@@ -24,7 +24,8 @@ ENDIF( WIN32 AND MSVC )
 
 #add cmake macros
 INCLUDE( CMakeMacros )
-INCLUDE( CPack )
+
+
 
 #try to find necessary libraries
 FIND_PACKAGE( OSG REQUIRED )
@@ -41,6 +42,7 @@ FIND_PACKAGE ( VorbisFile REQUIRED )
 INCLUDE_DIRECTORIES(
     include
 	${OSG_INCLUDE_DIR}
+	${OGG_INCLUDE_DIE}
 	${BULLET_INCLUDE_DIR}
 	${OSGWORKS_INCLUDE_DIR}
 	${OSGBULLET_INCLUDE_DIR}
@@ -51,3 +53,14 @@ INCLUDE_DIRECTORIES(
 
 ADD_SUBDIRECTORY(src)
 ADD_SUBDIRECTORY(include)
+
+#installer configuration
+INCLUDE(InstallRequiredSystemLibraries)
+SET(CPACK_GENERATOR "NSIS")
+SET(CPACK_PACKAGE_VERSION_MAJOR "6")
+SET(CPACK_PACKAGE_VERSION_MINOR "6")
+SET(CPACK_PACKAGE_VERSION_PATCH "6")
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "The awesome Starjumper project")
+SET(CPACK_PACKAGE_VENDOR "Quartet of awesomenes: Tim, Robert, Johannes, Stefan")
+
+INCLUDE( CPack )

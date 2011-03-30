@@ -18,7 +18,7 @@ GameManager::GameManager() :
 
 	// window view for testing purpose, uncomment if needed
 	// push with fullscreen ONLY!!!
-	//_viewer.setUpViewInWindow(40, 40, 800, 600, 0);
+	_viewer.setUpViewInWindow(40, 40, 800, 600, 0);
 
 	// initialize Soundmanager
 	Sound::initSoundManager();
