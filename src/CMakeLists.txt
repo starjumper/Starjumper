@@ -1,53 +1,13 @@
 SET(SOURCE
     main.cpp
-    GameManager.cpp
-    RenderingInstance.cpp
-    MenuButton.cpp
-    Menu.cpp
-    LevelOverview.cpp
-    Game.cpp
-    Level.cpp
-    Player.cpp
-    LazyCameraManipulator.cpp
-    GameKeyboardHandler.cpp
-    PlayerUpdater.cpp
-    PlayerState.cpp
-	HeadUpDisplay.cpp
-	EnvironmentObject.cpp
-	Cuboid.cpp
-	Tunnel.cpp
-	Goal.cpp
-    KinematicCharacterController.cpp
-    ParticleEffectFactory.cpp
-    Skybox.cpp
-    Sound.cpp
-	Credits.cpp
+	Level.cpp
+	Player.cpp
 )
 
 #dirty!
 SET(HEADER
-	../include/EnvironmentObject.h
-	../include/Cuboid.h
-	../include/Tunnel.h
-	../include/Goal.h
-	../include/Game.h
-	../include/GameKeyboardHandler.h
-	../include/GameManager.h
-	../include/HeadUpDisplay.h
-	../include/KinematicCharacterController.h
-	../include/LazyCameraManipulator.h
 	../include/Level.h
-	../include/LevelOverview.h
-	../include/Menu.h
-	../include/MenuButton.h
 	../include/Player.h
-	../include/PlayerState.h
-	../include/PlayerUpdater.h
-	../include/RenderingInstance.h
-	../include/types.h
-	../include/Skybox.h
-	../include/Sound.h
-	../include/Credits.h
 )
 
 FIND_PACKAGE( OpenGL )
