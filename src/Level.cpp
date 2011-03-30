@@ -54,8 +54,21 @@ void Level::loadMapFromFile(const std::string &mapfile)
         CollisionObject *collisionObject = 0;
         
         if(strcmp(it->name(), "cuboid") == 0)
-            collisionObject = new Cuboid(   getVectorFromXMLNode("position", *it), 
-                                            getVectorFromXMLNode("size", *it));
+        {
+            osg::Vec3 from = getVectorFromXMLNode("position", *it);
+            osg::Vec3 size = getVectorFromXMLNode("size", *it);
+            
+            collisionObject = new Cuboid(from, size);
+                     
+            int yBucketIndex = (int)((from.y() + size.y()) / 20.0f);
+         
+            while((int)_deadlyAltitudes.size() <= yBucketIndex)
+                _deadlyAltitudes.push_back(from.z());
+
+            // if current cuboid is lower then z -> adjust bucket value
+            if(from.z() < _deadlyAltitudes[yBucketIndex])
+                _deadlyAltitudes[yBucketIndex] = from.z();                                   
+        }
         else if(strcmp(it->name(), "tunnel") == 0)
             ;
         else if(strcmp(it->name(), "cuboidtunnel") == 0)
@@ -144,6 +157,25 @@ void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
     double currentStepTime = viewer.getFrameStamp()->getSimulationTime();
     _level->getPhysicsWorld()->stepSimulation(currentStepTime - _previousStepTime, 0);
     _previousStepTime = currentStepTime;
+    
+    
+    // player dies when falling to low
+    {
+        btVector3 position = Player::getInstance()->getController()->getGhostObject()->getWorldTransform().getOrigin();
+        int yBucketIndex = (int)(position.y() / 20.0f);
+    
+        if(yBucketIndex >= _level->getDeadlyAltitudes().size())
+            yBucketIndex = _level->getDeadlyAltitudes().size() - 1;
+
+        float minimum = min(_level->getDeadlyAltitudes()[yBucketIndex], 
+                            (_level->getDeadlyAltitudes())[yBucketIndex + 1]);
+
+        if(position.z() < (minimum - 5.0f))
+        {
+            Player::getInstance()->resetPosition();
+            ((LazyCameraManipulator *)viewer.getCameraManipulator())->resetCamera();
+        }
+    }
     
     traverse(node, nv);
 }

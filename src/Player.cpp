@@ -9,9 +9,9 @@ Player::Player() :
     loadPlayerModel();
     setScale(PLAYER_SCALE);
     setAttitude(PLAYER_ATTITUDE);
-    resetPosition();
     initializePhysics(); 
     initializePlayerEffects();   
+    resetPosition();
 }
 
 Player *Player::getInstance()
@@ -116,7 +116,16 @@ void Player::setEngines(const float speed, bool accelerating)
 
 void Player::resetPosition()
 {
-    setPosition(PLAYER_HOME_POSITION);    
+    setPosition(PLAYER_HOME_POSITION);
+
+    btTransform playerTransform;
+	playerTransform.setIdentity();
+	playerTransform.setOrigin(btVector3(0.0, 10.0, 5.0));
+
+	_playerGhostObject->setWorldTransform(playerTransform);
+    _mainEngine->clearParticles();
+    _leftEngine->clearParticles();
+    _rightEngine->clearParticles();
 }
 
 void Player::setAngles(const float angleX, const float angleY, const float angleZ)

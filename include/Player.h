@@ -43,7 +43,6 @@ private:
     void loadPlayerModel();
     void initializePlayerEffects();
     void initializePhysics();
-    void resetPosition();    
         
 public:
     static Player *getInstance();
@@ -55,4 +54,5 @@ public:
     
     void setAngles(const float angleX = 0.0f, const float angleY = 0.0f, const float angleZ = 180.0f);
     void setEngines(const float speed, bool accelerating);
+    void resetPosition();    
 };

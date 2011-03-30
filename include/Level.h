@@ -28,7 +28,8 @@ class Level : public osg::Group
 {
 private:    
     btDynamicsWorld *_physicsWorld;
-	
+	std::vector<float> _deadlyAltitudes;
+    
     void loadMapFromFile(const std::string &mapfile);
     void initializePhysicsWorld();
     
@@ -36,6 +37,8 @@ private:
             
 public:
     Level(const std::string &mapfile);    
+    
+    std::vector<float> getDeadlyAltitudes() { return _deadlyAltitudes; }
     
     btDynamicsWorld *getPhysicsWorld() { return _physicsWorld; };    
 };
