@@ -160,8 +160,8 @@ TexturedCuboid::TexturedCuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
     {
         (*texcoords)[0].set(size.x(), 0.0f);
         (*texcoords)[1].set(0.0f, 0.0f);
-        (*texcoords)[2].set(size.x(), size.y() / 3.0f);
-        (*texcoords)[3].set(0.0f,  size.y() / 3.0f); 
+        (*texcoords)[3].set(size.x(), size.y() / 3.0f);
+        (*texcoords)[2].set(0.0f,  size.y() / 3.0f); 
 
         _textureDrawable->setTexCoordArray(0, texcoords);
     }
@@ -191,7 +191,7 @@ AccelerationCuboid::AccelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &s
     
     osg::Vec4Array* colors = new osg::Vec4Array;
     {
-        colors->push_back(osg::Vec4(0.0f, 1.0f, 0.0f, 0.8f));
+        colors->push_back(osg::Vec4(0.0f, 1.0f, 0.0f, 0.7f));
 
         _textureDrawable->setColorArray(colors);
         _textureDrawable->setColorBinding(osg::Geometry::BIND_OVERALL);
@@ -211,7 +211,7 @@ DecelerationCuboid::DecelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &s
     
     osg::Vec4Array* colors = new osg::Vec4Array;
     {
-        colors->push_back(osg::Vec4(1.0f, 0.8f, 0.0f, 0.8f));
+        colors->push_back(osg::Vec4(1.0f, 0.8f, 0.0f, 0.7f));
 
         _textureDrawable->setColorArray(colors);
         _textureDrawable->setColorBinding(osg::Geometry::BIND_OVERALL);
