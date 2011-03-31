@@ -109,14 +109,50 @@ eventuelle Kollisionen erkennen kann. Gleichzeitig werden diese Parameter aktual
 Anfragen, die der Benutzer \"uber einen Tastendruck absetzt und die im \textbf{PlayerState} vermerkt werden.\\
 Folgendes Sequenzdiagramm soll das Vorgehen des \textbf{PlayerUpdater}s veranschaulichen:
 
-\section{Designentscheidungen}
-\subsection{Levelfiles}
+\section{Designentscheidungen und Design Patterns}
+Dieser Abschnitt besch\"aftigt sich mit einigen Besonderheiten der Starjumper Implementierung und erl\"autert deren
+Beweggr\"unde und Vorteile gegen\"uber alternativer Implementierungsstrategien.
+
 \subsection{Physik}
+Da sich die physikalischen Effekte, die sich in Starjumper wiederfinden (sollten), auf korrekte Auswirkung der Schwerkraft
+beim Sprung oder dem Verlassen einer Plattform, sowie der Erkennung von Kollisionen mit Umgebungsobjekten beschr\"anken,
+stand zu Beginn die \"Uberlegung im Raum, diese von Hand zu implementieren. Schnell wurde jedoch klar, dass trotz des
+an sich geringen Umfangs der Anforderungen an die Physik eine manuelle Implementierung viel Zeit kosten w\"urde, und so fiel
+die Entscheidung zugunsten der Verwendung der Physikbibliothek Bullet.\\
+Die von Bullet zur Verf\"ugung gestellten Klassen \texttt{btKinematicCharacterController} und \texttt{btGhostObject} boten
+laut Interface genau die gew\"unschten Funktionen: Das Ghost Object agiert als Rigid Body in der Physikwelt und "kennt"
+zu jedem Zeitpunkt alle eventuell vorhandenen Kollisionspartner, der \texttt{btKinematicCharacterController} stellt ein
+Steuerungsinterface f\"ur das GhostObject zur Verf\"ugung. Aufgrund einiger weniger Unzul\"anglichkeiten musste allerdings
+der Controller angepasst werden, sodass statt dem \texttt{btKinematicCharacterController} eine modifizierte Version
+namens \texttt{KinematicCharacterController} Verwendung findet.\\
+Das Rendering durch OpenSceneGraph und die Physik laufen parallel. So ist zu erkl\"aren, dass beispielsweise f\"ur
+Streckenelemente wie \texttt{Cuboid} jeweils eine Repr\"asentation f\"ur den Szenengraphen und ein \texttt{btRigidBody}
+f\"ur die Physics World existiert. Die Kommunikation zwischen diesen beiden Entit\"aten findet im \texttt{PlayerUpdater}
+statt. Korrekt parametrisiert (Bewegungsrichtung, Fallgeschwindigkeit, Gravitation) wird der 
 
+\subsection{Player}
+Der \texttt{Player} bzw. sein Modell wird in jeder Levelinstanz ben\"otigt. Die im Verlauf des Spiels vorgenommenen \"Anderungen
+am \texttt{Player} beschr\"anken sich jedoch auf Transformationen der umgebenden \texttt{PositionAttitudeTransform} und sind leicht reversibel,
+wie am Beispiel des Reset erkennbar ist. In einer fr\"uheren Version wurde f\"ur jedes Level eine neue Instanz der Klasse
+erzeugt, die logischerweise das Laden des Modells beinhaltet, was zu erheblicher Verz\"ogerung des Spielstarts f\"uhrte.\\
+Auf Basis dieser Erkenntnisse wurde ein Refactoring vorgenommen und der \texttt{Player} zu einem Singleton erweitert. Das hei\ss t,
+dass das Spielermodell nur noch ein einziges Mal beim Starten des Programms geladen werden muss und als global verf\"ugbare
+Ressource gehandhabt wird, ein Aufruf der statischen Methode \texttt{Player::getInstance()} liefert auf Wunsch die Player-Instanz.\\
+Neben dem Wegfall der Ladezeiten erm\"oglicht dies dar\"uber hinaus den globalen Zugriff auf den Zustand des Spielers,
+der z.B. die an verschiedenen Stellen des Spiels ben\"otigten Eigenschaften Geschwindigkeit und Neigungswinkel enth\"alt.
 
-\section{Design Patterns}
-
-
+\subsection{ParticleEffectFactory}
+Die Erstellung von Partikeleffekten erfordert diverse Komponenten und deren Konfiguration. So ist neben einem \texttt{ParticleSystem}, das
+die einzelnen Partikel \"uber die Dauer ihres Bestehens einschlie\ss lich ihrer L\"oschung verwaltet, ein entsprechender
+\texttt{ParticleSystemUpdater} n\"otig - ein Callback, der das kontinuierliche Stepping des Partikelsystems \"ubernimmt. Weitere Komponenten
+sind ein \texttt{Emitter}, der - bestehend aus einem \texttt{Shooter} und einem \texttt{Placer} - f\"ur die initiale Platzierung der Partikel verantwortlich
+ist, und ein sogenanntes \texttt{Program}, das sich beliebig konfigurieren l\"asst und das Verhalten der Partikel steuert.\\
+All diese Komponenten gilt es f\"ur jeden Partikeleffekt zu erstellen, woraus sich in h\"ochstem Ma\ss e redundanter Code erg\"abe
+Um diesem entgegenzuwirken, existiert in Starjumper eine Klasse \texttt{ParticleEffectFactory}. Dem Factory Pattern folgend stellt sie Methoden
+bereit, die einen durch die Klasse \texttt{ParticleEffect} gekapselten Partikeleffekt erzeugen und je nach Situation konfigurieren.\\
+\texttt{ParticleEffect} implementiert eine Art "Standard"-Partikeleffekt, dessen einzelne Komponenten und sonstige Einstellungen sich
+durch im Konstruktor \"ubergebene Objekte \"uberschreiben lassen. Durch diese Aufteilung wird duplizierter Code vermieden und
+gleichzeitig die Verantwortung f\"ur Partikeleffekt an einem Ort konzentriert.
 
 \section{Diskussion und Ausblick}
 
