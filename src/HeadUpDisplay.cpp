@@ -86,7 +86,7 @@ void HeadUpDisplay::initializeTimer()
 	_timer->setFont(TIMER_FONT);
     
     // place timer on top right
-	_timer->setPosition(osg::Vec3(viewer.getCamera()->getViewport()->width() - 150, 
+	_timer->setPosition(osg::Vec3(viewer.getCamera()->getViewport()->width() - 200, 
 	                                viewer.getCamera()->getViewport()->height() - 50, 0));
 	
     _timeNode->addDrawable(_timer);
