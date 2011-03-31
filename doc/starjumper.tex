@@ -153,7 +153,7 @@ ist, und ein sogenanntes \texttt{Program}, das sich beliebig konfigurieren l\"as
 All diese Komponenten gilt es f\"ur jeden Partikeleffekt zu erstellen, woraus sich in h\"ochstem Ma\ss e redundanter Code erg\"abe
 Um diesem entgegenzuwirken, existiert in Starjumper eine Klasse \texttt{ParticleEffectFactory}. Dem Factory Pattern folgend stellt sie Methoden
 bereit, die einen durch die Klasse \texttt{ParticleEffect} gekapselten Partikeleffekt erzeugen und je nach Situation konfigurieren.\\
-\texttt{ParticleEffect} implementiert eine Art "Standard"-Partikeleffekt, dessen einzelne Komponenten und sonstige Einstellungen sich
+\texttt{ParticleEffect} implementiert eine Art "Standard"-Partikeleffekt, dessen einzelne Komponenten und weitere Einstellungen sich
 durch im Konstruktor \"ubergebene Objekte \"uberschreiben lassen. Durch diese Aufteilung wird duplizierter Code vermieden und
 gleichzeitig die Verantwortung f\"ur Partikeleffekt an einem Ort konzentriert.
 

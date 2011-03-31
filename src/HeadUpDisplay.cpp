@@ -108,27 +108,24 @@ void HeadUpDisplay::updateTimer()
 {
     struct timeb currentTime;
 
+    // get current time
     ftime(&currentTime);
     
+    // calculate offset from start time
     time_t _timePassed = (((currentTime.time - _startTime.time) * 1000) + (currentTime.millitm - _startTime.millitm)) / 10;
-        
     
+    // extract miliseconds, seconds and minutes
+    time_t ms = _timePassed % 100;
+    time_t  s = (_timePassed / 100) % 60;
+    time_t  m = (_timePassed / 100 / 60) % 60;
+    
+    // construct time string
 	std::stringstream ss;
-	ss << _timePassed;
+	ss <<
+	    (m  < 10 ? "0" : "") << m << ":" <<
+	    (s  < 10 ? "0" : "") << s << ":" <<
+        (ms < 10 ? "0" : "") << ms;
 	std::string timeString = ss.str();
-	
-    if(timeString.size() > 2)
-    {
-        timeString.insert(timeString.size() - 2, ":", 1);
-    }
-    else if(timeString.size() == 2)
-    {
-        timeString = std::string("0:") + timeString;
-    }
-    else if(timeString.size() == 1)
-    {
-        timeString = std::string("0:0") + timeString;
-    }
     
     _timer->setText(timeString);
 }
