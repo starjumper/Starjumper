@@ -10,6 +10,7 @@ SET(SOURCE
 	KinematicCharacterController.cpp
 	LazyCameraManipulator.cpp
 	CollisionObject.cpp
+	CollisionModel.cpp
 	Cuboid.cpp
 	ParticleEffectFactory.cpp
 	HeadUpDisplay.cpp
@@ -30,6 +31,7 @@ SET(HEADER
 	../include/KinematicCharacterController.h
 	../include/LazyCameraManipulator.h
 	../include/CollisionObject.h
+	../include/CollisionModel.h
 	../include/Cuboid.h
 	../include/ParticleEffectFactory.h
 	../include/HeadUpDisplay.h

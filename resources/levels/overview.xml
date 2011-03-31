@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <world name="Galactica">
-	<road name="Road 1" filename="resources/levels/level1.xml" besttime="01:20:17" completions="5" deaths="78" />
-	<road name="Road 2" filename="resources/levels/level2.xml" besttime="00:33:03" completions="9" deaths="39" />
+	<road name="Road 1" filename="resources/levels/level1.xml" besttime="" completions="0" deaths="0" />
+	<road name="Road 2" filename="resources/levels/level2.xml" besttime="" completions="0" deaths="0" />
 	<road name="Road 3" filename="resources/levels/level3.xml" besttime="" completions="0" deaths="0" />
-	<road name="Road 4" filename="resources/levels/level4.xml" besttime="00:45:15" completions="10" deaths="38" />
+	<road name="Road 4" filename="resources/levels/level4.xml" besttime="" completions="0" deaths="0" />
 </world>

@@ -2,7 +2,9 @@
 
 extern osgViewer::Viewer viewer;
 
-Level::Level(const std::string &mapfile)
+Level::Level(const std::string &mapfile) :
+    _numDeaths(0),
+    _reachedFinish(false)
 {
     _shadowedScene = new osgShadow::ShadowedScene;
     _shadowedScene->setReceivesShadowTraversalMask(RECEIVE_SHADOW_MASK);
@@ -11,7 +13,8 @@ Level::Level(const std::string &mapfile)
     	
     addChild(_shadowedScene);
 
-    addChild((new HeadUpDisplay())->getCamera());
+    _headUpDisplay = new HeadUpDisplay();
+    addChild(_headUpDisplay->getCamera());
     addChild((new Sky())->getCamera());
     
     initializePhysicsWorld();
@@ -53,6 +56,12 @@ Level::Level(const std::string &mapfile)
     initializeLighting();
     
     Sound::switchBackgroundMusic(LEVEL_MUSIC_FILE, "GameMusic");	
+}
+
+void Level::playerDied()
+{
+    _headUpDisplay->resetTimer();
+    _numDeaths++;
 }
 
 void Level::initializeLighting()
@@ -107,22 +116,32 @@ void Level::loadMapFromFile(const std::string &mapfile)
 
             // if current cuboid is lower then z -> adjust bucket value
             if(from.z() < _deadlyAltitudes[yBucketIndex])
-                _deadlyAltitudes[yBucketIndex] = from.z();                                   
+                _deadlyAltitudes[yBucketIndex] = from.z();    
+                
+            _shadowedScene->addChild(collisionObject);                                   
         }
         else if(strcmp(it->name(), "tunnel") == 0)
-            ;
+        {
+        	collisionObject = new Tunnel(getVectorFromXMLNode("position", *it), atof(it->first_attribute("length")->value()));
+            _shadowedScene->addChild(((CollisionModel *)collisionObject)->getNode());  
+        }
         else if(strcmp(it->name(), "cuboidtunnel") == 0)
-            ;
-        else if(strcmp(it->name(), "goal") == 0)
-            ;
+        {
+            collisionObject = new CuboidTunnel(getVectorFromXMLNode("position", *it), atof(it->first_attribute("length")->value()));
+            _shadowedScene->addChild(((CollisionModel *)collisionObject)->getNode());
+        }
+        else if(strcmp(it->name(), "finish") == 0)
+        {
+            osg::Vec3 position = getVectorFromXMLNode("position", *it);
+            collisionObject = new Finish(position);
+            _finishs.push_back(position);
+            _shadowedScene->addChild(((CollisionModel *)collisionObject)->getNode());        	            
+        }
 		else
             throw std::runtime_error("Error: Unknown element \'" + std::string(it->name()) + "\' in level file!");
             
-        if(collisionObject != 0)
-        {
-            _shadowedScene->addChild(collisionObject);
+        if(collisionObject != 0 && strcmp(it->name(), "finish") != 0)
             _physicsWorld->addRigidBody(collisionObject->getRigidBody());
-        }
     }
 }
 
@@ -159,6 +178,46 @@ void Level::initializePhysicsWorld()
     _physicsWorld->setGravity(PHYSICS_WORLD_GRAVITY);
 }
 
+void Level::resetScene()
+{
+    if(!_physicsWorld)
+        return;
+    
+    btCollisionObjectArray collisionObjects = _physicsWorld->getCollisionObjectArray();
+    size_t collisionObjectCount = _physicsWorld->getNumCollisionObjects();
+    
+    for(size_t i = 0; i < collisionObjectCount; ++i)
+    {
+        btCollisionObject *collisionObject = collisionObjects[i];
+        btRigidBody* body = btRigidBody::upcast(collisionObject);
+        
+        if(!body)
+            continue;
+        
+        if(body->getMotionState())
+        {
+            btDefaultMotionState* motionState = (btDefaultMotionState*)body->getMotionState();
+			motionState->m_graphicsWorldTrans = motionState->m_startWorldTrans;
+			body->setCenterOfMassTransform(motionState->m_graphicsWorldTrans);
+			collisionObject->setInterpolationWorldTransform(motionState->m_startWorldTrans);
+			collisionObject->forceActivationState(ACTIVE_TAG);
+			collisionObject->activate();
+			collisionObject->setDeactivationTime(0);
+        }
+        
+        if (body && !body->isStaticObject())
+		{
+			btRigidBody::upcast(collisionObject)->setLinearVelocity(btVector3(0,0,0));
+			btRigidBody::upcast(collisionObject)->setAngularVelocity(btVector3(0,0,0));
+		}
+    }
+    
+    _physicsWorld->getBroadphase()->resetPool(_physicsWorld->getDispatcher());
+	_physicsWorld->getConstraintSolver()->reset();
+	
+    delete _physicsWorld;
+}
+
 osg::Vec3 Level::getVectorFromXMLNode(const std::string &name, const rapidxml::xml_node<> &node) const
 {
     rapidxml::xml_node<> *vectorNode = node.first_node(name.c_str());
@@ -182,6 +241,22 @@ osg::Vec3 Level::getVectorFromXMLNode(const std::string &name, const rapidxml::x
     }
     
     return osg::Vec3(x, y, z);   
+}
+
+time_t Level::getTime()
+{
+    return _headUpDisplay->getTime();
+}
+
+
+HeadUpDisplay *Level::getHeadUpDisplay() const
+{
+    return _headUpDisplay;
+}
+
+size_t Level::getNumDeaths() const
+{
+    return _numDeaths;
 }
 
 ////////////// World updater for stepping //////////////
@@ -210,7 +285,7 @@ void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
         
     _previousStepTime = currentStepTime;
     
-    // player dies when falling to low
+    // player dies when falling too low
     {
         btVector3 position = Player::getInstance()->getController()->getGhostObject()->getWorldTransform().getOrigin();
         int yBucketIndex = (int)(position.y() / 20.0f);
@@ -225,6 +300,24 @@ void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
         {
             Player::getInstance()->resetPosition();
             ((LazyCameraManipulator *)viewer.getCameraManipulator())->resetCamera();
+            _level->playerDied();
+        }
+    }
+    
+    // player reached finish
+    {
+        osg::Vec3 position = Player::getInstance()->getPosition();
+        std::vector<osg::Vec3> finishs = _level->getFinishs();
+
+        for(size_t i = 0; i < finishs.size(); i++)
+        {
+            float maxDistance = 1.0f;
+            osg::Vec3 diff = position - finishs[i];
+            
+            if(diff.x() < maxDistance && diff.x() > -maxDistance &&
+                diff.y() < maxDistance && diff.y() > -maxDistance &&
+                diff.z() < maxDistance && diff.z() > -maxDistance)
+                    _level->setReachedFinish(true);
         }
     }
     

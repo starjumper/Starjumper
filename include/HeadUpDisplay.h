@@ -45,7 +45,6 @@ private:
 	osg::PositionAttitudeTransform *_speedBarPat;
 	osg::PositionAttitudeTransform *_speedBarBackgroundPat;
 	osg::MatrixTransform *_speedBarMatrixTrans;
-
 public:
 	HeadUpDisplay();
     osg::Camera *getCamera();
@@ -57,6 +56,8 @@ public:
     void resetTimer();
 	void updateSpeedometer();
 	void updateTimer();
+	
+    time_t getTime();
 };
 
 class HeadUpDisplayUpdateCallback : public osg::NodeCallback

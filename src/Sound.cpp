@@ -14,6 +14,7 @@ void Sound::initSoundManager()
 void Sound::shutdownSoundManager()
 {
 	osgAudio::SoundManager::instance()->shutdown();
+	std::cout << "Shutdown SoundManager";
 }
 
 void Sound::switchBackgroundMusic(std::string fileName, std::string soundStateName)
@@ -42,4 +43,22 @@ void Sound::switchBackgroundMusic(std::string fileName, std::string soundStateNa
 
 		osgAudio::SoundManager::instance()->addSoundState(musicSoundState);
 	}
+}
+
+void Sound::playSampleOnce(std::string fileName)
+{
+	osg::ref_ptr<osgAudio::SoundState> sound_state = osgAudio::SoundManager::instance()->findSoundState("single");
+	if(!sound_state) 
+	{
+		sound_state = new osgAudio::SoundState("single");
+		osgAudio::Sample *sample = new osgAudio::Sample(osgDB::findDataFile(fileName));
+		sound_state->setSample(sample);
+		sound_state->setLooping(false);
+		sound_state->setAmbient(true);
+		sound_state->setGain(0.5);
+		sound_state->allocateSource(2);
+		osgAudio::SoundManager::instance()->addSoundState(sound_state.get());
+	}
+	if(!sound_state->isPlaying())
+		sound_state->setPlay(true);
 }

@@ -20,6 +20,7 @@
 #include "PlayerUpdater.h"
 #include "LazyCameraManipulator.h"
 #include "Cuboid.h"
+#include "CollisionModel.h"
 #include "HeadUpDisplay.h"
 #include "Sky.h"
 #include "Sound.h"
@@ -38,9 +39,13 @@ class Level : public osg::Group
 {
 private:    
     osg::ref_ptr<osgShadow::ShadowedScene> _shadowedScene;
+    osg::ref_ptr<HeadUpDisplay> _headUpDisplay;
+    size_t _numDeaths;
+    bool _reachedFinish;
     
     btDynamicsWorld *_physicsWorld;
 	std::vector<float> _deadlyAltitudes;
+    std::vector<osg::Vec3> _finishs;
     
     void initializeLighting();
     void initializePhysicsWorld();
@@ -51,9 +56,22 @@ private:
 public:
     Level(const std::string &mapfile);    
     
+    void playerDied();
+    
     std::vector<float> getDeadlyAltitudes() { return _deadlyAltitudes; }
     
     btDynamicsWorld *getPhysicsWorld() { return _physicsWorld; };
+
+    void resetScene();
+    
+    void setReachedFinish(bool reachedFinish) { _reachedFinish = reachedFinish; }
+    bool playerReachedFinish() { return _reachedFinish; }
+    std::vector<osg::Vec3> getFinishs() { return _finishs; }
+    
+    HeadUpDisplay *getHeadUpDisplay() const;
+    
+    size_t getNumDeaths() const;
+    time_t getTime();
 };
 
 class LevelUpdater : public osg::NodeCallback
