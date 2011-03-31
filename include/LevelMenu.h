@@ -14,7 +14,6 @@
 #include <osg/Texture2D>
 #include <osgDB/ReadFile>
 #include <osgText/Text>
-#include <osgGA/TrackballManipulator>
 
 #include "RapidXML/rapidxml.hpp"
 #include "RapidXML/rapidxml_iterators.hpp"
@@ -28,6 +27,7 @@
 #define LEVEL_SELECTOR_TEXTURE  "resources/textures/menu_background.png"
 #define MENU_ITEM_HEIGHT        40
 #define MENU_DETAIL_FONT_SIZE   25
+#define MENU_BACKGROUND_MODEL   "resources/models/player_high.osg"
 
 class MenuKeyboardHandler;
 
@@ -40,7 +40,8 @@ private:
 	osg::ref_ptr<osg::Camera> _camera;
 	osg::PositionAttitudeTransform *_menuPat;
     osg::PositionAttitudeTransform *_itemsPat;
-    
+    osg::MatrixTransform *_background;
+	
     osg::ref_ptr<osgText::Text> _bestTimeText;
     osg::ref_ptr<osgText::Text> _completionsText;
     osg::ref_ptr<osgText::Text> _deathsText;
@@ -52,6 +53,7 @@ public:
 	LevelMenu();
 
 	void initializeCamera();
+    void initializeBackground();
     void initializeSelector();
     void loadLevels();
     void updateDetails();

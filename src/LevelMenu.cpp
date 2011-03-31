@@ -13,6 +13,7 @@ LevelMenu::LevelMenu() :
     viewer.addEventHandler(_keyboardHandler);
 
 	initializeCamera();
+    initializeBackground();
     initializeSelector();
     loadLevels();
     updateDetails();
@@ -20,6 +21,28 @@ LevelMenu::LevelMenu() :
     _currentItemIndex = 0;
     
     Sound::switchBackgroundMusic(MENU_MUSIC_FILE, "MenuMusic");
+}
+
+void LevelMenu::initializeBackground()
+{
+	osg::Node* rotModel = osgDB::readNodeFile(MENU_BACKGROUND_MODEL);
+	if(!rotModel)
+	{
+		throw std::runtime_error("Unable to load player model file!");
+	}
+
+	_background = new osg::MatrixTransform;
+	_background->addChild(rotModel);
+
+	osg::MatrixTransform* transMatrix = new osg::MatrixTransform;
+	transMatrix->addChild(_background);
+
+	transMatrix->setMatrix(osg::Matrix::translate(-2.0, 20.0, 0.0) * osg::Matrix::scale(1.0, 1.0, 1.0));
+/*
+	MenuUpdater* menuUpdater = new MenuUpdater(this);
+	_background->setUpdateCallback(menuUpdater);
+*/
+	addChild(transMatrix);
 }
 
 void LevelMenu::initializeCamera()
@@ -225,7 +248,7 @@ void LevelMenu::runSelectedLevel()
 
 void LevelMenu::returnFromLevel()
 {
-    viewer.setCameraManipulator(new osgGA::TrackballManipulator()); 
+    viewer.setCameraManipulator(NULL); 
     _currentLevel->resetScene();
     viewer.setSceneData(this);
     _currentLevel = NULL;

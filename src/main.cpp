@@ -19,7 +19,8 @@ int main(int argc, char *argv[])
 	// set background color
 	viewer.getCamera()->setClearColor(osg::Vec4( 0., 0., 0., 1. ));
     viewer.getCamera()->setClearMask(GL_DEPTH_BUFFER_BIT);
-	
+	viewer.setCameraManipulator(NULL); 
+    
     osg::ref_ptr<LevelMenu> levelMenu = new LevelMenu();
 	
     viewer.setSceneData(levelMenu);
