@@ -1,20 +1,156 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map>
-<cuboid type="accelerate">
-	<position x="-50" y="0" z="-2" />
-	<size x="100" y="1000" z="2.400000" />
-	<color x="0.392157" y="0.258824" z="0.564706" />
-</cuboid>
+	
+	<!-- some jumps -->
+	<cuboid type="accelerate">
+		<position x="-2.5" y="0" z="-4.0" />
+		<size x="5" y="70" z="3.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="accelerate">
+		<position x="-2.5" y="100" z="-3.0" />
+		<size x="5" y="30" z="3.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="decelerate">
+		<position x="-2.5" y="160" z="-1.0" />
+		<size x="5" y="30" z="3.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="accelerate">
+		<position x="-2.5" y="200" z="1.0" />
+		<size x="5" y="70" z="3.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<!-- cuboid at top -->
+		<cuboid type="accelerate">
+			<position x="-45" y="250" z="5.5" />
+			<size x="90" y="10" z="30" />
+			<color x="0.03" y="0.8" z="0.35" />
+		</cuboid>
+	
+	<!-- cuboids at sides -->
+		<cuboid type="accelerate">
+			<position x="-6" y="200" z="-1.0" />
+			<size x="1" y="60" z="10.0" />
+			<color x="0.03" y="0.8" z="0.35" />
+		</cuboid>
+		
+		<cuboid type="accelerate">
+			<position x="5" y="200" z="-1.0" />
+			<size x="1" y="60" z="10.0" />
+			<color x="0.03" y="0.8" z="0.35" />
+		</cuboid>
+	
+	<!-- deep fall and zig zag jump -->
+	<cuboid type="accelerate">
+		<position x="-2.5" y="350" z="-30.0" />
+		<size x="5" y="50" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="accelerate">
+		<position x="0" y="440" z="-30.0" />
+		<size x="4.5" y="25" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="accelerate">
+		<position x="3" y="490" z="-30.0" />
+		<size x="4" y="25" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="decelerate">
+		<position x="6" y="540" z="-26.0" />
+		<size x="3.5" y="30" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="accelerate">
+		<position x="3" y="590" z="-30.0" />
+		<size x="3" y="30" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="accelerate">
+		<position x="0" y="640" z="-34.0" />
+		<size x="2.5" y="30" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="decelerate">
+		<position x="3" y="690" z="-30.0" />
+		<size x="2" y="30" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="accelerate">
+		<position x="3" y="740" z="-27.0" />
+		<size x="1.5" y="30" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="accelerate">
+		<position x="-1.5" y="790" z="-30.0" />
+		<size x="1" y="30" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="decelerate">
+		<position x="1" y="870" z="-30.0" />
+		<size x="0.5" y="50" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+		
+	<cuboid type="accelerate">
+		<position x="-1" y="940" z="-30.0" />
+		<size x="0.5" y="30" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="decelerate">
+		<position x="-2.5" y="1010" z="-30.0" />
+		<size x="0.5" y="30" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="accelerate">
+		<position x="0" y="1080" z="-30.0" />
+		<size x="0.5" y="30" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="decelerate">
+		<position x="-2.5" y="1150" z="-35.0" />
+		<size x="0.5" y="30" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="accelerate">
+		<position x="0" y="1210" z="-33.0" />
+		<size x="0.5" y="30" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="accelerate">
+		<position x="0" y="1200" z="-33.0" />
+		<size x="0.5" y="30" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
+	
+	<cuboid type="accelerate">
+		<position x="-2" y="1250" z="-31.0" />
+		<size x="4" y="100" z="6.0" />
+		<color x="0.03" y="0.8" z="0.35" />
+	</cuboid>
 
-<tunnel length="5">
-	<position x="7" y="100" z="0.4" />
-</tunnel>
+	<goal>
+		<position x="0" y="1330" z="-25" />
+	</goal>
 
-<cuboidtunnel length="5">
-	<position x="-7" y="100" z="0.4" />
-</cuboidtunnel>
-
-<finish>
-	<position x="0" y="100" z="0.4" />
-</finish>
 </map>
