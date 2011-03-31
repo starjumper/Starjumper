@@ -37,15 +37,15 @@ Level::Level(const std::string &mapfile)
     // setup manipulator to track the player
     cameraManipulator->setTrackNode(Player::getInstance());
     cameraManipulator->setHomePosition(LEVEL_CAMERA_HOME_EYE, LEVEL_CAMERA_HOME_CENTER, LEVEL_CAMERA_HOME_UP);
+
+    // player must be updated after physic is updated
+    Player::getInstance()->setUpdateCallback(new PlayerUpdater());
     
     // set _cameraManipulator as manipulator for the scene
     viewer.setCameraManipulator(cameraManipulator);
             
     LevelUpdater *stepCallback = new LevelUpdater(this);
     setUpdateCallback(stepCallback);
-
-    // player must be updated after physic is updated
-    Player::getInstance()->setUpdateCallback(new PlayerUpdater());
     
     // player keyboard control
     viewer.addEventHandler(new LevelKeyboardHandler());  

@@ -23,5 +23,5 @@ public:
     PlayerUpdater();
     
     virtual void operator()(osg::Node* node, osg::NodeVisitor* nv);
-    osg::Vec3 calculateNextPosition(Player *player);
+    osg::Vec3 calculateNextPosition();
 };

@@ -12,7 +12,7 @@ void PlayerUpdater::operator()(osg::Node* node, osg::NodeVisitor* nv)
 
     if(player)
     {
-        osg::Vec3 newPosition = calculateNextPosition(player);
+        osg::Vec3 newPosition = calculateNextPosition();
         player->setPosition(newPosition);
         player->setAngles(0, player->getPlayerState()->getAngleY());
     }    
@@ -20,8 +20,9 @@ void PlayerUpdater::operator()(osg::Node* node, osg::NodeVisitor* nv)
     traverse(node, nv);
 }
 
-osg::Vec3 PlayerUpdater::calculateNextPosition(Player *player)
+osg::Vec3 PlayerUpdater::calculateNextPosition()
 {
+    Player *player = Player::getInstance();
     PlayerState *playerState = player->getPlayerState();
     KinematicCharacterController *playerController = player->getController();
     
