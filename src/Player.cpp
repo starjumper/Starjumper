@@ -1,7 +1,8 @@
 #include "Player.h"
 #include "PlayerUpdater.h"
 
-Player *Player::_instance = NULL;
+
+osg::ref_ptr<Player> Player::_instance = NULL;
 
 Player::Player() :
     _playerState(new PlayerState())
@@ -22,6 +23,14 @@ Player *Player::getInstance()
   
     return _instance;
 }
+
+void Player::reset()
+{
+    _instance->getPlayerState()->reset();
+    _instance->getController()->reset();
+    _instance->resetPosition();
+}
+
 
 void Player::loadPlayerModel()
 {

@@ -3,12 +3,14 @@
 
 extern osgViewer::Viewer viewer;
 
-LevelMenu::LevelMenu() 
+LevelMenu::LevelMenu() :
+    _currentLevel(NULL)
 {
 	_menuPat = new osg::PositionAttitudeTransform();
 	_menuPat->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
 
-    viewer.addEventHandler(new MenuKeyboardHandler(this));
+    _keyboardHandler = new MenuKeyboardHandler(this);
+    viewer.addEventHandler(_keyboardHandler);
 
 	initializeCamera();
     initializeSelector();
@@ -191,8 +193,7 @@ void LevelMenu::selectPreviousItem()
         _itemsPat->setPosition(_itemsPat->getPosition() - osg::Vec3(0, MENU_ITEM_HEIGHT, 0));
         _currentItemIndex--;
         updateDetails();
-    }
-        
+    }        
 }
 
 void LevelMenu::selectNextItem()
@@ -218,5 +219,16 @@ void LevelMenu::updateDetails()
 
 void LevelMenu::runSelectedLevel()
 {
-    viewer.setSceneData(new Level(_items[_currentItemIndex]["filename"]));
+    _currentLevel = new Level(_items[_currentItemIndex]["filename"]);
+    viewer.setSceneData(_currentLevel);
+}
+
+void LevelMenu::returnFromLevel()
+{
+    viewer.setCameraManipulator(new osgGA::TrackballManipulator()); 
+    _currentLevel->resetScene();
+    viewer.setSceneData(this);
+    _currentLevel = NULL;
+    
+    Player::getInstance()->reset();
 }

@@ -33,7 +33,7 @@ private:
     ParticleEffect *_rightEngine;
     osg::ref_ptr<osg::Group> _particleEffects;
     
-    static Player *_instance;
+    static osg::ref_ptr<Player> _instance;
     
     btPairCachingGhostObject *_playerGhostObject;
     KinematicCharacterController *_playerController;
@@ -46,7 +46,8 @@ private:
         
 public:
     static Player *getInstance();
-    
+    static void reset();
+
     KinematicCharacterController *getController() const { return _playerController; }
     btPairCachingGhostObject *getGhostObject() const { return _playerGhostObject; }  
     PlayerState *getPlayerState() const { return _playerState; }
@@ -54,5 +55,5 @@ public:
     
     void setAngles(const float angleX = 0.0f, const float angleY = 0.0f, const float angleZ = 180.0f);
     void setEngines(const float speed, bool accelerating);
-    void resetPosition();    
+    void resetPosition();
 };

@@ -14,11 +14,13 @@
 #include <osg/Texture2D>
 #include <osgDB/ReadFile>
 #include <osgText/Text>
+#include <osgGA/TrackballManipulator>
 
 #include "RapidXML/rapidxml.hpp"
 #include "RapidXML/rapidxml_iterators.hpp"
 #include "RapidXML/rapidxml_utils.hpp"
 
+#include "Player.h"
 #include "Level.h"
 
 #define MENU_FONT               "fonts/arial.ttf"
@@ -42,6 +44,9 @@ private:
     osg::ref_ptr<osgText::Text> _bestTimeText;
     osg::ref_ptr<osgText::Text> _completionsText;
     osg::ref_ptr<osgText::Text> _deathsText;
+    
+    MenuKeyboardHandler *_keyboardHandler;
+    Level *_currentLevel;
 
 public:
 	LevelMenu();
@@ -54,6 +59,8 @@ public:
     void selectPreviousItem();
     void selectNextItem();    
     void runSelectedLevel();
+    void returnFromLevel();
 
-    osg::Camera *getCamera() { return _camera; };    
+    osg::Camera *getCamera() { return _camera; };  
+    bool levelRunning() { return _currentLevel != NULL; }
 };

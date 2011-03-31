@@ -159,6 +159,46 @@ void Level::initializePhysicsWorld()
     _physicsWorld->setGravity(PHYSICS_WORLD_GRAVITY);
 }
 
+void Level::resetScene()
+{
+    if(!_physicsWorld)
+        return;
+    
+    btCollisionObjectArray collisionObjects = _physicsWorld->getCollisionObjectArray();
+    size_t collisionObjectCount = _physicsWorld->getNumCollisionObjects();
+    
+    for(size_t i = 0; i < collisionObjectCount; ++i)
+    {
+        btCollisionObject *collisionObject = collisionObjects[i];
+        btRigidBody* body = btRigidBody::upcast(collisionObject);
+        
+        if(!body)
+            continue;
+        
+        if(body->getMotionState())
+        {
+            btDefaultMotionState* motionState = (btDefaultMotionState*)body->getMotionState();
+			motionState->m_graphicsWorldTrans = motionState->m_startWorldTrans;
+			body->setCenterOfMassTransform(motionState->m_graphicsWorldTrans);
+			collisionObject->setInterpolationWorldTransform(motionState->m_startWorldTrans);
+			collisionObject->forceActivationState(ACTIVE_TAG);
+			collisionObject->activate();
+			collisionObject->setDeactivationTime(0);
+        }
+        
+        if (body && !body->isStaticObject())
+		{
+			btRigidBody::upcast(collisionObject)->setLinearVelocity(btVector3(0,0,0));
+			btRigidBody::upcast(collisionObject)->setAngularVelocity(btVector3(0,0,0));
+		}
+    }
+    
+    _physicsWorld->getBroadphase()->resetPool(_physicsWorld->getDispatcher());
+	_physicsWorld->getConstraintSolver()->reset();
+	
+    delete _physicsWorld;
+}
+
 osg::Vec3 Level::getVectorFromXMLNode(const std::string &name, const rapidxml::xml_node<> &node) const
 {
     rapidxml::xml_node<> *vectorNode = node.first_node(name.c_str());

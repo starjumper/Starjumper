@@ -54,6 +54,8 @@ public:
     std::vector<float> getDeadlyAltitudes() { return _deadlyAltitudes; }
     
     btDynamicsWorld *getPhysicsWorld() { return _physicsWorld; };
+
+    void resetScene();
 };
 
 class LevelUpdater : public osg::NodeCallback
