@@ -60,7 +60,7 @@ Die Navigation im Men\"u erfolgt \"uber die Pfeiltasten, die ausgew\"ahlte Strec
 \section{Architektur}
 
 \textit{Die Beschreibung der Architektur erfolgt in kleineren logischen Einheiten, eine Gesamt\"ubersicht
-aller verwendeten Klassen und ihrer Verbindungen untereinander findet sich am Ende des Dokuements.}\\
+aller verwendeten Klassen und ihrer Verbindungen untereinander findet sich am Ende des Dokuments.}\\
 Im Folgenden sollen nun die wichtigsten architektonischen Bestandteile von Starjumper
 erl\"autert werden.
 
@@ -167,13 +167,17 @@ zu beeinflussen. Auch das Ausnutzen der von OpenSceneGraph bereitgestellten M\"o
 bei der Traversierung des Szenengraphen nacheinander aufgerufen werden, spart an einigen Stellen Code.\\
 Ein zweifelhaftes Implementierungsdetail ist die Verwendung des Viewers als globale Variable. Auf den Viewer wird an diversen Stellen
 zugegriffen, sodass dessen Verf\"ugbarkeit nicht optional war. Genauso wenig optimal war jedoch der Ansatz, eine Referenz auf den
-Viewer durch alle Ebenen durchzureichen, sodass schlussendlich die Entscheidung auf die Variante der globalen Variable fiel.
+Viewer durch alle Ebenen durchzureichen, sodass schlussendlich die Entscheidung auf die Variante der globalen Variable fiel.\\
+Gute Erfahrung haben wir hingegen mit der Implementierung des Players als Singleton gemacht. Neben den gesparten Ladezeiten ist dies
+die "bessere" Variante, globale Verf\"ugbarkeit der Eigenschaften des Players zu realisieren.\\
+Im Verlauf des Projekts hat sich gezeigt, dass vor allem statt der verwendeten Pr\"aprozessordirektiven f\"ur die Festlegung global
+konstanter Werte (wie etwa der Pfad der Spielermodelldatei) eine \"Uberschreibbare Konfigurationsdatei sinnvoll gewesen w\"are.
+Die hier spezifizierten Werte k\"onnten dann zum Beispiel \"uber Kommandozeilenargumente \"uberschrieben werden, sodass ohne
+Neukompilierung des Projekts bestimmte Parameter - vor allem zu Testzwecken - schnell und unkompliziert angepasst werden k\"onnten.
+Gleichzeitig w\"urde stellenweise die Komplexit\"at des Codes verringert bzw. die \"Ubersichtlichkeit erh\"oht.
+
 
 \newpage
-
-\appendix
-
-\section{Komplettes Klassendiagramm}
 
 \begin{figure}[ht]
 	\centering
