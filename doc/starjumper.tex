@@ -108,13 +108,6 @@ die im n\"achsten Abschnitt n\"aher erl\"autert werden.\\
 	\caption{Klassendiagramm Player}
 \end{figure}
 
-\subsection{PlayerUpdater}
-Der \texttt{PlayerUpdater} als NodeCallback nutzt den \texttt{PlayerState}, um pro Step die neue Position des Players
-zu berechnen. Genauer wird diese aus der Physics Worlds extrahiert, die die Bewegung des Spielers simuliert und so
-eventuelle Kollisionen erkennen kann. Gleichzeitig werden diese Parameter aktualisiert, dies geschieht auf Basis von
-Anfragen, die der Benutzer \"uber einen Tastendruck absetzt und die im \texttt{PlayerState} vermerkt werden.\\
-Folgendes Sequenzdiagramm soll das Vorgehen des \texttt{PlayerUpdater}s veranschaulichen:
-
 \section{Designentscheidungen und Design Patterns}
 Dieser Abschnitt besch\"aftigt sich mit einigen Besonderheiten der Starjumper Implementierung und erl\"autert deren
 Beweggr\"unde und Vorteile gegen\"uber alternativer Implementierungsstrategien.
@@ -172,7 +165,21 @@ vorteilhaft erwiesen. Der Einflussbereich einer Klasse beschr\"ankt sich in der 
 Kindknoten des Szenengraphen. So k\"onnen \"Anderungen an Klassen vorgenommen werden, (fast) ohne die \"ubrige existierende Funktionalit\"at
 zu beeinflussen. Auch das Ausnutzen der von OpenSceneGraph bereitgestellten M\"oglichkeiten wie Update Callbacks oder Event Handler, die
 bei der Traversierung des Szenengraphen nacheinander aufgerufen werden, spart an einigen Stellen Code.\\
-Ein verbesserungs
+Ein zweifelhaftes Implementierungsdetail ist die Verwendung des Viewers als globale Variable. Auf den Viewer wird an diversen Stellen
+zugegriffen, sodass dessen Verf\"ugbarkeit nicht optional war. Genauso wenig optimal war jedoch der Ansatz, eine Referenz auf den
+Viewer durch alle Ebenen durchzureichen, sodass schlussendlich die Entscheidung auf die Variante der globalen Variable fiel.
+
+\newpage
+
+\appendix
+
+\section{Komplettes Klassendiagramm}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1.6\textwidth, angle=-90]{All.jpg}
+	\caption{Klassendiagramm komplett}
+\end{figure}
 
 
 \end{document}
