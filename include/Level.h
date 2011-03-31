@@ -41,6 +41,7 @@ private:
     osg::ref_ptr<osgShadow::ShadowedScene> _shadowedScene;
     osg::ref_ptr<HeadUpDisplay> _headUpDisplay;
     size_t _numDeaths;
+    bool _reachedFinish;
     
     btDynamicsWorld *_physicsWorld;
 	std::vector<float> _deadlyAltitudes;
@@ -63,9 +64,14 @@ public:
 
     void resetScene();
     
+    void setReachedFinish(bool reachedFinish) { _reachedFinish = reachedFinish; }
+    bool playerReachedFinish() { return _reachedFinish; }
+    std::vector<osg::Vec3> getFinishs() { return _finishs; }
+    
     HeadUpDisplay *getHeadUpDisplay() const;
     
     size_t getNumDeaths() const;
+    time_t getTime();
 };
 
 class LevelUpdater : public osg::NodeCallback

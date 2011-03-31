@@ -106,13 +106,7 @@ void HeadUpDisplay::updateSpeedometer()
 
 void HeadUpDisplay::updateTimer()
 {
-    struct timeb currentTime;
-
-    // get current time
-    ftime(&currentTime);
-    
-    // calculate offset from start time
-    time_t _timePassed = (((currentTime.time - _startTime.time) * 1000) + (currentTime.millitm - _startTime.millitm)) / 10;
+    time_t _timePassed = getTime();
     
     // extract miliseconds, seconds and minutes
     time_t ms = _timePassed % 100;
@@ -125,9 +119,21 @@ void HeadUpDisplay::updateTimer()
 	    (m  < 10 ? "0" : "") << m << ":" <<
 	    (s  < 10 ? "0" : "") << s << ":" <<
         (ms < 10 ? "0" : "") << ms;
-	std::string timeString = ss.str();
+        
+    _timer->setText(ss.str());
+}
+
+time_t HeadUpDisplay::getTime()
+{
+    struct timeb currentTime;
+
+    // get current time
+    ftime(&currentTime);
     
-    _timer->setText(timeString);
+    // calculate offset from start time
+    time_t _timePassed = (((currentTime.time - _startTime.time) * 1000) + (currentTime.millitm - _startTime.millitm)) / 10;
+    
+    return _timePassed;
 }
 
 void HeadUpDisplayUpdateCallback::operator()(osg::Node *node, osg::NodeVisitor *nv)

@@ -3,7 +3,8 @@
 extern osgViewer::Viewer viewer;
 
 Level::Level(const std::string &mapfile) :
-    _numDeaths(0)
+    _numDeaths(0),
+    _reachedFinish(false)
 {
     _shadowedScene = new osgShadow::ShadowedScene;
     _shadowedScene->setReceivesShadowTraversalMask(RECEIVE_SHADOW_MASK);
@@ -242,6 +243,12 @@ osg::Vec3 Level::getVectorFromXMLNode(const std::string &name, const rapidxml::x
     return osg::Vec3(x, y, z);   
 }
 
+time_t Level::getTime()
+{
+    return _headUpDisplay->getTime();
+}
+
+
 HeadUpDisplay *Level::getHeadUpDisplay() const
 {
     return _headUpDisplay;
@@ -294,6 +301,23 @@ void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
             Player::getInstance()->resetPosition();
             ((LazyCameraManipulator *)viewer.getCameraManipulator())->resetCamera();
             _level->playerDied();
+        }
+    }
+    
+    // player reached finish
+    {
+        osg::Vec3 position = Player::getInstance()->getPosition();
+        std::vector<osg::Vec3> finishs = _level->getFinishs();
+
+        for(size_t i = 0; i < finishs.size(); i++)
+        {
+            float maxDistance = 1.0f;
+            osg::Vec3 diff = position - finishs[i];
+            
+            if(diff.x() < maxDistance && diff.x() > -maxDistance &&
+                diff.y() < maxDistance && diff.y() > -maxDistance &&
+                diff.z() < maxDistance && diff.z() > -maxDistance)
+                    _level->setReachedFinish(true);
         }
     }
     

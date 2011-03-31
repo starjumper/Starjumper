@@ -33,6 +33,7 @@ bool MenuKeyboardHandler::handle(const osgGA::GUIEventAdapter &ea, osgGA::GUIAct
                     else
                     {
                         Sound::shutdownSoundManager();
+                        _levelMenu->writeBackLevelFile();
                         exit(0);
                     }
 						

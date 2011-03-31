@@ -1,5 +1,8 @@
 #pragma once
 
+#include <iostream>
+#include <fstream>
+
 #include <osg/Geode>
 #include <osg/Depth>
 #include <osg/Camera>
@@ -24,14 +27,17 @@
 
 #define MENU_FONT               "fonts/arial.ttf"
 #define MENU_MUSIC_FILE         "resources/sound/48000_2chan.ogg"
+#define LEVEL_HEADER_TEXTURE  "resources/textures/starjumper.jpg"
 #define LEVEL_SELECTOR_TEXTURE  "resources/textures/menu_background.png"
 #define MENU_ITEM_HEIGHT        40
 #define MENU_DETAIL_FONT_SIZE   25
 #define MENU_BACKGROUND_MODEL   "resources/models/player_high.osg"
 
-#define MENU_CAMERA_HOME_EYE       osg::Vec3(0.0, 1.0, 2.0)
-#define MENU_CAMERA_HOME_CENTER    osg::Vec3(0.0, 10.0, 0.0)
-#define MENU_CAMERA_HOME_UP        osg::Vec3(0.0, -10.0, 5.0)
+#define MENU_CAMERA_HOME_EYE     osg::Vec3(0.0, 1.0, 2.0)
+#define MENU_CAMERA_HOME_CENTER  osg::Vec3(0.0, 10.0, 0.0)
+#define MENU_CAMERA_HOME_UP      osg::Vec3(0.0, -10.0, 5.0)
+
+#define LEVEL_OVERVIEW_FILE     "resources/levels/overview.xml"
 
 class MenuKeyboardHandler;
 
@@ -57,7 +63,8 @@ public:
 	LevelMenu();
 
 	void initializeCamera();
-    void initializeBackground();
+    void initializeBackgroundAnimation();
+    void initializeHeader();
     void initializeSelector();
     void loadLevels();
     void updateDetails();
@@ -67,16 +74,21 @@ public:
     void selectNextItem();    
     void runSelectedLevel();
     void returnFromLevel();
+    void writeBackLevelFile();	
     
     osg::MatrixTransform *getBackground() { return _background; }
 
     osg::Camera *getCamera() { return _camera; };  
     bool levelRunning() { return _currentLevel != NULL; }
+    Level *getCurrentLevel() { return _currentLevel; }
 };
 
 class LevelMenuUpdater : public osg::NodeCallback
 {
+private:
+    LevelMenu *_menu;
+    
 public:
-	LevelMenuUpdater();
+	LevelMenuUpdater(LevelMenu *menu);
 	virtual void operator()(osg::Node *node, osg::NodeVisitor *nv);
 };
