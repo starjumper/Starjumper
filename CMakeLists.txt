@@ -24,7 +24,6 @@ ENDIF( WIN32 AND MSVC )
 
 #add cmake macros
 INCLUDE( CMakeMacros )
-INCLUDE( CPack )
 
 #try to find necessary libraries
 FIND_PACKAGE( OSG REQUIRED )
