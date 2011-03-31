@@ -3,7 +3,8 @@
 
 extern osgViewer::Viewer viewer;
 
-HeadUpDisplay::HeadUpDisplay() 
+HeadUpDisplay::HeadUpDisplay() :
+    _isTiming(true)
 {
 	_hudPat = new osg::PositionAttitudeTransform();
 	_hudPat->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
@@ -106,21 +107,27 @@ void HeadUpDisplay::updateSpeedometer()
 
 void HeadUpDisplay::updateTimer()
 {
-    time_t _timePassed = getTime();
+    time_t _timePassed;
     
+    if(_isTiming) 
+        _timePassed = getTime();
+    else
+        _timePassed = getFinalTime();
+
     // extract miliseconds, seconds and minutes
     time_t ms = _timePassed % 100;
     time_t  s = (_timePassed / 100) % 60;
     time_t  m = (_timePassed / 100 / 60) % 60;
-    
+
     // construct time string
-	std::stringstream ss;
-	ss <<
-	    (m  < 10 ? "0" : "") << m << ":" <<
-	    (s  < 10 ? "0" : "") << s << ":" <<
+    std::stringstream ss;
+    ss <<
+        (m  < 10 ? "0" : "") << m << ":" <<
+        (s  < 10 ? "0" : "") << s << ":" <<
         (ms < 10 ? "0" : "") << ms;
-        
+
     _timer->setText(ss.str());
+
 }
 
 time_t HeadUpDisplay::getTime()
@@ -136,10 +143,16 @@ time_t HeadUpDisplay::getTime()
     return _timePassed;
 }
 
+void HeadUpDisplay::stopTimer()
+{
+    _isTiming = false;
+    _finalTime = getTime();
+}
+
 void HeadUpDisplayUpdateCallback::operator()(osg::Node *node, osg::NodeVisitor *nv)
 {
     osg::ref_ptr<HeadUpDisplay> hud = dynamic_cast<HeadUpDisplay *> (node->getUserData());
 
-    hud->updateSpeedometer();
+    hud->updateSpeedometer();    
     hud->updateTimer();
 }

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <osg/Group>
+#include <osg/BlendFunc>
+#include <osg/BlendColor>
 #include <osgViewer/Viewer>
 #include <osgShadow/ShadowedScene>
 #include <osgShadow/ShadowVolume>
@@ -47,6 +49,8 @@ private:
 	std::vector<float> _deadlyAltitudes;
     std::vector<osg::Vec3> _finishs;
     
+    LevelKeyboardHandler *_keyboardHandler;
+    
     void initializeLighting();
     void initializePhysicsWorld();
     void loadMapFromFile(const std::string &mapfile);
@@ -67,16 +71,21 @@ public:
     void setReachedFinish(bool reachedFinish) { _reachedFinish = reachedFinish; }
     bool playerReachedFinish() { return _reachedFinish; }
     std::vector<osg::Vec3> getFinishs() { return _finishs; }
+    LevelKeyboardHandler *getKeyboardHandler() { return _keyboardHandler; }
     
     HeadUpDisplay *getHeadUpDisplay() const;
     
+    osgShadow::ShadowedScene* getShadowedScene() { return _shadowedScene; }
+    
     size_t getNumDeaths() const;
     time_t getTime();
+    
 };
 
 class LevelUpdater : public osg::NodeCallback
 {
 private:
+    osg::BlendColor *_blendColor;
     Level *_level;
     float _previousStepTime;
     

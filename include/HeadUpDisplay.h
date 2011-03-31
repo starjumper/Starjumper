@@ -36,8 +36,10 @@ private:
 	osg::ref_ptr<osg::Camera> _camera;
 	osg::Geode *_timeNode;
     osgText::Text *_timer;	
+    bool _isTiming;
 
     struct timeb _startTime;
+    time_t _finalTime;
 
 	osg::Node *_speedBarNode;
 	osg::PositionAttitudeTransform *_hudPat;
@@ -53,11 +55,13 @@ public:
 	void initializeSpeedometer();
 	void initializeTimer();
 	
+    void stopTimer();
     void resetTimer();
 	void updateSpeedometer();
 	void updateTimer();
 	
     time_t getTime();
+    time_t getFinalTime() { return _finalTime; };
 };
 
 class HeadUpDisplayUpdateCallback : public osg::NodeCallback

@@ -14,6 +14,7 @@ LazyCameraManipulator::LazyCameraManipulator():
     _durationOfMovementX = 0;
     
     _firstRun = true;
+    _fadeOut = false;
     
 	setTrackerMode(osgGA::NodeTrackerManipulator::NODE_CENTER);    	  
 }
@@ -27,6 +28,8 @@ bool LazyCameraManipulator::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAc
 {     
     if(ea.getEventType() == osgGA::GUIEventAdapter::FRAME)
     {
+        if(_fadeOut)
+            _distance += 10.0f;
         
         // retrieve player position and direction of movement
         const Player *player = dynamic_cast<const Player *>(getTrackNode());
