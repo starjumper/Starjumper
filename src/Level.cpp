@@ -195,7 +195,19 @@ LevelUpdater::LevelUpdater(Level *level) :
 void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
 {    
     double currentStepTime = viewer.getFrameStamp()->getSimulationTime();
-    _level->getPhysicsWorld()->stepSimulation(currentStepTime - _previousStepTime, 0);        
+    
+    // compensate error arising from the osg::Viewer resetting its SimulationTime
+    if(fabs(currentStepTime - _previousStepTime) > 0.1f)
+        _previousStepTime = currentStepTime - 0.05;
+    
+    if(_previousStepTime <= 0.1f)
+    {
+        Player::getInstance()->resetPosition();
+        ((LazyCameraManipulator *)viewer.getCameraManipulator())->resetCamera();        
+    }
+    else
+        _level->getPhysicsWorld()->stepSimulation(currentStepTime - _previousStepTime, 0);        
+        
     _previousStepTime = currentStepTime;
     
     // player dies when falling to low

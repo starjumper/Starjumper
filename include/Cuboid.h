@@ -6,6 +6,7 @@
 #include <osgDB/ReadFile>
 
 #include "CollisionObject.h"
+#include "Player.h"
 
 #define ACCELERATION_CUBOID_TEXTURE "resources/textures/acceleration.png"
 #define DECELERATION_CUBOID_TEXTURE "resources/textures/deceleration.png"

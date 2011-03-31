@@ -200,7 +200,14 @@ AccelerationCuboid::AccelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &s
 
 void AccelerationCuboid::collide()
 {
+    Player *player = Player::getInstance();
+    float speed = player->getPlayerState()->getSpeed();
     
+    if(!player->getPlayerState()->requestDecelerate())
+    {
+        player->getPlayerState()->setSpeed(speed + 0.02 <= 1.0 ? speed + 0.02 : 1.0);
+        player->setEngines(speed + 0.02 <= 1.0 ? speed + 0.02 : 1.0, ACCELERATE);
+    } 
 }
 
 DecelerationCuboid::DecelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
@@ -220,5 +227,12 @@ DecelerationCuboid::DecelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &s
 
 void DecelerationCuboid::collide()
 {
-    
+    Player *player = Player::getInstance();
+    float speed = player->getPlayerState()->getSpeed();
+
+    if(!player->getPlayerState()->requestAccelerate())
+    {
+        player->getPlayerState()->setSpeed(speed - 0.04 >= 0 ? speed - 0.04 : 0);
+        player->setEngines(speed - 0.04 >= 0 ? speed - 0.04 : 0, DECELERATE);
+    }    
 }
