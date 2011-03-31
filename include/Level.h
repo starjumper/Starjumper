@@ -38,6 +38,8 @@ class Level : public osg::Group
 {
 private:    
     osg::ref_ptr<osgShadow::ShadowedScene> _shadowedScene;
+    osg::ref_ptr<HeadUpDisplay> _headUpDisplay;
+    size_t _numDeaths;
     
     btDynamicsWorld *_physicsWorld;
 	std::vector<float> _deadlyAltitudes;
@@ -51,9 +53,15 @@ private:
 public:
     Level(const std::string &mapfile);    
     
+    void playerDied();
+    
     std::vector<float> getDeadlyAltitudes() { return _deadlyAltitudes; }
     
     btDynamicsWorld *getPhysicsWorld() { return _physicsWorld; };
+    
+    HeadUpDisplay *getHeadUpDisplay() const;
+    
+    size_t getNumDeaths() const;
 };
 
 class LevelUpdater : public osg::NodeCallback
