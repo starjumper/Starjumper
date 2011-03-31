@@ -4,7 +4,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
     _from(from),
     _size(size)
 {
-    osg::Geometry *drawable = new osg::Geometry();
+    _drawable = new osg::Geometry();
 
     osg::Vec3Array *pyramidVertices = new osg::Vec3Array();
     {
@@ -19,7 +19,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
         pyramidVertices->push_back( from + osg::Vec3(0, size.y(), 0) );
     }
 
-    drawable->setVertexArray( pyramidVertices ); 
+    _drawable->setVertexArray( pyramidVertices ); 
 
      // front
     {
@@ -28,7 +28,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
         face->push_back(1);
         face->push_back(2);
         face->push_back(3);
-        drawable->addPrimitiveSet(face);
+        _drawable->addPrimitiveSet(face);
     }
 
      // back
@@ -38,7 +38,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
         face->push_back(5);
         face->push_back(6);
         face->push_back(7);
-        drawable->addPrimitiveSet(face);
+        _drawable->addPrimitiveSet(face);
     }
 
      // left
@@ -48,7 +48,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
         face->push_back(4);
         face->push_back(7);
         face->push_back(3);
-        drawable->addPrimitiveSet(face);
+        _drawable->addPrimitiveSet(face);
     }
 
      // right
@@ -58,17 +58,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
         face->push_back(5);
         face->push_back(6);
         face->push_back(2);
-        drawable->addPrimitiveSet(face);
-    }
-
-     // top
-    {
-        osg::DrawElementsUInt *face = new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
-        face->push_back(0);
-        face->push_back(1);
-        face->push_back(5);
-        face->push_back(4);
-        drawable->addPrimitiveSet(face);
+        _drawable->addPrimitiveSet(face);
     }
 
      // bottom
@@ -78,7 +68,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
         face->push_back(2);
         face->push_back(6);
         face->push_back(7);
-        drawable->addPrimitiveSet(face);
+        _drawable->addPrimitiveSet(face);
     }
 
     osg::Vec4Array* colors = new osg::Vec4Array;
@@ -92,22 +82,8 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
         colors->push_back(osg::Vec4(0.0f, 1.0f, 0.0f, 0.8f));
         colors->push_back(osg::Vec4(0.0f, 1.0f, 0.0f, 0.8f));
 
-        drawable->setColorArray(colors);
-        drawable->setColorBinding(osg::Geometry::BIND_PER_VERTEX);
-    }
-
-    osg::Vec2Array* texcoords = new osg::Vec2Array(8);
-    {
-        (*texcoords)[0].set(size.x(), 0.0f); // TOP
-        (*texcoords)[1].set(0.0f, 0.0f); // TOP
-        (*texcoords)[2].set(0.0f,  0.0f); // ""
-        (*texcoords)[3].set(0.0f,  0.0f); // "" 
-        (*texcoords)[4].set(size.x(), size.y() / 3.0f); // TOP
-        (*texcoords)[5].set(0.0f,  size.y() / 3.0f); // TOP
-        (*texcoords)[6].set(0.0f,  0.0f); // ""
-        (*texcoords)[7].set(0.0f,  0.0f); // "" 
-
-        drawable->setTexCoordArray(0,texcoords);
+        _drawable->setColorArray(colors);
+        _drawable->setColorBinding(osg::Geometry::BIND_PER_VERTEX);
     }
 
     osg::StateSet* stateSet = new osg::StateSet();
@@ -116,7 +92,7 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
     stateSet->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
 
     setStateSet(stateSet);
-    addDrawable(drawable);
+    addDrawable(_drawable);
 }
 
 btRigidBody *Cuboid::getRigidBody()
@@ -143,7 +119,106 @@ btRigidBody *Cuboid::getRigidBody()
     return rigidBody;
 }
 
-void Cuboid::collide()
+DefaultCuboid::DefaultCuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
+    Cuboid(from, size)
+{
+      // top
+     {
+         osg::DrawElementsUInt *face = new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
+         face->push_back(0);
+         face->push_back(1);
+         face->push_back(5);
+         face->push_back(4);
+         _drawable->addPrimitiveSet(face);
+     }
+}
+
+TexturedCuboid::TexturedCuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
+    Cuboid(from, size)
+{
+    _textureDrawable = new osg::Geometry();
+
+    osg::Vec3Array *pyramidVertices = new osg::Vec3Array();
+    {
+        pyramidVertices->push_back( from + osg::Vec3(0, 0, size.z()));
+        pyramidVertices->push_back( from + osg::Vec3(size.x(), 0, size.z()));
+        pyramidVertices->push_back( from + osg::Vec3(size.x(), size.y(), size.z()));
+        pyramidVertices->push_back( from + osg::Vec3(0, size.y(), size.z()));
+    }
+
+    _textureDrawable->setVertexArray( pyramidVertices );
+
+    osg::DrawElementsUInt *face = new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
+    face->push_back(0);
+    face->push_back(1);
+    face->push_back(2);
+    face->push_back(3);
+    
+    _textureDrawable->addPrimitiveSet(face);
+        
+    osg::Vec2Array* texcoords = new osg::Vec2Array(4);
+    {
+        (*texcoords)[0].set(size.x(), 0.0f);
+        (*texcoords)[1].set(0.0f, 0.0f);
+        (*texcoords)[2].set(size.x(), size.y() / 3.0f);
+        (*texcoords)[3].set(0.0f,  size.y() / 3.0f); 
+
+        _textureDrawable->setTexCoordArray(0, texcoords);
+    }
+             
+    _texture = new osg::Texture2D;
+    _texture->setDataVariance(osg::Object::DYNAMIC); 
+    _texture->setWrap(osg::Texture::WRAP_S, osg::Texture::REPEAT); 
+    _texture->setWrap(osg::Texture::WRAP_T, osg::Texture::REPEAT);
+
+    osg::StateSet* stateSet = new osg::StateSet();
+    stateSet->setTextureAttributeAndModes(0, _texture, osg::StateAttribute::ON);
+    
+    _textureDrawable->setStateSet(stateSet);
+    addDrawable(_textureDrawable);
+}
+
+void TexturedCuboid::setTexture(osg::Image *image)
+{
+    _texture->setImage(image);
+}
+
+AccelerationCuboid::AccelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
+    TexturedCuboid(from, size)
+{
+    osg::Image *image = osgDB::readImageFile(ACCELERATION_CUBOID_TEXTURE);
+    setTexture(image);   
+    
+    osg::Vec4Array* colors = new osg::Vec4Array;
+    {
+        colors->push_back(osg::Vec4(0.0f, 1.0f, 0.0f, 0.8f));
+
+        _textureDrawable->setColorArray(colors);
+        _textureDrawable->setColorBinding(osg::Geometry::BIND_OVERALL);
+    }
+}
+
+void AccelerationCuboid::collide()
+{
+    
+}
+
+DecelerationCuboid::DecelerationCuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
+    TexturedCuboid(from, size)
+{
+    osg::Image *image = osgDB::readImageFile(DECELERATION_CUBOID_TEXTURE);
+    setTexture(image);  
+    
+    osg::Vec4Array* colors = new osg::Vec4Array;
+    {
+        colors->push_back(osg::Vec4(1.0f, 0.8f, 0.0f, 0.8f));
+
+        _textureDrawable->setColorArray(colors);
+        _textureDrawable->setColorBinding(osg::Geometry::BIND_OVERALL);
+    } 
+}
+
+void DecelerationCuboid::collide()
 {
     
 }
