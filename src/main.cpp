@@ -1,6 +1,7 @@
 #include <osgViewer/Viewer>
 
 #include "LevelMenu.h"
+#include "Sound.h"
 
 osgViewer::Viewer viewer;
 
@@ -22,5 +23,10 @@ int main(int argc, char *argv[])
     LevelMenu *levelMenu = new LevelMenu();
 	
     viewer.setSceneData(levelMenu->getCamera());
+    
+    Sound::initSoundManager();
+	
     viewer.run();
+    
+    Sound::shutdownSoundManager();
 }

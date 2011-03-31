@@ -51,6 +51,8 @@ Level::Level(const std::string &mapfile)
     viewer.addEventHandler(new LevelKeyboardHandler());  
     
     initializeLighting();
+    
+    Sound::switchBackgroundMusic(LEVEL_MUSIC_FILE, "GameMusic");	
 }
 
 void Level::initializeLighting()
@@ -179,14 +181,21 @@ osg::Vec3 Level::getVectorFromXMLNode(const std::string &name, const rapidxml::x
 
 LevelUpdater::LevelUpdater(Level *level) :
     _level(level),
-    _previousStepTime(viewer.getFrameStamp()->getSimulationTime())
+    _previousStepTime(0.0f)
 {
 }
 
 void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
 {    
     double currentStepTime = viewer.getFrameStamp()->getSimulationTime();
-    _level->getPhysicsWorld()->stepSimulation(currentStepTime - _previousStepTime, 0);
+    if(_previousStepTime == 0.0f)
+    {
+        Player::getInstance()->resetPosition();
+        ((LazyCameraManipulator *)viewer.getCameraManipulator())->resetCamera();        
+    }
+    else
+        _level->getPhysicsWorld()->stepSimulation(currentStepTime - _previousStepTime, 0);        
+        
     _previousStepTime = currentStepTime;
     
     

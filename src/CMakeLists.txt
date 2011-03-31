@@ -14,6 +14,7 @@ SET(SOURCE
 	ParticleEffectFactory.cpp
 	HeadUpDisplay.cpp
 	Sky.cpp
+	Sound.cpp
 )
 
 #dirty!
@@ -33,6 +34,7 @@ SET(HEADER
 	../include/ParticleEffectFactory.h
 	../include/HeadUpDisplay.h
 	../include/Sky.h
+	../include/Sound.h
 )
 
 FIND_PACKAGE( OpenGL )
