@@ -1,5 +1,7 @@
 SET(SOURCE
     main.cpp
+	LevelMenu.cpp
+	MenuKeyboardHandler.cpp
 	Level.cpp
 	LevelKeyboardHandler.cpp
 	Player.cpp
@@ -17,6 +19,8 @@ SET(SOURCE
 #dirty!
 SET(HEADER
 	../include/types.h
+	../include/LevelMenu.h
+	../include/MenuKeyboardHandler.h
 	../include/Level.h
 	../include/LevelKeyboardHandler.h
 	../include/Player.h

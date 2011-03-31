@@ -1,7 +1,6 @@
 #include <osgViewer/Viewer>
 
-#include "Player.h"
-#include "Level.h"
+#include "LevelMenu.h"
 
 osgViewer::Viewer viewer;
 
@@ -20,8 +19,8 @@ int main(int argc, char *argv[])
 	viewer.getCamera()->setClearColor(osg::Vec4( 0., 0., 0., 1. ));
     viewer.getCamera()->setClearMask(GL_DEPTH_BUFFER_BIT);
 	
-    Level *level = new Level("resources/levels/level1.xml");
-
-    viewer.setSceneData(level);
+    LevelMenu *levelMenu = new LevelMenu();
+	
+    viewer.setSceneData(levelMenu->getCamera());
     viewer.run();
 }

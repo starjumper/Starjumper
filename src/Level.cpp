@@ -179,7 +179,7 @@ osg::Vec3 Level::getVectorFromXMLNode(const std::string &name, const rapidxml::x
 
 LevelUpdater::LevelUpdater(Level *level) :
     _level(level),
-    _previousStepTime(0.0f)
+    _previousStepTime(viewer.getFrameStamp()->getSimulationTime())
 {
 }
 

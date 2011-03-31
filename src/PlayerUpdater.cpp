@@ -97,20 +97,6 @@ osg::Vec3 PlayerUpdater::calculateNextPosition(Player *player)
             CollisionObject *groundObject = (CollisionObject *)playerController->getGroundObject();
             groundObject->collide();
         }
-        else if(!playerController->onGround())
-        {        /*
-            // player is falling, kill player if there is no chance to land on ground anymore
-            btVector3 position = playerController->getGhostObject()->getWorldTransform().getOrigin();
-            int yBucketIndex = (int)(position.y() / 20.0f);
-        
-            if(yBucketIndex >= player->getDeadlyAltitudes()->size())
-                yBucketIndex = player->getDeadlyAltitudes()->size() - 1;
-
-            float minimum = min((*(player->getDeadlyAltitudes()))[yBucketIndex], (*(player->getDeadlyAltitudes()))[yBucketIndex + 1]);
-                
-            if(position.z() < (minimum - 5.0f))
-                playerState->beDead();*/
-        }
     }
     
     direction += btVector3(0, playerState->getSpeed(), 0);
