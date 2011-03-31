@@ -45,6 +45,7 @@ bool GameKeyboardHandler::handle(const osgGA::GUIEventAdapter &ea, osgGA::GUIAct
 			break;
 		case K_JUMP:
 			_player->getPlayerState()->setRequestJump(keyState);
+			Sound::playSoundOnce("bla");
 			break;
 		default:
 			return false;

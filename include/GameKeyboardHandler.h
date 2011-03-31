@@ -1,6 +1,7 @@
 #pragma once
 
 #include <osgGA/GUIEventHandler>
+#include <Sound.h>
 
 #include "types.h"
 #include "Player.h"

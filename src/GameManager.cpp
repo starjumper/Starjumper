@@ -29,7 +29,6 @@ GameManager::GameManager() :
 	buildCredits();
 
     selectRenderingInstance("main_menu");
-	Sound::switchBackgroundMusic("48000_2chan.ogg", "MenuMusic");
     
     _keyboardHandler = new GameManagerKeyboardHandler(this);
     _viewer.addEventHandler(_keyboardHandler);
