@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node7" href="$class_acceleration_cuboid.html" title="AccelerationCuboid" alt="" coords="5,238,147,266"/>
+<area shape="rect" id="node9" href="$class_deceleration_cuboid.html" title="DecelerationCuboid" alt="" coords="171,238,315,266"/>
+<area shape="rect" id="node2" href="$class_cuboid.html" title="Cuboid" alt="" coords="125,83,192,111"/>
+<area shape="rect" id="node4" href="$class_collision_object.html" title="CollisionObject" alt="" coords="100,6,217,34"/>
+</map>

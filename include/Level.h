@@ -20,6 +20,7 @@
 #include "PlayerUpdater.h"
 #include "LazyCameraManipulator.h"
 #include "Cuboid.h"
+#include "CollisionModel.h"
 #include "HeadUpDisplay.h"
 #include "Sky.h"
 #include "Sound.h"

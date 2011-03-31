@@ -107,22 +107,31 @@ void Level::loadMapFromFile(const std::string &mapfile)
 
             // if current cuboid is lower then z -> adjust bucket value
             if(from.z() < _deadlyAltitudes[yBucketIndex])
-                _deadlyAltitudes[yBucketIndex] = from.z();                                   
+                _deadlyAltitudes[yBucketIndex] = from.z();    
+                
+            _shadowedScene->addChild(collisionObject);                                   
         }
         else if(strcmp(it->name(), "tunnel") == 0)
-            ;
+        {
+        	collisionObject = new Tunnel(getVectorFromXMLNode("position", *it), atof(it->first_attribute("length")->value()));
+            _shadowedScene->addChild(((CollisionModel *)collisionObject)->getNode());  
+        }
         else if(strcmp(it->name(), "cuboidtunnel") == 0)
-            ;
-        else if(strcmp(it->name(), "goal") == 0)
-            ;
+        {
+            collisionObject = new CuboidTunnel(getVectorFromXMLNode("position", *it), atof(it->first_attribute("length")->value()));
+            _shadowedScene->addChild(((CollisionModel *)collisionObject)->getNode());
+        }
+        else if(strcmp(it->name(), "finish") == 0)
+        {
+            osg::Vec3 position = getVectorFromXMLNode("position", *it);
+            collisionObject = new Finish(position);
+            _shadowedScene->addChild(((CollisionModel *)collisionObject)->getNode());        	            
+        }
 		else
             throw std::runtime_error("Error: Unknown element \'" + std::string(it->name()) + "\' in level file!");
             
-        if(collisionObject != 0)
-        {
-            _shadowedScene->addChild(collisionObject);
+        if(collisionObject != 0 && strcmp(it->name(), "finish") != 0)
             _physicsWorld->addRigidBody(collisionObject->getRigidBody());
-        }
     }
 }
 
