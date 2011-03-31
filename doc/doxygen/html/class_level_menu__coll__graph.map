@@ -1,4 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node6" title="STL class." alt="" coords="123,86,205,114"/>
-<area shape="rect" id="node8" title="STL class." alt="" coords="79,6,249,34"/>
+<area shape="rect" id="node10" href="$class_menu_keyboard_handler.html" title="MenuKeyboardHandler" alt="" coords="1516,73,1676,101"/>
+<area shape="rect" id="node6" title="STL class." alt="" coords="228,23,311,51"/>
+<area shape="rect" id="node8" title="STL class." alt="" coords="5,23,176,51"/>
+<area shape="rect" id="node13" href="$class_level.html" title="Level" alt="" coords="943,113,999,141"/>
+<area shape="rect" id="node15" href="$class_level_keyboard_handler.html" title="LevelKeyboardHandler" alt="" coords="453,74,616,102"/>
 </map>

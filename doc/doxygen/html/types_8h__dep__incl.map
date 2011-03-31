@@ -1,9 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_collision_object_8h.html" title="include/CollisionObject.h" alt="" coords="144,83,317,111"/>
-<area shape="rect" id="node7" href="$_level_8h.html" title="include/Level.h" alt="" coords="299,238,411,266"/>
-<area shape="rect" id="node11" href="$_menu_keyboard_handler_8h.html" title="include/MenuKeyboardHandler.h" alt="" coords="437,393,656,421"/>
-<area shape="rect" id="node17" href="$_level_keyboard_handler_8h.html" title="include/LevelKeyboardHandler.h" alt="" coords="392,83,611,111"/>
-<area shape="rect" id="node5" href="$_cuboid_8h.html" title="include/Cuboid.h" alt="" coords="5,161,128,189"/>
-<area shape="rect" id="node13" href="$_player_updater_8h.html" title="include/PlayerUpdater.h" alt="" coords="152,161,317,189"/>
-<area shape="rect" id="node9" href="$_level_menu_8h.html" title="include/LevelMenu.h" alt="" coords="373,315,520,343"/>
+<area shape="rect" id="node3" href="$_collision_object_8h.html" title="include/CollisionObject.h" alt="" coords="243,83,416,111"/>
+<area shape="rect" id="node7" href="$_level_8h.html" title="include/Level.h" alt="" coords="431,238,543,266"/>
+<area shape="rect" id="node11" href="$_menu_keyboard_handler_8h.html" title="include/MenuKeyboardHandler.h" alt="" coords="629,393,848,421"/>
+<area shape="rect" id="node20" href="$_level_keyboard_handler_8h.html" title="include/LevelKeyboardHandler.h" alt="" coords="584,83,803,111"/>
+<area shape="rect" id="node5" href="$_collision_model_8h.html" title="include/CollisionModel.h" alt="" coords="341,161,509,189"/>
+<area shape="rect" id="node13" href="$_cuboid_8h.html" title="include/Cuboid.h" alt="" coords="5,161,128,189"/>
+<area shape="rect" id="node16" href="$_player_updater_8h.html" title="include/PlayerUpdater.h" alt="" coords="152,161,317,189"/>
+<area shape="rect" id="node9" href="$_level_menu_8h.html" title="include/LevelMenu.h" alt="" coords="565,315,712,343"/>
 </map>

@@ -1,5 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_level_menu.html" title="LevelMenu" alt="" coords="120,382,208,410"/>
-<area shape="rect" id="node8" title="STL class." alt="" coords="123,86,205,114"/>
-<area shape="rect" id="node10" title="STL class." alt="" coords="79,6,249,34"/>
+<area shape="rect" id="node2" href="$class_level_menu.html" title="LevelMenu" alt="" coords="1292,63,1380,91"/>
+<area shape="rect" id="node8" title="STL class." alt="" coords="228,62,311,90"/>
+<area shape="rect" id="node10" title="STL class." alt="" coords="5,62,176,90"/>
+<area shape="rect" id="node13" href="$class_level.html" title="Level" alt="" coords="943,149,999,177"/>
+<area shape="rect" id="node15" href="$class_level_keyboard_handler.html" title="LevelKeyboardHandler" alt="" coords="453,113,616,141"/>
 </map>

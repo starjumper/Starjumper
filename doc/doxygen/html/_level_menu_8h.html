@@ -102,7 +102,9 @@ function toggleVisibility(linkObj) {
 <h1>include/LevelMenu.h File Reference</h1>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &lt;osg/Geode&gt;</code><br/>
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br/>
+<code>#include &lt;fstream&gt;</code><br/>
+<code>#include &lt;osg/Geode&gt;</code><br/>
 <code>#include &lt;osg/Depth&gt;</code><br/>
 <code>#include &lt;osg/Camera&gt;</code><br/>
 <code>#include &lt;osg/ShapeDrawable&gt;</code><br/>
@@ -116,6 +118,7 @@ function toggleVisibility(linkObj) {
 <code>#include &quot;<a class="el" href="rapidxml_8hpp_source.html">RapidXML/rapidxml.hpp</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="rapidxml__iterators_8hpp_source.html">RapidXML/rapidxml_iterators.hpp</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="rapidxml__utils_8hpp_source.html">RapidXML/rapidxml_utils.hpp</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_player_8h_source.html">Player.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_level_8h_source.html">Level.h</a>&quot;</code><br/>
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png"/> Include dependency graph for LevelMenu.h:</div>
@@ -124,7 +127,7 @@ function toggleVisibility(linkObj) {
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="_level_menu_8h__incl.png" border="0" usemap="#include_2_level_menu_8h" alt=""/></div>
 <map name="include_2_level_menu_8h" id="include_2_level_menu_8h">
-<area shape="rect" id="node25" href="rapidxml_8hpp.html" title="This file contains rapidxml parser and DOM implementation." alt="" coords="79,238,247,266"/><area shape="rect" id="node35" href="rapidxml__iterators_8hpp.html" title="This file contains rapidxml iterators." alt="" coords="95,161,322,189"/><area shape="rect" id="node38" href="rapidxml__utils_8hpp.html" title="RapidXML/rapidxml_utils.hpp" alt="" coords="397,161,597,189"/><area shape="rect" id="node49" href="_level_8h.html" title="Level.h" alt="" coords="1802,83,1869,111"/><area shape="rect" id="node69" href="types_8h.html" title="types.h" alt="" coords="2526,238,2593,266"/><area shape="rect" id="node71" href="_level_keyboard_handler_8h.html" title="LevelKeyboardHandler.h" alt="" coords="2742,161,2915,189"/><area shape="rect" id="node76" href="_player_8h.html" title="Player.h" alt="" coords="2191,238,2261,266"/><area shape="rect" id="node102" href="_player_updater_8h.html" title="PlayerUpdater.h" alt="" coords="3041,161,3161,189"/><area shape="rect" id="node117" href="_sound_8h.html" title="Sound.h" alt="" coords="3357,238,3429,266"/><area shape="rect" id="node119" href="_lazy_camera_manipulator_8h.html" title="LazyCameraManipulator.h" alt="" coords="1518,161,1697,189"/><area shape="rect" id="node121" href="_cuboid_8h.html" title="Cuboid.h" alt="" coords="873,161,950,189"/><area shape="rect" id="node128" href="_head_up_display_8h.html" title="HeadUpDisplay.h" alt="" coords="1366,161,1494,189"/><area shape="rect" id="node139" href="_sky_8h.html" title="Sky.h" alt="" coords="1185,161,1241,189"/><area shape="rect" id="node87" href="_kinematic_character_controller_8h.html" title="KinematicCharacterController.h" alt="" coords="2562,315,2773,343"/><area shape="rect" id="node92" href="_player_state_8h.html" title="PlayerState.h" alt="" coords="2330,315,2437,343"/><area shape="rect" id="node96" href="_particle_effect_factory_8h.html" title="ParticleEffectFactory.h" alt="" coords="1917,315,2079,343"/></map>
+<area shape="rect" id="node29" href="rapidxml_8hpp.html" title="This file contains rapidxml parser and DOM implementation." alt="" coords="191,238,359,266"/><area shape="rect" id="node39" href="rapidxml__iterators_8hpp.html" title="This file contains rapidxml iterators." alt="" coords="144,161,371,189"/><area shape="rect" id="node42" href="rapidxml__utils_8hpp.html" title="RapidXML/rapidxml_utils.hpp" alt="" coords="445,161,645,189"/><area shape="rect" id="node52" href="_player_8h.html" title="Player.h" alt="" coords="1327,238,1396,266"/><area shape="rect" id="node81" href="_level_8h.html" title="Level.h" alt="" coords="1464,83,1531,111"/><area shape="rect" id="node65" href="_kinematic_character_controller_8h.html" title="KinematicCharacterController.h" alt="" coords="1399,315,1609,343"/><area shape="rect" id="node71" href="_player_state_8h.html" title="PlayerState.h" alt="" coords="1633,315,1740,343"/><area shape="rect" id="node76" href="_particle_effect_factory_8h.html" title="ParticleEffectFactory.h" alt="" coords="1967,315,2129,343"/><area shape="rect" id="node102" href="types_8h.html" title="types.h" alt="" coords="764,238,831,266"/><area shape="rect" id="node104" href="_level_keyboard_handler_8h.html" title="LevelKeyboardHandler.h" alt="" coords="923,161,1096,189"/><area shape="rect" id="node109" href="_player_updater_8h.html" title="PlayerUpdater.h" alt="" coords="1171,161,1291,189"/><area shape="rect" id="node118" href="_sound_8h.html" title="Sound.h" alt="" coords="855,238,927,266"/><area shape="rect" id="node120" href="_lazy_camera_manipulator_8h.html" title="LazyCameraManipulator.h" alt="" coords="2107,161,2285,189"/><area shape="rect" id="node122" href="_cuboid_8h.html" title="Cuboid.h" alt="" coords="2309,161,2387,189"/><area shape="rect" id="node129" href="_collision_model_8h.html" title="CollisionModel.h" alt="" coords="1153,238,1276,266"/><area shape="rect" id="node137" href="_head_up_display_8h.html" title="HeadUpDisplay.h" alt="" coords="3165,161,3293,189"/><area shape="rect" id="node147" href="_sky_8h.html" title="Sky.h" alt="" coords="2984,161,3040,189"/></map>
 </div>
 </div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png"/> This graph shows which files directly or indirectly include this file:</div>
@@ -141,21 +144,106 @@ function toggleVisibility(linkObj) {
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html">LevelMenu</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu_updater.html">LevelMenuUpdater</a></td></tr>
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_level_menu_8h.html#a04d46f28d25d5b97d577aa8ddc949fee">MENU_FONT</a>&#160;&#160;&#160;&quot;fonts/arial.ttf&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_level_menu_8h.html#a1db8c37dccfbeeec8b4eed7469fdeaa1">MENU_MUSIC_FILE</a>&#160;&#160;&#160;&quot;resources/sound/48000_2chan.ogg&quot;</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_level_menu_8h.html#a5983882e4b3795f0b213a3ce3f3b6701">LEVEL_HEADER_TEXTURE</a>&#160;&#160;&#160;&quot;resources/textures/starjumper.jpg&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_level_menu_8h.html#ad14e3a06b27a20669605ee4a4e6fabbc">LEVEL_SELECTOR_TEXTURE</a>&#160;&#160;&#160;&quot;resources/textures/menu_background.png&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_level_menu_8h.html#a0251df482deabbedd5dc74ebfa1deba4">MENU_ITEM_HEIGHT</a>&#160;&#160;&#160;40</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_level_menu_8h.html#afb0e498767d6f581ac38435c7c38feaa">MENU_DETAIL_FONT_SIZE</a>&#160;&#160;&#160;25</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_level_menu_8h.html#a86e87f7b5c745ecdcb9f7bc3dd53a1a8">MENU_BACKGROUND_MODEL</a>&#160;&#160;&#160;&quot;resources/models/player_high.osg&quot;</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_level_menu_8h.html#a43bc8b3003fabbd25af76736f2f5de43">MENU_CAMERA_HOME_EYE</a>&#160;&#160;&#160;osg::Vec3(0.0, 1.0, 2.0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_level_menu_8h.html#a51949cb7d7e3a47eb3ad38c189b8e0be">MENU_CAMERA_HOME_CENTER</a>&#160;&#160;&#160;osg::Vec3(0.0, 10.0, 0.0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_level_menu_8h.html#af40fc852a33eea96d780e9213889b6fc">MENU_CAMERA_HOME_UP</a>&#160;&#160;&#160;osg::Vec3(0.0, -10.0, 5.0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_level_menu_8h.html#a6bec167d6a3a9987974b8bf3603d16d8">LEVEL_OVERVIEW_FILE</a>&#160;&#160;&#160;&quot;resources/levels/overview.xml&quot;</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
+<a class="anchor" id="a5983882e4b3795f0b213a3ce3f3b6701"></a><!-- doxytag: member="LevelMenu.h::LEVEL_HEADER_TEXTURE" ref="a5983882e4b3795f0b213a3ce3f3b6701" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LEVEL_HEADER_TEXTURE&#160;&#160;&#160;&quot;resources/textures/starjumper.jpg&quot;</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6bec167d6a3a9987974b8bf3603d16d8"></a><!-- doxytag: member="LevelMenu.h::LEVEL_OVERVIEW_FILE" ref="a6bec167d6a3a9987974b8bf3603d16d8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LEVEL_OVERVIEW_FILE&#160;&#160;&#160;&quot;resources/levels/overview.xml&quot;</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ad14e3a06b27a20669605ee4a4e6fabbc"></a><!-- doxytag: member="LevelMenu.h::LEVEL_SELECTOR_TEXTURE" ref="ad14e3a06b27a20669605ee4a4e6fabbc" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">#define LEVEL_SELECTOR_TEXTURE&#160;&#160;&#160;&quot;resources/textures/menu_background.png&quot;</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a86e87f7b5c745ecdcb9f7bc3dd53a1a8"></a><!-- doxytag: member="LevelMenu.h::MENU_BACKGROUND_MODEL" ref="a86e87f7b5c745ecdcb9f7bc3dd53a1a8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MENU_BACKGROUND_MODEL&#160;&#160;&#160;&quot;resources/models/player_high.osg&quot;</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a51949cb7d7e3a47eb3ad38c189b8e0be"></a><!-- doxytag: member="LevelMenu.h::MENU_CAMERA_HOME_CENTER" ref="a51949cb7d7e3a47eb3ad38c189b8e0be" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MENU_CAMERA_HOME_CENTER&#160;&#160;&#160;osg::Vec3(0.0, 10.0, 0.0)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a43bc8b3003fabbd25af76736f2f5de43"></a><!-- doxytag: member="LevelMenu.h::MENU_CAMERA_HOME_EYE" ref="a43bc8b3003fabbd25af76736f2f5de43" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MENU_CAMERA_HOME_EYE&#160;&#160;&#160;osg::Vec3(0.0, 1.0, 2.0)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af40fc852a33eea96d780e9213889b6fc"></a><!-- doxytag: member="LevelMenu.h::MENU_CAMERA_HOME_UP" ref="af40fc852a33eea96d780e9213889b6fc" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MENU_CAMERA_HOME_UP&#160;&#160;&#160;osg::Vec3(0.0, -10.0, 5.0)</td>
         </tr>
       </table>
 </div>
@@ -230,7 +318,7 @@ Defines</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Mar 31 2011 18:04:50 for Starjumper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 1 2011 00:16:22 for Starjumper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

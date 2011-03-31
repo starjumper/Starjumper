@@ -101,71 +101,98 @@ function toggleVisibility(linkObj) {
 <a href="_level_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#pragma once</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span>
 <a name="l00003"></a>00003 <span class="preprocessor">#include &lt;osg/Group&gt;</span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;osgViewer/Viewer&gt;</span>
-<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;osgShadow/ShadowedScene&gt;</span>
-<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;osgShadow/ShadowVolume&gt;</span>
-<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;osgShadow/ShadowTexture&gt;</span>
-<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;osgShadow/ShadowMap&gt;</span>
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;btBulletDynamicsCommon.h&gt;</span>
-<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;BulletCollision/CollisionDispatch/btGhostObject.h&gt;</span>
-<a name="l00012"></a>00012 
-<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;<a class="code" href="rapidxml_8hpp.html" title="This file contains rapidxml parser and DOM implementation.">RapidXML/rapidxml.hpp</a>&quot;</span>
-<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;<a class="code" href="rapidxml__iterators_8hpp.html" title="This file contains rapidxml iterators.">RapidXML/rapidxml_iterators.hpp</a>&quot;</span>
-<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;<a class="code" href="rapidxml__utils_8hpp.html">RapidXML/rapidxml_utils.hpp</a>&quot;</span>
-<a name="l00016"></a>00016 
-<a name="l00017"></a>00017 <span class="preprocessor">#include &quot;<a class="code" href="types_8h.html">types.h</a>&quot;</span>
-<a name="l00018"></a>00018 <span class="preprocessor">#include &quot;<a class="code" href="_level_keyboard_handler_8h.html">LevelKeyboardHandler.h</a>&quot;</span>
-<a name="l00019"></a>00019 <span class="preprocessor">#include &quot;<a class="code" href="_player_8h.html">Player.h</a>&quot;</span>
-<a name="l00020"></a>00020 <span class="preprocessor">#include &quot;<a class="code" href="_player_updater_8h.html">PlayerUpdater.h</a>&quot;</span>
-<a name="l00021"></a>00021 <span class="preprocessor">#include &quot;<a class="code" href="_lazy_camera_manipulator_8h.html">LazyCameraManipulator.h</a>&quot;</span>
-<a name="l00022"></a>00022 <span class="preprocessor">#include &quot;<a class="code" href="_cuboid_8h.html">Cuboid.h</a>&quot;</span>
-<a name="l00023"></a>00023 <span class="preprocessor">#include &quot;<a class="code" href="_head_up_display_8h.html">HeadUpDisplay.h</a>&quot;</span>
-<a name="l00024"></a>00024 <span class="preprocessor">#include &quot;<a class="code" href="_sky_8h.html">Sky.h</a>&quot;</span>
-<a name="l00025"></a>00025 <span class="preprocessor">#include &quot;<a class="code" href="_sound_8h.html">Sound.h</a>&quot;</span>
-<a name="l00026"></a>00026 
-<a name="l00027"></a><a class="code" href="_level_8h.html#ab4667fa4cf280329947d5ba644752900">00027</a> <span class="preprocessor">#define PHYSICS_WORLD_MIN           -1000, -1000, -1000</span>
-<a name="l00028"></a><a class="code" href="_level_8h.html#aa45eb1e573a156c59381d42a6f1ac708">00028</a> <span class="preprocessor"></span><span class="preprocessor">#define PHYSICS_WORLD_MAX           1000, 1000, 1000</span>
-<a name="l00029"></a><a class="code" href="_level_8h.html#ad5099c712732e0c2e22d1d16f97bcfea">00029</a> <span class="preprocessor"></span><span class="preprocessor">#define PHYSICS_WORLD_GRAVITY       btVector3(0.0, 0.0, -40.0)</span>
-<a name="l00030"></a>00030 <span class="preprocessor"></span>
-<a name="l00031"></a><a class="code" href="_level_8h.html#a93b6dd3f5bb2bb6405c178d1befcbeeb">00031</a> <span class="preprocessor">#define LEVEL_CAMERA_HOME_EYE       osg::Vec3(0.0, 1.0, 2.0)</span>
-<a name="l00032"></a><a class="code" href="_level_8h.html#a298a275de2bae970e2bf41902d8466cb">00032</a> <span class="preprocessor"></span><span class="preprocessor">#define LEVEL_CAMERA_HOME_CENTER    osg::Vec3(0.0, 10.0, 0.0)</span>
-<a name="l00033"></a><a class="code" href="_level_8h.html#a6825202b6cd9f134b7a52525719de2be">00033</a> <span class="preprocessor"></span><span class="preprocessor">#define LEVEL_CAMERA_HOME_UP        osg::Vec3(0.0, -10.0, 5.0)</span>
-<a name="l00034"></a>00034 <span class="preprocessor"></span>
-<a name="l00035"></a><a class="code" href="_level_8h.html#a3b29602eaa1d68177a1b41643706ff2f">00035</a> <span class="preprocessor">#define LEVEL_MUSIC_FILE             &quot;resources/sound/andromeda.ogg&quot;</span>
-<a name="l00036"></a>00036 <span class="preprocessor"></span>
-<a name="l00037"></a><a class="code" href="class_level.html">00037</a> <span class="keyword">class </span><a class="code" href="class_level.html">Level</a> : <span class="keyword">public</span> osg::Group
-<a name="l00038"></a>00038 {
-<a name="l00039"></a>00039 <span class="keyword">private</span>:    
-<a name="l00040"></a><a class="code" href="class_level.html#ad34dda4eea400c593bcdb9854a005ebe">00040</a>     osg::ref_ptr&lt;osgShadow::ShadowedScene&gt; <a class="code" href="class_level.html#ad34dda4eea400c593bcdb9854a005ebe">_shadowedScene</a>;
-<a name="l00041"></a>00041     
-<a name="l00042"></a><a class="code" href="class_level.html#a8a356bcda1e4f041d26171b5c45eca82">00042</a>     btDynamicsWorld *<a class="code" href="class_level.html#a8a356bcda1e4f041d26171b5c45eca82">_physicsWorld</a>;
-<a name="l00043"></a><a class="code" href="class_level.html#a494f0278329a1f25bac343e8fe64f9db">00043</a>         std::vector&lt;float&gt; <a class="code" href="class_level.html#a494f0278329a1f25bac343e8fe64f9db">_deadlyAltitudes</a>;
-<a name="l00044"></a>00044     
-<a name="l00045"></a>00045     <span class="keywordtype">void</span> <a class="code" href="class_level.html#ab7344c06a582a5a3953ecdc9b4082596">initializeLighting</a>();
-<a name="l00046"></a>00046     <span class="keywordtype">void</span> <a class="code" href="class_level.html#ae3a2b21cefa1c350726811da03e05b87">initializePhysicsWorld</a>();
-<a name="l00047"></a>00047     <span class="keywordtype">void</span> <a class="code" href="class_level.html#a3c46bfc76087e6715933a1b1ba096830">loadMapFromFile</a>(<span class="keyword">const</span> std::string &amp;mapfile);
-<a name="l00048"></a>00048     
-<a name="l00049"></a>00049     osg::Vec3 <a class="code" href="class_level.html#af2ae3adc944ea7acdccd96ffd2e88238">getVectorFromXMLNode</a>(<span class="keyword">const</span> std::string &amp;name, <span class="keyword">const</span> <a class="code" href="classrapidxml_1_1xml__node.html">rapidxml::xml_node&lt;&gt;</a> &amp;node) <span class="keyword">const</span>;
-<a name="l00050"></a>00050             
-<a name="l00051"></a>00051 <span class="keyword">public</span>:
-<a name="l00052"></a>00052     <a class="code" href="class_level.html#a7e938d80df7a20a6cfa47824d094e171">Level</a>(<span class="keyword">const</span> std::string &amp;mapfile);    
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;osg/BlendFunc&gt;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;osg/BlendColor&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;osgViewer/Viewer&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;osgShadow/ShadowedScene&gt;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;osgShadow/ShadowVolume&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;osgShadow/ShadowTexture&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;osgShadow/ShadowMap&gt;</span>
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012 <span class="preprocessor">#include &lt;btBulletDynamicsCommon.h&gt;</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;BulletCollision/CollisionDispatch/btGhostObject.h&gt;</span>
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;<a class="code" href="rapidxml_8hpp.html" title="This file contains rapidxml parser and DOM implementation.">RapidXML/rapidxml.hpp</a>&quot;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;<a class="code" href="rapidxml__iterators_8hpp.html" title="This file contains rapidxml iterators.">RapidXML/rapidxml_iterators.hpp</a>&quot;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &quot;<a class="code" href="rapidxml__utils_8hpp.html">RapidXML/rapidxml_utils.hpp</a>&quot;</span>
+<a name="l00018"></a>00018 
+<a name="l00019"></a>00019 <span class="preprocessor">#include &quot;<a class="code" href="types_8h.html">types.h</a>&quot;</span>
+<a name="l00020"></a>00020 <span class="preprocessor">#include &quot;<a class="code" href="_level_keyboard_handler_8h.html">LevelKeyboardHandler.h</a>&quot;</span>
+<a name="l00021"></a>00021 <span class="preprocessor">#include &quot;<a class="code" href="_player_8h.html">Player.h</a>&quot;</span>
+<a name="l00022"></a>00022 <span class="preprocessor">#include &quot;<a class="code" href="_player_updater_8h.html">PlayerUpdater.h</a>&quot;</span>
+<a name="l00023"></a>00023 <span class="preprocessor">#include &quot;<a class="code" href="_lazy_camera_manipulator_8h.html">LazyCameraManipulator.h</a>&quot;</span>
+<a name="l00024"></a>00024 <span class="preprocessor">#include &quot;<a class="code" href="_cuboid_8h.html">Cuboid.h</a>&quot;</span>
+<a name="l00025"></a>00025 <span class="preprocessor">#include &quot;<a class="code" href="_collision_model_8h.html">CollisionModel.h</a>&quot;</span>
+<a name="l00026"></a>00026 <span class="preprocessor">#include &quot;<a class="code" href="_head_up_display_8h.html">HeadUpDisplay.h</a>&quot;</span>
+<a name="l00027"></a>00027 <span class="preprocessor">#include &quot;<a class="code" href="_sky_8h.html">Sky.h</a>&quot;</span>
+<a name="l00028"></a>00028 <span class="preprocessor">#include &quot;<a class="code" href="_sound_8h.html">Sound.h</a>&quot;</span>
+<a name="l00029"></a>00029 
+<a name="l00030"></a><a class="code" href="_level_8h.html#ab4667fa4cf280329947d5ba644752900">00030</a> <span class="preprocessor">#define PHYSICS_WORLD_MIN           -1000, -1000, -1000</span>
+<a name="l00031"></a><a class="code" href="_level_8h.html#aa45eb1e573a156c59381d42a6f1ac708">00031</a> <span class="preprocessor"></span><span class="preprocessor">#define PHYSICS_WORLD_MAX           1000, 1000, 1000</span>
+<a name="l00032"></a><a class="code" href="_level_8h.html#ad5099c712732e0c2e22d1d16f97bcfea">00032</a> <span class="preprocessor"></span><span class="preprocessor">#define PHYSICS_WORLD_GRAVITY       btVector3(0.0, 0.0, -40.0)</span>
+<a name="l00033"></a>00033 <span class="preprocessor"></span>
+<a name="l00034"></a><a class="code" href="_level_8h.html#a93b6dd3f5bb2bb6405c178d1befcbeeb">00034</a> <span class="preprocessor">#define LEVEL_CAMERA_HOME_EYE       osg::Vec3(0.0, 1.0, 2.0)</span>
+<a name="l00035"></a><a class="code" href="_level_8h.html#a298a275de2bae970e2bf41902d8466cb">00035</a> <span class="preprocessor"></span><span class="preprocessor">#define LEVEL_CAMERA_HOME_CENTER    osg::Vec3(0.0, 10.0, 0.0)</span>
+<a name="l00036"></a><a class="code" href="_level_8h.html#a6825202b6cd9f134b7a52525719de2be">00036</a> <span class="preprocessor"></span><span class="preprocessor">#define LEVEL_CAMERA_HOME_UP        osg::Vec3(0.0, -10.0, 5.0)</span>
+<a name="l00037"></a>00037 <span class="preprocessor"></span>
+<a name="l00038"></a><a class="code" href="_level_8h.html#a3b29602eaa1d68177a1b41643706ff2f">00038</a> <span class="preprocessor">#define LEVEL_MUSIC_FILE             &quot;resources/sound/andromeda.ogg&quot;</span>
+<a name="l00039"></a>00039 <span class="preprocessor"></span>
+<a name="l00040"></a><a class="code" href="class_level.html">00040</a> <span class="keyword">class </span><a class="code" href="class_level.html">Level</a> : <span class="keyword">public</span> osg::Group
+<a name="l00041"></a>00041 {
+<a name="l00042"></a>00042 <span class="keyword">private</span>:    
+<a name="l00043"></a><a class="code" href="class_level.html#ad34dda4eea400c593bcdb9854a005ebe">00043</a>     osg::ref_ptr&lt;osgShadow::ShadowedScene&gt; <a class="code" href="class_level.html#ad34dda4eea400c593bcdb9854a005ebe">_shadowedScene</a>;
+<a name="l00044"></a><a class="code" href="class_level.html#a21fd31746721f136d713c9c06b9b029b">00044</a>     osg::ref_ptr&lt;HeadUpDisplay&gt; <a class="code" href="class_level.html#a21fd31746721f136d713c9c06b9b029b">_headUpDisplay</a>;
+<a name="l00045"></a><a class="code" href="class_level.html#a5174c661f060751e726b0334c915218c">00045</a>     <span class="keywordtype">size_t</span> <a class="code" href="class_level.html#a5174c661f060751e726b0334c915218c">_numDeaths</a>;
+<a name="l00046"></a><a class="code" href="class_level.html#a46a4fb5bda02e4cef65760df5e41e8f9">00046</a>     <span class="keywordtype">bool</span> <a class="code" href="class_level.html#a46a4fb5bda02e4cef65760df5e41e8f9">_reachedFinish</a>;
+<a name="l00047"></a>00047     
+<a name="l00048"></a><a class="code" href="class_level.html#a8a356bcda1e4f041d26171b5c45eca82">00048</a>     btDynamicsWorld *<a class="code" href="class_level.html#a8a356bcda1e4f041d26171b5c45eca82">_physicsWorld</a>;
+<a name="l00049"></a><a class="code" href="class_level.html#a494f0278329a1f25bac343e8fe64f9db">00049</a>         std::vector&lt;float&gt; <a class="code" href="class_level.html#a494f0278329a1f25bac343e8fe64f9db">_deadlyAltitudes</a>;
+<a name="l00050"></a><a class="code" href="class_level.html#a45e27b870049fa55cddfe46d5c95acd9">00050</a>     std::vector&lt;osg::Vec3&gt; <a class="code" href="class_level.html#a45e27b870049fa55cddfe46d5c95acd9">_finishs</a>;
+<a name="l00051"></a>00051     
+<a name="l00052"></a><a class="code" href="class_level.html#a8bf292d2431654d2be7699be4b97b022">00052</a>     <a class="code" href="class_level_keyboard_handler.html">LevelKeyboardHandler</a> *<a class="code" href="class_level.html#a8bf292d2431654d2be7699be4b97b022">_keyboardHandler</a>;
 <a name="l00053"></a>00053     
-<a name="l00054"></a><a class="code" href="class_level.html#a63f2eb6b11b26f68e8c03397ebf4c51c">00054</a>     std::vector&lt;float&gt; <a class="code" href="class_level.html#a63f2eb6b11b26f68e8c03397ebf4c51c">getDeadlyAltitudes</a>() { <span class="keywordflow">return</span> <a class="code" href="class_level.html#a494f0278329a1f25bac343e8fe64f9db">_deadlyAltitudes</a>; }
-<a name="l00055"></a>00055     
-<a name="l00056"></a><a class="code" href="class_level.html#a8e6c76ab7ebea20aa9536384f68db6ae">00056</a>     btDynamicsWorld *<a class="code" href="class_level.html#a8e6c76ab7ebea20aa9536384f68db6ae">getPhysicsWorld</a>() { <span class="keywordflow">return</span> <a class="code" href="class_level.html#a8a356bcda1e4f041d26171b5c45eca82">_physicsWorld</a>; };
-<a name="l00057"></a>00057 };
-<a name="l00058"></a>00058 
-<a name="l00059"></a><a class="code" href="class_level_updater.html">00059</a> <span class="keyword">class </span><a class="code" href="class_level_updater.html">LevelUpdater</a> : <span class="keyword">public</span> osg::NodeCallback
-<a name="l00060"></a>00060 {
-<a name="l00061"></a>00061 <span class="keyword">private</span>:
-<a name="l00062"></a><a class="code" href="class_level_updater.html#abba31e276ab51f8fb4eb0ae483fc79bf">00062</a>     <a class="code" href="class_level.html">Level</a> *<a class="code" href="class_level_updater.html#abba31e276ab51f8fb4eb0ae483fc79bf">_level</a>;
-<a name="l00063"></a><a class="code" href="class_level_updater.html#a82968356cceb4159dcfde3b660b98a9e">00063</a>     <span class="keywordtype">float</span> <a class="code" href="class_level_updater.html#a82968356cceb4159dcfde3b660b98a9e">_previousStepTime</a>;
+<a name="l00054"></a>00054     <span class="keywordtype">void</span> <a class="code" href="class_level.html#ab7344c06a582a5a3953ecdc9b4082596">initializeLighting</a>();
+<a name="l00055"></a>00055     <span class="keywordtype">void</span> <a class="code" href="class_level.html#ae3a2b21cefa1c350726811da03e05b87">initializePhysicsWorld</a>();
+<a name="l00056"></a>00056     <span class="keywordtype">void</span> <a class="code" href="class_level.html#a3c46bfc76087e6715933a1b1ba096830">loadMapFromFile</a>(<span class="keyword">const</span> std::string &amp;mapfile);
+<a name="l00057"></a>00057     
+<a name="l00058"></a>00058     osg::Vec3 <a class="code" href="class_level.html#af2ae3adc944ea7acdccd96ffd2e88238">getVectorFromXMLNode</a>(<span class="keyword">const</span> std::string &amp;name, <span class="keyword">const</span> <a class="code" href="classrapidxml_1_1xml__node.html">rapidxml::xml_node&lt;&gt;</a> &amp;node) <span class="keyword">const</span>;
+<a name="l00059"></a>00059             
+<a name="l00060"></a>00060 <span class="keyword">public</span>:
+<a name="l00061"></a>00061     <a class="code" href="class_level.html#a7e938d80df7a20a6cfa47824d094e171">Level</a>(<span class="keyword">const</span> std::string &amp;mapfile);    
+<a name="l00062"></a>00062     
+<a name="l00063"></a>00063     <span class="keywordtype">void</span> <a class="code" href="class_level.html#a7cb6867931cc289d92d5e5b2fc3e5c99">playerDied</a>();
 <a name="l00064"></a>00064     
-<a name="l00065"></a>00065 <span class="keyword">public</span>:
-<a name="l00066"></a>00066     <a class="code" href="class_level_updater.html#ab98ef7f7b82a217b6f6f160012ec4e1e">LevelUpdater</a>(<a class="code" href="class_level.html">Level</a> *level);
-<a name="l00067"></a>00067     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_level_updater.html#a25d3afe3f0d3c54a64a93864510e4cdd">operator()</a>(osg::Node *node, osg::NodeVisitor *nv);
-<a name="l00068"></a>00068 };
+<a name="l00065"></a><a class="code" href="class_level.html#a63f2eb6b11b26f68e8c03397ebf4c51c">00065</a>     std::vector&lt;float&gt; <a class="code" href="class_level.html#a63f2eb6b11b26f68e8c03397ebf4c51c">getDeadlyAltitudes</a>() { <span class="keywordflow">return</span> <a class="code" href="class_level.html#a494f0278329a1f25bac343e8fe64f9db">_deadlyAltitudes</a>; }
+<a name="l00066"></a>00066     
+<a name="l00067"></a><a class="code" href="class_level.html#a8e6c76ab7ebea20aa9536384f68db6ae">00067</a>     btDynamicsWorld *<a class="code" href="class_level.html#a8e6c76ab7ebea20aa9536384f68db6ae">getPhysicsWorld</a>() { <span class="keywordflow">return</span> <a class="code" href="class_level.html#a8a356bcda1e4f041d26171b5c45eca82">_physicsWorld</a>; };
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069     <span class="keywordtype">void</span> <a class="code" href="class_level.html#aed541ac308635766e2761f77c0ccc796">resetScene</a>();
+<a name="l00070"></a>00070     
+<a name="l00071"></a><a class="code" href="class_level.html#a013e632ed5e7832b468f9f599c800154">00071</a>     <span class="keywordtype">void</span> <a class="code" href="class_level.html#a013e632ed5e7832b468f9f599c800154">setReachedFinish</a>(<span class="keywordtype">bool</span> reachedFinish) { <a class="code" href="class_level.html#a46a4fb5bda02e4cef65760df5e41e8f9">_reachedFinish</a> = reachedFinish; }
+<a name="l00072"></a><a class="code" href="class_level.html#a1e9b8c7f0bab03abcb54eed81a928f19">00072</a>     <span class="keywordtype">bool</span> <a class="code" href="class_level.html#a1e9b8c7f0bab03abcb54eed81a928f19">playerReachedFinish</a>() { <span class="keywordflow">return</span> <a class="code" href="class_level.html#a46a4fb5bda02e4cef65760df5e41e8f9">_reachedFinish</a>; }
+<a name="l00073"></a><a class="code" href="class_level.html#ae3072243f09366dbb07dbb44a6028d47">00073</a>     std::vector&lt;osg::Vec3&gt; <a class="code" href="class_level.html#ae3072243f09366dbb07dbb44a6028d47">getFinishs</a>() { <span class="keywordflow">return</span> <a class="code" href="class_level.html#a45e27b870049fa55cddfe46d5c95acd9">_finishs</a>; }
+<a name="l00074"></a><a class="code" href="class_level.html#a50d0a9b220ea363e9e6991028e0da78c">00074</a>     <a class="code" href="class_level_keyboard_handler.html">LevelKeyboardHandler</a> *<a class="code" href="class_level.html#a50d0a9b220ea363e9e6991028e0da78c">getKeyboardHandler</a>() { <span class="keywordflow">return</span> <a class="code" href="class_level.html#a8bf292d2431654d2be7699be4b97b022">_keyboardHandler</a>; }
+<a name="l00075"></a>00075     
+<a name="l00076"></a>00076     <a class="code" href="class_head_up_display.html">HeadUpDisplay</a> *<a class="code" href="class_level.html#aff41ab694d7094e34dda0919605b8224">getHeadUpDisplay</a>() <span class="keyword">const</span>;
+<a name="l00077"></a>00077     
+<a name="l00078"></a><a class="code" href="class_level.html#af15247d7124944efe1146ed956d70bf9">00078</a>     osgShadow::ShadowedScene* <a class="code" href="class_level.html#af15247d7124944efe1146ed956d70bf9">getShadowedScene</a>() { <span class="keywordflow">return</span> <a class="code" href="class_level.html#ad34dda4eea400c593bcdb9854a005ebe">_shadowedScene</a>; }
+<a name="l00079"></a>00079     
+<a name="l00080"></a>00080     <span class="keywordtype">size_t</span> <a class="code" href="class_level.html#a78ab6c68018f04f5716e12cebebcad60">getNumDeaths</a>() <span class="keyword">const</span>;
+<a name="l00081"></a>00081     time_t <a class="code" href="class_level.html#a1c0bf9df2f444be7ae5bdb3696931ce8">getTime</a>();
+<a name="l00082"></a>00082     
+<a name="l00083"></a>00083 };
+<a name="l00084"></a>00084 
+<a name="l00085"></a><a class="code" href="class_level_updater.html">00085</a> <span class="keyword">class </span><a class="code" href="class_level_updater.html">LevelUpdater</a> : <span class="keyword">public</span> osg::NodeCallback
+<a name="l00086"></a>00086 {
+<a name="l00087"></a>00087 <span class="keyword">private</span>:
+<a name="l00088"></a><a class="code" href="class_level_updater.html#aa34ae977e4f7f82b7f632fd214fb716b">00088</a>     osg::BlendColor *<a class="code" href="class_level_updater.html#aa34ae977e4f7f82b7f632fd214fb716b">_blendColor</a>;
+<a name="l00089"></a><a class="code" href="class_level_updater.html#abba31e276ab51f8fb4eb0ae483fc79bf">00089</a>     <a class="code" href="class_level.html">Level</a> *<a class="code" href="class_level_updater.html#abba31e276ab51f8fb4eb0ae483fc79bf">_level</a>;
+<a name="l00090"></a><a class="code" href="class_level_updater.html#a82968356cceb4159dcfde3b660b98a9e">00090</a>     <span class="keywordtype">float</span> <a class="code" href="class_level_updater.html#a82968356cceb4159dcfde3b660b98a9e">_previousStepTime</a>;
+<a name="l00091"></a>00091     
+<a name="l00092"></a>00092 <span class="keyword">public</span>:
+<a name="l00093"></a>00093     <a class="code" href="class_level_updater.html#ab98ef7f7b82a217b6f6f160012ec4e1e">LevelUpdater</a>(<a class="code" href="class_level.html">Level</a> *level);
+<a name="l00094"></a>00094     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_level_updater.html#a25d3afe3f0d3c54a64a93864510e4cdd">operator()</a>(osg::Node *node, osg::NodeVisitor *nv);
+<a name="l00095"></a>00095 };
 </pre></div></div>
 </div>
 <!--- window showing the filter options -->
@@ -182,7 +209,7 @@ function toggleVisibility(linkObj) {
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Mar 31 2011 18:04:50 for Starjumper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 1 2011 00:16:22 for Starjumper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

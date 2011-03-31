@@ -116,7 +116,7 @@ function toggleVisibility(linkObj) {
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="class_player__coll__graph.png" border="0" usemap="#_player_coll__map" alt="Collaboration graph"/></div>
 <map name="_player_coll__map" id="_player_coll__map">
-<area shape="rect" id="node2" href="class_kinematic_character_controller.html" title="KinematicCharacterController" alt="" coords="5,6,205,34"/><area shape="rect" id="node5" href="class_particle_effect.html" title="ParticleEffect" alt="" coords="229,6,333,34"/><area shape="rect" id="node7" href="class_player_state.html" title="PlayerState" alt="" coords="357,6,451,34"/></map>
+<area shape="rect" id="node2" href="class_kinematic_character_controller.html" title="KinematicCharacterController" alt="" coords="5,6,205,34"/><area shape="rect" id="node4" href="class_particle_effect.html" title="ParticleEffect" alt="" coords="229,6,333,34"/><area shape="rect" id="node6" href="class_player_state.html" title="PlayerState" alt="" coords="357,6,451,34"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
@@ -131,6 +131,7 @@ Public Member Functions</h2></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_player.html">Player</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a8a5e9b9c50dfc47114dbff9efbe5c67c">getInstance</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a1af5d39f7bac2aeaa1e30c7dda2332fa">reset</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#affe0cc3cb714f6deb4e62f0c0d3f1fd8">Player</a> ()</td></tr>
@@ -148,7 +149,7 @@ Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kinematic_character_controller.html">KinematicCharacterController</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a74f2b09958bd6525209c5895308fd78d">_playerController</a></td></tr>
 <tr><td colspan="2"><h2><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_player.html">Player</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#af8164ab1e1b87f96a115c633661f72c6">_instance</a> = NULL</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static osg::ref_ptr&lt; <a class="el" href="class_player.html">Player</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a1280eef8db17b3e9f0d0ac983b5677f2">_instance</a> = NULL</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="affe0cc3cb714f6deb4e62f0c0d3f1fd8"></a><!-- doxytag: member="Player::Player" ref="affe0cc3cb714f6deb4e62f0c0d3f1fd8" args="()" -->
@@ -296,6 +297,22 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a1af5d39f7bac2aeaa1e30c7dda2332fa"></a><!-- doxytag: member="Player::reset" ref="a1af5d39f7bac2aeaa1e30c7dda2332fa" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Player::reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a173f280aa1f8c7f6e3096813391107cf"></a><!-- doxytag: member="Player::resetPosition" ref="a173f280aa1f8c7f6e3096813391107cf" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -373,12 +390,12 @@ Static Private Attributes</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Field Documentation</h2>
-<a class="anchor" id="af8164ab1e1b87f96a115c633661f72c6"></a><!-- doxytag: member="Player::_instance" ref="af8164ab1e1b87f96a115c633661f72c6" args="" -->
+<a class="anchor" id="a1280eef8db17b3e9f0d0ac983b5677f2"></a><!-- doxytag: member="Player::_instance" ref="a1280eef8db17b3e9f0d0ac983b5677f2" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_player.html">Player</a> * <a class="el" href="class_player.html#af8164ab1e1b87f96a115c633661f72c6">Player::_instance</a> = NULL<code> [static, private]</code></td>
+          <td class="memname">osg::ref_ptr&lt; <a class="el" href="class_player.html">Player</a> &gt; <a class="el" href="class_player.html#a1280eef8db17b3e9f0d0ac983b5677f2">Player::_instance</a> = NULL<code> [static, private]</code></td>
         </tr>
       </table>
 </div>
@@ -496,7 +513,7 @@ Static Private Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Mar 31 2011 18:04:50 for Starjumper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 1 2011 00:16:22 for Starjumper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

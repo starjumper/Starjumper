@@ -136,34 +136,39 @@ function toggleVisibility(linkObj) {
 <a name="l00036"></a><a class="code" href="class_head_up_display.html#aaeb12b3c1b5d44b212707695ffda0fbd">00036</a>         osg::ref_ptr&lt;osg::Camera&gt; <a class="code" href="class_head_up_display.html#aaeb12b3c1b5d44b212707695ffda0fbd">_camera</a>;
 <a name="l00037"></a><a class="code" href="class_head_up_display.html#a25ec173c1a79a66df720d1d68b1ccdc9">00037</a>         osg::Geode *<a class="code" href="class_head_up_display.html#a25ec173c1a79a66df720d1d68b1ccdc9">_timeNode</a>;
 <a name="l00038"></a><a class="code" href="class_head_up_display.html#ae58d457786122b4e96fa39421908aae2">00038</a>     osgText::Text *<a class="code" href="class_head_up_display.html#ae58d457786122b4e96fa39421908aae2">_timer</a>;      
-<a name="l00039"></a>00039 
-<a name="l00040"></a><a class="code" href="class_head_up_display.html#adae0594e3d2d13ab3ad005e40edbb99d">00040</a>     <span class="keyword">struct </span>timeb <a class="code" href="class_head_up_display.html#adae0594e3d2d13ab3ad005e40edbb99d">_startTime</a>;
-<a name="l00041"></a>00041 
-<a name="l00042"></a><a class="code" href="class_head_up_display.html#ae461f5c1f4aa1ea2132046d610a27c85">00042</a>         osg::Node *<a class="code" href="class_head_up_display.html#ae461f5c1f4aa1ea2132046d610a27c85">_speedBarNode</a>;
-<a name="l00043"></a><a class="code" href="class_head_up_display.html#a271015afedc119f7f135e7f1e8393291">00043</a>         osg::PositionAttitudeTransform *<a class="code" href="class_head_up_display.html#a271015afedc119f7f135e7f1e8393291">_hudPat</a>;
-<a name="l00044"></a><a class="code" href="class_head_up_display.html#a0cb13738c022f467ffb7845cd0a7d9fa">00044</a>         osg::PositionAttitudeTransform *<a class="code" href="class_head_up_display.html#a0cb13738c022f467ffb7845cd0a7d9fa">_speedPat</a>;
-<a name="l00045"></a><a class="code" href="class_head_up_display.html#a28195c784867f3e067b7e125c32315e4">00045</a>         osg::PositionAttitudeTransform *<a class="code" href="class_head_up_display.html#a28195c784867f3e067b7e125c32315e4">_speedBarPat</a>;
-<a name="l00046"></a><a class="code" href="class_head_up_display.html#ab151996caafd3654dd43e8cbcbd103be">00046</a>         osg::PositionAttitudeTransform *<a class="code" href="class_head_up_display.html#ab151996caafd3654dd43e8cbcbd103be">_speedBarBackgroundPat</a>;
-<a name="l00047"></a><a class="code" href="class_head_up_display.html#af0eec0aaf14a61582f3378d9b32375a4">00047</a>         osg::MatrixTransform *<a class="code" href="class_head_up_display.html#af0eec0aaf14a61582f3378d9b32375a4">_speedBarMatrixTrans</a>;
-<a name="l00048"></a>00048 
-<a name="l00049"></a>00049 <span class="keyword">public</span>:
-<a name="l00050"></a>00050         <a class="code" href="class_head_up_display.html#a6b2e6d37ab533c9a51e7a61df5838856">HeadUpDisplay</a>();
-<a name="l00051"></a>00051     osg::Camera *<a class="code" href="class_head_up_display.html#a07890b19ec593e52a1689fd9f840f46d">getCamera</a>();
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053         <span class="keywordtype">void</span> <a class="code" href="class_head_up_display.html#aff30e06277a65970f10fbe40b26731fb">initializeCamera</a>();
-<a name="l00054"></a>00054         <span class="keywordtype">void</span> <a class="code" href="class_head_up_display.html#af0b4af24b586a049d7ef25ead5d9840d">initializeSpeedometer</a>();
-<a name="l00055"></a>00055         <span class="keywordtype">void</span> <a class="code" href="class_head_up_display.html#aa84f97e6c3cac2e7905b118674b7721c">initializeTimer</a>();
-<a name="l00056"></a>00056         
-<a name="l00057"></a>00057     <span class="keywordtype">void</span> <a class="code" href="class_head_up_display.html#ab5addd195ef821d0b4d7ebb23d706c5a">resetTimer</a>();
-<a name="l00058"></a>00058         <span class="keywordtype">void</span> <a class="code" href="class_head_up_display.html#a3a91e9174fa3ef6cee44aaf545c9810a">updateSpeedometer</a>();
-<a name="l00059"></a>00059         <span class="keywordtype">void</span> <a class="code" href="class_head_up_display.html#a8a33426d58db836cae56646b11e2cf13">updateTimer</a>();
-<a name="l00060"></a>00060 };
-<a name="l00061"></a>00061 
-<a name="l00062"></a><a class="code" href="class_head_up_display_update_callback.html">00062</a> <span class="keyword">class </span><a class="code" href="class_head_up_display_update_callback.html">HeadUpDisplayUpdateCallback</a> : <span class="keyword">public</span> osg::NodeCallback
-<a name="l00063"></a>00063 {
-<a name="l00064"></a>00064 <span class="keyword">public</span>:
-<a name="l00065"></a>00065     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_head_up_display_update_callback.html#a2fde5fc4e83dc0b140030fbb2ea5546a">operator()</a>(osg::Node *node, osg::NodeVisitor *nv);
-<a name="l00066"></a>00066 };
+<a name="l00039"></a><a class="code" href="class_head_up_display.html#a6ada421fc001ca7dd9d41c987ba6d7d3">00039</a>     <span class="keywordtype">bool</span> <a class="code" href="class_head_up_display.html#a6ada421fc001ca7dd9d41c987ba6d7d3">_isTiming</a>;
+<a name="l00040"></a>00040 
+<a name="l00041"></a><a class="code" href="class_head_up_display.html#adae0594e3d2d13ab3ad005e40edbb99d">00041</a>     <span class="keyword">struct </span>timeb <a class="code" href="class_head_up_display.html#adae0594e3d2d13ab3ad005e40edbb99d">_startTime</a>;
+<a name="l00042"></a><a class="code" href="class_head_up_display.html#ac5d49d69319ab7df39d609194182346b">00042</a>     time_t <a class="code" href="class_head_up_display.html#ac5d49d69319ab7df39d609194182346b">_finalTime</a>;
+<a name="l00043"></a>00043 
+<a name="l00044"></a><a class="code" href="class_head_up_display.html#ae461f5c1f4aa1ea2132046d610a27c85">00044</a>         osg::Node *<a class="code" href="class_head_up_display.html#ae461f5c1f4aa1ea2132046d610a27c85">_speedBarNode</a>;
+<a name="l00045"></a><a class="code" href="class_head_up_display.html#a271015afedc119f7f135e7f1e8393291">00045</a>         osg::PositionAttitudeTransform *<a class="code" href="class_head_up_display.html#a271015afedc119f7f135e7f1e8393291">_hudPat</a>;
+<a name="l00046"></a><a class="code" href="class_head_up_display.html#a0cb13738c022f467ffb7845cd0a7d9fa">00046</a>         osg::PositionAttitudeTransform *<a class="code" href="class_head_up_display.html#a0cb13738c022f467ffb7845cd0a7d9fa">_speedPat</a>;
+<a name="l00047"></a><a class="code" href="class_head_up_display.html#a28195c784867f3e067b7e125c32315e4">00047</a>         osg::PositionAttitudeTransform *<a class="code" href="class_head_up_display.html#a28195c784867f3e067b7e125c32315e4">_speedBarPat</a>;
+<a name="l00048"></a><a class="code" href="class_head_up_display.html#ab151996caafd3654dd43e8cbcbd103be">00048</a>         osg::PositionAttitudeTransform *<a class="code" href="class_head_up_display.html#ab151996caafd3654dd43e8cbcbd103be">_speedBarBackgroundPat</a>;
+<a name="l00049"></a><a class="code" href="class_head_up_display.html#af0eec0aaf14a61582f3378d9b32375a4">00049</a>         osg::MatrixTransform *<a class="code" href="class_head_up_display.html#af0eec0aaf14a61582f3378d9b32375a4">_speedBarMatrixTrans</a>;
+<a name="l00050"></a>00050 <span class="keyword">public</span>:
+<a name="l00051"></a>00051         <a class="code" href="class_head_up_display.html#a6b2e6d37ab533c9a51e7a61df5838856">HeadUpDisplay</a>();
+<a name="l00052"></a>00052     osg::Camera *<a class="code" href="class_head_up_display.html#a07890b19ec593e52a1689fd9f840f46d">getCamera</a>();
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054         <span class="keywordtype">void</span> <a class="code" href="class_head_up_display.html#aff30e06277a65970f10fbe40b26731fb">initializeCamera</a>();
+<a name="l00055"></a>00055         <span class="keywordtype">void</span> <a class="code" href="class_head_up_display.html#af0b4af24b586a049d7ef25ead5d9840d">initializeSpeedometer</a>();
+<a name="l00056"></a>00056         <span class="keywordtype">void</span> <a class="code" href="class_head_up_display.html#aa84f97e6c3cac2e7905b118674b7721c">initializeTimer</a>();
+<a name="l00057"></a>00057         
+<a name="l00058"></a>00058     <span class="keywordtype">void</span> <a class="code" href="class_head_up_display.html#a54affcf626d2d6a07010352799062cc5">stopTimer</a>();
+<a name="l00059"></a>00059     <span class="keywordtype">void</span> <a class="code" href="class_head_up_display.html#ab5addd195ef821d0b4d7ebb23d706c5a">resetTimer</a>();
+<a name="l00060"></a>00060         <span class="keywordtype">void</span> <a class="code" href="class_head_up_display.html#a3a91e9174fa3ef6cee44aaf545c9810a">updateSpeedometer</a>();
+<a name="l00061"></a>00061         <span class="keywordtype">void</span> <a class="code" href="class_head_up_display.html#a8a33426d58db836cae56646b11e2cf13">updateTimer</a>();
+<a name="l00062"></a>00062         
+<a name="l00063"></a>00063     time_t <a class="code" href="class_head_up_display.html#abf4ec0507f2738f006d69e8c0119b0a1">getTime</a>();
+<a name="l00064"></a><a class="code" href="class_head_up_display.html#a864969aa7940e90e1f19aa89e8f1ed39">00064</a>     time_t <a class="code" href="class_head_up_display.html#a864969aa7940e90e1f19aa89e8f1ed39">getFinalTime</a>() { <span class="keywordflow">return</span> <a class="code" href="class_head_up_display.html#ac5d49d69319ab7df39d609194182346b">_finalTime</a>; };
+<a name="l00065"></a>00065 };
+<a name="l00066"></a>00066 
+<a name="l00067"></a><a class="code" href="class_head_up_display_update_callback.html">00067</a> <span class="keyword">class </span><a class="code" href="class_head_up_display_update_callback.html">HeadUpDisplayUpdateCallback</a> : <span class="keyword">public</span> osg::NodeCallback
+<a name="l00068"></a>00068 {
+<a name="l00069"></a>00069 <span class="keyword">public</span>:
+<a name="l00070"></a>00070     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_head_up_display_update_callback.html#a2fde5fc4e83dc0b140030fbb2ea5546a">operator()</a>(osg::Node *node, osg::NodeVisitor *nv);
+<a name="l00071"></a>00071 };
 </pre></div></div>
 </div>
 <!--- window showing the filter options -->
@@ -180,7 +185,7 @@ function toggleVisibility(linkObj) {
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Mar 31 2011 18:04:50 for Starjumper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 1 2011 00:16:22 for Starjumper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

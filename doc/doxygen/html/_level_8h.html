@@ -103,6 +103,8 @@ function toggleVisibility(linkObj) {
 </div>
 <div class="contents">
 <div class="textblock"><code>#include &lt;osg/Group&gt;</code><br/>
+<code>#include &lt;osg/BlendFunc&gt;</code><br/>
+<code>#include &lt;osg/BlendColor&gt;</code><br/>
 <code>#include &lt;osgViewer/Viewer&gt;</code><br/>
 <code>#include &lt;osgShadow/ShadowedScene&gt;</code><br/>
 <code>#include &lt;osgShadow/ShadowVolume&gt;</code><br/>
@@ -119,6 +121,7 @@ function toggleVisibility(linkObj) {
 <code>#include &quot;<a class="el" href="_player_updater_8h_source.html">PlayerUpdater.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_lazy_camera_manipulator_8h_source.html">LazyCameraManipulator.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_cuboid_8h_source.html">Cuboid.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_collision_model_8h_source.html">CollisionModel.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_head_up_display_8h_source.html">HeadUpDisplay.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_sky_8h_source.html">Sky.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_sound_8h_source.html">Sound.h</a>&quot;</code><br/>
@@ -129,7 +132,7 @@ function toggleVisibility(linkObj) {
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="_level_8h__incl.png" border="0" usemap="#include_2_level_8h" alt=""/></div>
 <map name="include_2_level_8h" id="include_2_level_8h">
-<area shape="rect" id="node19" href="rapidxml_8hpp.html" title="This file contains rapidxml parser and DOM implementation." alt="" coords="2916,161,3084,189"/><area shape="rect" id="node29" href="rapidxml__iterators_8hpp.html" title="This file contains rapidxml iterators." alt="" coords="2497,83,2724,111"/><area shape="rect" id="node32" href="rapidxml__utils_8hpp.html" title="RapidXML/rapidxml_utils.hpp" alt="" coords="2223,83,2423,111"/><area shape="rect" id="node43" href="types_8h.html" title="types.h" alt="" coords="5,238,72,266"/><area shape="rect" id="node45" href="_level_keyboard_handler_8h.html" title="LevelKeyboardHandler.h" alt="" coords="77,83,251,111"/><area shape="rect" id="node50" href="_player_8h.html" title="Player.h" alt="" coords="1183,161,1252,189"/><area shape="rect" id="node79" href="_player_updater_8h.html" title="PlayerUpdater.h" alt="" coords="883,83,1003,111"/><area shape="rect" id="node101" href="_sound_8h.html" title="Sound.h" alt="" coords="428,161,500,189"/><area shape="rect" id="node103" href="_lazy_camera_manipulator_8h.html" title="LazyCameraManipulator.h" alt="" coords="3617,83,3796,111"/><area shape="rect" id="node107" href="_cuboid_8h.html" title="Cuboid.h" alt="" coords="1384,83,1461,111"/><area shape="rect" id="node118" href="_head_up_display_8h.html" title="HeadUpDisplay.h" alt="" coords="2020,83,2148,111"/><area shape="rect" id="node131" href="_sky_8h.html" title="Sky.h" alt="" coords="1940,83,1996,111"/><area shape="rect" id="node63" href="_kinematic_character_controller_8h.html" title="KinematicCharacterController.h" alt="" coords="1391,238,1601,266"/><area shape="rect" id="node68" href="_player_state_8h.html" title="PlayerState.h" alt="" coords="1260,238,1367,266"/><area shape="rect" id="node72" href="_particle_effect_factory_8h.html" title="ParticleEffectFactory.h" alt="" coords="1777,238,1940,266"/><area shape="rect" id="node94" href="_collision_object_8h.html" title="CollisionObject.h" alt="" coords="980,161,1108,189"/></map>
+<area shape="rect" id="node23" href="rapidxml_8hpp.html" title="This file contains rapidxml parser and DOM implementation." alt="" coords="80,161,248,189"/><area shape="rect" id="node33" href="rapidxml__iterators_8hpp.html" title="This file contains rapidxml iterators." alt="" coords="51,83,277,111"/><area shape="rect" id="node36" href="rapidxml__utils_8hpp.html" title="RapidXML/rapidxml_utils.hpp" alt="" coords="443,83,643,111"/><area shape="rect" id="node47" href="types_8h.html" title="types.h" alt="" coords="1643,238,1709,266"/><area shape="rect" id="node49" href="_level_keyboard_handler_8h.html" title="LevelKeyboardHandler.h" alt="" coords="1637,83,1811,111"/><area shape="rect" id="node54" href="_player_8h.html" title="Player.h" alt="" coords="2837,161,2907,189"/><area shape="rect" id="node83" href="_player_updater_8h.html" title="PlayerUpdater.h" alt="" coords="2213,83,2333,111"/><area shape="rect" id="node105" href="_sound_8h.html" title="Sound.h" alt="" coords="1936,161,2008,189"/><area shape="rect" id="node107" href="_lazy_camera_manipulator_8h.html" title="LazyCameraManipulator.h" alt="" coords="3071,83,3249,111"/><area shape="rect" id="node111" href="_cuboid_8h.html" title="Cuboid.h" alt="" coords="3547,83,3624,111"/><area shape="rect" id="node122" href="_collision_model_8h.html" title="CollisionModel.h" alt="" coords="4060,83,4183,111"/><area shape="rect" id="node131" href="_head_up_display_8h.html" title="HeadUpDisplay.h" alt="" coords="2693,83,2821,111"/><area shape="rect" id="node139" href="_sky_8h.html" title="Sky.h" alt="" coords="3696,83,3752,111"/><area shape="rect" id="node67" href="_kinematic_character_controller_8h.html" title="KinematicCharacterController.h" alt="" coords="2285,238,2496,266"/><area shape="rect" id="node72" href="_player_state_8h.html" title="PlayerState.h" alt="" coords="2571,238,2677,266"/><area shape="rect" id="node76" href="_particle_effect_factory_8h.html" title="ParticleEffectFactory.h" alt="" coords="2803,238,2965,266"/><area shape="rect" id="node98" href="_collision_object_8h.html" title="CollisionObject.h" alt="" coords="3328,161,3456,189"/></map>
 </div>
 </div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png"/> This graph shows which files directly or indirectly include this file:</div>
@@ -264,7 +267,7 @@ Defines</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Mar 31 2011 18:04:50 for Starjumper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 1 2011 00:16:22 for Starjumper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

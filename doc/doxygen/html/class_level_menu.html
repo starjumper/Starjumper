@@ -113,20 +113,28 @@ function toggleVisibility(linkObj) {
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="class_level_menu__coll__graph.png" border="0" usemap="#_level_menu_coll__map" alt="Collaboration graph"/></div>
 <map name="_level_menu_coll__map" id="_level_menu_coll__map">
-<area shape="rect" id="node6" title="STL class." alt="" coords="123,86,205,114"/><area shape="rect" id="node8" title="STL class." alt="" coords="79,6,249,34"/></map>
+<area shape="rect" id="node10" href="class_menu_keyboard_handler.html" title="MenuKeyboardHandler" alt="" coords="1516,73,1676,101"/><area shape="rect" id="node6" title="STL class." alt="" coords="228,23,311,51"/><area shape="rect" id="node8" title="STL class." alt="" coords="5,23,176,51"/><area shape="rect" id="node13" href="class_level.html" title="Level" alt="" coords="943,113,999,141"/><area shape="rect" id="node15" href="class_level_keyboard_handler.html" title="LevelKeyboardHandler" alt="" coords="453,74,616,102"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#a64c66281247ff14a6146293f79cdc571">LevelMenu</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#ac5d0e358be2ca3760f2fa75c4fcc5f1c">initializeCamera</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#addf717c4f9f554eafc823dd5c936c380">initializeBackgroundAnimation</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#a9bae7ae8cf412f5a95bfae6148aa8dfb">initializeHeader</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#a8516d390c8967226a685a7ebb87f9e85">initializeSelector</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#afd322e09d770004910a2f13cf77b3f5b">loadLevels</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#a97290cdeb847da449011b67501e5626c">updateDetails</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#ae622d934d91d104b62d7fd533cae97fb">resetCamera</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#a3797d03d382652f5b13c1a6417388871">selectPreviousItem</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#a8d68a5b47000dd288df81aa747e0b48a">selectNextItem</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#a8bc73b62f7e966eaaf23aa40262d535f">runSelectedLevel</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#ab2c7b16bf75c1657f8a76e0b295f0dba">returnFromLevel</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#a04c7983b892fab94e09f9c8991a4ac00">writeBackLevelFile</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">osg::MatrixTransform *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#ae5d8b5e14dccd5e0be4ee9fea27c685f">getBackground</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">osg::Camera *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#abd13dee69d259370af6760363bdacdce">getCamera</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#a88e3bf8b3872f483c162d264d625c825">levelRunning</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_level.html">Level</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#a088ab8589eef660be6353f1870993cf7">getCurrentLevel</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::map<br class="typebreak"/>
@@ -135,9 +143,12 @@ Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">osg::ref_ptr&lt; osg::Camera &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#aa8d4932301897a18e319ae60afe0f4f4">_camera</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">osg::PositionAttitudeTransform *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#aff914d26a0e705dbdfc8909a652dde14">_menuPat</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">osg::PositionAttitudeTransform *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#af1ac67816e64fc5d4d5165e81396d7ad">_itemsPat</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">osg::MatrixTransform *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#a7ce19044a8745df30a2e167c7263416e">_background</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">osg::ref_ptr&lt; osgText::Text &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#ac5f630fa2977de11ea23f3a5e6d174f9">_bestTimeText</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">osg::ref_ptr&lt; osgText::Text &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#ad778850103c5d2116af26a8cb9f33fb9">_completionsText</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">osg::ref_ptr&lt; osgText::Text &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#a525e623d3e8eb1768f13fd3b2e25f911">_deathsText</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_menu_keyboard_handler.html">MenuKeyboardHandler</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#a48d2240e3521bf31521967faee5911d8">_keyboardHandler</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_level.html">Level</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_menu.html#a661f051c74b90016d9288fb1ea0221e6">_currentLevel</a></td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a64c66281247ff14a6146293f79cdc571"></a><!-- doxytag: member="LevelMenu::LevelMenu" ref="a64c66281247ff14a6146293f79cdc571" args="()" -->
@@ -157,6 +168,22 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ae5d8b5e14dccd5e0be4ee9fea27c685f"></a><!-- doxytag: member="LevelMenu::getBackground" ref="ae5d8b5e14dccd5e0be4ee9fea27c685f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">osg::MatrixTransform* LevelMenu::getBackground </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="abd13dee69d259370af6760363bdacdce"></a><!-- doxytag: member="LevelMenu::getCamera" ref="abd13dee69d259370af6760363bdacdce" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -173,12 +200,60 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a088ab8589eef660be6353f1870993cf7"></a><!-- doxytag: member="LevelMenu::getCurrentLevel" ref="a088ab8589eef660be6353f1870993cf7" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_level.html">Level</a>* LevelMenu::getCurrentLevel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="addf717c4f9f554eafc823dd5c936c380"></a><!-- doxytag: member="LevelMenu::initializeBackgroundAnimation" ref="addf717c4f9f554eafc823dd5c936c380" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelMenu::initializeBackgroundAnimation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ac5d0e358be2ca3760f2fa75c4fcc5f1c"></a><!-- doxytag: member="LevelMenu::initializeCamera" ref="ac5d0e358be2ca3760f2fa75c4fcc5f1c" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void LevelMenu::initializeCamera </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9bae7ae8cf412f5a95bfae6148aa8dfb"></a><!-- doxytag: member="LevelMenu::initializeHeader" ref="a9bae7ae8cf412f5a95bfae6148aa8dfb" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelMenu::initializeHeader </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -205,12 +280,60 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a88e3bf8b3872f483c162d264d625c825"></a><!-- doxytag: member="LevelMenu::levelRunning" ref="a88e3bf8b3872f483c162d264d625c825" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LevelMenu::levelRunning </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="afd322e09d770004910a2f13cf77b3f5b"></a><!-- doxytag: member="LevelMenu::loadLevels" ref="afd322e09d770004910a2f13cf77b3f5b" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void LevelMenu::loadLevels </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae622d934d91d104b62d7fd533cae97fb"></a><!-- doxytag: member="LevelMenu::resetCamera" ref="ae622d934d91d104b62d7fd533cae97fb" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelMenu::resetCamera </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab2c7b16bf75c1657f8a76e0b295f0dba"></a><!-- doxytag: member="LevelMenu::returnFromLevel" ref="ab2c7b16bf75c1657f8a76e0b295f0dba" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelMenu::returnFromLevel </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -285,7 +408,36 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a04c7983b892fab94e09f9c8991a4ac00"></a><!-- doxytag: member="LevelMenu::writeBackLevelFile" ref="a04c7983b892fab94e09f9c8991a4ac00" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelMenu::writeBackLevelFile </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Field Documentation</h2>
+<a class="anchor" id="a7ce19044a8745df30a2e167c7263416e"></a><!-- doxytag: member="LevelMenu::_background" ref="a7ce19044a8745df30a2e167c7263416e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">osg::MatrixTransform* <a class="el" href="class_level_menu.html#a7ce19044a8745df30a2e167c7263416e">LevelMenu::_background</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ac5f630fa2977de11ea23f3a5e6d174f9"></a><!-- doxytag: member="LevelMenu::_bestTimeText" ref="ac5f630fa2977de11ea23f3a5e6d174f9" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -338,6 +490,19 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a661f051c74b90016d9288fb1ea0221e6"></a><!-- doxytag: member="LevelMenu::_currentLevel" ref="a661f051c74b90016d9288fb1ea0221e6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_level.html">Level</a>* <a class="el" href="class_level_menu.html#a661f051c74b90016d9288fb1ea0221e6">LevelMenu::_currentLevel</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a525e623d3e8eb1768f13fd3b2e25f911"></a><!-- doxytag: member="LevelMenu::_deathsText" ref="a525e623d3e8eb1768f13fd3b2e25f911" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -377,6 +542,19 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a48d2240e3521bf31521967faee5911d8"></a><!-- doxytag: member="LevelMenu::_keyboardHandler" ref="a48d2240e3521bf31521967faee5911d8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_menu_keyboard_handler.html">MenuKeyboardHandler</a>* <a class="el" href="class_level_menu.html#a48d2240e3521bf31521967faee5911d8">LevelMenu::_keyboardHandler</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="aff914d26a0e705dbdfc8909a652dde14"></a><!-- doxytag: member="LevelMenu::_menuPat" ref="aff914d26a0e705dbdfc8909a652dde14" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -409,7 +587,7 @@ Private Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Mar 31 2011 18:04:50 for Starjumper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 1 2011 00:16:22 for Starjumper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

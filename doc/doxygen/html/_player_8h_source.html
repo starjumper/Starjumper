@@ -133,7 +133,7 @@ function toggleVisibility(linkObj) {
 <a name="l00033"></a><a class="code" href="class_player.html#a94e7a05baa4efc440a741ee61aa41d2b">00033</a>     <a class="code" href="class_particle_effect.html">ParticleEffect</a> *<a class="code" href="class_player.html#a94e7a05baa4efc440a741ee61aa41d2b">_rightEngine</a>;
 <a name="l00034"></a><a class="code" href="class_player.html#a06163f57095d05ecaf02d8a34ffbde6e">00034</a>     osg::ref_ptr&lt;osg::Group&gt; <a class="code" href="class_player.html#a06163f57095d05ecaf02d8a34ffbde6e">_particleEffects</a>;
 <a name="l00035"></a>00035     
-<a name="l00036"></a><a class="code" href="class_player.html#af8164ab1e1b87f96a115c633661f72c6">00036</a>     <span class="keyword">static</span> <a class="code" href="class_player.html">Player</a> *<a class="code" href="class_player.html#af8164ab1e1b87f96a115c633661f72c6">_instance</a>;
+<a name="l00036"></a><a class="code" href="class_player.html#a1280eef8db17b3e9f0d0ac983b5677f2">00036</a>     <span class="keyword">static</span> osg::ref_ptr&lt;Player&gt; <a class="code" href="class_player.html#a1280eef8db17b3e9f0d0ac983b5677f2">_instance</a>;
 <a name="l00037"></a>00037     
 <a name="l00038"></a><a class="code" href="class_player.html#a079b798aa00b575aabf7e06549941ffc">00038</a>     btPairCachingGhostObject *<a class="code" href="class_player.html#a079b798aa00b575aabf7e06549941ffc">_playerGhostObject</a>;
 <a name="l00039"></a><a class="code" href="class_player.html#a74f2b09958bd6525209c5895308fd78d">00039</a>     <a class="code" href="class_kinematic_character_controller.html">KinematicCharacterController</a> *<a class="code" href="class_player.html#a74f2b09958bd6525209c5895308fd78d">_playerController</a>;
@@ -146,16 +146,17 @@ function toggleVisibility(linkObj) {
 <a name="l00046"></a>00046         
 <a name="l00047"></a>00047 <span class="keyword">public</span>:
 <a name="l00048"></a>00048     <span class="keyword">static</span> <a class="code" href="class_player.html">Player</a> *<a class="code" href="class_player.html#a8a5e9b9c50dfc47114dbff9efbe5c67c">getInstance</a>();
-<a name="l00049"></a>00049     
-<a name="l00050"></a><a class="code" href="class_player.html#abfec37d37a2416d6950c2d0f933b41cb">00050</a>     <a class="code" href="class_kinematic_character_controller.html">KinematicCharacterController</a> *<a class="code" href="class_player.html#abfec37d37a2416d6950c2d0f933b41cb">getController</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_player.html#a74f2b09958bd6525209c5895308fd78d">_playerController</a>; }
-<a name="l00051"></a><a class="code" href="class_player.html#a0a9510e3f1eb960540e2f0b24c4ae722">00051</a>     btPairCachingGhostObject *<a class="code" href="class_player.html#a0a9510e3f1eb960540e2f0b24c4ae722">getGhostObject</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_player.html#a079b798aa00b575aabf7e06549941ffc">_playerGhostObject</a>; }  
-<a name="l00052"></a><a class="code" href="class_player.html#a9d55a9414281bea209c58eff8b9483ba">00052</a>     <a class="code" href="class_player_state.html">PlayerState</a> *<a class="code" href="class_player.html#a9d55a9414281bea209c58eff8b9483ba">getPlayerState</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_player.html#a8c9a7d31c77519099cc65dd8a141be23">_playerState</a>; }
-<a name="l00053"></a><a class="code" href="class_player.html#a5e2a3c33b68bdd4bf2f172d17958c9ca">00053</a>     osg::ref_ptr&lt;osg::Group&gt; <a class="code" href="class_player.html#a5e2a3c33b68bdd4bf2f172d17958c9ca">getParticleEffects</a>() { <span class="keywordflow">return</span> <a class="code" href="class_player.html#a06163f57095d05ecaf02d8a34ffbde6e">_particleEffects</a>; }
-<a name="l00054"></a>00054     
-<a name="l00055"></a>00055     <span class="keywordtype">void</span> <a class="code" href="class_player.html#a386f1482ade49bcfde1376de64aeda1c">setAngles</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> angleX = 0.0f, <span class="keyword">const</span> <span class="keywordtype">float</span> angleY = 0.0f, <span class="keyword">const</span> <span class="keywordtype">float</span> angleZ = 180.0f);
-<a name="l00056"></a>00056     <span class="keywordtype">void</span> <a class="code" href="class_player.html#a8bc71bdd2072561edd86d77e75694c78">setEngines</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> speed, <span class="keywordtype">bool</span> accelerating);
-<a name="l00057"></a>00057     <span class="keywordtype">void</span> <a class="code" href="class_player.html#a173f280aa1f8c7f6e3096813391107cf">resetPosition</a>();    
-<a name="l00058"></a>00058 };
+<a name="l00049"></a>00049     <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_player.html#a1af5d39f7bac2aeaa1e30c7dda2332fa">reset</a>();
+<a name="l00050"></a>00050 
+<a name="l00051"></a><a class="code" href="class_player.html#abfec37d37a2416d6950c2d0f933b41cb">00051</a>     <a class="code" href="class_kinematic_character_controller.html">KinematicCharacterController</a> *<a class="code" href="class_player.html#abfec37d37a2416d6950c2d0f933b41cb">getController</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_player.html#a74f2b09958bd6525209c5895308fd78d">_playerController</a>; }
+<a name="l00052"></a><a class="code" href="class_player.html#a0a9510e3f1eb960540e2f0b24c4ae722">00052</a>     btPairCachingGhostObject *<a class="code" href="class_player.html#a0a9510e3f1eb960540e2f0b24c4ae722">getGhostObject</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_player.html#a079b798aa00b575aabf7e06549941ffc">_playerGhostObject</a>; }  
+<a name="l00053"></a><a class="code" href="class_player.html#a9d55a9414281bea209c58eff8b9483ba">00053</a>     <a class="code" href="class_player_state.html">PlayerState</a> *<a class="code" href="class_player.html#a9d55a9414281bea209c58eff8b9483ba">getPlayerState</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_player.html#a8c9a7d31c77519099cc65dd8a141be23">_playerState</a>; }
+<a name="l00054"></a><a class="code" href="class_player.html#a5e2a3c33b68bdd4bf2f172d17958c9ca">00054</a>     osg::ref_ptr&lt;osg::Group&gt; <a class="code" href="class_player.html#a5e2a3c33b68bdd4bf2f172d17958c9ca">getParticleEffects</a>() { <span class="keywordflow">return</span> <a class="code" href="class_player.html#a06163f57095d05ecaf02d8a34ffbde6e">_particleEffects</a>; }
+<a name="l00055"></a>00055     
+<a name="l00056"></a>00056     <span class="keywordtype">void</span> <a class="code" href="class_player.html#a386f1482ade49bcfde1376de64aeda1c">setAngles</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> angleX = 0.0f, <span class="keyword">const</span> <span class="keywordtype">float</span> angleY = 0.0f, <span class="keyword">const</span> <span class="keywordtype">float</span> angleZ = 180.0f);
+<a name="l00057"></a>00057     <span class="keywordtype">void</span> <a class="code" href="class_player.html#a8bc71bdd2072561edd86d77e75694c78">setEngines</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> speed, <span class="keywordtype">bool</span> accelerating);
+<a name="l00058"></a>00058     <span class="keywordtype">void</span> <a class="code" href="class_player.html#a173f280aa1f8c7f6e3096813391107cf">resetPosition</a>();
+<a name="l00059"></a>00059 };
 </pre></div></div>
 </div>
 <!--- window showing the filter options -->
@@ -172,7 +173,7 @@ function toggleVisibility(linkObj) {
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Mar 31 2011 18:04:50 for Starjumper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 1 2011 00:16:22 for Starjumper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

@@ -114,14 +114,24 @@ function toggleVisibility(linkObj) {
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="class_level__coll__graph.png" border="0" usemap="#_level_coll__map" alt="Collaboration graph"/></div>
 <map name="_level_coll__map" id="_level_coll__map">
-</map>
+<area shape="rect" id="node2" href="class_level_keyboard_handler.html" title="LevelKeyboardHandler" alt="" coords="5,6,168,34"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#a7e938d80df7a20a6cfa47824d094e171">Level</a> (const std::string &amp;mapfile)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#a7cb6867931cc289d92d5e5b2fc3e5c99">playerDied</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#a63f2eb6b11b26f68e8c03397ebf4c51c">getDeadlyAltitudes</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">btDynamicsWorld *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#a8e6c76ab7ebea20aa9536384f68db6ae">getPhysicsWorld</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#aed541ac308635766e2761f77c0ccc796">resetScene</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#a013e632ed5e7832b468f9f599c800154">setReachedFinish</a> (bool reachedFinish)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#a1e9b8c7f0bab03abcb54eed81a928f19">playerReachedFinish</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; osg::Vec3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#ae3072243f09366dbb07dbb44a6028d47">getFinishs</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_level_keyboard_handler.html">LevelKeyboardHandler</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#a50d0a9b220ea363e9e6991028e0da78c">getKeyboardHandler</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_head_up_display.html">HeadUpDisplay</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#aff41ab694d7094e34dda0919605b8224">getHeadUpDisplay</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">osgShadow::ShadowedScene *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#af15247d7124944efe1146ed956d70bf9">getShadowedScene</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#a78ab6c68018f04f5716e12cebebcad60">getNumDeaths</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#a1c0bf9df2f444be7ae5bdb3696931ce8">getTime</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#ab7344c06a582a5a3953ecdc9b4082596">initializeLighting</a> ()</td></tr>
@@ -132,8 +142,13 @@ Private Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">osg::ref_ptr<br class="typebreak"/>
 &lt; osgShadow::ShadowedScene &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#ad34dda4eea400c593bcdb9854a005ebe">_shadowedScene</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">osg::ref_ptr&lt; <a class="el" href="class_head_up_display.html">HeadUpDisplay</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#a21fd31746721f136d713c9c06b9b029b">_headUpDisplay</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#a5174c661f060751e726b0334c915218c">_numDeaths</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#a46a4fb5bda02e4cef65760df5e41e8f9">_reachedFinish</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">btDynamicsWorld *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#a8a356bcda1e4f041d26171b5c45eca82">_physicsWorld</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#a494f0278329a1f25bac343e8fe64f9db">_deadlyAltitudes</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; osg::Vec3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#a45e27b870049fa55cddfe46d5c95acd9">_finishs</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_level_keyboard_handler.html">LevelKeyboardHandler</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level.html#a8bf292d2431654d2be7699be4b97b022">_keyboardHandler</a></td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a7e938d80df7a20a6cfa47824d094e171"></a><!-- doxytag: member="Level::Level" ref="a7e938d80df7a20a6cfa47824d094e171" args="(const std::string &amp;mapfile)" -->
@@ -170,6 +185,70 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ae3072243f09366dbb07dbb44a6028d47"></a><!-- doxytag: member="Level::getFinishs" ref="ae3072243f09366dbb07dbb44a6028d47" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;osg::Vec3&gt; Level::getFinishs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aff41ab694d7094e34dda0919605b8224"></a><!-- doxytag: member="Level::getHeadUpDisplay" ref="aff41ab694d7094e34dda0919605b8224" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_head_up_display.html">HeadUpDisplay</a> * Level::getHeadUpDisplay </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a50d0a9b220ea363e9e6991028e0da78c"></a><!-- doxytag: member="Level::getKeyboardHandler" ref="a50d0a9b220ea363e9e6991028e0da78c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_level_keyboard_handler.html">LevelKeyboardHandler</a>* Level::getKeyboardHandler </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a78ab6c68018f04f5716e12cebebcad60"></a><!-- doxytag: member="Level::getNumDeaths" ref="a78ab6c68018f04f5716e12cebebcad60" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Level::getNumDeaths </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a8e6c76ab7ebea20aa9536384f68db6ae"></a><!-- doxytag: member="Level::getPhysicsWorld" ref="a8e6c76ab7ebea20aa9536384f68db6ae" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -179,6 +258,38 @@ Private Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af15247d7124944efe1146ed956d70bf9"></a><!-- doxytag: member="Level::getShadowedScene" ref="af15247d7124944efe1146ed956d70bf9" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">osgShadow::ShadowedScene* Level::getShadowedScene </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1c0bf9df2f444be7ae5bdb3696931ce8"></a><!-- doxytag: member="Level::getTime" ref="a1c0bf9df2f444be7ae5bdb3696931ce8" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">time_t Level::getTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -262,6 +373,71 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a7cb6867931cc289d92d5e5b2fc3e5c99"></a><!-- doxytag: member="Level::playerDied" ref="a7cb6867931cc289d92d5e5b2fc3e5c99" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Level::playerDied </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1e9b8c7f0bab03abcb54eed81a928f19"></a><!-- doxytag: member="Level::playerReachedFinish" ref="a1e9b8c7f0bab03abcb54eed81a928f19" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Level::playerReachedFinish </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aed541ac308635766e2761f77c0ccc796"></a><!-- doxytag: member="Level::resetScene" ref="aed541ac308635766e2761f77c0ccc796" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Level::resetScene </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a013e632ed5e7832b468f9f599c800154"></a><!-- doxytag: member="Level::setReachedFinish" ref="a013e632ed5e7832b468f9f599c800154" args="(bool reachedFinish)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Level::setReachedFinish </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>reachedFinish</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/><h2>Field Documentation</h2>
 <a class="anchor" id="a494f0278329a1f25bac343e8fe64f9db"></a><!-- doxytag: member="Level::_deadlyAltitudes" ref="a494f0278329a1f25bac343e8fe64f9db" args="" -->
 <div class="memitem">
@@ -276,12 +452,77 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a45e27b870049fa55cddfe46d5c95acd9"></a><!-- doxytag: member="Level::_finishs" ref="a45e27b870049fa55cddfe46d5c95acd9" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;osg::Vec3&gt; <a class="el" href="class_level.html#a45e27b870049fa55cddfe46d5c95acd9">Level::_finishs</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a21fd31746721f136d713c9c06b9b029b"></a><!-- doxytag: member="Level::_headUpDisplay" ref="a21fd31746721f136d713c9c06b9b029b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">osg::ref_ptr&lt;<a class="el" href="class_head_up_display.html">HeadUpDisplay</a>&gt; <a class="el" href="class_level.html#a21fd31746721f136d713c9c06b9b029b">Level::_headUpDisplay</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8bf292d2431654d2be7699be4b97b022"></a><!-- doxytag: member="Level::_keyboardHandler" ref="a8bf292d2431654d2be7699be4b97b022" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_level_keyboard_handler.html">LevelKeyboardHandler</a>* <a class="el" href="class_level.html#a8bf292d2431654d2be7699be4b97b022">Level::_keyboardHandler</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5174c661f060751e726b0334c915218c"></a><!-- doxytag: member="Level::_numDeaths" ref="a5174c661f060751e726b0334c915218c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t <a class="el" href="class_level.html#a5174c661f060751e726b0334c915218c">Level::_numDeaths</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a8a356bcda1e4f041d26171b5c45eca82"></a><!-- doxytag: member="Level::_physicsWorld" ref="a8a356bcda1e4f041d26171b5c45eca82" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">btDynamicsWorld* <a class="el" href="class_level.html#a8a356bcda1e4f041d26171b5c45eca82">Level::_physicsWorld</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a46a4fb5bda02e4cef65760df5e41e8f9"></a><!-- doxytag: member="Level::_reachedFinish" ref="a46a4fb5bda02e4cef65760df5e41e8f9" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_level.html#a46a4fb5bda02e4cef65760df5e41e8f9">Level::_reachedFinish</a><code> [private]</code></td>
         </tr>
       </table>
 </div>
@@ -321,7 +562,7 @@ Private Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Mar 31 2011 18:04:50 for Starjumper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 1 2011 00:16:22 for Starjumper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

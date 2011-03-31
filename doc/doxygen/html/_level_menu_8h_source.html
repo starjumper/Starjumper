@@ -100,63 +100,98 @@ function toggleVisibility(linkObj) {
 <div class="contents">
 <a href="_level_menu_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#pragma once</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span>
-<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;osg/Geode&gt;</span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;osg/Depth&gt;</span>
-<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;osg/Camera&gt;</span>
-<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;osg/ShapeDrawable&gt;</span>
-<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;osgViewer/Viewer&gt;</span>
-<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;osg/Drawable&gt;</span>
-<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;osg/Texture2D&gt;</span>
-<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;osg/PositionAttitudeTransform&gt;</span>
-<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;osg/ShapeDrawable&gt;</span>
-<a name="l00012"></a>00012 <span class="preprocessor">#include &lt;osg/Drawable&gt;</span>
-<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;osg/Geometry&gt;</span>
-<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;osg/Texture2D&gt;</span>
-<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;osgDB/ReadFile&gt;</span>
-<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;osgText/Text&gt;</span>
-<a name="l00017"></a>00017 
-<a name="l00018"></a>00018 <span class="preprocessor">#include &quot;<a class="code" href="rapidxml_8hpp.html" title="This file contains rapidxml parser and DOM implementation.">RapidXML/rapidxml.hpp</a>&quot;</span>
-<a name="l00019"></a>00019 <span class="preprocessor">#include &quot;<a class="code" href="rapidxml__iterators_8hpp.html" title="This file contains rapidxml iterators.">RapidXML/rapidxml_iterators.hpp</a>&quot;</span>
-<a name="l00020"></a>00020 <span class="preprocessor">#include &quot;<a class="code" href="rapidxml__utils_8hpp.html">RapidXML/rapidxml_utils.hpp</a>&quot;</span>
-<a name="l00021"></a>00021 
-<a name="l00022"></a>00022 <span class="preprocessor">#include &quot;<a class="code" href="_level_8h.html">Level.h</a>&quot;</span>
-<a name="l00023"></a>00023 
-<a name="l00024"></a><a class="code" href="_level_menu_8h.html#a04d46f28d25d5b97d577aa8ddc949fee">00024</a> <span class="preprocessor">#define MENU_FONT               &quot;fonts/arial.ttf&quot;</span>
-<a name="l00025"></a><a class="code" href="_level_menu_8h.html#a1db8c37dccfbeeec8b4eed7469fdeaa1">00025</a> <span class="preprocessor"></span><span class="preprocessor">#define MENU_MUSIC_FILE         &quot;resources/sound/48000_2chan.ogg&quot;</span>
-<a name="l00026"></a><a class="code" href="_level_menu_8h.html#ad14e3a06b27a20669605ee4a4e6fabbc">00026</a> <span class="preprocessor"></span><span class="preprocessor">#define LEVEL_SELECTOR_TEXTURE  &quot;resources/textures/menu_background.png&quot;</span>
-<a name="l00027"></a><a class="code" href="_level_menu_8h.html#a0251df482deabbedd5dc74ebfa1deba4">00027</a> <span class="preprocessor"></span><span class="preprocessor">#define MENU_ITEM_HEIGHT        40</span>
-<a name="l00028"></a><a class="code" href="_level_menu_8h.html#afb0e498767d6f581ac38435c7c38feaa">00028</a> <span class="preprocessor"></span><span class="preprocessor">#define MENU_DETAIL_FONT_SIZE   25</span>
-<a name="l00029"></a>00029 <span class="preprocessor"></span>
-<a name="l00030"></a>00030 <span class="keyword">class </span><a class="code" href="class_menu_keyboard_handler.html">MenuKeyboardHandler</a>;
-<a name="l00031"></a>00031 
-<a name="l00032"></a><a class="code" href="class_level_menu.html">00032</a> <span class="keyword">class </span><a class="code" href="class_level_menu.html">LevelMenu</a> : <span class="keyword">public</span> osg::Group
-<a name="l00033"></a>00033 {
-<a name="l00034"></a>00034 <span class="keyword">private</span>:
-<a name="l00035"></a><a class="code" href="class_level_menu.html#adfa32f1fb556a961718ebef81411d81d">00035</a>     std::vector&lt;std::map&lt;std::string, std::string&gt; &gt; <a class="code" href="class_level_menu.html#adfa32f1fb556a961718ebef81411d81d">_items</a>;
-<a name="l00036"></a><a class="code" href="class_level_menu.html#a4f4629b863f39d81cdc0cd63fbca6dc9">00036</a>     <span class="keywordtype">int</span> <a class="code" href="class_level_menu.html#a4f4629b863f39d81cdc0cd63fbca6dc9">_currentItemIndex</a>;
-<a name="l00037"></a>00037 
-<a name="l00038"></a><a class="code" href="class_level_menu.html#aa8d4932301897a18e319ae60afe0f4f4">00038</a>         osg::ref_ptr&lt;osg::Camera&gt; <a class="code" href="class_level_menu.html#aa8d4932301897a18e319ae60afe0f4f4">_camera</a>;
-<a name="l00039"></a><a class="code" href="class_level_menu.html#aff914d26a0e705dbdfc8909a652dde14">00039</a>         osg::PositionAttitudeTransform *<a class="code" href="class_level_menu.html#aff914d26a0e705dbdfc8909a652dde14">_menuPat</a>;
-<a name="l00040"></a><a class="code" href="class_level_menu.html#af1ac67816e64fc5d4d5165e81396d7ad">00040</a>     osg::PositionAttitudeTransform *<a class="code" href="class_level_menu.html#af1ac67816e64fc5d4d5165e81396d7ad">_itemsPat</a>;
-<a name="l00041"></a>00041     
-<a name="l00042"></a><a class="code" href="class_level_menu.html#ac5f630fa2977de11ea23f3a5e6d174f9">00042</a>     osg::ref_ptr&lt;osgText::Text&gt; <a class="code" href="class_level_menu.html#ac5f630fa2977de11ea23f3a5e6d174f9">_bestTimeText</a>;
-<a name="l00043"></a><a class="code" href="class_level_menu.html#ad778850103c5d2116af26a8cb9f33fb9">00043</a>     osg::ref_ptr&lt;osgText::Text&gt; <a class="code" href="class_level_menu.html#ad778850103c5d2116af26a8cb9f33fb9">_completionsText</a>;
-<a name="l00044"></a><a class="code" href="class_level_menu.html#a525e623d3e8eb1768f13fd3b2e25f911">00044</a>     osg::ref_ptr&lt;osgText::Text&gt; <a class="code" href="class_level_menu.html#a525e623d3e8eb1768f13fd3b2e25f911">_deathsText</a>;
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 <span class="keyword">public</span>:
-<a name="l00047"></a>00047         <a class="code" href="class_level_menu.html#a64c66281247ff14a6146293f79cdc571">LevelMenu</a>();
-<a name="l00048"></a>00048 
-<a name="l00049"></a>00049         <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#ac5d0e358be2ca3760f2fa75c4fcc5f1c">initializeCamera</a>();
-<a name="l00050"></a>00050     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#a8516d390c8967226a685a7ebb87f9e85">initializeSelector</a>();
-<a name="l00051"></a>00051     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#afd322e09d770004910a2f13cf77b3f5b">loadLevels</a>();
-<a name="l00052"></a>00052     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#a97290cdeb847da449011b67501e5626c">updateDetails</a>();
-<a name="l00053"></a>00053     
-<a name="l00054"></a>00054     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#a3797d03d382652f5b13c1a6417388871">selectPreviousItem</a>();
-<a name="l00055"></a>00055     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#a8d68a5b47000dd288df81aa747e0b48a">selectNextItem</a>();    
-<a name="l00056"></a>00056     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#a8bc73b62f7e966eaaf23aa40262d535f">runSelectedLevel</a>();
-<a name="l00057"></a>00057 
-<a name="l00058"></a><a class="code" href="class_level_menu.html#abd13dee69d259370af6760363bdacdce">00058</a>     osg::Camera *<a class="code" href="class_level_menu.html#abd13dee69d259370af6760363bdacdce">getCamera</a>() { <span class="keywordflow">return</span> <a class="code" href="class_level_menu.html#aa8d4932301897a18e319ae60afe0f4f4">_camera</a>; };    
-<a name="l00059"></a>00059 };
+<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;fstream&gt;</span>
+<a name="l00005"></a>00005 
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;osg/Geode&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;osg/Depth&gt;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;osg/Camera&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;osg/ShapeDrawable&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;osgViewer/Viewer&gt;</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;osg/Drawable&gt;</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &lt;osg/Texture2D&gt;</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;osg/PositionAttitudeTransform&gt;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;osg/ShapeDrawable&gt;</span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;osg/Drawable&gt;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;osg/Geometry&gt;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &lt;osg/Texture2D&gt;</span>
+<a name="l00018"></a>00018 <span class="preprocessor">#include &lt;osgDB/ReadFile&gt;</span>
+<a name="l00019"></a>00019 <span class="preprocessor">#include &lt;osgText/Text&gt;</span>
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021 <span class="preprocessor">#include &quot;<a class="code" href="rapidxml_8hpp.html" title="This file contains rapidxml parser and DOM implementation.">RapidXML/rapidxml.hpp</a>&quot;</span>
+<a name="l00022"></a>00022 <span class="preprocessor">#include &quot;<a class="code" href="rapidxml__iterators_8hpp.html" title="This file contains rapidxml iterators.">RapidXML/rapidxml_iterators.hpp</a>&quot;</span>
+<a name="l00023"></a>00023 <span class="preprocessor">#include &quot;<a class="code" href="rapidxml__utils_8hpp.html">RapidXML/rapidxml_utils.hpp</a>&quot;</span>
+<a name="l00024"></a>00024 
+<a name="l00025"></a>00025 <span class="preprocessor">#include &quot;<a class="code" href="_player_8h.html">Player.h</a>&quot;</span>
+<a name="l00026"></a>00026 <span class="preprocessor">#include &quot;<a class="code" href="_level_8h.html">Level.h</a>&quot;</span>
+<a name="l00027"></a>00027 
+<a name="l00028"></a><a class="code" href="_level_menu_8h.html#a04d46f28d25d5b97d577aa8ddc949fee">00028</a> <span class="preprocessor">#define MENU_FONT               &quot;fonts/arial.ttf&quot;</span>
+<a name="l00029"></a><a class="code" href="_level_menu_8h.html#a1db8c37dccfbeeec8b4eed7469fdeaa1">00029</a> <span class="preprocessor"></span><span class="preprocessor">#define MENU_MUSIC_FILE         &quot;resources/sound/48000_2chan.ogg&quot;</span>
+<a name="l00030"></a><a class="code" href="_level_menu_8h.html#a5983882e4b3795f0b213a3ce3f3b6701">00030</a> <span class="preprocessor"></span><span class="preprocessor">#define LEVEL_HEADER_TEXTURE  &quot;resources/textures/starjumper.jpg&quot;</span>
+<a name="l00031"></a><a class="code" href="_level_menu_8h.html#ad14e3a06b27a20669605ee4a4e6fabbc">00031</a> <span class="preprocessor"></span><span class="preprocessor">#define LEVEL_SELECTOR_TEXTURE  &quot;resources/textures/menu_background.png&quot;</span>
+<a name="l00032"></a><a class="code" href="_level_menu_8h.html#a0251df482deabbedd5dc74ebfa1deba4">00032</a> <span class="preprocessor"></span><span class="preprocessor">#define MENU_ITEM_HEIGHT        40</span>
+<a name="l00033"></a><a class="code" href="_level_menu_8h.html#afb0e498767d6f581ac38435c7c38feaa">00033</a> <span class="preprocessor"></span><span class="preprocessor">#define MENU_DETAIL_FONT_SIZE   25</span>
+<a name="l00034"></a><a class="code" href="_level_menu_8h.html#a86e87f7b5c745ecdcb9f7bc3dd53a1a8">00034</a> <span class="preprocessor"></span><span class="preprocessor">#define MENU_BACKGROUND_MODEL   &quot;resources/models/player_high.osg&quot;</span>
+<a name="l00035"></a>00035 <span class="preprocessor"></span>
+<a name="l00036"></a><a class="code" href="_level_menu_8h.html#a43bc8b3003fabbd25af76736f2f5de43">00036</a> <span class="preprocessor">#define MENU_CAMERA_HOME_EYE     osg::Vec3(0.0, 1.0, 2.0)</span>
+<a name="l00037"></a><a class="code" href="_level_menu_8h.html#a51949cb7d7e3a47eb3ad38c189b8e0be">00037</a> <span class="preprocessor"></span><span class="preprocessor">#define MENU_CAMERA_HOME_CENTER  osg::Vec3(0.0, 10.0, 0.0)</span>
+<a name="l00038"></a><a class="code" href="_level_menu_8h.html#af40fc852a33eea96d780e9213889b6fc">00038</a> <span class="preprocessor"></span><span class="preprocessor">#define MENU_CAMERA_HOME_UP      osg::Vec3(0.0, -10.0, 5.0)</span>
+<a name="l00039"></a>00039 <span class="preprocessor"></span>
+<a name="l00040"></a><a class="code" href="_level_menu_8h.html#a6bec167d6a3a9987974b8bf3603d16d8">00040</a> <span class="preprocessor">#define LEVEL_OVERVIEW_FILE     &quot;resources/levels/overview.xml&quot;</span>
+<a name="l00041"></a>00041 <span class="preprocessor"></span>
+<a name="l00042"></a>00042 <span class="keyword">class </span><a class="code" href="class_menu_keyboard_handler.html">MenuKeyboardHandler</a>;
+<a name="l00043"></a>00043 
+<a name="l00044"></a><a class="code" href="class_level_menu.html">00044</a> <span class="keyword">class </span><a class="code" href="class_level_menu.html">LevelMenu</a> : <span class="keyword">public</span> osg::Group
+<a name="l00045"></a>00045 {
+<a name="l00046"></a>00046 <span class="keyword">private</span>:
+<a name="l00047"></a><a class="code" href="class_level_menu.html#adfa32f1fb556a961718ebef81411d81d">00047</a>     std::vector&lt;std::map&lt;std::string, std::string&gt; &gt; <a class="code" href="class_level_menu.html#adfa32f1fb556a961718ebef81411d81d">_items</a>;
+<a name="l00048"></a><a class="code" href="class_level_menu.html#a4f4629b863f39d81cdc0cd63fbca6dc9">00048</a>     <span class="keywordtype">int</span> <a class="code" href="class_level_menu.html#a4f4629b863f39d81cdc0cd63fbca6dc9">_currentItemIndex</a>;
+<a name="l00049"></a>00049 
+<a name="l00050"></a><a class="code" href="class_level_menu.html#aa8d4932301897a18e319ae60afe0f4f4">00050</a>         osg::ref_ptr&lt;osg::Camera&gt; <a class="code" href="class_level_menu.html#aa8d4932301897a18e319ae60afe0f4f4">_camera</a>;
+<a name="l00051"></a><a class="code" href="class_level_menu.html#aff914d26a0e705dbdfc8909a652dde14">00051</a>         osg::PositionAttitudeTransform *<a class="code" href="class_level_menu.html#aff914d26a0e705dbdfc8909a652dde14">_menuPat</a>;
+<a name="l00052"></a><a class="code" href="class_level_menu.html#af1ac67816e64fc5d4d5165e81396d7ad">00052</a>     osg::PositionAttitudeTransform *<a class="code" href="class_level_menu.html#af1ac67816e64fc5d4d5165e81396d7ad">_itemsPat</a>;
+<a name="l00053"></a><a class="code" href="class_level_menu.html#a7ce19044a8745df30a2e167c7263416e">00053</a>     osg::MatrixTransform *<a class="code" href="class_level_menu.html#a7ce19044a8745df30a2e167c7263416e">_background</a>;
+<a name="l00054"></a>00054         
+<a name="l00055"></a><a class="code" href="class_level_menu.html#ac5f630fa2977de11ea23f3a5e6d174f9">00055</a>     osg::ref_ptr&lt;osgText::Text&gt; <a class="code" href="class_level_menu.html#ac5f630fa2977de11ea23f3a5e6d174f9">_bestTimeText</a>;
+<a name="l00056"></a><a class="code" href="class_level_menu.html#ad778850103c5d2116af26a8cb9f33fb9">00056</a>     osg::ref_ptr&lt;osgText::Text&gt; <a class="code" href="class_level_menu.html#ad778850103c5d2116af26a8cb9f33fb9">_completionsText</a>;
+<a name="l00057"></a><a class="code" href="class_level_menu.html#a525e623d3e8eb1768f13fd3b2e25f911">00057</a>     osg::ref_ptr&lt;osgText::Text&gt; <a class="code" href="class_level_menu.html#a525e623d3e8eb1768f13fd3b2e25f911">_deathsText</a>;
+<a name="l00058"></a>00058     
+<a name="l00059"></a><a class="code" href="class_level_menu.html#a48d2240e3521bf31521967faee5911d8">00059</a>     <a class="code" href="class_menu_keyboard_handler.html">MenuKeyboardHandler</a> *<a class="code" href="class_level_menu.html#a48d2240e3521bf31521967faee5911d8">_keyboardHandler</a>;
+<a name="l00060"></a><a class="code" href="class_level_menu.html#a661f051c74b90016d9288fb1ea0221e6">00060</a>     <a class="code" href="class_level.html">Level</a> *<a class="code" href="class_level_menu.html#a661f051c74b90016d9288fb1ea0221e6">_currentLevel</a>;
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062 <span class="keyword">public</span>:
+<a name="l00063"></a>00063         <a class="code" href="class_level_menu.html#a64c66281247ff14a6146293f79cdc571">LevelMenu</a>();
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065         <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#ac5d0e358be2ca3760f2fa75c4fcc5f1c">initializeCamera</a>();
+<a name="l00066"></a>00066     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#addf717c4f9f554eafc823dd5c936c380">initializeBackgroundAnimation</a>();
+<a name="l00067"></a>00067     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#a9bae7ae8cf412f5a95bfae6148aa8dfb">initializeHeader</a>();
+<a name="l00068"></a>00068     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#a8516d390c8967226a685a7ebb87f9e85">initializeSelector</a>();
+<a name="l00069"></a>00069     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#afd322e09d770004910a2f13cf77b3f5b">loadLevels</a>();
+<a name="l00070"></a>00070     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#a97290cdeb847da449011b67501e5626c">updateDetails</a>();
+<a name="l00071"></a>00071     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#ae622d934d91d104b62d7fd533cae97fb">resetCamera</a>();
+<a name="l00072"></a>00072     
+<a name="l00073"></a>00073     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#a3797d03d382652f5b13c1a6417388871">selectPreviousItem</a>();
+<a name="l00074"></a>00074     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#a8d68a5b47000dd288df81aa747e0b48a">selectNextItem</a>();    
+<a name="l00075"></a>00075     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#a8bc73b62f7e966eaaf23aa40262d535f">runSelectedLevel</a>();
+<a name="l00076"></a>00076     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#ab2c7b16bf75c1657f8a76e0b295f0dba">returnFromLevel</a>();
+<a name="l00077"></a>00077     <span class="keywordtype">void</span> <a class="code" href="class_level_menu.html#a04c7983b892fab94e09f9c8991a4ac00">writeBackLevelFile</a>();  
+<a name="l00078"></a>00078     
+<a name="l00079"></a><a class="code" href="class_level_menu.html#ae5d8b5e14dccd5e0be4ee9fea27c685f">00079</a>     osg::MatrixTransform *<a class="code" href="class_level_menu.html#ae5d8b5e14dccd5e0be4ee9fea27c685f">getBackground</a>() { <span class="keywordflow">return</span> <a class="code" href="class_level_menu.html#a7ce19044a8745df30a2e167c7263416e">_background</a>; }
+<a name="l00080"></a>00080 
+<a name="l00081"></a><a class="code" href="class_level_menu.html#abd13dee69d259370af6760363bdacdce">00081</a>     osg::Camera *<a class="code" href="class_level_menu.html#abd13dee69d259370af6760363bdacdce">getCamera</a>() { <span class="keywordflow">return</span> <a class="code" href="class_level_menu.html#aa8d4932301897a18e319ae60afe0f4f4">_camera</a>; };  
+<a name="l00082"></a><a class="code" href="class_level_menu.html#a88e3bf8b3872f483c162d264d625c825">00082</a>     <span class="keywordtype">bool</span> <a class="code" href="class_level_menu.html#a88e3bf8b3872f483c162d264d625c825">levelRunning</a>() { <span class="keywordflow">return</span> <a class="code" href="class_level_menu.html#a661f051c74b90016d9288fb1ea0221e6">_currentLevel</a> != NULL; }
+<a name="l00083"></a><a class="code" href="class_level_menu.html#a088ab8589eef660be6353f1870993cf7">00083</a>     <a class="code" href="class_level.html">Level</a> *<a class="code" href="class_level_menu.html#a088ab8589eef660be6353f1870993cf7">getCurrentLevel</a>() { <span class="keywordflow">return</span> <a class="code" href="class_level_menu.html#a661f051c74b90016d9288fb1ea0221e6">_currentLevel</a>; }
+<a name="l00084"></a>00084 };
+<a name="l00085"></a>00085 
+<a name="l00086"></a><a class="code" href="class_level_menu_updater.html">00086</a> <span class="keyword">class </span><a class="code" href="class_level_menu_updater.html">LevelMenuUpdater</a> : <span class="keyword">public</span> osg::NodeCallback
+<a name="l00087"></a>00087 {
+<a name="l00088"></a>00088 <span class="keyword">private</span>:
+<a name="l00089"></a><a class="code" href="class_level_menu_updater.html#ad084104dd4db592983255958c5cf7b3c">00089</a>     <a class="code" href="class_level_menu.html">LevelMenu</a> *<a class="code" href="class_level_menu_updater.html#ad084104dd4db592983255958c5cf7b3c">_menu</a>;
+<a name="l00090"></a>00090     
+<a name="l00091"></a>00091 <span class="keyword">public</span>:
+<a name="l00092"></a>00092         <a class="code" href="class_level_menu_updater.html#afb4aeb0489d752d9add768edc37ab56f">LevelMenuUpdater</a>(<a class="code" href="class_level_menu.html">LevelMenu</a> *menu);
+<a name="l00093"></a>00093         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_level_menu_updater.html#ac422e17b93fccf13a6d3d7f962c92584">operator()</a>(osg::Node *node, osg::NodeVisitor *nv);
+<a name="l00094"></a>00094 };
 </pre></div></div>
 </div>
 <!--- window showing the filter options -->
@@ -173,7 +208,7 @@ function toggleVisibility(linkObj) {
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Mar 31 2011 18:04:50 for Starjumper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 1 2011 00:16:22 for Starjumper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

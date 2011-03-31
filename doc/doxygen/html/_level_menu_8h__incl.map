@@ -1,18 +1,19 @@
 <map id="G" name="G">
-<area shape="rect" id="node25" href="$rapidxml_8hpp.html" title="This file contains rapidxml parser and DOM implementation." alt="" coords="79,238,247,266"/>
-<area shape="rect" id="node35" href="$rapidxml__iterators_8hpp.html" title="This file contains rapidxml iterators." alt="" coords="95,161,322,189"/>
-<area shape="rect" id="node38" href="$rapidxml__utils_8hpp.html" title="RapidXML/rapidxml_utils.hpp" alt="" coords="397,161,597,189"/>
-<area shape="rect" id="node49" href="$_level_8h.html" title="Level.h" alt="" coords="1802,83,1869,111"/>
-<area shape="rect" id="node69" href="$types_8h.html" title="types.h" alt="" coords="2526,238,2593,266"/>
-<area shape="rect" id="node71" href="$_level_keyboard_handler_8h.html" title="LevelKeyboardHandler.h" alt="" coords="2742,161,2915,189"/>
-<area shape="rect" id="node76" href="$_player_8h.html" title="Player.h" alt="" coords="2191,238,2261,266"/>
-<area shape="rect" id="node102" href="$_player_updater_8h.html" title="PlayerUpdater.h" alt="" coords="3041,161,3161,189"/>
-<area shape="rect" id="node117" href="$_sound_8h.html" title="Sound.h" alt="" coords="3357,238,3429,266"/>
-<area shape="rect" id="node119" href="$_lazy_camera_manipulator_8h.html" title="LazyCameraManipulator.h" alt="" coords="1518,161,1697,189"/>
-<area shape="rect" id="node121" href="$_cuboid_8h.html" title="Cuboid.h" alt="" coords="873,161,950,189"/>
-<area shape="rect" id="node128" href="$_head_up_display_8h.html" title="HeadUpDisplay.h" alt="" coords="1366,161,1494,189"/>
-<area shape="rect" id="node139" href="$_sky_8h.html" title="Sky.h" alt="" coords="1185,161,1241,189"/>
-<area shape="rect" id="node87" href="$_kinematic_character_controller_8h.html" title="KinematicCharacterController.h" alt="" coords="2562,315,2773,343"/>
-<area shape="rect" id="node92" href="$_player_state_8h.html" title="PlayerState.h" alt="" coords="2330,315,2437,343"/>
-<area shape="rect" id="node96" href="$_particle_effect_factory_8h.html" title="ParticleEffectFactory.h" alt="" coords="1917,315,2079,343"/>
+<area shape="rect" id="node29" href="$rapidxml_8hpp.html" title="This file contains rapidxml parser and DOM implementation." alt="" coords="191,238,359,266"/>
+<area shape="rect" id="node39" href="$rapidxml__iterators_8hpp.html" title="This file contains rapidxml iterators." alt="" coords="144,161,371,189"/>
+<area shape="rect" id="node42" href="$rapidxml__utils_8hpp.html" title="RapidXML/rapidxml_utils.hpp" alt="" coords="445,161,645,189"/>
+<area shape="rect" id="node52" href="$_player_8h.html" title="Player.h" alt="" coords="1327,238,1396,266"/>
+<area shape="rect" id="node81" href="$_level_8h.html" title="Level.h" alt="" coords="1464,83,1531,111"/>
+<area shape="rect" id="node65" href="$_kinematic_character_controller_8h.html" title="KinematicCharacterController.h" alt="" coords="1399,315,1609,343"/>
+<area shape="rect" id="node71" href="$_player_state_8h.html" title="PlayerState.h" alt="" coords="1633,315,1740,343"/>
+<area shape="rect" id="node76" href="$_particle_effect_factory_8h.html" title="ParticleEffectFactory.h" alt="" coords="1967,315,2129,343"/>
+<area shape="rect" id="node102" href="$types_8h.html" title="types.h" alt="" coords="764,238,831,266"/>
+<area shape="rect" id="node104" href="$_level_keyboard_handler_8h.html" title="LevelKeyboardHandler.h" alt="" coords="923,161,1096,189"/>
+<area shape="rect" id="node109" href="$_player_updater_8h.html" title="PlayerUpdater.h" alt="" coords="1171,161,1291,189"/>
+<area shape="rect" id="node118" href="$_sound_8h.html" title="Sound.h" alt="" coords="855,238,927,266"/>
+<area shape="rect" id="node120" href="$_lazy_camera_manipulator_8h.html" title="LazyCameraManipulator.h" alt="" coords="2107,161,2285,189"/>
+<area shape="rect" id="node122" href="$_cuboid_8h.html" title="Cuboid.h" alt="" coords="2309,161,2387,189"/>
+<area shape="rect" id="node129" href="$_collision_model_8h.html" title="CollisionModel.h" alt="" coords="1153,238,1276,266"/>
+<area shape="rect" id="node137" href="$_head_up_display_8h.html" title="HeadUpDisplay.h" alt="" coords="3165,161,3293,189"/>
+<area shape="rect" id="node147" href="$_sky_8h.html" title="Sky.h" alt="" coords="2984,161,3040,189"/>
 </map>

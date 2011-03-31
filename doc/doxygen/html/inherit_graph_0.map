@@ -1,8 +1,12 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$class_collision_object.html" title="CollisionObject" alt="" coords="5,30,123,58"/>
-<area shape="rect" id="node3" href="$class_cuboid.html" title="Cuboid" alt="" coords="171,30,237,58"/>
-<area shape="rect" id="node5" href="$class_default_cuboid.html" title="DefaultCuboid" alt="" coords="292,5,401,33"/>
-<area shape="rect" id="node7" href="$class_textured_cuboid.html" title="TexturedCuboid" alt="" coords="285,55,408,83"/>
-<area shape="rect" id="node9" href="$class_acceleration_cuboid.html" title="AccelerationCuboid" alt="" coords="457,30,599,58"/>
-<area shape="rect" id="node11" href="$class_deceleration_cuboid.html" title="DecelerationCuboid" alt="" coords="456,81,600,109"/>
+<area shape="rect" id="node1" href="$class_collision_object.html" title="CollisionObject" alt="" coords="5,119,123,147"/>
+<area shape="rect" id="node3" href="$class_collision_model.html" title="CollisionModel" alt="" coords="171,81,283,109"/>
+<area shape="rect" id="node11" href="$class_cuboid.html" title="Cuboid" alt="" coords="193,157,260,185"/>
+<area shape="rect" id="node5" href="$class_cuboid_tunnel.html" title="CuboidTunnel" alt="" coords="339,5,445,33"/>
+<area shape="rect" id="node7" href="$class_finish.html" title="Finish" alt="" coords="364,55,420,83"/>
+<area shape="rect" id="node9" href="$class_tunnel.html" title="Tunnel" alt="" coords="361,106,423,134"/>
+<area shape="rect" id="node13" href="$class_default_cuboid.html" title="DefaultCuboid" alt="" coords="337,157,447,185"/>
+<area shape="rect" id="node15" href="$class_textured_cuboid.html" title="TexturedCuboid" alt="" coords="331,207,453,235"/>
+<area shape="rect" id="node17" href="$class_acceleration_cuboid.html" title="AccelerationCuboid" alt="" coords="503,182,644,210"/>
+<area shape="rect" id="node19" href="$class_deceleration_cuboid.html" title="DecelerationCuboid" alt="" coords="501,233,645,261"/>
 </map>

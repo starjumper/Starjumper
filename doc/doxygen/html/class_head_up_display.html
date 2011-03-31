@@ -114,15 +114,20 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#aff30e06277a65970f10fbe40b26731fb">initializeCamera</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#af0b4af24b586a049d7ef25ead5d9840d">initializeSpeedometer</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#aa84f97e6c3cac2e7905b118674b7721c">initializeTimer</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#a54affcf626d2d6a07010352799062cc5">stopTimer</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#ab5addd195ef821d0b4d7ebb23d706c5a">resetTimer</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#a3a91e9174fa3ef6cee44aaf545c9810a">updateSpeedometer</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#a8a33426d58db836cae56646b11e2cf13">updateTimer</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#abf4ec0507f2738f006d69e8c0119b0a1">getTime</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#a864969aa7940e90e1f19aa89e8f1ed39">getFinalTime</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">osg::ref_ptr&lt; osg::Camera &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#aaeb12b3c1b5d44b212707695ffda0fbd">_camera</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">osg::Geode *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#a25ec173c1a79a66df720d1d68b1ccdc9">_timeNode</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">osgText::Text *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#ae58d457786122b4e96fa39421908aae2">_timer</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#a6ada421fc001ca7dd9d41c987ba6d7d3">_isTiming</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct timeb&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#adae0594e3d2d13ab3ad005e40edbb99d">_startTime</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#ac5d49d69319ab7df39d609194182346b">_finalTime</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">osg::Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#ae461f5c1f4aa1ea2132046d610a27c85">_speedBarNode</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">osg::PositionAttitudeTransform *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#a271015afedc119f7f135e7f1e8393291">_hudPat</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">osg::PositionAttitudeTransform *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_head_up_display.html#a0cb13738c022f467ffb7845cd0a7d9fa">_speedPat</a></td></tr>
@@ -154,6 +159,38 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">osg::Camera * HeadUpDisplay::getCamera </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a864969aa7940e90e1f19aa89e8f1ed39"></a><!-- doxytag: member="HeadUpDisplay::getFinalTime" ref="a864969aa7940e90e1f19aa89e8f1ed39" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">time_t HeadUpDisplay::getFinalTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abf4ec0507f2738f006d69e8c0119b0a1"></a><!-- doxytag: member="HeadUpDisplay::getTime" ref="abf4ec0507f2738f006d69e8c0119b0a1" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">time_t HeadUpDisplay::getTime </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -228,6 +265,22 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a54affcf626d2d6a07010352799062cc5"></a><!-- doxytag: member="HeadUpDisplay::stopTimer" ref="a54affcf626d2d6a07010352799062cc5" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HeadUpDisplay::stopTimer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a3a91e9174fa3ef6cee44aaf545c9810a"></a><!-- doxytag: member="HeadUpDisplay::updateSpeedometer" ref="a3a91e9174fa3ef6cee44aaf545c9810a" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -274,12 +327,38 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ac5d49d69319ab7df39d609194182346b"></a><!-- doxytag: member="HeadUpDisplay::_finalTime" ref="ac5d49d69319ab7df39d609194182346b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">time_t <a class="el" href="class_head_up_display.html#ac5d49d69319ab7df39d609194182346b">HeadUpDisplay::_finalTime</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a271015afedc119f7f135e7f1e8393291"></a><!-- doxytag: member="HeadUpDisplay::_hudPat" ref="a271015afedc119f7f135e7f1e8393291" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">osg::PositionAttitudeTransform* <a class="el" href="class_head_up_display.html#a271015afedc119f7f135e7f1e8393291">HeadUpDisplay::_hudPat</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6ada421fc001ca7dd9d41c987ba6d7d3"></a><!-- doxytag: member="HeadUpDisplay::_isTiming" ref="a6ada421fc001ca7dd9d41c987ba6d7d3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_head_up_display.html#a6ada421fc001ca7dd9d41c987ba6d7d3">HeadUpDisplay::_isTiming</a><code> [private]</code></td>
         </tr>
       </table>
 </div>
@@ -410,7 +489,7 @@ Private Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Mar 31 2011 18:04:50 for Starjumper by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 1 2011 00:16:22 for Starjumper by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>
