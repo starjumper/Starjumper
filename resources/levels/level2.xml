@@ -97,8 +97,8 @@
 		<color x="0.03" y="0.8" z="0.35" />
 	</cuboid>
 	
-	<goal>
+	<finish>
 		<position x="7.5" y="1230" z="-24" />
-	</goal>
+	</finish>
 	
 </map>

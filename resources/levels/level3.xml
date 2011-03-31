@@ -149,8 +149,8 @@
 		<color x="0.03" y="0.8" z="0.35" />
 	</cuboid>
 
-	<goal>
+	<finish>
 		<position x="0" y="1330" z="-25" />
-	</goal>
+	</finish>
 
 </map>
