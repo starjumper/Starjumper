@@ -91,8 +91,15 @@ void Level::loadMapFromFile(const std::string &mapfile)
             osg::Vec3 from = getVectorFromXMLNode("position", *it);
             osg::Vec3 size = getVectorFromXMLNode("size", *it);
             
-            collisionObject = new Cuboid(from, size);
-                     
+            if(it->first_attribute("type") == 0)
+                collisionObject = new DefaultCuboid(from, size);
+            else if(std::string(it->first_attribute("type")->value()) == "accelerate")
+                collisionObject = new AccelerationCuboid(from, size);
+            else if(std::string(it->first_attribute("type")->value()) == "decelerate")
+                collisionObject = new DecelerationCuboid(from, size);
+            else
+                collisionObject = new DefaultCuboid(from, size);            
+
             int yBucketIndex = (int)((from.y() + size.y()) / 20.0f);
          
             while((int)_deadlyAltitudes.size() <= yBucketIndex)
@@ -181,7 +188,7 @@ osg::Vec3 Level::getVectorFromXMLNode(const std::string &name, const rapidxml::x
 
 LevelUpdater::LevelUpdater(Level *level) :
     _level(level),
-    _previousStepTime(0.0f)
+    _previousStepTime(viewer.getFrameStamp()->getSimulationTime())
 {
 }
 
@@ -202,7 +209,6 @@ void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
         _level->getPhysicsWorld()->stepSimulation(currentStepTime - _previousStepTime, 0);        
         
     _previousStepTime = currentStepTime;
-    
     
     // player dies when falling to low
     {
