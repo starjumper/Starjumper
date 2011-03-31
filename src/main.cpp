@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     viewer.getCamera()->setClearMask(GL_DEPTH_BUFFER_BIT);
 
 	// uncomment to use window mode
-	//viewer.setUpViewInWindow(0, 0, 800, 600, 0);
+	//viewer.setUpViewInWindow(40, 40, 1000, 600, 0);
     
     Sound::initSoundManager();
     
