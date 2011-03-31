@@ -2,7 +2,8 @@
 
 extern osgViewer::Viewer viewer;
 
-Level::Level(const std::string &mapfile)
+Level::Level(const std::string &mapfile) :
+    _numDeaths(0)
 {
     _shadowedScene = new osgShadow::ShadowedScene;
     _shadowedScene->setReceivesShadowTraversalMask(RECEIVE_SHADOW_MASK);
@@ -11,7 +12,8 @@ Level::Level(const std::string &mapfile)
     	
     addChild(_shadowedScene);
 
-    addChild((new HeadUpDisplay())->getCamera());
+    _headUpDisplay = new HeadUpDisplay();
+    addChild(_headUpDisplay->getCamera());
     addChild((new Sky())->getCamera());
     
     initializePhysicsWorld();
@@ -53,6 +55,12 @@ Level::Level(const std::string &mapfile)
     initializeLighting();
     
     Sound::switchBackgroundMusic(LEVEL_MUSIC_FILE, "GameMusic");	
+}
+
+void Level::playerDied()
+{
+    _headUpDisplay->resetTimer();
+    _numDeaths++;
 }
 
 void Level::initializeLighting()
@@ -234,6 +242,16 @@ osg::Vec3 Level::getVectorFromXMLNode(const std::string &name, const rapidxml::x
     return osg::Vec3(x, y, z);   
 }
 
+HeadUpDisplay *Level::getHeadUpDisplay() const
+{
+    return _headUpDisplay;
+}
+
+size_t Level::getNumDeaths() const
+{
+    return _numDeaths;
+}
+
 ////////////// World updater for stepping //////////////
 
 LevelUpdater::LevelUpdater(Level *level) :
@@ -260,7 +278,7 @@ void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
         
     _previousStepTime = currentStepTime;
     
-    // player dies when falling to low
+    // player dies when falling too low
     {
         btVector3 position = Player::getInstance()->getController()->getGhostObject()->getWorldTransform().getOrigin();
         int yBucketIndex = (int)(position.y() / 20.0f);
@@ -275,6 +293,7 @@ void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
         {
             Player::getInstance()->resetPosition();
             ((LazyCameraManipulator *)viewer.getCameraManipulator())->resetCamera();
+            _level->playerDied();
         }
     }
     
