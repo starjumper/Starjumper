@@ -21,6 +21,9 @@ LevelMenu::LevelMenu() :
     _currentItemIndex = 0;
         
     Sound::switchBackgroundMusic(MENU_MUSIC_FILE, "MenuMusic");
+    
+    
+    setUpdateCallback(new LevelMenuUpdater());
 }
 
 void LevelMenu::initializeBackground()
@@ -38,10 +41,7 @@ void LevelMenu::initializeBackground()
 	transMatrix->addChild(_background);
 
 	transMatrix->setMatrix(osg::Matrix::translate(-2.0, 20.0, -5.0) * osg::Matrix::scale(1.0, 1.0, 1.0));
-/*
-	MenuUpdater* menuUpdater = new MenuUpdater(this);
-	_background->setUpdateCallback(menuUpdater);
-*/
+
 	addChild(transMatrix);
 }
 
@@ -58,6 +58,12 @@ void LevelMenu::initializeCamera()
 	_camera->setRenderOrder(osg::Camera::PRE_RENDER);
 	_camera->addChild(_menuPat);
     addChild(_camera);
+}
+
+void LevelMenu::resetCamera()
+{
+    viewer.setCameraManipulator(NULL); 
+    viewer.getCamera()->setViewMatrixAsLookAt(MENU_CAMERA_HOME_EYE, MENU_CAMERA_HOME_CENTER, MENU_CAMERA_HOME_UP);
 }
 
 void LevelMenu::initializeSelector()
@@ -256,4 +262,20 @@ void LevelMenu::returnFromLevel()
     _currentLevel = NULL;
     
     Player::getInstance()->reset();
+}
+
+LevelMenuUpdater::LevelMenuUpdater()
+{
+
+}
+
+void LevelMenuUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
+{
+    LevelMenu *menu = dynamic_cast<LevelMenu *>(node);
+    
+    if(!menu->levelRunning())
+    {
+        menu->resetCamera();
+	    menu->getBackground()->postMult(osg::Matrix::rotate(osg::inDegrees(0.5f),0.0f,0.0f,1.0f));
+    }
 }

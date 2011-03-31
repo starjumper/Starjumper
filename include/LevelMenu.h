@@ -61,12 +61,22 @@ public:
     void initializeSelector();
     void loadLevels();
     void updateDetails();
+    void resetCamera();
     
     void selectPreviousItem();
     void selectNextItem();    
     void runSelectedLevel();
     void returnFromLevel();
+    
+    osg::MatrixTransform *getBackground() { return _background; }
 
     osg::Camera *getCamera() { return _camera; };  
     bool levelRunning() { return _currentLevel != NULL; }
+};
+
+class LevelMenuUpdater : public osg::NodeCallback
+{
+public:
+	LevelMenuUpdater();
+	virtual void operator()(osg::Node *node, osg::NodeVisitor *nv);
 };
