@@ -3,5 +3,4 @@
 	<road name="Road 1" filename="resources/levels/level1.xml" besttime="" completions="0" deaths="0" />
 	<road name="Road 2" filename="resources/levels/level2.xml" besttime="" completions="0" deaths="0" />
 	<road name="Road 3" filename="resources/levels/level3.xml" besttime="" completions="0" deaths="0" />
-	<road name="Road 4" filename="resources/levels/level4.xml" besttime="" completions="0" deaths="0" />
 </world>

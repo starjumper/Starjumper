@@ -98,10 +98,8 @@ osg::Vec3 PlayerUpdater::calculateNextPosition()
             // player is on the floor, apply special attributes from ground to player
             CollisionObject *groundObject = (CollisionObject *)playerController->getGroundObject();
             groundObject->collide();
-        }
-        
+        }   
     }
-    
     
     direction += btVector3(0, playerState->getSpeed(), 0);
     playerController->setWalkDirection(direction);    
@@ -110,7 +108,7 @@ osg::Vec3 PlayerUpdater::calculateNextPosition()
 	if(playerState->requestJump() && playerController->canJump())
 	{
         playerController->jump();
-//		Sound::playSampleOnce(JUMP_SAMPLE);
+		Sound::playSampleOnce(JUMP_SAMPLE);
 	}
 
     btVector3 position = playerController->getGhostObject()->getWorldTransform().getOrigin();
