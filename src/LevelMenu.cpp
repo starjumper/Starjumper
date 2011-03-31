@@ -16,7 +16,8 @@ LevelMenu::LevelMenu() :
     viewer.addEventHandler(_keyboardHandler);
 
 	initializeCamera();
-    initializeBackground();
+    initializeHeader();
+    initializeBackgroundAnimation();
     initializeSelector();
     loadLevels();
     updateDetails();
@@ -25,13 +26,67 @@ LevelMenu::LevelMenu() :
         
     Sound::switchBackgroundMusic(MENU_MUSIC_FILE, "MenuMusic");
     
-    
     viewer.getCamera()->setUpdateCallback(new LevelMenuUpdater(this));
 }
 
-void LevelMenu::initializeBackground()
+void LevelMenu::initializeHeader()
+{
+    osg::PositionAttitudeTransform *headerPat = new osg::PositionAttitudeTransform();
+    osg::Geode *headerGeode = new osg::Geode();
+    osg::Geometry *textureDrawable = new osg::Geometry();
+    osg::Texture2D *texture;
+
+    osg::Vec3Array *vertices = new osg::Vec3Array();
+    {
+        vertices->push_back(osg::Vec3(0, 0, 0));
+        vertices->push_back(osg::Vec3(436, 0, 0));
+        vertices->push_back(osg::Vec3(436, 75, 0));
+        vertices->push_back(osg::Vec3(0, 75, 0));
+    }
+
+    textureDrawable->setVertexArray( vertices );
+
+    osg::DrawElementsUInt *face = new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
+    face->push_back(0);
+    face->push_back(1);
+    face->push_back(2);
+    face->push_back(3);
+    
+    textureDrawable->addPrimitiveSet(face);
+        
+    osg::Vec2Array* texcoords = new osg::Vec2Array(4);
+    {
+        (*texcoords)[0].set(0.0f, 0.0f);
+        (*texcoords)[1].set(1.0f, 0.0f); 
+        (*texcoords)[2].set(1.0f, 1.0f);
+        (*texcoords)[3].set(0.0f, 1.0f);
+
+        textureDrawable->setTexCoordArray(0, texcoords);
+    }
+             
+    texture = new osg::Texture2D;
+    texture->setDataVariance(osg::Object::DYNAMIC); 
+    texture->setWrap(osg::Texture::WRAP_S, osg::Texture::REPEAT); 
+    texture->setWrap(osg::Texture::WRAP_T, osg::Texture::REPEAT);
+
+    osg::StateSet* stateSet = new osg::StateSet();
+    stateSet->setTextureAttributeAndModes(0, texture, osg::StateAttribute::ON);
+    
+    textureDrawable->setStateSet(stateSet);
+    headerGeode->addDrawable(textureDrawable);
+    headerPat->addChild(headerGeode);
+    _menuPat->addChild(headerPat);
+    
+    headerPat->setPosition(osg::Vec3(100, viewer.getCamera()->getViewport()->height() - 125, -0.01)); 
+	
+    osg::Image *image = osgDB::readImageFile(LEVEL_HEADER_TEXTURE);
+    texture->setImage(image);
+}
+
+void LevelMenu::initializeBackgroundAnimation()
 {
 	osg::Node* rotModel = osgDB::readNodeFile(MENU_BACKGROUND_MODEL);
+
 	if(!rotModel)
 	{
 		throw std::runtime_error("Unable to load player model file!");
@@ -76,15 +131,15 @@ void LevelMenu::initializeSelector()
     osg::Geometry *textureDrawable = new osg::Geometry();
     osg::Texture2D *texture;
 
-    osg::Vec3Array *pyramidVertices = new osg::Vec3Array();
+    osg::Vec3Array *vertices = new osg::Vec3Array();
     {
-        pyramidVertices->push_back(osg::Vec3(0, 0, 0));
-        pyramidVertices->push_back(osg::Vec3(682, 0, 0));
-        pyramidVertices->push_back(osg::Vec3(682, 172, 0));
-        pyramidVertices->push_back(osg::Vec3(0, 172, 0));
+        vertices->push_back(osg::Vec3(0, 0, 0));
+        vertices->push_back(osg::Vec3(682, 0, 0));
+        vertices->push_back(osg::Vec3(682, 172, 0));
+        vertices->push_back(osg::Vec3(0, 172, 0));
     }
 
-    textureDrawable->setVertexArray( pyramidVertices );
+    textureDrawable->setVertexArray( vertices );
 
     osg::DrawElementsUInt *face = new osg::DrawElementsUInt(osg::PrimitiveSet::QUADS, 0);
     face->push_back(0);
@@ -117,7 +172,7 @@ void LevelMenu::initializeSelector()
     selectorPat->addChild(selectorGeode);
     _menuPat->addChild(selectorPat);
     
-    selectorPat->setPosition(osg::Vec3(viewer.getCamera()->getViewport()->width() - 1000, viewer.getCamera()->getViewport()->height() - 275, -0.01)); 
+    selectorPat->setPosition(osg::Vec3(viewer.getCamera()->getViewport()->width() - 900, viewer.getCamera()->getViewport()->height() - 325, -0.01)); 
 	
     osg::Image *image = osgDB::readImageFile(LEVEL_SELECTOR_TEXTURE);
     texture->setImage(image);
@@ -166,14 +221,14 @@ void LevelMenu::initializeSelector()
     }
     
 
-    detailsPat->setPosition(osg::Vec3(viewer.getCamera()->getViewport()->width() - 960, viewer.getCamera()->getViewport()->height() - 120, 0));
+    detailsPat->setPosition(osg::Vec3(viewer.getCamera()->getViewport()->width() - 860, viewer.getCamera()->getViewport()->height() - 170, 0));
     _menuPat->addChild(detailsPat);
 }
 
 void LevelMenu::loadLevels()
 {
     _itemsPat = new osg::PositionAttitudeTransform();
-	_itemsPat->setPosition(osg::Vec3(viewer.getCamera()->getViewport()->width() - 500, viewer.getCamera()->getViewport()->height() - 200, 0)); 
+	_itemsPat->setPosition(osg::Vec3(viewer.getCamera()->getViewport()->width() - 400, viewer.getCamera()->getViewport()->height() - 250, 0)); 
     
     // load XML document
     rapidxml::file<> mf(LEVEL_OVERVIEW_FILE);

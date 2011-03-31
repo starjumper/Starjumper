@@ -96,5 +96,11 @@ osg::Matrixd LazyCameraManipulator::getInverseMatrix() const
 void LazyCameraManipulator::resetCamera()
 {
     _firstRun = true;
+    _fadeOut = false;
+}
+
+void LazyCameraManipulator::fadeOut()
+{
+    _fadeOut = true;
 }
 
