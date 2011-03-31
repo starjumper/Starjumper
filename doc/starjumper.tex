@@ -51,9 +51,9 @@ bremsen, lenken und springen. Die folgende Tabelle zeigt die in-game Tastaturbel
 	\end{center}
 	\caption{Tastaturbelegung}
 \end{table}
-\noindent Dar\"uber hinaus kann per \textbf{Escape} jederzeit aus dem Spiel in das Men\"u
+\noindent Dar\"uber hinaus kann per \texttt{Escape} jederzeit aus dem Spiel in das Men\"u
 bzw. in die jeweils n\"achsth\"ohere Ebene in der Men\"uhierarchie gewechselt werden. Im
-Hauptmen\"u beendet ein Druck auf \textbf{Escape} das Programm.\\
+Hauptmen\"u beendet ein Druck auf \texttt{Escape} das Programm.\\
 Die Navigation in den Men\"us erfolgt mithilfe der Maus.
 
 
@@ -65,48 +65,48 @@ Im Folgenden sollen nun die wichtigsten architektonischen Bestandteile von Starj
 erl\"autert werden. 
 
 \subsection{GameManager}
-Der \textbf{GameManager} bildet die oberste Instanz des Spiels. Er verwaltet prim\"ar den \textbf{Viewer}, der f\"ur das
-Rendering des Szenengraphen verantwortlich ist, sowie die Szenengraphen (in Form von \textbf{RenderingInstance}
-Objekten), zwischen denen er dynamisch umschalten kann. Die Klasse \textbf{RenderingInstance} ist ein
-Wrapper f\"ur Szenengraphen und dient als abstrakte Oberklasse f\"ur u.a. \textbf{Game} und \textbf{Menu}, die
+Der \texttt{GameManager} bildet die oberste Instanz des Spiels. Er verwaltet prim\"ar den \texttt{Viewer}, der f\"ur das
+Rendering des Szenengraphen verantwortlich ist, sowie die Szenengraphen (in Form von \texttt{RenderingInstance}
+Objekten), zwischen denen er dynamisch umschalten kann. Die Klasse \texttt{RenderingInstance} ist ein
+Wrapper f\"ur Szenengraphen und dient als abstrakte Oberklasse f\"ur u.a. \texttt{Game} und \texttt{Menu}, die
 sp\"ater erl\"autert werden.\\
-Dar\"uber hinaus implementiert der \textbf{GameManager} \"ubergeordnete Spiellogik wie das Starten des Spiels,
+Dar\"uber hinaus implementiert der \texttt{GameManager} \"ubergeordnete Spiellogik wie das Starten des Spiels,
 Beenden, Erstellen und Aufrufen von Men\"us, sowie die Bereitstellung von Callback-Funktionen f\"ur
 die Men\"us. Ein \"ubergeordneter Keyboardhandler sorgt f\"ur die globale Logik der Escape Taste.
 
 \subsection{Menu}
-Die Aufgabe der Klasse \textbf{Menu} ist das Erstellen eines Men\"us mit klickbaren Textelementen. Diese
-werden als Callback auf entsprechende Methoden des \textbf{GameManagers} gemappt. Zur Anzeige der Men\"ueintr\"age
+Die Aufgabe der Klasse \texttt{Menu} ist das Erstellen eines Men\"us mit klickbaren Textelementen. Diese
+werden als Callback auf entsprechende Methoden des \texttt{GameManagers} gemappt. Zur Anzeige der Men\"ueintr\"age
 kommt das Modul osgWidget zum Einsatz.
 
 \subsection{Game}
-Die von \textbf{RenderingInstance} erbende Klasse \textbf{Game} beinhaltet die zentrale Spiellogik. Von hier aus werden die
-f\"ur das Spiel ben\"otigten Elemente wie etwa \textbf{HeadUpDisplay}, \textbf{Player} und \textbf{Level} erzeugt und verwaltet,
+Die von \texttt{RenderingInstance} erbende Klasse \texttt{Game} beinhaltet die zentrale Spiellogik. Von hier aus werden die
+f\"ur das Spiel ben\"otigten Elemente wie etwa \texttt{HeadUpDisplay}, \texttt{Player} und \texttt{Level} erzeugt und verwaltet,
 sowie der schlu\ss endlich zu rendernde Szenengraph generiert.\\
-Neben den f\"ur OpenSceneGraph wichtigen Komponenten verwaltet \textbf{Game} auch die Bullet Physics World und sorgt
-f\"ur das OSG-synchrone Stepping derselben mittels eines NodeCallbacks namens \textbf{WorldUpdater}.
+Neben den f\"ur OpenSceneGraph wichtigen Komponenten verwaltet \texttt{Game} auch die Bullet Physics World und sorgt
+f\"ur das OSG-synchrone Stepping derselben mittels eines NodeCallbacks namens \texttt{WorldUpdater}.
 
 \subsection{Level}
 Starjumper verwendet ein einfaches XML-Format f\"ur die Beschreibung der Levels. F\"ur das Parsen einer
-solchen Leveldatei und dem anschlie\ss enden Umwandeln in OSG-kompatible Form zeichnet \textbf{Level} verantwortlich.\\
-Derzeit m\"ogliche Elemente eines Levels sind Quader, Tunnel und das Ziel, ensprechend erzeugt \textbf{Level}
-jeweils eine Instanz der Klasse \textbf{Cuboid}, \textbf{Tunnel} oder \textbf{Goal} und f\"ugt sie in einer osg::Group zusammen.\\
+solchen Leveldatei und dem anschlie\ss enden Umwandeln in OSG-kompatible Form zeichnet \texttt{Level} verantwortlich.\\
+Derzeit m\"ogliche Elemente eines Levels sind Quader, Tunnel und das Ziel, ensprechend erzeugt \texttt{Level}
+jeweils eine Instanz der Klasse \texttt{Cuboid}, \texttt{Tunnel} oder \texttt{Goal} und f\"ugt sie in einer osg::Group zusammen.\\
 Diese Elementklassen wiederum generieren jeweils eine Repr\"asentation f\"ur OSG und Bullet.
 
 \subsection{Player}
-\textbf{Player} stellt die vom Benutzer steuerbare Entit\"at dar in Form eines Raumschiffs, das fix aus einer Datei
+\texttt{Player} stellt die vom Benutzer steuerbare Entit\"at dar in Form eines Raumschiffs, das fix aus einer Datei
 geladen wird. Zwecks Positionierbarkeit wird das Model in einer PositionAttitudeTransform gekapselt.
-Neben dem Laden dieser Modeldatei werden in \textbf{Player} die Physikkomponenten f\"ur den Spieler generiert.
-Die Interaktion des Benutzers mit dem Spiel erfolgt \"uber die Komponenten \textbf{PlayerState} und \textbf{PlayerUpdater},
+Neben dem Laden dieser Modeldatei werden in \texttt{Player} die Physikkomponenten f\"ur den Spieler generiert.
+Die Interaktion des Benutzers mit dem Spiel erfolgt \"uber die Komponenten \texttt{PlayerState} und \texttt{PlayerUpdater},
 die im n\"achsten Abschnitt n\"aher erl\"autert werden.\\
-\textit{Details zu \textbf{KinematicCharacterController} und \textbf{btGhostObject} in Kombination finden sich im Abschnitt "Designentscheidungen".}
+\textit{Details zu \texttt{KinematicCharacterController} und \texttt{btGhostObject} in Kombination finden sich im Abschnitt "Designentscheidungen".}
 
 \subsection{PlayerUpdater}
-Der \textbf{PlayerUpdater} als NodeCallback nutzt den \textbf{PlayerState}, um pro Step die neue Position des Players
+Der \texttt{PlayerUpdater} als NodeCallback nutzt den \texttt{PlayerState}, um pro Step die neue Position des Players
 zu berechnen. Genauer wird diese aus der Physics Worlds extrahiert, die die Bewegung des Spielers simuliert und so
 eventuelle Kollisionen erkennen kann. Gleichzeitig werden diese Parameter aktualisiert, dies geschieht auf Basis von
-Anfragen, die der Benutzer \"uber einen Tastendruck absetzt und die im \textbf{PlayerState} vermerkt werden.\\
-Folgendes Sequenzdiagramm soll das Vorgehen des \textbf{PlayerUpdater}s veranschaulichen:
+Anfragen, die der Benutzer \"uber einen Tastendruck absetzt und die im \texttt{PlayerState} vermerkt werden.\\
+Folgendes Sequenzdiagramm soll das Vorgehen des \texttt{PlayerUpdater}s veranschaulichen:
 
 \section{Designentscheidungen und Design Patterns}
 Dieser Abschnitt besch\"aftigt sich mit einigen Besonderheiten der Starjumper Implementierung und erl\"autert deren
