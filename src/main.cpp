@@ -21,12 +21,11 @@ int main(int argc, char *argv[])
     viewer.getCamera()->setClearMask(GL_DEPTH_BUFFER_BIT);
 	viewer.setCameraManipulator(NULL); 
     
+    Sound::initSoundManager();
+    
     osg::ref_ptr<LevelMenu> levelMenu = new LevelMenu();
 	
-    viewer.setSceneData(levelMenu);
-    
-    Sound::initSoundManager();
-	
+    viewer.setSceneData(levelMenu);    
     viewer.run();
     
     Sound::shutdownSoundManager();

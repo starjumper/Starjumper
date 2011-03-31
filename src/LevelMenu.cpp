@@ -19,7 +19,7 @@ LevelMenu::LevelMenu() :
     updateDetails();
     
     _currentItemIndex = 0;
-    
+        
     Sound::switchBackgroundMusic(MENU_MUSIC_FILE, "MenuMusic");
 }
 
@@ -37,7 +37,7 @@ void LevelMenu::initializeBackground()
 	osg::MatrixTransform* transMatrix = new osg::MatrixTransform;
 	transMatrix->addChild(_background);
 
-	transMatrix->setMatrix(osg::Matrix::translate(-2.0, 20.0, 0.0) * osg::Matrix::scale(1.0, 1.0, 1.0));
+	transMatrix->setMatrix(osg::Matrix::translate(-2.0, 20.0, -5.0) * osg::Matrix::scale(1.0, 1.0, 1.0));
 /*
 	MenuUpdater* menuUpdater = new MenuUpdater(this);
 	_background->setUpdateCallback(menuUpdater);
@@ -249,6 +249,8 @@ void LevelMenu::runSelectedLevel()
 void LevelMenu::returnFromLevel()
 {
     viewer.setCameraManipulator(NULL); 
+    viewer.getCamera()->setViewMatrixAsLookAt(MENU_CAMERA_HOME_EYE, MENU_CAMERA_HOME_CENTER, MENU_CAMERA_HOME_UP);
+	
     _currentLevel->resetScene();
     viewer.setSceneData(this);
     _currentLevel = NULL;
