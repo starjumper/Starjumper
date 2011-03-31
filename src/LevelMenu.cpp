@@ -176,7 +176,7 @@ void LevelMenu::loadLevels()
 	_itemsPat->setPosition(osg::Vec3(viewer.getCamera()->getViewport()->width() - 500, viewer.getCamera()->getViewport()->height() - 200, 0)); 
     
     // load XML document
-    rapidxml::file<> mf("resources/levels/overview.xml");
+    rapidxml::file<> mf(LEVEL_OVERVIEW_FILE);
     rapidxml::xml_document<> xml_doc;
     xml_doc.parse<0>(mf.data());
     
@@ -314,6 +314,29 @@ void LevelMenu::returnFromLevel()
     updateDetails();
 }
 
+void LevelMenu::writeBackLevelFile()
+{
+    std::ofstream overviewFile;
+    overviewFile.open(LEVEL_OVERVIEW_FILE);
+        
+    overviewFile << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
+    overviewFile << "<world name=\"Galactica\">" << std::endl;
+    
+    for(size_t i=0; i<_items.size(); i++)
+    {
+       overviewFile << "\t<road name=\"" << _items[i]["name"] 
+                    << "\" filename=\""  << _items[i]["filename"] 
+                    << "\" besttime=\""  << _items[i]["besttime"] 
+                    << "\" completions=\""  << _items[i]["completions"] 
+                    << "\" deaths=\""  << _items[i]["deaths"]
+                    << "\" />" << std::endl;
+    }
+    
+    overviewFile << "</world>" << std::endl;
+    overviewFile.close();
+}
+
+
 LevelMenuUpdater::LevelMenuUpdater(LevelMenu *menu) :
     _menu(menu)
 {
@@ -334,3 +357,5 @@ void LevelMenuUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
 	    _menu->getBackground()->postMult(osg::Matrix::rotate(osg::inDegrees(0.5f),0.0f,0.0f,1.0f));
     }
 }
+
+
