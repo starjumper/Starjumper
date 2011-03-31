@@ -51,7 +51,8 @@ Level::Level(const std::string &mapfile) :
     setUpdateCallback(stepCallback);
     
     // player keyboard control
-    viewer.addEventHandler(new LevelKeyboardHandler());  
+    _keyboardHandler = new LevelKeyboardHandler();
+    viewer.addEventHandler(_keyboardHandler);
     
     initializeLighting();
     
@@ -245,7 +246,7 @@ osg::Vec3 Level::getVectorFromXMLNode(const std::string &name, const rapidxml::x
 
 time_t Level::getTime()
 {
-    return _headUpDisplay->getTime();
+    return _headUpDisplay->getFinalTime();
 }
 
 
@@ -265,6 +266,9 @@ LevelUpdater::LevelUpdater(Level *level) :
     _level(level),
     _previousStepTime(viewer.getFrameStamp()->getSimulationTime())
 {
+    _blendColor = new osg::BlendColor(osg::Vec4(1, 1, 1, 1));
+    
+    _level->getShadowedScene()->getOrCreateStateSet()->setAttributeAndModes(_blendColor, osg::StateAttribute::ON);
 }
 
 void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
@@ -304,6 +308,10 @@ void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
         }
     }
     
+    // fade out when level is finished
+    osg::Vec4 constantBlendColor = _blendColor->getConstantColor();
+    float alpha = constantBlendColor.a();
+    
     // player reached finish
     {
         osg::Vec3 position = Player::getInstance()->getPosition();
@@ -317,9 +325,36 @@ void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
             if(diff.x() < maxDistance && diff.x() > -maxDistance &&
                 diff.y() < maxDistance && diff.y() > -maxDistance &&
                 diff.z() < maxDistance && diff.z() > -maxDistance)
-                    _level->setReachedFinish(true);
+                {
+                    if(alpha == 1.0f)
+                    {
+                        alpha -= 0.01f;
+                        _level->getHeadUpDisplay()->stopTimer();
+                        viewer.getEventHandlers().remove(_level->getKeyboardHandler());
+                        ((LazyCameraManipulator *)viewer.getCameraManipulator())->fadeOut();
+                        Player::getInstance()->getPlayerState()->setRequestAccelerate(false);
+                        Player::getInstance()->getPlayerState()->setRequestDecelerate(true);
+                    }                    
+                }
+        }
+        
+        if(alpha < 1.0f)
+        {
+            alpha -= 0.01f;
+
+            if(alpha <= 0.0f)
+            {
+                alpha = 0.0f;                 
+                _level->setReachedFinish(true);
+            }
+
+            constantBlendColor[3] = alpha;
+
+            _blendColor->setConstantColor(constantBlendColor);
         }
     }
+    
+
     
     traverse(node, nv);
 }
