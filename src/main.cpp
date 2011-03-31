@@ -20,11 +20,11 @@ int main(int argc, char *argv[])
 	viewer.getCamera()->setClearColor(osg::Vec4( 0., 0., 0., 1. ));
     viewer.getCamera()->setClearMask(GL_DEPTH_BUFFER_BIT);
 	
+	Sound::initSoundManager();
+
     LevelMenu *levelMenu = new LevelMenu();
 	
     viewer.setSceneData(levelMenu->getCamera());
-    
-    Sound::initSoundManager();
 	
     viewer.run();
     

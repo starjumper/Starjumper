@@ -104,9 +104,12 @@ osg::Vec3 PlayerUpdater::calculateNextPosition()
     playerController->setWalkDirection(direction);    
 
     // handle jump request
-    if(playerState->requestJump())
+	if(playerState->requestJump() && playerController->canJump())
+	{
         playerController->jump();
-    
+		Sound::playSampleOnce(JUMP_SAMPLE);
+	}
+
     btVector3 position = playerController->getGhostObject()->getWorldTransform().getOrigin();
         
     return osgbBullet::asOsgVec3(position);
