@@ -72,11 +72,15 @@ public:
 
     osg::Camera *getCamera() { return _camera; };  
     bool levelRunning() { return _currentLevel != NULL; }
+    Level *getCurrentLevel() { return _currentLevel; }
 };
 
 class LevelMenuUpdater : public osg::NodeCallback
 {
+private:
+    LevelMenu *_menu;
+    
 public:
-	LevelMenuUpdater();
+	LevelMenuUpdater(LevelMenu *menu);
 	virtual void operator()(osg::Node *node, osg::NodeVisitor *nv);
 };

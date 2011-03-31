@@ -1,5 +1,8 @@
+#include <sstream>
+
 #include "LevelMenu.h"
 #include "MenuKeyboardHandler.h"
+
 
 extern osgViewer::Viewer viewer;
 
@@ -23,7 +26,7 @@ LevelMenu::LevelMenu() :
     Sound::switchBackgroundMusic(MENU_MUSIC_FILE, "MenuMusic");
     
     
-    setUpdateCallback(new LevelMenuUpdater());
+    viewer.getCamera()->setUpdateCallback(new LevelMenuUpdater(this));
 }
 
 void LevelMenu::initializeBackground()
@@ -243,7 +246,23 @@ void LevelMenu::updateDetails()
     if(_items[_currentItemIndex]["besttime"] == "")
         _bestTimeText->setText("Best Time: --:--:--");
     else
-        _bestTimeText->setText("Best Time: " + _items[_currentItemIndex]["besttime"]);
+    {
+        time_t t = (time_t)atol(_items[_currentItemIndex]["besttime"].c_str());
+        
+        // extract miliseconds, seconds and minutes
+        time_t ms = t % 100;
+        time_t  s = (t / 100) % 60;
+        time_t  m = (t / 100 / 60) % 60;
+
+        // construct time string
+    	std::stringstream ss;
+    	ss <<
+    	    (m  < 10 ? "0" : "") << m << ":" <<
+    	    (s  < 10 ? "0" : "") << s << ":" <<
+            (ms < 10 ? "0" : "") << ms;
+
+        _bestTimeText->setText("Best Time: " + ss.str());
+    }
 }
 
 void LevelMenu::runSelectedLevel()
@@ -254,6 +273,36 @@ void LevelMenu::runSelectedLevel()
 
 void LevelMenu::returnFromLevel()
 {
+   	
+    if(_currentLevel->playerReachedFinish())
+    {
+        // update completions
+        {
+            std::stringstream ss;
+            ss << atoi(_items[_currentItemIndex]["completions"].c_str()) + 1;
+            _items[_currentItemIndex]["completions"] = ss.str();
+        }
+        
+        // update best time
+        {
+            time_t t = _currentLevel->getTime();
+
+            if(_items[_currentItemIndex]["besttime"] == "" | t < atol(_items[_currentItemIndex]["besttime"].c_str()))
+            {
+                std::stringstream ss;
+                ss << t;
+                _items[_currentItemIndex]["besttime"] =  ss.str();
+            }
+        }
+    }
+
+    // update number of deaths
+    {
+        std::stringstream ss;
+        ss << atoi(_items[_currentItemIndex]["deaths"].c_str()) + _currentLevel->getNumDeaths();
+        _items[_currentItemIndex]["deaths"] = ss.str();
+    }
+    
     viewer.setCameraManipulator(NULL); 
     viewer.getCamera()->setViewMatrixAsLookAt(MENU_CAMERA_HOME_EYE, MENU_CAMERA_HOME_CENTER, MENU_CAMERA_HOME_UP);
 	
@@ -262,20 +311,26 @@ void LevelMenu::returnFromLevel()
     _currentLevel = NULL;
     
     Player::getInstance()->reset();
+    updateDetails();
 }
 
-LevelMenuUpdater::LevelMenuUpdater()
+LevelMenuUpdater::LevelMenuUpdater(LevelMenu *menu) :
+    _menu(menu)
 {
 
 }
 
 void LevelMenuUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
 {
-    LevelMenu *menu = dynamic_cast<LevelMenu *>(node);
     
-    if(!menu->levelRunning())
+    if(_menu->levelRunning())
     {
-        menu->resetCamera();
-	    menu->getBackground()->postMult(osg::Matrix::rotate(osg::inDegrees(0.5f),0.0f,0.0f,1.0f));
+        if(_menu->getCurrentLevel()->playerReachedFinish())
+            _menu->returnFromLevel();
+    }
+    else
+    {
+        _menu->resetCamera();
+	    _menu->getBackground()->postMult(osg::Matrix::rotate(osg::inDegrees(0.5f),0.0f,0.0f,1.0f));
     }
 }
