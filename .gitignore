@@ -13,5 +13,4 @@ src/Makefile
 
 doc/*.aux
 doc/*.log
-doc/*.pdf
 doc/*.gz
