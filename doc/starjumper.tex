@@ -1,7 +1,6 @@
 \documentclass{llncs}
+\usepackage[ngerman]{babel}
 \usepackage{float}
-
-\hyphenation{ btGhost-Object }
 
 \begin{document}
 
@@ -100,7 +99,7 @@ geladen wird. Zwecks Positionierbarkeit wird das Model in einer PositionAttitude
 Neben dem Laden dieser Modeldatei werden in \textbf{Player} die Physikkomponenten f\"ur den Spieler generiert.
 Die Interaktion des Benutzers mit dem Spiel erfolgt \"uber die Komponenten \textbf{PlayerState} und \textbf{PlayerUpdater},
 die im n\"achsten Abschnitt n\"aher erl\"autert werden.\\
-\textit{Details zu der Kombination aus \textbf{KinematicCharacterController} und \textbf{btGhostObject} finden sich im Abschnitt "Designentscheidungen".}
+\textit{Details zu \textbf{KinematicCharacterController} und \textbf{btGhostObject} in Kombination finden sich im Abschnitt "Designentscheidungen".}
 
 \subsection{PlayerUpdater}
 Der \textbf{PlayerUpdater} als NodeCallback nutzt den \textbf{PlayerState}, um pro Step die neue Position des Players
@@ -120,7 +119,7 @@ stand zu Beginn die \"Uberlegung im Raum, diese von Hand zu implementieren. Schn
 an sich geringen Umfangs der Anforderungen an die Physik eine manuelle Implementierung viel Zeit kosten w\"urde, und so fiel
 die Entscheidung zugunsten der Verwendung der Physikbibliothek Bullet.\\
 Die von Bullet zur Verf\"ugung gestellten Klassen \texttt{btKinematicCharacterController} und \texttt{btGhostObject} boten
-laut Interface genau die gew\"unschten Funktionen: Das Ghost Object agiert als Rigid Body in der Physikwelt und "kennt"
+laut Interface genau die gew\"unschten Funktionen: Das Ghost Object agiert als Rigid Body in der Physikwelt und kennt
 zu jedem Zeitpunkt alle eventuell vorhandenen Kollisionspartner, der \texttt{btKinematicCharacterController} stellt ein
 Steuerungsinterface f\"ur das GhostObject zur Verf\"ugung. Aufgrund einiger weniger Unzul\"anglichkeiten musste allerdings
 der Controller angepasst werden, sodass statt dem \texttt{btKinematicCharacterController} eine modifizierte Version
@@ -128,7 +127,11 @@ namens \texttt{KinematicCharacterController} Verwendung findet.\\
 Das Rendering durch OpenSceneGraph und die Physik laufen parallel. So ist zu erkl\"aren, dass beispielsweise f\"ur
 Streckenelemente wie \texttt{Cuboid} jeweils eine Repr\"asentation f\"ur den Szenengraphen und ein \texttt{btRigidBody}
 f\"ur die Physics World existiert. Die Kommunikation zwischen diesen beiden Entit\"aten findet im \texttt{PlayerUpdater}
-statt. Korrekt parametrisiert (Bewegungsrichtung, Fallgeschwindigkeit, Gravitation) wird der 
+statt. Korrekt parametrisiert (Bewegungsrichtung, Fallgeschwindigkeit, Gravitation) berechnet der Controller bei jedem
+Stepping der Physics World die neue Position des Spielers, welche anschlie\ss end durch den \texttt{PlayerUpdater}
+abgefragt und auf die \texttt{PositionAttitudeTransform} des Spielermodells \"ubertragen wird. Im Gegenzug werden
+durch den Benutzer per Tastendruck im \texttt{PlayerState} gesetzte Requests - wie der Wunsch nach links zu steuern -
+ausgewertet und dienen als Basis f\"ur die Aktualisierung der Parameter des Controllers.
 
 \subsection{Player}
 Der \texttt{Player} bzw. sein Modell wird in jeder Levelinstanz ben\"otigt. Die im Verlauf des Spiels vorgenommenen \"Anderungen
@@ -153,6 +156,7 @@ bereit, die einen durch die Klasse \texttt{ParticleEffect} gekapselten Partikele
 \texttt{ParticleEffect} implementiert eine Art "Standard"-Partikeleffekt, dessen einzelne Komponenten und sonstige Einstellungen sich
 durch im Konstruktor \"ubergebene Objekte \"uberschreiben lassen. Durch diese Aufteilung wird duplizierter Code vermieden und
 gleichzeitig die Verantwortung f\"ur Partikeleffekt an einem Ort konzentriert.
+
 
 \section{Diskussion und Ausblick}
 
