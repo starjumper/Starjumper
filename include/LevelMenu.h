@@ -25,6 +25,7 @@
 #define MENU_MUSIC_FILE         "resources/sound/48000_2chan.ogg"
 #define LEVEL_SELECTOR_TEXTURE  "resources/textures/menu_background.png"
 #define MENU_ITEM_HEIGHT        40
+#define MENU_DETAIL_FONT_SIZE   25
 
 class MenuKeyboardHandler;
 
@@ -37,6 +38,10 @@ private:
 	osg::ref_ptr<osg::Camera> _camera;
 	osg::PositionAttitudeTransform *_menuPat;
     osg::PositionAttitudeTransform *_itemsPat;
+    
+    osg::ref_ptr<osgText::Text> _bestTimeText;
+    osg::ref_ptr<osgText::Text> _completionsText;
+    osg::ref_ptr<osgText::Text> _deathsText;
 
 public:
 	LevelMenu();
@@ -44,6 +49,7 @@ public:
 	void initializeCamera();
     void initializeSelector();
     void loadLevels();
+    void updateDetails();
     
     void selectPreviousItem();
     void selectNextItem();    

@@ -13,6 +13,7 @@ LevelMenu::LevelMenu()
 	initializeCamera();
     initializeSelector();
     loadLevels();
+    updateDetails();
     
     _currentItemIndex = 0;
     
@@ -85,7 +86,54 @@ void LevelMenu::initializeSelector()
     selectorPat->setPosition(osg::Vec3(viewer.getCamera()->getViewport()->width() - 1000, viewer.getCamera()->getViewport()->height() - 275, -0.01)); 
 	
     osg::Image *image = osgDB::readImageFile(LEVEL_SELECTOR_TEXTURE);
-    texture->setImage(image);    
+    texture->setImage(image);
+    
+    //////////////////
+    
+    osg::PositionAttitudeTransform *detailsPat = new osg::PositionAttitudeTransform();
+
+    // completions
+    {
+        osg::Geode *completionsNode = new osg::Geode();
+
+	    _completionsText = new osgText::Text();
+	    _completionsText->setFont(MENU_FONT);
+	    _completionsText->setCharacterSize(MENU_DETAIL_FONT_SIZE);
+	    _completionsText->setPosition(osg::Vec3(0, - MENU_ITEM_HEIGHT, 0));
+
+        completionsNode->addDrawable(_completionsText);
+        detailsPat->addChild(completionsNode);
+    }
+    
+    // deaths
+    {
+        osg::Geode *deathsNode = new osg::Geode();
+
+	    _deathsText = new osgText::Text();
+	    _deathsText->setFont(MENU_FONT);
+	    _deathsText->setCharacterSize(MENU_DETAIL_FONT_SIZE);
+	    _deathsText->setPosition(osg::Vec3(0, - MENU_ITEM_HEIGHT * 2, 0));
+
+        deathsNode->addDrawable(_deathsText);
+        detailsPat->addChild(deathsNode);
+    }
+    
+    // best time
+    {
+        osg::Geode *bestTimeNode = new osg::Geode();
+
+	    _bestTimeText = new osgText::Text();
+	    _bestTimeText->setFont(MENU_FONT);
+	    _bestTimeText->setCharacterSize(MENU_DETAIL_FONT_SIZE);    	
+	    _bestTimeText->setPosition(osg::Vec3(0, - MENU_ITEM_HEIGHT * 3, 0));
+
+        bestTimeNode->addDrawable(_bestTimeText);
+        detailsPat->addChild(bestTimeNode);
+    }
+    
+
+    detailsPat->setPosition(osg::Vec3(viewer.getCamera()->getViewport()->width() - 960, viewer.getCamera()->getViewport()->height() - 120, 0));
+    _menuPat->addChild(detailsPat);
 }
 
 void LevelMenu::loadLevels()
@@ -120,6 +168,7 @@ void LevelMenu::loadLevels()
             std::map<std::string, std::string> item;
 
             item["name"] = it->first_attribute("name")->value();
+            item["filename"] = it->first_attribute("filename")->value();
             item["besttime"] = it->first_attribute("besttime")->value();
             item["completions"] = it->first_attribute("completions")->value();
             item["deaths"] = it->first_attribute("deaths")->value();
@@ -141,6 +190,7 @@ void LevelMenu::selectPreviousItem()
     {
         _itemsPat->setPosition(_itemsPat->getPosition() - osg::Vec3(0, MENU_ITEM_HEIGHT, 0));
         _currentItemIndex--;
+        updateDetails();
     }
         
 }
@@ -151,10 +201,22 @@ void LevelMenu::selectNextItem()
     {
         _itemsPat->setPosition(_itemsPat->getPosition() + osg::Vec3(0, MENU_ITEM_HEIGHT, 0)); 
         _currentItemIndex++;
+        updateDetails();
     }   
+}
+
+void LevelMenu::updateDetails()
+{
+    _completionsText->setText("Completions: " + _items[_currentItemIndex]["completions"]);
+    _deathsText->setText("Deaths: " + _items[_currentItemIndex]["deaths"]);
+    
+    if(_items[_currentItemIndex]["besttime"] == "")
+        _bestTimeText->setText("Best Time: --:--:--");
+    else
+        _bestTimeText->setText("Best Time: " + _items[_currentItemIndex]["besttime"]);
 }
 
 void LevelMenu::runSelectedLevel()
 {
-    viewer.setSceneData(new Level("resources/levels/level1.xml"));
+    viewer.setSceneData(new Level(_items[_currentItemIndex]["filename"]));
 }
