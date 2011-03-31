@@ -42,6 +42,7 @@ private:
     
     btDynamicsWorld *_physicsWorld;
 	std::vector<float> _deadlyAltitudes;
+    std::vector<osg::Vec3> _finishs;
     
     void initializeLighting();
     void initializePhysicsWorld();

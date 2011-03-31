@@ -125,6 +125,7 @@ void Level::loadMapFromFile(const std::string &mapfile)
         {
             osg::Vec3 position = getVectorFromXMLNode("position", *it);
             collisionObject = new Finish(position);
+            _finishs.push_back(position);
             _shadowedScene->addChild(((CollisionModel *)collisionObject)->getNode());        	            
         }
 		else
