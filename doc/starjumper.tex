@@ -1,6 +1,7 @@
 \documentclass{llncs}
 \usepackage[ngerman]{babel}
 \usepackage{float}
+\usepackage{graphicx}
 
 \begin{document}
 
@@ -71,8 +72,13 @@ Selektiert der Benutzer ein Level, alloziiert \texttt{LevelMenu} eine Instanz de
 \"ubergibt die aufbereiteten Inhalte des entsprechenden Levelfiles. Anschlie\ss end ersetzt \texttt{Level}
 das \texttt{LevelMenu} als zu rendernden Szenengraphen.\\
 Hier wird au\ss erdem der Keyboardhandler definiert, der die Logik der Escape-Taste umsetzt (Programm beenden
-bzw. aus dem laufenden Spiel zur Level\"ubersicht zur\"uckkehren), und in den \texttt{Viewer} eingeh\"angt. 
+bzw. aus dem laufenden Spiel zur Level\"ubersicht zur\"uckkehren), und in den \texttt{Viewer} eingeh\"angt.\\
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{LevelMenu.jpg}
+	\caption{Klassendiagramm LevelMenu}
+\end{figure}
 
 \subsection{Level}
 Die von \texttt{osg::Group} erbende Klasse \texttt{Level} stellt in sich den zu einem Spiel geh\"orenden Szenengraphen
@@ -82,6 +88,11 @@ das \texttt{HeadUpDisplay}, den Kameramanipulator und k\"ummert sich um die Bele
 Neben den OpenSceneGraph-Komponenten erstellt und verwaltet \texttt{Level} zudem die Bullet Physics World, innerhalb
 derer physikalische Simulationen parallel zu OSG ablaufen.\\
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{Level.jpg}
+	\caption{Klassendiagramm Level}
+\end{figure}
 
 \subsection{Player}
 \texttt{Player} stellt die vom Benutzer steuerbare Entit\"at dar in Form eines Raumschiffs, das fix aus einer Datei
@@ -90,6 +101,12 @@ Neben dem Laden dieser Modeldatei werden in \texttt{Player} die Physikkomponente
 Die Interaktion des Benutzers mit dem Spiel erfolgt \"uber die Komponenten \texttt{PlayerState} und \texttt{PlayerUpdater},
 die im n\"achsten Abschnitt n\"aher erl\"autert werden.\\
 \textit{Details zu \texttt{KinematicCharacterController} und \texttt{btGhostObject} in Kombination finden sich im Abschnitt "Designentscheidungen".}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{Player.jpg}
+	\caption{Klassendiagramm Player}
+\end{figure}
 
 \subsection{PlayerUpdater}
 Der \texttt{PlayerUpdater} als NodeCallback nutzt den \texttt{PlayerState}, um pro Step die neue Position des Players
