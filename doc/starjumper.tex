@@ -51,47 +51,37 @@ bremsen, lenken und springen. Die folgende Tabelle zeigt die in-game Tastaturbel
 	\end{center}
 	\caption{Tastaturbelegung}
 \end{table}
-\noindent Dar\"uber hinaus kann per \texttt{Escape} jederzeit aus dem Spiel in das Men\"u
-bzw. in die jeweils n\"achsth\"ohere Ebene in der Men\"uhierarchie gewechselt werden. Im
-Hauptmen\"u beendet ein Druck auf \texttt{Escape} das Programm.\\
-Die Navigation in den Men\"us erfolgt mithilfe der Maus.
+\noindent Dar\"uber hinaus kann per \texttt{Escape} jederzeit aus dem Spiel in das Levelauswahlmen\"u
+gewechselt werden. Im Hauptmen\"u beendet ein Druck auf \texttt{Escape} das Programm.\\
+Die Navigation im Men\"u erfolgt \"uber die Pfeiltasten, die ausgew\"ahlte Strecke wird mit \texttt{Enter} gestartet.
 
 
 \section{Architektur}
 
 \textit{Die Beschreibung der Architektur erfolgt in kleineren logischen Einheiten, eine Gesamt\"ubersicht
-aller verwendeten Klassen und ihrer Verbindungen untereinander findet sich im Anhang.}\\
+aller verwendeten Klassen und ihrer Verbindungen untereinander findet sich am Ende des Dokuements.}\\
 Im Folgenden sollen nun die wichtigsten architektonischen Bestandteile von Starjumper
-erl\"autert werden. 
+erl\"autert werden.
 
-\subsection{GameManager}
-Der \texttt{GameManager} bildet die oberste Instanz des Spiels. Er verwaltet prim\"ar den \texttt{Viewer}, der f\"ur das
-Rendering des Szenengraphen verantwortlich ist, sowie die Szenengraphen (in Form von \texttt{RenderingInstance}
-Objekten), zwischen denen er dynamisch umschalten kann. Die Klasse \texttt{RenderingInstance} ist ein
-Wrapper f\"ur Szenengraphen und dient als abstrakte Oberklasse f\"ur u.a. \texttt{Game} und \texttt{Menu}, die
-sp\"ater erl\"autert werden.\\
-Dar\"uber hinaus implementiert der \texttt{GameManager} \"ubergeordnete Spiellogik wie das Starten des Spiels,
-Beenden, Erstellen und Aufrufen von Men\"us, sowie die Bereitstellung von Callback-Funktionen f\"ur
-die Men\"us. Ein \"ubergeordneter Keyboardhandler sorgt f\"ur die globale Logik der Escape Taste.
+\subsection{LevelMenu}
+Das \texttt{LevelMenu} bildet den Einstiegspunkt des Spiels. Es bietet eine \"Ubersicht der verf\"ugbaren
+Levels, die selektiert und gestartet werden k\"onnen. Bei Instanziierung parst das \texttt{LevelMenu} die
+XML-Dateien, in denen die Levels des Spiels definiert wurden, und bereitet sie f\"ur die weitere Verarbeitung auf.\\
+Selektiert der Benutzer ein Level, alloziiert \texttt{LevelMenu} eine Instanz der Klasse \texttt{Level} und
+\"ubergibt die aufbereiteten Inhalte des entsprechenden Levelfiles. Anschlie\ss end ersetzt \texttt{Level}
+das \texttt{LevelMenu} als zu rendernden Szenengraphen.\\
+Hier wird au\ss erdem der Keyboardhandler definiert, der die Logik der Escape-Taste umsetzt (Programm beenden
+bzw. aus dem laufenden Spiel zur Level\"ubersicht zur\"uckkehren), und in den \texttt{Viewer} eingeh\"angt. 
 
-\subsection{Menu}
-Die Aufgabe der Klasse \texttt{Menu} ist das Erstellen eines Men\"us mit klickbaren Textelementen. Diese
-werden als Callback auf entsprechende Methoden des \texttt{GameManagers} gemappt. Zur Anzeige der Men\"ueintr\"age
-kommt das Modul osgWidget zum Einsatz.
-
-\subsection{Game}
-Die von \texttt{RenderingInstance} erbende Klasse \texttt{Game} beinhaltet die zentrale Spiellogik. Von hier aus werden die
-f\"ur das Spiel ben\"otigten Elemente wie etwa \texttt{HeadUpDisplay}, \texttt{Player} und \texttt{Level} erzeugt und verwaltet,
-sowie der schlu\ss endlich zu rendernde Szenengraph generiert.\\
-Neben den f\"ur OpenSceneGraph wichtigen Komponenten verwaltet \texttt{Game} auch die Bullet Physics World und sorgt
-f\"ur das OSG-synchrone Stepping derselben mittels eines NodeCallbacks namens \texttt{WorldUpdater}.
 
 \subsection{Level}
-Starjumper verwendet ein einfaches XML-Format f\"ur die Beschreibung der Levels. F\"ur das Parsen einer
-solchen Leveldatei und dem anschlie\ss enden Umwandeln in OSG-kompatible Form zeichnet \texttt{Level} verantwortlich.\\
-Derzeit m\"ogliche Elemente eines Levels sind Quader, Tunnel und das Ziel, ensprechend erzeugt \texttt{Level}
-jeweils eine Instanz der Klasse \texttt{Cuboid}, \texttt{Tunnel} oder \texttt{Goal} und f\"ugt sie in einer osg::Group zusammen.\\
-Diese Elementklassen wiederum generieren jeweils eine Repr\"asentation f\"ur OSG und Bullet.
+Die von \texttt{osg::Group} erbende Klasse \texttt{Level} stellt in sich den zu einem Spiel geh\"orenden Szenengraphen
+dar und verbindet alle Teile der Spiellogik. \texttt{Level} erstellt aus den \"ubergebenen Leveldaten eine Reihe
+von Levelelementen (Kuboiden, Tunnel, ...), den \texttt{Player} (dies gilt nur f\"ur die erste Levelinstanz aufgrund der Singleton Eigenschaft, siehe Abschnitt zum Player),
+das \texttt{HeadUpDisplay}, den Kameramanipulator und k\"ummert sich um die Beleuchtung.\\
+Neben den OpenSceneGraph-Komponenten erstellt und verwaltet \texttt{Level} zudem die Bullet Physics World, innerhalb
+derer physikalische Simulationen parallel zu OSG ablaufen.\\
+
 
 \subsection{Player}
 \texttt{Player} stellt die vom Benutzer steuerbare Entit\"at dar in Form eines Raumschiffs, das fix aus einer Datei
@@ -140,7 +130,8 @@ wie am Beispiel des Reset erkennbar ist. In einer fr\"uheren Version wurde f\"ur
 erzeugt, die logischerweise das Laden des Modells beinhaltet, was zu erheblicher Verz\"ogerung des Spielstarts f\"uhrte.\\
 Auf Basis dieser Erkenntnisse wurde ein Refactoring vorgenommen und der \texttt{Player} zu einem Singleton erweitert. Das hei\ss t,
 dass das Spielermodell nur noch ein einziges Mal beim Starten des Programms geladen werden muss und als global verf\"ugbare
-Ressource gehandhabt wird, ein Aufruf der statischen Methode \texttt{Player::getInstance()} liefert auf Wunsch die Player-Instanz.\\
+Ressource gehandhabt wird, ein Aufruf der statischen Methode \texttt{Player::getInstance()} liefert auf Wunsch die Player-Instanz.
+Die initiale Erzeugung des \texttt{Player} Objekts erfolgt beim ersten Aufruf dieser Funktion.\\
 Neben dem Wegfall der Ladezeiten erm\"oglicht dies dar\"uber hinaus den globalen Zugriff auf den Zustand des Spielers,
 der z.B. die an verschiedenen Stellen des Spiels ben\"otigten Eigenschaften Geschwindigkeit und Neigungswinkel enth\"alt.
 
@@ -155,11 +146,16 @@ Um diesem entgegenzuwirken, existiert in Starjumper eine Klasse \texttt{Particle
 bereit, die einen durch die Klasse \texttt{ParticleEffect} gekapselten Partikeleffekt erzeugen und je nach Situation konfigurieren.\\
 \texttt{ParticleEffect} implementiert eine Art "Standard"-Partikeleffekt, dessen einzelne Komponenten und weitere Einstellungen sich
 durch im Konstruktor \"ubergebene Objekte \"uberschreiben lassen. Durch diese Aufteilung wird duplizierter Code vermieden und
-gleichzeitig die Verantwortung f\"ur Partikeleffekt an einem Ort konzentriert.
+gleichzeitig die Verantwortung f\"ur das Erstellen von Partikeleffekten an einem Ort konzentriert.
 
 
 \section{Diskussion und Ausblick}
-
+Die relativ simpel gehaltene Klassenhierarchie und minimale Bindung zwischen den Komponenten hat sich w\"ahrend der Entwicklung als
+vorteilhaft erwiesen. Der Einflussbereich einer Klasse beschr\"ankt sich in der Regel auf sie selbst, sowie die von ihr erstellen
+Kindknoten des Szenengraphen. So k\"onnen \"Anderungen an Klassen vorgenommen werden, (fast) ohne die \"ubrige existierende Funktionalit\"at
+zu beeinflussen. Auch das Ausnutzen der von OpenSceneGraph bereitgestellten M\"oglichkeiten wie Update Callbacks oder Event Handler, die
+bei der Traversierung des Szenengraphen nacheinander aufgerufen werden, spart an einigen Stellen Code.\\
+Ein verbesserungs
 
 
 \end{document}
