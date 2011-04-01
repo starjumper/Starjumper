@@ -1,7 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map>
 <cuboid type="accelerate">
-	<position x="-100" y="0" z="0" />
-	<size x="200" y="1000" z="0.300000" />
+	<position x="-1.500000" y="0" z="-9" />
+	<size x="3" y="40" z="9.600000" />
+	<color x="0.800000" y="0.164706" z="0.345098" />
 </cuboid>
+<cuboid type="decelerate">
+	<position x="-6.500000" y="49" z="-3" />
+	<size x="5" y="29" z="4.300000" />
+	<color x="0.188235" y="0.250980" z="0.545098" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-0.500000" y="96" z="-3" />
+	<size x="5" y="42" z="6.800000" />
+	<color x="0.674510" y="0.494118" z="0.039216" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="-4.500000" y="129" z="-1" />
+	<size x="5" y="24" z="6.800000" />
+	<color x="0.415686" y="0.909804" z="0.607843" />
+</cuboid>
+<cuboid type="">
+	<position x="-3.500000" y="169" z="-2" />
+	<size x="5" y="93" z="7.700000" />
+	<color x="0.725490" y="0.901961" z="0.372549" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="0.500000" y="220" z="0" />
+	<size x="3" y="66" z="2.000000" />
+	<color x="0.270588" y="0.470588" z="0.596078" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="3.000000" y="275" z="-9" />
+	<size x="4" y="72" z="9.700000" />
+	<color x="0.145098" y="0.662745" z="0.850980" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="0.500000" y="311" z="-7" />
+	<size x="5" y="31" z="9.800000" />
+	<color x="0.764706" y="0.125490" z="0.686275" />
+</cuboid>
+<cuboid type="">
+	<position x="-4.500000" y="366" z="-1" />
+	<size x="5" y="24" z="2.200000" />
+	<color x="0.282353" y="0.682353" z="0.611765" />
+</cuboid>
+<cuboid type="">
+	<position x="0.000000" y="416" z="0" />
+	<size x="2" y="87" z="3.900000" />
+	<color x="0.670588" y="0.827451" z="0.937255" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="3.000000" y="461" z="-1" />
+	<size x="4" y="67" z="3.300000" />
+	<color x="0.996078" y="0.031373" z="0.196078" />
+</cuboid>
+<cuboid type="">
+	<position x="-2.500000" y="519" z="-1" />
+	<size x="5" y="89" z="2.700000" />
+	<color x="0.447059" y="0.313725" z="0.435294" />
+</cuboid>
+<cuboid type="">
+	<position x="-2.500000" y="551" z="-6" />
+	<size x="3" y="84" z="8.800000" />
+	<color x="0.643137" y="0.572549" z="0.521569" />
+</cuboid>
+<cuboid type="">
+	<position x="-0.500000" y="595" z="0" />
+	<size x="5" y="20" z="1.600000" />
+	<color x="0.811765" y="0.345098" z="0.721569" />
+</cuboid>
+<cuboid type="">
+	<position x="-2.500000" y="647" z="0" />
+	<size x="5" y="52" z="4.300000" />
+	<color x="0.274510" y="0.698039" z="0.674510" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="4.500000" y="705" z="5" />
+	<size x="5" y="38" z="1.100000" />
+	<color x="0.709804" y="0.239216" z="0.400000" />
+</cuboid>
+<cuboid type="decelerate">
+	<position x="0.000000" y="765" z="1" />
+	<size x="2" y="80" z="8.700000" />
+	<color x="0.325490" y="0.701961" z="0.105882" />
+</cuboid>
+<cuboid type="">
+	<position x="0.500000" y="816" z="8" />
+	<size x="5" y="39" z="0.500000" />
+	<color x="0.513725" y="0.282353" z="0.521569" />
+</cuboid>
+<cuboid type="accelerate">
+	<position x="7.000000" y="851" z="3" />
+	<size x="2" y="89" z="8.400000" />
+	<color x="0.345098" y="0.439216" z="0.219608" />
+</cuboid>
+<finish>
+	<position x="8.000000" y="925" z="12" />
+</finish>
 </map>
