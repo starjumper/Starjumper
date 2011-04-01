@@ -35,6 +35,13 @@ public:
     void collide() { }
 };
 
+class FinishUpdater : public osg::NodeCallback 
+{
+public:
+    FinishUpdater();    
+    virtual void operator()(osg::Node* node, osg::NodeVisitor* nv);
+};
+
 class Tunnel : public CollisionModel
 {
 public:
