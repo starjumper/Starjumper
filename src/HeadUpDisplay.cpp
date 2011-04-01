@@ -47,7 +47,7 @@ void HeadUpDisplay::initializeSpeedometer()
         throw std::runtime_error("Unable to load speedbar model file!");
 
 	osg::Node *_speedBarBackgroundNode = osgDB::readNodeFile(SPEEDBG_MODEL);
-	if(!_speedBarBackgroundNode)
+	if(!_speedBarNode)
         throw std::runtime_error("Unable to load speedbar background model file!");
 
 	osg::StateSet *speedBarBackgroundState = _speedBarBackgroundNode->getOrCreateStateSet();

@@ -10,7 +10,7 @@ Level::Level(const std::string &mapfile) :
     _shadowedScene->setReceivesShadowTraversalMask(RECEIVE_SHADOW_MASK);
 	_shadowedScene->setCastsShadowTraversalMask(CAST_SHADOW_MASK);
 	_shadowedScene->setShadowTechnique(new osgShadow::ShadowMap);
-    	
+ 
     addChild(_shadowedScene);
 
     _headUpDisplay = new HeadUpDisplay();
@@ -30,7 +30,7 @@ Level::Level(const std::string &mapfile) :
     _physicsWorld->addCollisionObject(Player::getInstance()->getGhostObject(),
                                btBroadphaseProxy::CharacterFilter,
                                btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter);
-    
+                               
     // register player controller
     _physicsWorld->addAction(Player::getInstance()->getController());
     
@@ -46,7 +46,7 @@ Level::Level(const std::string &mapfile) :
     
     // set _cameraManipulator as manipulator for the scene
     viewer.setCameraManipulator(cameraManipulator);
-            
+                
     LevelUpdater *stepCallback = new LevelUpdater(this);
     setUpdateCallback(stepCallback);
     
@@ -56,7 +56,7 @@ Level::Level(const std::string &mapfile) :
     
     initializeLighting();
     
-    Sound::switchBackgroundMusic(LEVEL_MUSIC_FILE, "GameMusic");	
+    Sound::switchBackgroundMusic(LEVEL_MUSIC_FILE, "GameMusic");    
 }
 
 void Level::playerDied()
@@ -124,7 +124,7 @@ void Level::loadMapFromFile(const std::string &mapfile)
         else if(strcmp(it->name(), "tunnel") == 0)
         {
         	collisionObject = new Tunnel(getVectorFromXMLNode("position", *it), atof(it->first_attribute("length")->value()));
-            _shadowedScene->addChild(((CollisionModel *)collisionObject)->getNode());  
+            _shadowedScene->addChild(((CollisionModel *)collisionObject)->getNode()); 
         }
         else if(strcmp(it->name(), "cuboidtunnel") == 0)
         {
@@ -353,8 +353,6 @@ void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
             _blendColor->setConstantColor(constantBlendColor);
         }
     }
-    
-
     
     traverse(node, nv);
 }
