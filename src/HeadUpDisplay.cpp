@@ -90,10 +90,13 @@ void HeadUpDisplay::initializeTimer()
 
 	_timer = new osgText::Text();
 	_timer->setFont(TIMER_FONT);
+	
+	int timerSize = viewer.getCamera()->getViewport()->height() / 25;
+    _timer->setCharacterSize(timerSize);
     
     // place timer on top right
-	_timer->setPosition(osg::Vec3(viewer.getCamera()->getViewport()->width() - 200, 
-	                                viewer.getCamera()->getViewport()->height() - 50, 0));
+	_timer->setPosition(osg::Vec3(viewer.getCamera()->getViewport()->width() - timerSize * 6, 
+	                                viewer.getCamera()->getViewport()->height() - timerSize - 20, 0));
 	
     _timeNode->addDrawable(_timer);
 	_hudPat->addChild(_timeNode);
