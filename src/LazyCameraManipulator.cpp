@@ -61,8 +61,8 @@ void LazyCameraManipulator::calculateNextCameraPosition()
         }
         _directionOfMovementX = newDirectionX;
     }
-
-    float stepper = (nodePosition.x() - _oldNodePosition.x()) / _numSimulationSubSteps;
+            
+    float stepper = (_numSimulationSubSteps > 0) ? ((nodePosition.x() - _oldNodePosition.x()) / _numSimulationSubSteps) : 0.0f;
     
     for(int i=0; i<_numSimulationSubSteps; i++, _oldNodePosition.x() += stepper, _durationOfMovementX++)
     {
@@ -79,13 +79,12 @@ void LazyCameraManipulator::calculateNextCameraPosition()
         {
             // +++ step 3 +++
             // in any other case continue (or begin) approaching the node
-            
             _newCameraPosition.x() = _oldCameraPosition.x() + (_oldNodePosition.x() - _oldCameraPosition.x()) * (_durationOfMovementX / MAX_FRAME_DELAY);
         }
     
         _oldCameraPosition = _newCameraPosition;
     }
-
+    
     _oldNodePosition = nodePosition;
 }
 

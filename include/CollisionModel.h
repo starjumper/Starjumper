@@ -2,6 +2,9 @@
 
 #include <osg/Geode>
 #include <osg/PositionAttitudeTransform>
+#include <osg/Material>
+#include <osg/BlendFunc>
+#include <osg/BlendColor>
 #include <osgDB/ReadFile>
 
 #include <btBulletDynamicsCommon.h>

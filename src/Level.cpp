@@ -69,7 +69,7 @@ void Level::initializeLighting()
 {    
     // add Light for player shadow
 	osg::Light *light = new osg::Light();
-	light->setLightNum(3);
+	light->setLightNum(5);
 	
 	osg::LightSource *lightSource = new osg::LightSource;   
 	lightSource->setLight(light);
@@ -78,10 +78,10 @@ void Level::initializeLighting()
 	lightSource->setStateSetModes(*stateset, osg::StateAttribute::ON);
 	
 	light->setPosition(osg::Vec4(osg::Vec3(0.0, 10.0, 1000.0),1.0));
-	light->setDiffuse(osg::Vec4(1.0,0.0,0.0,0.5));
+	light->setDiffuse(osg::Vec4(1.0,0.0,0.0,1.0));
 	light->setAmbient(osg::Vec4(1.0,1.0,1.0,1.0));
 
-	_shadowedScene->addChild(lightSource);
+	Player::getInstance()->addChild(lightSource);
 }
 
 void Level::loadMapFromFile(const std::string &mapfile)

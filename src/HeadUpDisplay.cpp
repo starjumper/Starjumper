@@ -55,13 +55,19 @@ void HeadUpDisplay::initializeSpeedometer()
 	material->setAlpha(osg::Material::FRONT_AND_BACK, HUD_TRANSPARENCY);
 	speedBarBackgroundState->setAttributeAndModes(material, osg::StateAttribute::ON);
 	osg::BlendFunc *blendfunc = new osg::BlendFunc(osg::BlendFunc::SRC_ALPHA, osg::BlendFunc::ONE_MINUS_SRC_ALPHA );
-	speedBarBackgroundState->setAttributeAndModes(blendfunc);
-	
+    speedBarBackgroundState->setAttributeAndModes(blendfunc);      
+
+	osg::Texture2D *texture = new osg::Texture2D;	
+	osg::Image *image = osgDB::readImageFile(HUD_TEXTURE);
+	texture->setImage(image);
+
+	speedBarBackgroundState->setTextureAttributeAndModes(0, texture, osg::StateAttribute::ON);
+
+	_speedBarBackgroundNode->setStateSet(speedBarBackgroundState);
 
 	_speedBarBackgroundPat = new osg::PositionAttitudeTransform();
 	_speedBarBackgroundPat->addChild(_speedBarBackgroundNode);
 	_speedBarBackgroundPat->setScale(osg::Vec3d(60.0, 10.0, 60.0));
-	//_speedBarBackgroundPat->setPosition(osg::Vec3d(100.0, 100.0, 100.0));
 	_speedBarBackgroundPat->setAttitude(osg::Quat(osg::DegreesToRadians(270.0f), osg::Vec3(1.0f, 0.0f , 0.0f)));
 	_speedPat->addChild(_speedBarBackgroundPat);
 
@@ -71,6 +77,7 @@ void HeadUpDisplay::initializeSpeedometer()
 	_speedBarPat->setAttitude(osg::Quat(osg::DegreesToRadians(90.0f), osg::Vec3(0.0f, 1.0f , 0.0f)));
 	_speedBarMatrixTrans->addChild(_speedBarPat);
 	_speedPat->setPosition(SPEEDOMETER_POSITION);
+	
 }
 
 void HeadUpDisplay::initializeTimer()

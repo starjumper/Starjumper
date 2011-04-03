@@ -2,7 +2,7 @@
 
 #include <osgGA/NodeTrackerManipulator>
 
-#define MAX_FRAME_DELAY 100.0
+#define MAX_FRAME_DELAY 200.0
 
 class LazyCameraManipulator : public osgGA::NodeTrackerManipulator
 {

@@ -9,6 +9,9 @@
 #include <osgText/Text>
 #include <osg/ShapeDrawable>
 #include <osg/Material>
+#include <osg/CullFace>
+#include <osg/BlendColor>
+#include <osg/BlendFunc>
 #include <osg/MatrixTransform>
 #include <osg/Node>
 #include <osg/NodeCallback>
@@ -28,7 +31,7 @@
 #define SPEEDBAR_LENGTH		200.0f
 
 #define HUD_TRANSPARENCY	0.2
-
+#define HUD_TEXTURE			"resources/textures/carbon.png"
 
 class HeadUpDisplay : public osg::Referenced
 {
