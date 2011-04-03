@@ -85,13 +85,13 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
         _drawable->setColorArray(colors);
         _drawable->setColorBinding(osg::Geometry::BIND_PER_VERTEX);
     }
-
+/*
     osg::StateSet* stateSet = new osg::StateSet();
     stateSet->setMode(GL_ALPHA_TEST, osg::StateAttribute::ON); 
     stateSet->setMode(GL_BLEND, osg::StateAttribute::ON);
     stateSet->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
 
-    setStateSet(stateSet);
+    setStateSet(stateSet);*/
     addDrawable(_drawable);
 }
 

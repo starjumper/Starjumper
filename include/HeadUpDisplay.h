@@ -54,6 +54,8 @@ public:
 	void initializeSpeedometer();
 	void initializeTimer();
 	
+    bool isTiming() { return _isTiming; }
+    void startTimer();
     void stopTimer();
     void resetTimer();
 	void updateSpeedometer();

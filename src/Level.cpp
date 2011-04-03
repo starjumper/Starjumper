@@ -61,6 +61,10 @@ Level::Level(const std::string &mapfile) :
 
 void Level::playerDied()
 {
+    Player::getInstance()->getPlayerState()->setSpeed(0.0f);
+    Player::getInstance()->resetPosition();
+    ((LazyCameraManipulator *)viewer.getCameraManipulator())->resetCamera();
+    
     _headUpDisplay->resetTimer();
     _numDeaths++;
 }
@@ -302,11 +306,7 @@ void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
                             (_level->getDeadlyAltitudes())[yBucketIndex + 1]);
 
         if(position.z() < (minimum - 5.0f))
-        {
-            Player::getInstance()->resetPosition();
-            ((LazyCameraManipulator *)viewer.getCameraManipulator())->resetCamera();
             _level->playerDied();
-        }
     }
     
     // fade out when level is finished

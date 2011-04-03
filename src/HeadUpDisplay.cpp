@@ -4,7 +4,7 @@
 extern osgViewer::Viewer viewer;
 
 HeadUpDisplay::HeadUpDisplay() :
-    _isTiming(true)
+    _isTiming(false)
 {
 	_hudPat = new osg::PositionAttitudeTransform();
 	_hudPat->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
@@ -50,7 +50,7 @@ void HeadUpDisplay::initializeSpeedometer()
 	if(!_speedBarNode)
         throw std::runtime_error("Unable to load speedbar background model file!");
 
-	osg::StateSet *speedBarBackgroundState = _speedBarBackgroundNode->getOrCreateStateSet();
+	osg::StateSet *speedBarBackgroundState = new osg::StateSet();
 	osg::Material *material = new osg::Material();
 	material->setAlpha(osg::Material::FRONT_AND_BACK, HUD_TRANSPARENCY);
 	speedBarBackgroundState->setAttributeAndModes(material, osg::StateAttribute::ON);
@@ -102,11 +102,6 @@ void HeadUpDisplay::initializeTimer()
 	_hudPat->addChild(_timeNode);
 }
 
-void HeadUpDisplay::resetTimer()
-{
-    ftime(&_startTime);
-}
-
 void HeadUpDisplay::updateSpeedometer()
 {
 	float playerSpeed = Player::getInstance()->getPlayerState()->getSpeed();
@@ -151,10 +146,21 @@ time_t HeadUpDisplay::getTime()
     return _timePassed;
 }
 
+void HeadUpDisplay::startTimer()
+{
+    _isTiming = true;
+    resetTimer();
+}
+
 void HeadUpDisplay::stopTimer()
 {
     _isTiming = false;
     _finalTime = getTime();
+}
+
+void HeadUpDisplay::resetTimer()
+{
+    ftime(&_startTime);
 }
 
 void HeadUpDisplayUpdateCallback::operator()(osg::Node *node, osg::NodeVisitor *nv)
