@@ -324,7 +324,7 @@ void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
             osg::Vec3 diff = position - finishs[i];
             
             if(diff.x() < maxDistance && diff.x() > -maxDistance &&
-                diff.y() < maxDistance && diff.y() > -maxDistance &&
+                diff.y() < maxDistance * 3.0f && diff.y() > -maxDistance &&
                 diff.z() < maxDistance && diff.z() > -maxDistance)
                 {
                     if(alpha == 1.0f)

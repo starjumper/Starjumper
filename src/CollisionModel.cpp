@@ -30,6 +30,21 @@ Finish::Finish(osg::Vec3 position) :
     
 	FinishUpdater *finishUpdater = new FinishUpdater();
     _transform->setUpdateCallback(finishUpdater);
+    
+    
+   osg::StateSet *stateset = new osg::StateSet();
+/*   stateset->setMode(GL_ALPHA_TEST, osg::StateAttribute::ON); 
+   stateset->setMode(GL_BLEND, osg::StateAttribute::ON);
+   stateset->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
+
+   osg::ref_ptr<osg::Material> matirial = new osg::Material;
+     matirial->setColorMode(osg::Material::AMBIENT);
+     matirial->setAlpha(osg::Material::FRONT_AND_BACK, 0.5);*/
+/*     matirial->setAmbient(osg::Material::FRONT_AND_BACK, osg::Vec4(1, 0, 1, 1));
+     matirial->setSpecular(osg::Material::FRONT_AND_BACK, osg::Vec4(1, 1, 1, 1));
+     matirial->setShininess(osg::Material::FRONT_AND_BACK, 64.0f);
+ 	  stateset->setAttributeAndModes(matirial, osg::StateAttribute::ON);*/
+     tunnelModel->setStateSet(stateset);
 }
 
 FinishUpdater::FinishUpdater()
@@ -62,14 +77,17 @@ Tunnel::Tunnel(osg::Vec3 position, float length) :
 	_transform->setScale(osg::Vec3f(2.0f, length, 2.0f));
 	
 	
+	osg::StateSet *stateset = new osg::StateSet();
+    tunnelModel->setStateSet(stateset);
+    
 	
-    	osg::StateSet *speedBarBackgroundState = tunnelModel->getOrCreateStateSet();
-    /*	osg::Material *material = new osg::Material();
-    	material->setAlpha(osg::Material::FRONT_AND_BACK, HUD_TRANSPARENCY);
-    	speedBarBackgroundState->setAttributeAndModes(material, osg::StateAttribute::ON);
-    	osg::BlendFunc *blendfunc = new osg::BlendFunc(osg::BlendFunc::SRC_ALPHA, osg::BlendFunc::ONE_MINUS_SRC_ALPHA );
+//    	osg::StateSet *speedBarBackgroundState = tunnelModel->getOrCreateStateSet();
+/*    	osg::Material *material = new osg::Material();
+    	material->setColorMode(osg::Material::AMBIENT_AND_DIFFUSE);
+    	speedBarBackgroundState->setAttributeAndModes(material, osg::StateAttribute::ON);*/
+/*    	osg::BlendFunc *blendfunc = new osg::BlendFunc(osg::BlendFunc::SRC_ALPHA, osg::BlendFunc::ONE_MINUS_SRC_ALPHA );
     	speedBarBackgroundState->setAttributeAndModes(blendfunc);
-    */
+  */  
 /*
 
         osg::BlendFunc *blendFunc = new osg::BlendFunc();
@@ -80,16 +98,16 @@ Tunnel::Tunnel(osg::Vec3 position, float length) :
          blendFunc->setDestination(osg::BlendFunc::ONE_MINUS_CONSTANT_ALPHA);
          speedBarBackgroundState->setAttributeAndModes(blendFunc, osg::StateAttribute::ON);
          speedBarBackgroundState->setAttributeAndModes(blendColor, osg::StateAttribute::ON);    
-
+*//*
 
         osg::ref_ptr<osg::Material> matirial = new osg::Material;
           matirial->setColorMode(osg::Material::AMBIENT);
           matirial->setAlpha(osg::Material::FRONT_AND_BACK, 0.5);
-          matirial->setAmbient(osg::Material::FRONT_AND_BACK, osg::Vec4(1, 1, 1, 1));
+          matirial->setAmbient(osg::Material::FRONT_AND_BACK, osg::Vec4(1, 0, 1, 1));
           matirial->setSpecular(osg::Material::FRONT_AND_BACK, osg::Vec4(1, 1, 1, 1));
           matirial->setShininess(osg::Material::FRONT_AND_BACK, 64.0f);
-      	  speedBarBackgroundState->setAttributeAndModes(matirial, osg::StateAttribute::ON);*/
-
+      	  speedBarBackgroundState->setAttributeAndModes(matirial, osg::StateAttribute::ON);
+          tunnelModel->setStateSet(speedBarBackgroundState);*/
 }
 
 CuboidTunnel::CuboidTunnel(osg::Vec3 position, float length) :
