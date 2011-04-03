@@ -7,6 +7,7 @@
 #include <osg/Node>
 #include <osg/NodeCallback>
 #include <osg/PositionAttitudeTransform>
+#include <osgViewer/Viewer>
 
 #include <btBulletDynamicsCommon.h>
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
@@ -14,6 +15,7 @@
 
 #include "Player.h"
 #include "CollisionObject.h"
+#include "LazyCameraManipulator.h"
 #include "Sound.h"
 
 #define min(a,b) (((a) < (b)) ? (a) : (b))

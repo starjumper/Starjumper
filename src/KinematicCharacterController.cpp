@@ -223,9 +223,6 @@ void KinematicCharacterController::updateTargetPositionBasedOnCollision (const b
 
 void KinematicCharacterController::stepForwardAndStrafe ( btCollisionWorld* collisionWorld, const btVector3& walkMove)
 {
-	// printf("m_normalizedDirection=%f,%f,%f\n",
-	// 	m_normalizedDirection[0],m_normalizedDirection[1],m_normalizedDirection[2]);
-	// phase 2: forward and strafe
 	btTransform start, end;
 	m_targetPosition = m_currentPosition + walkMove;
 	start.setIdentity ();

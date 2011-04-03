@@ -271,28 +271,22 @@ LevelUpdater::LevelUpdater(Level *level) :
     _level->getShadowedScene()->getOrCreateStateSet()->setAttributeAndModes(_blendColor, osg::StateAttribute::ON);
 }
 
-#include <iostream>
-
 void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
 {    
     double currentStepTime = viewer.getFrameStamp()->getSimulationTime();
     
     // compensate error arising from the osg::Viewer resetting its SimulationTime
-    /*if(fabs(currentStepTime - _previousStepTime) > 0.1f)
-        _previousStepTime = currentStepTime - 0.05;*/
-    
-    if(_previousStepTime <= 0.1f)
+    if(currentStepTime - _previousStepTime < 0.0f)
     {
         Player::getInstance()->resetPosition();
         ((LazyCameraManipulator *)viewer.getCameraManipulator())->resetCamera();        
+        _previousStepTime = currentStepTime - 0.5;        
     }
-    else
-    {
-        std::cout << (int)((currentStepTime - _previousStepTime) * 60.0f) + 1 << std::endl;
-
-        _level->getPhysicsWorld()->stepSimulation(currentStepTime - _previousStepTime, 
-                    (int)((currentStepTime - _previousStepTime) * 60.0f) + 1);        
-    }
+    
+    int numSimulationSubSteps = _level->getPhysicsWorld()->stepSimulation(currentStepTime - _previousStepTime, 
+                                        (int)((currentStepTime - _previousStepTime) * 60.0f) + 1); 
+                                        
+    ((LazyCameraManipulator *)viewer.getCameraManipulator())->setNumSimulationSubSteps(numSimulationSubSteps);
        
     _previousStepTime = currentStepTime;
     

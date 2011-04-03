@@ -1,5 +1,6 @@
 #include "PlayerUpdater.h"
-#include <iostream>
+
+extern osgViewer::Viewer viewer;
 
 PlayerUpdater::PlayerUpdater()
 {
@@ -11,12 +12,15 @@ void PlayerUpdater::operator()(osg::Node* node, osg::NodeVisitor* nv)
     Player *player = Player::getInstance();
 
     if(player)
-    {
+    {        
         osg::Vec3 newPosition = calculateNextPosition();
+
         player->setPosition(newPosition);
         player->setAngles(0, player->getPlayerState()->getAngleY());        
+
+        dynamic_cast<LazyCameraManipulator *>(viewer.getCameraManipulator())->calculateNextCameraPosition();
     }    
-            
+    
     traverse(node, nv);
 }
 
@@ -83,9 +87,8 @@ osg::Vec3 PlayerUpdater::calculateNextPosition()
     if(playerController->frontalHit())
     {
         if(speed > 0.8f)
-        {
             playerState->beDead();
-        }
+
         speed = 0;
         playerState->setSpeed(0);
         player->setEngines(0, DECELERATE);
