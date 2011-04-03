@@ -271,12 +271,14 @@ LevelUpdater::LevelUpdater(Level *level) :
     _level->getShadowedScene()->getOrCreateStateSet()->setAttributeAndModes(_blendColor, osg::StateAttribute::ON);
 }
 
+#include <iostream>
+
 void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
 {    
     double currentStepTime = viewer.getFrameStamp()->getSimulationTime();
     
     // compensate error arising from the osg::Viewer resetting its SimulationTime
-/*    if(fabs(currentStepTime - _previousStepTime) > 0.1f)
+    /*if(fabs(currentStepTime - _previousStepTime) > 0.1f)
         _previousStepTime = currentStepTime - 0.05;*/
     
     if(_previousStepTime <= 0.1f)
@@ -285,8 +287,13 @@ void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
         ((LazyCameraManipulator *)viewer.getCameraManipulator())->resetCamera();        
     }
     else
+    {
+        if(currentStepTime - _previousStepTime >= 10 * btScalar(1.)/btScalar(60.))
+            std::cout << currentStepTime - _previousStepTime << " > " << 10 * btScalar(1.)/btScalar(60.) << std::endl;
+
         _level->getPhysicsWorld()->stepSimulation(currentStepTime - _previousStepTime, 10);        
-        
+    }
+       
     _previousStepTime = currentStepTime;
     
     // player dies when falling too low
