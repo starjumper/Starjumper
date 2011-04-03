@@ -65,7 +65,6 @@ void HeadUpDisplay::initializeSpeedometer()
 
 	_speedBarBackgroundNode->setStateSet(speedBarBackgroundState);
 
-
     int speedBarSize = viewer.getCamera()->getViewport()->height() / 12.0f;
     
 	_speedBarBackgroundPat = new osg::PositionAttitudeTransform();
@@ -76,11 +75,11 @@ void HeadUpDisplay::initializeSpeedometer()
 
 	_speedBarPat = new osg::PositionAttitudeTransform();
 	_speedBarPat->addChild(_speedBarNode);
-	_speedBarPat->setScale(osg::Vec3d(speedBarSize / 5.0f, 10.0, speedBarSize / 5.0f));
+	_speedBarPat->setScale(osg::Vec3d(speedBarSize / 5.0f, speedBarSize / 6.0f, speedBarSize / 5.0f));
 	_speedBarPat->setAttitude(osg::Quat(osg::DegreesToRadians(90.0f), osg::Vec3(0.0f, 1.0f , 0.0f)));
 	_speedBarMatrixTrans->addChild(_speedBarPat);
-	_speedPat->setPosition(SPEEDOMETER_POSITION);
 	
+	_speedPat->setPosition(osg::Vec3(speedBarSize * 2 + 20, speedBarSize * 2 + 20 , 0));
 }
 
 void HeadUpDisplay::initializeTimer()

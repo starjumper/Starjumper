@@ -26,10 +26,6 @@
 #define SPEEDBG_MODEL		"resources/models/speed_background.osg"
 #define SPEEDOMETER_POSITION osg::Vec3(150.0, 150.0, 0.0)
 
-#define SPEEDBAR_POSITION   osg::Vec3(150 ,0 , 0)
-#define SPEEDBAR_WIDTH      10.0f
-#define SPEEDBAR_LENGTH		200.0f
-
 #define HUD_TRANSPARENCY	0.2
 #define HUD_TEXTURE			"resources/textures/carbon.png"
 
