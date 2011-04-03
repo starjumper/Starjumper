@@ -288,10 +288,10 @@ void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
     }
     else
     {
-        if(currentStepTime - _previousStepTime >= 10 * btScalar(1.)/btScalar(60.))
-            std::cout << currentStepTime - _previousStepTime << " > " << 10 * btScalar(1.)/btScalar(60.) << std::endl;
+        std::cout << (int)((currentStepTime - _previousStepTime) * 60.0f) + 1 << std::endl;
 
-        _level->getPhysicsWorld()->stepSimulation(currentStepTime - _previousStepTime, 10);        
+        _level->getPhysicsWorld()->stepSimulation(currentStepTime - _previousStepTime, 
+                    (int)((currentStepTime - _previousStepTime) * 60.0f) + 1);        
     }
        
     _previousStepTime = currentStepTime;
