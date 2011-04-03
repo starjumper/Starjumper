@@ -285,7 +285,7 @@ void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
         ((LazyCameraManipulator *)viewer.getCameraManipulator())->resetCamera();        
     }
     else
-        _level->getPhysicsWorld()->stepSimulation(currentStepTime - _previousStepTime, 1);        
+        _level->getPhysicsWorld()->stepSimulation(currentStepTime - _previousStepTime, 10);        
         
     _previousStepTime = currentStepTime;
     
