@@ -4,7 +4,7 @@
 extern osgViewer::Viewer viewer;
 
 HeadUpDisplay::HeadUpDisplay() :
-    _isTiming(false)
+    _isTiming(true)
 {
 	_hudPat = new osg::PositionAttitudeTransform();
 	_hudPat->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
