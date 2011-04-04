@@ -33,10 +33,10 @@ Finish::Finish(osg::Vec3 position) :
 	FinishUpdater *finishUpdater = new FinishUpdater();
     _transform->setUpdateCallback(finishUpdater);
 
-
     osg::StateSet* stateSet = new osg::StateSet();
     stateSet->setMode(GL_ALPHA_TEST, osg::StateAttribute::ON); 
     stateSet->setMode(GL_BLEND, osg::StateAttribute::ON);
+    stateSet->setRenderBinDetails( 0, "RenderBin");
 
     tunnelModel->setStateSet(stateSet);
 }
@@ -76,19 +76,7 @@ Tunnel::Tunnel(osg::Vec3 position, float length) :
 	
 	_transform->addChild(tunnelModel);
 	_transform->setPosition(position);
-	_transform->setScale(osg::Vec3f(2.0f, length, 2.0f));
-	
-	
-	osg::StateSet *stateset = new osg::StateSet();
-    
-    osg::ref_ptr<osg::Material> matirial = new osg::Material;
-    matirial->setColorMode(osg::Material::AMBIENT);
-    matirial->setAlpha(osg::Material::FRONT_AND_BACK, 0.9);
-    matirial->setAmbient(osg::Material::FRONT_AND_BACK, osg::Vec4(1, 1, 1, 1));
-    matirial->setSpecular(osg::Material::FRONT_AND_BACK, osg::Vec4(1, 1, 1, 1));
-    matirial->setShininess(osg::Material::FRONT_AND_BACK, 64.0f);
-    stateset->setAttributeAndModes(matirial, osg::StateAttribute::ON);
-    tunnelModel->setStateSet(stateset);
+	_transform->setScale(osg::Vec3f(2.0f, length, 2.0f));	
 }
 
 CuboidTunnel::CuboidTunnel(osg::Vec3 position, float length) :

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <world name="Galactica">
-	<road name="Road 1" filename="resources/levels/level1.xml" besttime="458" completions="4" deaths="0" />
-	<road name="Road 2" filename="resources/levels/level2.xml" besttime="2206" completions="1" deaths="3" />
-	<road name="Road 3" filename="resources/levels/level3.xml" besttime="2437" completions="1" deaths="0" />
+	<road name="Road 1" filename="resources/levels/level1.xml" besttime="" completions="0" deaths="0" />
+	<road name="Road 2" filename="resources/levels/level2.xml" besttime="" completions="0" deaths="0" />
+	<road name="Road 3" filename="resources/levels/level3.xml" besttime="" completions="0" deaths="0" />
 	<road name="Road 4" filename="resources/levels/level4.xml" besttime="" completions="0" deaths="0" />
 	<road name="Road 5" filename="resources/levels/level5.xml" besttime="" completions="0" deaths="0" />
 	<road name="Road 6" filename="resources/levels/level6.xml" besttime="" completions="0" deaths="0" />
 	<road name="Road 7" filename="resources/levels/level7.xml" besttime="" completions="0" deaths="0" />
 	<road name="Road 8" filename="resources/levels/level8.xml" besttime="" completions="0" deaths="0" />
-	<road name="Road 9" filename="resources/levels/level9.xml" besttime="" completions="0" deaths="3" />
+	<road name="Road 9" filename="resources/levels/level9.xml" besttime="" completions="0" deaths="0" />
 	<road name="Road 10" filename="resources/levels/level10.xml" besttime="" completions="0" deaths="0" />
 </world>
