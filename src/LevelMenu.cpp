@@ -25,7 +25,7 @@ LevelMenu::LevelMenu() :
             
     viewer.getCamera()->setUpdateCallback(new LevelMenuUpdater(this));
 
-    Sound::getInstance()->loop("menu_music");    
+    Sound::getInstance()->playInLoop(MENU_MUSIC_FILE);    
 }
 
 void LevelMenu::initializeHeader()
@@ -367,8 +367,8 @@ void LevelMenu::returnFromLevel()
     Player::getInstance()->reset();
     updateDetails();
     
-    Sound::getInstance()->stop("level_music");
-    Sound::getInstance()->loop("menu_music");
+    Sound::getInstance()->stop(LEVEL_MUSIC_FILE);
+    Sound::getInstance()->playInLoop(MENU_MUSIC_FILE);
 }
 
 void LevelMenu::writeBackLevelFile()

@@ -7,11 +7,16 @@
 #include <AL/alc.h>
 #include <AL/alure.h>
 
+#define LEVEL_MUSIC_FILE        "resources/sound/andromeda.ogg"
+#define MENU_MUSIC_FILE         "resources/sound/48000_2chan.ogg"
+#define JUMP_SOUND              "resources/sound/boing.wav"
+
 class Sound
 {
 private:
-	static Sound* instance;
-	std::map<std::string, ALuint> sounds;
+	static Sound *_instance;
+	std::map<std::string, ALuint> _sounds;
+
 	Sound();
 
 public:
@@ -19,9 +24,9 @@ public:
 	
 	static Sound *getInstance();
 
-	void loadSoundFromFile(std::string key, std::string filename);
-	void play(std::string key);
-	void loop(std::string key);
+	void loadFromFile(std::string filename);
+	void playSound(std::string key);
+	void playInLoop(std::string key);
 	void stop(std::string key);
 	void stopAll();
 };

@@ -20,9 +20,9 @@ int main(int argc, char *argv[])
 	viewer.getCamera()->setClearColor(osg::Vec4( 0., 0., 0., 1. ));
     viewer.getCamera()->setClearMask(GL_DEPTH_BUFFER_BIT);
          
-    Sound::getInstance()->loadSoundFromFile("menu_music", MENU_MUSIC_FILE);
-    Sound::getInstance()->loadSoundFromFile("level_music", LEVEL_MUSIC_FILE);
-    Sound::getInstance()->loadSoundFromFile("jump_sound", JUMP_SOUND);
+    Sound::getInstance()->loadFromFile(MENU_MUSIC_FILE);
+    Sound::getInstance()->loadFromFile(LEVEL_MUSIC_FILE);
+    Sound::getInstance()->loadFromFile(JUMP_SOUND);
     
     osg::ref_ptr<LevelMenu> levelMenu = new LevelMenu();
 	

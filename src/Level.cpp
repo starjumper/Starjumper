@@ -56,8 +56,8 @@ Level::Level(const std::string &mapfile) :
     
     initializeLighting();
     
-    Sound::getInstance()->stop("menu_music");
-    Sound::getInstance()->loop("level_music");    
+    Sound::getInstance()->stop(MENU_MUSIC_FILE);
+    Sound::getInstance()->playInLoop(LEVEL_MUSIC_FILE);    
 }
 
 void Level::playerDied()
