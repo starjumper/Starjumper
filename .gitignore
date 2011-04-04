@@ -5,6 +5,13 @@ CMakeFiles/
 cmake_install.cmake
 Makefile
 
+lib/alure-1.1/CMakeCache.txt
+lib/alure-1.1/CPackConfig.cmake
+lib/alure-1.1/CPackSourceConfig.cmake
+lib/alure-1.1/CMakeFiles/
+lib/alure-1.1/cmake_install.cmake
+lib/alure-1.1/Makefile
+
 bin/StarJumper
 
 src/CMakeFiles/
