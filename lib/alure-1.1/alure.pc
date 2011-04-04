@@ -1,0 +1,11 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}//Users/robert/Desktop/Projekte/Starjumper/lib/alure-1.1
+includedir=${prefix}/include
+
+Name: ALURE
+Description: File-loading and utility functions for OpenAL
+Requires: openal
+Version: 1.0.72
+Libs: -L${libdir} -lAlure 
+Cflags: -I${includedir}
