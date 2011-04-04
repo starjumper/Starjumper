@@ -87,6 +87,12 @@ Cuboid::Cuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
     }
 
     addDrawable(_drawable);
+
+    osg::StateSet* stateSet = new osg::StateSet();
+    stateSet->setMode(GL_ALPHA_TEST, osg::StateAttribute::ON); 
+    stateSet->setMode(GL_BLEND, osg::StateAttribute::ON);
+
+    setStateSet(stateSet);
 }
 
 btRigidBody *Cuboid::getRigidBody()
@@ -165,7 +171,7 @@ TexturedCuboid::TexturedCuboid(const osg::Vec3 &from, const osg::Vec3 &size) :
     _texture->setWrap(osg::Texture::WRAP_S, osg::Texture::REPEAT); 
     _texture->setWrap(osg::Texture::WRAP_T, osg::Texture::REPEAT);
 
-    osg::StateSet* stateSet = new osg::StateSet();
+    osg::StateSet* stateSet = _textureDrawable->getOrCreateStateSet();
     stateSet->setTextureAttributeAndModes(0, _texture, osg::StateAttribute::ON);
     
     _textureDrawable->setStateSet(stateSet);

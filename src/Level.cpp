@@ -272,8 +272,13 @@ LevelUpdater::LevelUpdater(Level *level) :
     _previousStepTime(viewer.getFrameStamp()->getSimulationTime())
 {
     _blendColor = new osg::BlendColor(osg::Vec4(1, 1, 1, 1));
-    
+    /*
     _level->getShadowedScene()->getOrCreateStateSet()->setAttributeAndModes(_blendColor, osg::StateAttribute::ON);
+    
+    _level->getShadowedScene()->getOrCreateStateSet()->setMode(GL_ALPHA_TEST, osg::StateAttribute::ON); 
+    _level->getShadowedScene()->getOrCreateStateSet()->setMode(GL_BLEND, osg::StateAttribute::ON);
+    _level->getShadowedScene()->getOrCreateStateSet()->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
+    */
 }
 
 void LevelUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)

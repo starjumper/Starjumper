@@ -33,13 +33,12 @@ Finish::Finish(osg::Vec3 position) :
 	FinishUpdater *finishUpdater = new FinishUpdater();
     _transform->setUpdateCallback(finishUpdater);
 
-	osg::StateSet *stateset = new osg::StateSet();
-    
-    osg::ref_ptr<osg::Material> matirial = new osg::Material;
-    matirial->setColorMode(osg::Material::AMBIENT);
-    matirial->setAlpha(osg::Material::FRONT_AND_BACK, 1.0);
-    stateset->setAttributeAndModes(matirial, osg::StateAttribute::ON);
-    tunnelModel->setStateSet(stateset);
+
+    osg::StateSet* stateSet = new osg::StateSet();
+    stateSet->setMode(GL_ALPHA_TEST, osg::StateAttribute::ON); 
+    stateSet->setMode(GL_BLEND, osg::StateAttribute::ON);
+
+    tunnelModel->setStateSet(stateSet);
 }
 
 FinishUpdater::FinishUpdater() :

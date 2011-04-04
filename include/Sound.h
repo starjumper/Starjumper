@@ -7,8 +7,8 @@
 #include <AL/alc.h>
 #include <AL/alure.h>
 
-#define LEVEL_MUSIC_FILE        "resources/sound/andromeda.ogg"
-#define MENU_MUSIC_FILE         "resources/sound/48000_2chan.ogg"
+#define LEVEL_MUSIC_FILE        "resources/sound/andromeda.wav"
+#define MENU_MUSIC_FILE         "resources/sound/48000_2chan.wav"
 #define JUMP_SOUND              "resources/sound/boing.wav"
 
 class Sound
