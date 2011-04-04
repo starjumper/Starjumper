@@ -8,7 +8,7 @@ extern osgViewer::Viewer viewer;
 
 LevelMenu::LevelMenu() :
     _currentLevel(NULL),
-    _currentItemIndex(1)
+    _currentItemIndex(0)
 {
 	_menuPat = new osg::PositionAttitudeTransform();
 	_menuPat->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
