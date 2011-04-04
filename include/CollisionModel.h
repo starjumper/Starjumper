@@ -6,6 +6,7 @@
 #include <osg/BlendFunc>
 #include <osg/BlendColor>
 #include <osgDB/ReadFile>
+#include <osgViewer/Viewer>
 
 #include <btBulletDynamicsCommon.h>
 #include <osgbBullet/Utils.h>
@@ -40,6 +41,8 @@ public:
 
 class FinishUpdater : public osg::NodeCallback 
 {
+private:
+    double _previousStepTime;
 public:
     FinishUpdater();    
     virtual void operator()(osg::Node* node, osg::NodeVisitor* nv);

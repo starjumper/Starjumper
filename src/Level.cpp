@@ -56,7 +56,8 @@ Level::Level(const std::string &mapfile) :
     
     initializeLighting();
     
-    Sound::switchBackgroundMusic(LEVEL_MUSIC_FILE, "GameMusic");    
+    Sound::getInstance()->stop("menu_music");
+    Sound::getInstance()->loop("level_music");    
 }
 
 void Level::playerDied()

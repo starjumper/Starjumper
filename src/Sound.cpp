@@ -1,64 +1,56 @@
-#include "Sound.h"
+#include <Sound.h>
 
-Sound::Sound() 
+Sound* Sound::instance = new Sound();
+
+Sound::Sound()
 {
+	alureInitDevice(NULL, NULL);
 }
 
-void Sound::initSoundManager()
+Sound::~Sound()
 {
-	osgAudio::SoundManager::instance()->init(16, false);
-	osgAudio::SoundManager::instance()->getEnvironment()->setDistanceModel(osgAudio::InverseDistance);
-	osgAudio::SoundManager::instance()->getEnvironment()->setDopplerFactor(1);
+	alureShutdownDevice();
 }
 
-void Sound::shutdownSoundManager()
+Sound* Sound::getInstance()
 {
-	osgAudio::SoundManager::instance()->shutdown();
-	std::cout << "Shutdown SoundManager";
+	return Sound::instance;
 }
 
-void Sound::switchBackgroundMusic(std::string fileName, std::string soundStateName)
+void Sound::loadSoundFromFile(std::string key, std::string filename)
 {
-	osgAudio::SoundState *musicSoundState = osgAudio::SoundManager::instance()->findSoundState(soundStateName);
-	if (musicSoundState)
+	ALuint source;
+	
+	alGenSources(1, &source);
+	
+	alSourcei(source, AL_BUFFER, alureCreateBufferFromFile((ALchar*)filename.c_str()));
+	
+	sounds[key] = source;
+}
+
+void Sound::play(std::string key)
+{
+	alSourcei(sounds[key], AL_LOOPING, AL_FALSE);
+	
+	alSourcePlay(sounds[key]);
+}
+
+void Sound::loop(std::string key)
+{
+	alSourcei(sounds[key], AL_LOOPING, AL_TRUE);
+	
+	alSourcePlay(sounds[key]);
+}
+
+void Sound::stop(std::string key)
+{
+	alSourceStop(sounds[key]);
+}
+
+void Sound::stopAll()
+{
+	for (std::map<std::string, ALuint>::iterator i = sounds.begin(); i != sounds.end(); ++i)
 	{
-		if(!musicSoundState->isPlaying()) 
-		{
-			osgAudio::SoundManager::instance()->stopAllSources();
-			musicSoundState->setPlay(true);
-		}
+		stop(i->first);
 	}
-	else
-	{
-		osgAudio::SoundManager::instance()->stopAllSources();
-		musicSoundState = new osgAudio::SoundState(soundStateName);
-		musicSoundState->allocateSource(1);
-
-		osgAudio::FileStream *musicStream = new osgAudio::FileStream(fileName);
-
-		musicSoundState->setStream(musicStream);
-		musicSoundState->setAmbient(true);
-		musicSoundState->setLooping(true);
-		musicSoundState->setPlay(true);
-
-		osgAudio::SoundManager::instance()->addSoundState(musicSoundState);
-	}
-}
-
-void Sound::playSampleOnce(std::string fileName)
-{
-	osg::ref_ptr<osgAudio::SoundState> sound_state = osgAudio::SoundManager::instance()->findSoundState("single");
-	if(!sound_state) 
-	{
-		sound_state = new osgAudio::SoundState("single");
-		osgAudio::Sample *sample = new osgAudio::Sample(osgDB::findDataFile(fileName));
-		sound_state->setSample(sample);
-		sound_state->setLooping(false);
-		sound_state->setAmbient(true);
-		sound_state->setGain(0.5);
-		sound_state->allocateSource(2);
-		osgAudio::SoundManager::instance()->addSoundState(sound_state.get());
-	}
-	if(!sound_state->isPlaying())
-		sound_state->setPlay(true);
 }

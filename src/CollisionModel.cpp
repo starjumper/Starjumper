@@ -1,5 +1,7 @@
 #include "CollisionModel.h"
 
+extern osgViewer::Viewer viewer;
+
 CollisionModel::CollisionModel()
 {
     _transform = new osg::PositionAttitudeTransform();
@@ -40,24 +42,32 @@ Finish::Finish(osg::Vec3 position) :
     tunnelModel->setStateSet(stateset);
 }
 
-FinishUpdater::FinishUpdater()
+FinishUpdater::FinishUpdater() :
+    _previousStepTime(0.0f)
 {
 }
 
 void FinishUpdater::operator()(osg::Node* node, osg::NodeVisitor* nv)
 {
-    osg::PositionAttitudeTransform *finish = dynamic_cast<osg::PositionAttitudeTransform *>(node);
+    double currentStepTime = viewer.getFrameStamp()->getSimulationTime();
     
-    osg::Quat attitude = finish->getAttitude();
-    osg::Quat::value_type angle;
-    osg::Vec3 axis;
+    if(_previousStepTime > 0.0f)
+    {
+        osg::PositionAttitudeTransform *finish = dynamic_cast<osg::PositionAttitudeTransform *>(node);
+    
+        osg::Quat attitude = finish->getAttitude();
+        osg::Quat::value_type angle;
+        osg::Vec3 axis;
 
-    attitude.getRotate(angle, axis);
+        attitude.getRotate(angle, axis);
+
+        float degrees = osg::RadiansToDegrees(angle) + ((currentStepTime-_previousStepTime) * 50.0f);
+        degrees = (degrees > 360) ? degrees - 360 : degrees;
     
-    float degrees = osg::RadiansToDegrees(angle) + 1;
-    degrees = (degrees > 360) ? degrees - 360 : degrees;
+        finish->setAttitude(osg::Quat(osg::DegreesToRadians(degrees), axis));
+    }
     
-    finish->setAttitude(osg::Quat(osg::DegreesToRadians(degrees), axis));
+    _previousStepTime = currentStepTime;
 }
 
 Tunnel::Tunnel(osg::Vec3 position, float length) :

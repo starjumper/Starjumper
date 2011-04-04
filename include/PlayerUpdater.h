@@ -19,7 +19,6 @@
 #include "Sound.h"
 
 #define min(a,b) (((a) < (b)) ? (a) : (b))
-#define JUMP_SAMPLE "resources/sound/boing.wav"
 
 class PlayerUpdater : public osg::NodeCallback 
 {

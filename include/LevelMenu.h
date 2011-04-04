@@ -27,7 +27,7 @@
 
 #define MENU_FONT               "fonts/arial.ttf"
 #define MENU_MUSIC_FILE         "resources/sound/48000_2chan.ogg"
-#define LEVEL_HEADER_TEXTURE  "resources/textures/starjumper.jpg"
+#define LEVEL_HEADER_TEXTURE    "resources/textures/starjumper.jpg"
 #define LEVEL_SELECTOR_TEXTURE  "resources/textures/menu_background.png"
 #define MENU_ITEM_HEIGHT        40
 #define MENU_DETAIL_FONT_SIZE   25
@@ -87,6 +87,7 @@ class LevelMenuUpdater : public osg::NodeCallback
 {
 private:
     LevelMenu *_menu;
+    double _previousStepTime;
     
 public:
 	LevelMenuUpdater(LevelMenu *menu);

@@ -7,7 +7,8 @@
 extern osgViewer::Viewer viewer;
 
 LevelMenu::LevelMenu() :
-    _currentLevel(NULL)
+    _currentLevel(NULL),
+    _currentItemIndex(1)
 {
 	_menuPat = new osg::PositionAttitudeTransform();
 	_menuPat->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
@@ -21,12 +22,10 @@ LevelMenu::LevelMenu() :
     initializeSelector();
     loadLevels();
     updateDetails();
-    
-    _currentItemIndex = 0;
-        
-    Sound::switchBackgroundMusic(MENU_MUSIC_FILE, "MenuMusic");
-    
+            
     viewer.getCamera()->setUpdateCallback(new LevelMenuUpdater(this));
+
+    Sound::getInstance()->loop("menu_music");    
 }
 
 void LevelMenu::initializeHeader()
@@ -297,7 +296,7 @@ void LevelMenu::updateDetails()
 {
     _completionsText->setText("Completions: " + _items[_currentItemIndex]["completions"]);
     _deathsText->setText("Deaths: " + _items[_currentItemIndex]["deaths"]);
-    
+
     if(_items[_currentItemIndex]["besttime"] == "")
         _bestTimeText->setText("Best Time: --:--:--");
     else
@@ -367,6 +366,9 @@ void LevelMenu::returnFromLevel()
     
     Player::getInstance()->reset();
     updateDetails();
+    
+    Sound::getInstance()->stop("level_music");
+    Sound::getInstance()->loop("menu_music");
 }
 
 void LevelMenu::writeBackLevelFile()
@@ -393,24 +395,28 @@ void LevelMenu::writeBackLevelFile()
 
 
 LevelMenuUpdater::LevelMenuUpdater(LevelMenu *menu) :
-    _menu(menu)
+    _menu(menu),
+    _previousStepTime(0.0f)
 {
 
 }
 
 void LevelMenuUpdater::operator()(osg::Node *node, osg::NodeVisitor *nv)
 {
+    double currentStepTime = viewer.getFrameStamp()->getSimulationTime();
     
     if(_menu->levelRunning())
     {
         if(_menu->getCurrentLevel()->playerReachedFinish())
             _menu->returnFromLevel();
     }
-    else
+    else if(_previousStepTime > 0.0f) 
     {
-        _menu->resetCamera();
-	    _menu->getBackground()->postMult(osg::Matrix::rotate(osg::inDegrees(0.5f),0.0f,0.0f,1.0f));
+            _menu->resetCamera();
+	        _menu->getBackground()->postMult(osg::Matrix::rotate(osg::inDegrees((currentStepTime - _previousStepTime) * 20.0f),0.0f,0.0f,1.0f));
     }
+    
+    _previousStepTime = currentStepTime;
 }
 
 

@@ -1,17 +1,27 @@
 #pragma once
 
-#include <osgDB/FileUtils>
-#include <osgAudio/FileStream.h>
-#include <osgAudio/SoundManager.h>
-#include <osgAudio/SoundState.h>
-#include <osgAudio/Stream.h>
+#include <map>
+#include <string>
+
+#include <AL/al.h>
+#include <AL/alc.h>
+#include <AL/alure.h>
 
 class Sound
 {
-	public:
-		Sound();
-		static void initSoundManager();
-		static void shutdownSoundManager();
-		static void switchBackgroundMusic(std::string fileName, std::string soundStateName);
-		static void playSampleOnce(std::string fileName);
+private:
+	static Sound* instance;
+	std::map<std::string, ALuint> sounds;
+	Sound();
+
+public:
+	~Sound();
+	
+	static Sound *getInstance();
+
+	void loadSoundFromFile(std::string key, std::string filename);
+	void play(std::string key);
+	void loop(std::string key);
+	void stop(std::string key);
+	void stopAll();
 };

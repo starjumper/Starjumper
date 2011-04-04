@@ -111,7 +111,7 @@ osg::Vec3 PlayerUpdater::calculateNextPosition()
 	if(playerState->requestJump() && playerController->canJump())
 	{
         playerController->jump();
-		Sound::playSampleOnce(JUMP_SAMPLE);
+		Sound::getInstance()->play("jump_sound");
 	}
 
     btVector3 position = playerController->getGhostObject()->getWorldTransform().getOrigin();

@@ -23,6 +23,8 @@
 #define ACCELERATE              true
 #define DECELERATE              false
 
+#define JUMP_SOUND              "resources/sound/boing.wav"
+
 class Player : public osg::PositionAttitudeTransform
 {
 private:
